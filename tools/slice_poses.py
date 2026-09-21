@@ -1,6 +1,7 @@
-"""把 GPT 生成的斑龜姿勢表切成單張圖，放到 assets/poses/。
+"""把 GPT 生成的烏龜姿勢表切成單張圖，放到 assets/poses/<品種>/。
 
-  python tools/slice_poses.py            # 在 Turtle 資料夾執行
+  python tools/slice_poses.py            # 處理所有品種（在 Turtle 資料夾執行）
+  python tools/slice_poses.py musk       # 只處理麝香龜
 
 每一格會做這些事：
   1. 去背：洋紅色背景，或 GPT 那種「半透明加雜訊」的假透明背景都能處理
@@ -8,8 +9,8 @@
   3. 找出背甲的位置和寬度，把每張縮放到背甲一樣寬，並對齊到同一個基準點
 遊戲裡以背甲中心當烏龜的座標，所以所有姿勢換來換去都不會跳動。
 
-先處理 reference/active2.png（原型用），如果 reference/sheets/ 裡有正式版姿勢表，
-同名的姿勢會被正式版覆蓋。
+每個品種的原始圖放在 reference/sheets/<品種>/；斑龜先處理原型 proto_36.png，
+同名的姿勢會被正式版姿勢表覆蓋。預覽圖輸出到 reference/previews/。
 """
 import json
 import sys
@@ -20,15 +21,16 @@ from PIL import Image
 from scipy import ndimage
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / 'assets' / 'poses'
+POSES_DIR = ROOT / 'assets' / 'poses'
+OUT = POSES_DIR  # 處理某個品種時會改成 assets/poses/<品種>
 
 OUT_SIZE = 560            # 輸出每張的尺寸
 SHELL_W = 200             # 背甲在輸出圖裡的寬度 (px)
 ANCHOR = (250, 300)       # 背甲中心在輸出圖裡的位置
 
-# 原型：active2.png 是 6×6，順序對應下面這些姿勢
+# 原型：proto_36.png（原名 active2.png）是 6×6，順序對應下面這些姿勢
 PROTO = {
-    'file': 'reference/active2.png', 'cols': 6, 'rows': 6, 'bg': 'alpha',
+    'file': 'reference/sheets/bangui/proto_36.png', 'cols': 6, 'rows': 6, 'bg': 'alpha',
     'poses': [
         ('walk_a', '悠閒散步'), ('look', '停下張望'), ('neck_up', '伸長脖子'),
         ('head_in', '縮頭'), ('observe', '抬頭觀察'), ('swim', '泡水游泳'),
@@ -45,27 +47,46 @@ PROTO = {
     ],
 }
 
-# 正式版：assets/PROMPTS_ACTIONS.md 裡的姿勢表
-SHEETS = [
-    {'file': 'reference/sheets/sheet_a.png', 'cols': 3, 'rows': 2, 'bg': 'magenta',
-     'poses': [('walk_a', '散步'), ('walk_b', '慢慢爬'), ('look', '張望'),
-               ('neck_up', '伸長脖子'), ('observe', '抬頭觀察'), ('sniff', '低頭聞聞')]},
-    {'file': 'reference/sheets/sheet_b.png', 'cols': 3, 'rows': 2, 'bg': 'magenta',
-     'poses': [('bask', '曬太陽'), ('sleep', '睡覺'), ('yawn', '打哈欠'),
-               ('stretch', '伸懶腰'), ('hide', '縮進殼裡'), ('rest', '趴著休息')]},
-    {'file': 'reference/sheets/sheet_c.png', 'cols': 3, 'rows': 2, 'bg': 'magenta',
-     'poses': [('happy', '開心'), ('startled', '驚嚇'), ('angry', '生氣'),
-               ('purr', '滿足'), ('think', '思考'), ('relax', '放鬆')]},
-    {'file': 'reference/sheets/sheet_d.png', 'cols': 3, 'rows': 2, 'bg': 'magenta',
-     'poses': [('swim', '游泳'), ('dive', '下潛'), ('rise', '上浮'),
-               ('float', '漂浮'), ('drink', '淺水換氣'), ('nibble', '啃水草')]},
-    {'file': 'reference/sheets/loop_swim.png', 'cols': 2, 'rows': 2, 'bg': 'magenta',
-     'poses': [('swim_1', '游泳1'), ('swim_2', '游泳2'), ('swim_3', '游泳3'), ('swim_4', '游泳4')]},
-    {'file': 'reference/sheets/loop_walk.png', 'cols': 2, 'rows': 2, 'bg': 'magenta',
-     'poses': [('walk_1', '爬行1'), ('walk_2', '爬行2'), ('walk_3', '爬行3'), ('walk_4', '爬行4')]},
-    {'file': 'reference/sheets/loop_wag.png', 'cols': 2, 'rows': 2, 'bg': 'magenta',
-     'poses': [('wag_1', '搖尾巴1'), ('wag_2', '搖尾巴2'), ('wag_3', '搖尾巴3'), ('wag_4', '搖尾巴4')]},
-]
+
+def sheets_in(folder, shell=None):
+    """正式版姿勢表（格式見 assets/prompts/PROMPTS_*.md），每個品種一個資料夾，檔名都一樣。
+    shell='dark'：背甲顏色很深、跟皮膚分不開的品種（麝香龜），改用亮度找背甲。"""
+    def sheet(name, cols, rows, poses):
+        return {'file': f'{folder}/{name}', 'cols': cols, 'rows': rows, 'bg': 'magenta', 'poses': poses, 'shell': shell}
+    return [
+        sheet('sheet_a.png', 3, 2, [('walk_a', '散步'), ('walk_b', '慢慢爬'), ('look', '張望'),
+                                    ('neck_up', '伸長脖子'), ('observe', '抬頭觀察'), ('sniff', '低頭聞聞')]),
+        sheet('sheet_b.png', 3, 2, [('bask', '曬太陽'), ('sleep', '睡覺'), ('yawn', '打哈欠'),
+                                    ('stretch', '伸懶腰'), ('hide', '縮進殼裡'), ('rest', '趴著休息')]),
+        sheet('sheet_c.png', 3, 2, [('happy', '開心'), ('startled', '驚嚇'), ('angry', '生氣'),
+                                    ('purr', '滿足'), ('think', '思考'), ('relax', '放鬆')]),
+        sheet('sheet_d.png', 3, 2, [('swim', '游泳'), ('dive', '下潛'), ('rise', '上浮'),
+                                    ('float', '漂浮'), ('drink', '淺水換氣'), ('nibble', '咬食物')]),
+        sheet('loop_swim.png', 2, 2, [(f'swim_{i}', f'游泳{i}') for i in range(1, 5)]),
+        sheet('loop_walk.png', 2, 2, [(f'walk_{i}', f'爬行{i}') for i in range(1, 5)]),
+        sheet('loop_wag.png', 2, 2, [(f'wag_{i}', f'搖尾巴{i}') for i in range(1, 5)]),
+        sheet('loop_shake.png', 2, 2, [(f'shake_{i}', f'搖屁屁{i}') for i in range(1, 5)]),
+    ]
+
+
+# 麝香龜的角色參考圖（4×4）：只取面向右的格子，None 表示跳過（面向左或背面）
+MUSK_REF = {
+    'file': 'reference/sheets/musk/musk_ref.png', 'cols': 4, 'rows': 4, 'bg': 'magenta', 'shell': 'dark',
+    'poses': [
+        ('walk_a', '站立'), None, ('relax', '站著放鬆'), None,
+        ('think', '轉頭看'), None, ('neck_up', '伸長脖子'), ('stretch', '往前伸脖子'),
+        ('rest', '趴低'), ('walk_b', '慢慢爬'), ('observe', '抬頭觀察'), ('sniff', '低頭聞聞'),
+        ('hide', '縮頭'), ('angry', '張嘴'), ('run', '快步走'), ('happy', '抬腳'),
+    ],
+}
+
+# 每個品種用哪些來源；後面的會覆蓋前面同名的姿勢
+SPECIES = {
+    'bangui': [PROTO, *sheets_in('reference/sheets/bangui')],
+    'musk': [MUSK_REF, *sheets_in('reference/sheets/musk', shell='dark')],
+    'map': sheets_in('reference/sheets/map'),
+    'slider': sheets_in('reference/sheets/slider'),
+}
 
 
 def clean_alpha(cell: np.ndarray, bg: str) -> np.ndarray:
@@ -91,6 +112,24 @@ def keep_main_blob(alpha: np.ndarray) -> np.ndarray:
     # 往外擴 2px，把反鋸齒的邊緣留住
     mask = ndimage.binary_dilation(mask, iterations=2)
     return alpha * mask
+
+
+def find_shell_dark(rgb: np.ndarray, alpha: np.ndarray, thr=115, edge=6):
+    """深色系烏龜（例如麝香龜）用的背甲偵測：背甲是整隻烏龜最暗的部分。
+    先剝掉外圍一圈描邊，不然描邊會把整隻烏龜圍起來，被當成一整塊。"""
+    lum = rgb[..., :3].astype(np.float32) @ [0.299, 0.587, 0.114]
+    inner = ndimage.binary_erosion(alpha > 0.5, iterations=edge)
+    m = inner & (lum < thr)
+    k = max(3, round(alpha.shape[1] / 70))
+    core = ndimage.binary_closing(m, iterations=k)
+    core = ndimage.binary_opening(core, iterations=k + 2)
+    labels, n = ndimage.label(core)
+    if n == 0:
+        return None
+    sizes = ndimage.sum(core, labels, range(1, n + 1))
+    biggest = labels == (int(np.argmax(sizes)) + 1)
+    ys, xs = np.nonzero(biggest)
+    return (xs.min() + xs.max()) / 2, (ys.min() + ys.max()) / 2, xs.max() - xs.min()
 
 
 def find_shell(rgb: np.ndarray, alpha: np.ndarray):
@@ -125,19 +164,24 @@ def process_sheet(spec, results, report):
     path = ROOT / spec['file']
     if not path.exists():
         return
+    OUT.mkdir(parents=True, exist_ok=True)
     img = np.array(Image.open(path).convert('RGBA'))
     h, w = img.shape[:2]
     cw, ch = w / spec['cols'], h / spec['rows']
     # 第一輪：每格去背、找背甲
     cells = []
-    for idx, (key, name) in enumerate(spec['poses']):
+    for idx, entry in enumerate(spec['poses']):
+        if entry is None:
+            continue
+        key, name = entry
         r, c = divmod(idx, spec['cols'])
         cell = img[round(r * ch):round((r + 1) * ch), round(c * cw):round((c + 1) * cw)]
         alpha = keep_main_blob(clean_alpha(cell, spec['bg']))
         if alpha.max() == 0:
             report.append(f'  ✗ {key:9} {name}：這格是空的')
             continue
-        cells.append((key, name, cell, alpha, find_shell(cell, alpha)))
+        finder = find_shell_dark if spec.get('shell') == 'dark' else find_shell
+        cells.append((key, name, cell, alpha, finder(cell, alpha)))
 
     # 同一張表裡 GPT 畫的烏龜一樣大，用背甲寬的中位數決定縮放，避免個別格子偵測誤差造成忽大忽小
     widths = [sh[2] for *_, sh in cells if sh]
@@ -206,21 +250,39 @@ def contact_sheet(results, path):
     sheet.save(path)
 
 
-def main():
-    OUT.mkdir(parents=True, exist_ok=True)
+def slice_species(species, sources, preview_dir):
+    global OUT
+    OUT = POSES_DIR / species
     results, report = {}, []
-    for spec in [PROTO, *SHEETS]:
+    for spec in sources:
         if (ROOT / spec['file']).exists():
             report.append(spec['file'])
             process_sheet(spec, results, report)
     if not results:
-        sys.exit('找不到任何姿勢表。')
+        print(f'[{species}] 還沒有姿勢表，略過')
+        return
+    OUT.mkdir(parents=True, exist_ok=True)
     meta = {'size': OUT_SIZE, 'anchor': ANCHOR, 'shellWidth': SHELL_W, 'poses': results}
     (OUT / 'poses.json').write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding='utf-8')
-    preview = Path(sys.argv[1]) if len(sys.argv) > 1 else OUT.parent.parent / 'reference' / 'poses_preview.png'
+    preview_dir.mkdir(parents=True, exist_ok=True)
+    preview = preview_dir / f'poses_preview_{species}.png'
     contact_sheet(results, preview)
+    print(f'[{species}]')
     print('\n'.join(report))
-    print(f'\n共 {len(results)} 個姿勢 → {OUT}\n預覽圖 → {preview}')
+    print(f'共 {len(results)} 個姿勢 → {OUT}\n預覽圖 → {preview}\n')
+
+
+def main():
+    wanted = sys.argv[1:] or list(SPECIES)
+    unknown = [w for w in wanted if w not in SPECIES]
+    if unknown:
+        sys.exit(f'不認識的品種：{unknown}，可用的有 {list(SPECIES)}')
+    for species in wanted:
+        slice_species(species, SPECIES[species], ROOT / 'reference' / 'previews')
+    # 索引：哪些品種有姿勢圖（遊戲只載入這些，避免去抓不存在的檔案）
+    ready = sorted(d.name for d in POSES_DIR.iterdir() if (d / 'poses.json').exists())
+    (POSES_DIR / 'index.json').write_text(json.dumps(ready), encoding='utf-8')
+    print(f'有姿勢圖的品種：{ready}')
 
 
 if __name__ == '__main__':

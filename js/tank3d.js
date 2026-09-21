@@ -29,10 +29,10 @@ const FOOD_SCALE = 2.2;
 export class Tank3D extends Tank {
   constructor(canvas, getState, assets, hooks) {
     super(canvas, getState, assets, hooks);
-    this.tz = 0;
-    this.tzTarget = 0;
     this.dayF = null;
     this.initScene();
+    // 父類別建構時已經建好烏龜，那時場景還沒好，現在補建牠們的 3D 物件
+    for (const agent of this.agents.values()) this.onAgentAdded(agent);
     this.resize();
     canvas.addEventListener('pointerup', e => this.onPointerUp(e));
   }
@@ -255,38 +255,64 @@ export class Tank3D extends Tank {
   }
 
   buildTurtle() {
-    this.turtleCanvas = document.createElement('canvas');
-    this.turtleCanvas.width = this.turtleCanvas.height = TEX;
-    this.turtleCtx = this.turtleCanvas.getContext('2d');
-    this.turtleTex = new THREE.CanvasTexture(this.turtleCanvas);
-    this.turtleTex.colorSpace = THREE.SRGBColorSpace;
-    this.turtleMesh = new THREE.Mesh(
-      new THREE.PlaneGeometry(1, 1),
-      new THREE.MeshLambertMaterial({ map: this.turtleTex, transparent: true, alphaTest: 0.35, side: THREE.DoubleSide }),
-    );
-    this.scene.add(this.turtleMesh);
+    this.turtleViews = new Map(); // 烏龜 id → 這隻烏龜的 3D 物件
 
     const heartTex = canvasTexture(64, 64, ctx => { ctx.fillStyle = '#ef6f8f'; drawHeart(ctx, 32, 34, 22); });
-    this.heartSprites = Array.from({ length: 10 }, () => {
+    this.heartSprites = Array.from({ length: 12 }, () => {
       const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: heartTex, transparent: true, depthWrite: false }));
       sp.scale.set(3, 3, 1);
       sp.visible = false;
       this.scene.add(sp);
       return sp;
     });
-    const zTex = canvasTexture(64, 64, ctx => {
+    this.zTex = canvasTexture(64, 64, ctx => {
       ctx.fillStyle = '#fff';
       ctx.font = 'bold 48px sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText('z', 32, 34);
     });
-    this.zSprites = Array.from({ length: 3 }, (_, i) => {
-      const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: zTex, transparent: true, depthWrite: false }));
+  }
+
+  // 每隻烏龜：一片轉向鏡頭的貼圖、頭上的名字、睡覺時的 zzz
+  onAgentAdded(agent) {
+    if (!this.scene) return;
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = TEX;
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    const mesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(1, 1),
+      new THREE.MeshLambertMaterial({ map: tex, transparent: true, alphaTest: 0.35, side: THREE.DoubleSide }),
+    );
+    mesh.userData.agentId = agent.id;
+
+    const nameCanvas = document.createElement('canvas');
+    nameCanvas.width = 256;
+    nameCanvas.height = 64;
+    const nameTex = new THREE.CanvasTexture(nameCanvas);
+    nameTex.colorSpace = THREE.SRGBColorSpace;
+    const name = new THREE.Sprite(new THREE.SpriteMaterial({ map: nameTex, transparent: true, depthWrite: false, depthTest: false }));
+    name.scale.set(12, 3, 1);
+    name.renderOrder = 10;
+
+    const zzz = Array.from({ length: 3 }, (_, i) => {
+      const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: this.zTex, transparent: true, depthWrite: false }));
       sp.scale.setScalar(1.5 + i * 0.6);
-      this.scene.add(sp);
       return sp;
     });
+
+    this.scene.add(mesh, name, ...zzz);
+    this.turtleViews.set(agent.id, { mesh, canvas, ctx: canvas.getContext('2d'), tex, name, nameCanvas, nameTex, nameKey: '', zzz });
+  }
+
+  onAgentRemoved(agent) {
+    const v = this.turtleViews?.get(agent.id);
+    if (!v) return;
+    this.scene.remove(v.mesh, v.name, ...v.zzz);
+    v.tex.dispose();
+    v.nameTex.dispose();
+    this.turtleViews.delete(agent.id);
   }
 
   buildParticles() {
@@ -374,7 +400,9 @@ export class Tank3D extends Tank {
       if (this.dropFoodAt(this.tool, p.x / S + W / 2, p.z)) this.hooks.onDrop(this.tool);
       return;
     }
-    if (ray.intersectObject(this.turtleMesh).length) this.hooks.onPoke();
+    const meshes = [...this.turtleViews.values()].map(v => v.mesh);
+    const hit = ray.intersectObjects(meshes)[0];
+    this.clickAgent(hit ? this.agents.get(hit.object.userData.agentId) : null);
   }
 
   // 點擊的位置換算成要在哪裡丟食物：
@@ -388,39 +416,18 @@ export class Tank3D extends Tank {
     return p;
   }
 
-  decide(s, night, h, foot) {
-    super.decide(s, night, h, foot);
-    // 曬背時待在燈正下方附近，其他時候在缸裡前後隨意移動
-    this.tzTarget = this.t.mode === 'bask' ? rand(-6, 6) : rand(-14, 14);
-  }
-
-  update(dt) {
-    super.update(dt);
-    const t = this.t;
-    let target = this.tzTarget;
-    let speed = 8;
-    if (t.mode === 'food') {
-      const inWater = this.food.filter(f => f.inWater);
-      if (inWater.length) {
-        target = inWater.reduce((a, f) => Math.hypot(f.x - t.x, f.y - t.y) < Math.hypot(a.x - t.x, a.y - t.y) ? f : a).z;
-        speed = 30;
-      }
-    }
-    const d = target - this.tz;
-    this.tz += Math.sign(d) * Math.min(Math.abs(d), speed * dt);
-  }
-
   // ---------- 繪圖 ----------
 
   draw() {
     const s = this.getState();
-    const dirt = 1 - s.stats.water / 100;
+    const dirt = 1 - s.tank.water / 100;
 
     this.controls.update();
     this.updateLighting(s);
     this.updateWater(dirt);
     this.updatePlants();
-    this.updateTurtleMesh();
+    this.placedNames = [];
+    for (const agent of this.agents.values()) this.updateTurtleView(agent);
     this.updateFoodMeshes();
     this.updateBubbles3d();
     this.updateOverlays();
@@ -472,27 +479,45 @@ export class Tank3D extends Tank {
     }
   }
 
-  updateTurtleMesh() {
-    const t = this.t;
-    const f = this.turtleFrame();
+  updateTurtleView(agent) {
+    const v = this.turtleViews.get(agent.id);
+    if (!v) return;
+    const t = agent.t;
+    const f = agent.frame();
 
-    const ctx = this.turtleCtx;
+    const ctx = v.ctx;
     ctx.clearRect(0, 0, TEX, TEX);
     ctx.save();
     ctx.translate(TEX / 2, TEX / 2);
-    this.paintTurtle(ctx, f, SHELL_TEX);
+    agent.paint(ctx, f, SHELL_TEX);
     ctx.restore();
-    this.turtleTex.needsUpdate = true;
+    v.tex.needsUpdate = true;
 
-    const mesh = this.turtleMesh;
+    const mesh = v.mesh;
+    const { foot, h } = agent.size();
     const size = f.shell * S * TURTLE_SCALE * TEX / SHELL_TEX;
     // 放大後腳底也要貼地：以背甲中心下方 foot 的位置為準往上撐
-    const lift = t.grounded ? this.size().foot * (TURTLE_SCALE - 1) : 0;
-    mesh.position.set(X(t.x), Y(t.y + f.dy * TURTLE_SCALE - lift), this.tz);
+    const lift = t.grounded ? foot * (TURTLE_SCALE - 1) : 0;
+    mesh.position.set(X(t.x), Y(t.y + f.dy * TURTLE_SCALE - lift), agent.z);
     mesh.scale.set(size * t.face * f.m.sx, size * f.m.sy, 1);
     // 只繞 Y 軸轉向鏡頭，烏龜保持直立
     const cam = this.camera.position;
     mesh.rotation.set(0, Math.atan2(cam.x - mesh.position.x, cam.z - mesh.position.z), -(t.tilt + f.m.rot) * t.face);
+
+    // 名字（有改名或選取狀態改變時才重畫）
+    const selected = agent.id === this.selectedId;
+    const key = `${agent.turtle.name}|${selected}`;
+    if (key !== v.nameKey) {
+      v.nameKey = key;
+      drawNameTag(v.nameCanvas, agent.turtle.name, selected);
+      v.nameTex.needsUpdate = true;
+    }
+    // 跟別隻的名字太近就往上錯開
+    const nx = X(t.x);
+    let ny = Y(t.y - h * TURTLE_SCALE) + 3;
+    while (this.placedNames.some(p => Math.abs(p.x - nx) < 9 && Math.abs(p.y - ny) < 2.6)) ny += 2.6;
+    this.placedNames.push({ x: nx, y: ny });
+    v.name.position.set(nx, ny, agent.z);
   }
 
   // 水面高度（跟 updateWater 的波浪公式一樣），讓漂浮的食物跟著起伏
@@ -565,20 +590,23 @@ export class Tank3D extends Tank {
       const p = this.hearts[i];
       sp.visible = !!p;
       if (!p) return;
-      sp.position.set(X(p.x), Y(p.y) + 2, this.tz + 1);
+      sp.position.set(X(p.x), Y(p.y) + 2, (p.z ?? 0) + 1);
       sp.material.opacity = Math.min(1, p.life);
     });
 
-    const t = this.t;
-    const sleeping = t.mode === 'sleep' && !t.path.length;
-    const { w, h } = this.size();
-    this.zSprites.forEach((sp, i) => {
-      sp.visible = sleeping;
-      if (!sleeping) return;
-      const ph = (this.time * 0.5 + i / 3) % 1;
-      sp.position.set(X(t.x + t.face * w * 0.3 + ph * 20), Y(t.y - h * 0.9 - ph * 50), this.tz + 1);
-      sp.material.opacity = 1 - ph;
-    });
+    for (const agent of this.agents.values()) {
+      const v = this.turtleViews.get(agent.id);
+      if (!v) continue;
+      const t = agent.t;
+      const { w, h } = agent.size();
+      v.zzz.forEach((sp, i) => {
+        sp.visible = agent.sleeping;
+        if (!agent.sleeping) return;
+        const ph = (this.time * 0.5 + i / 3) % 1;
+        sp.position.set(X(t.x + t.face * w * 0.3 + ph * 20), Y(t.y - h * 0.9 - ph * 50), agent.z + 1);
+        sp.material.opacity = 1 - ph;
+      });
+    }
   }
 }
 
@@ -590,4 +618,19 @@ function canvasTexture(w, h, paint) {
   const tex = new THREE.CanvasTexture(c);
   tex.colorSpace = THREE.SRGBColorSpace;
   return tex;
+}
+
+// 烏龜頭上的名字牌
+function drawNameTag(canvas, name, selected) {
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.font = 'bold 34px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  const text = (selected ? '▼ ' : '') + name;
+  ctx.lineWidth = 8;
+  ctx.strokeStyle = 'rgba(30, 30, 20, .6)';
+  ctx.strokeText(text, canvas.width / 2, canvas.height / 2);
+  ctx.fillStyle = selected ? '#ffe27a' : '#ffffff';
+  ctx.fillText(text, canvas.width / 2, canvas.height / 2);
 }

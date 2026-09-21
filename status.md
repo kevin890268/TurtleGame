@@ -2,7 +2,7 @@
 
 最後更新：2026-09-21
 
-網頁版的斑龜（*Mauremys sinensis*）飼養遊戲。純前端靜態網站，不需要建置步驟，可以直接放上 GitHub Pages。
+網頁版的澤龜飼養遊戲，主角是台灣原生的斑龜（*Mauremys sinensis*），一個缸子可以養最多 4 隻、不同品種。純前端靜態網站，不需要建置步驟，可以直接放上 GitHub Pages。
 
 ---
 
@@ -21,12 +21,18 @@ python -m http.server 8123 --directory C:/Users/User/Desktop/Turtle
 ## 已完成
 
 ### 遊戲系統
-- [x] 五項數值：飽足、水質、日照、健康、心情
+- [x] **一缸多隻**：新開局是兩隻隨機命名的斑龜；「＋新增烏龜」可以選品種，最多 4 隻；每隻都有 ✏️ 改名按鈕
+- [x] **多品種**：斑龜、麝香龜、地圖龜、巴西龜（收容）；每個品種的體型、代謝、水質耐受度、游泳能力、曬背和水底活動的習性都不同（`js/species.js`）
+- [x] 數值：每隻各自有飽足、日照、健康、心情；**水質整缸共用**，烏龜越多、越大，水髒得越快
 - [x] 遊戲時間和現實時間同步，離開後回來會補算，最多補 72 小時
 - [x] 日夜：06:00 天亮、19:00 天黑；曬背燈可手動開關，也可用定時器（08–18）
 - [x] 成長：幼龜 → 亞成龜 → 成龜，三天內吃的食物種類越多長得越快
-- [x] 陪牠玩（玩太多次會嫌煩）、看獸醫（健康低於 40 才能用）
-- [x] 存檔放在瀏覽器（localStorage），可匯出、匯入 JSON
+- [x] 點缸裡的烏龜選取牠，再點一次是陪牠玩（玩太多次會嫌煩）；看獸醫（健康低於 40 才能用）
+- [x] 時間速度滑桿 1～10 倍（只在網頁開著、看得到時有效；離開網頁的時間一律照 1 倍計算）
+- [x] 手動調整時間：**快轉** +1／+6 小時（照常變餓、水變髒）；**調時鐘**直接設定時刻、不模擬中間的時間（給作息跟遊戲對不上的人用）
+- [x] **水溫**：跟著台灣各月份的室溫和一天中的時間變化；冷的時候烏龜吃得少、長得慢、游得慢，低於 16℃ 躲在水底不動，太冷或太熱會傷健康
+- [x] **設備**：過濾器（無／小型／強力：越強水越乾淨，但強水流會讓幼龜和麝香龜心情變差）、燈具（保溫燈沒有 UVB，曬背效果減半／UVB 曬背燈）、加溫棒（水溫維持 26℃）
+- [x] 存檔放在瀏覽器（localStorage），可匯出、匯入 JSON；舊版單隻存檔會自動升級，並多送一隻斑龜室友
 - [x] 飼養日誌
 
 ### 畫面
@@ -36,6 +42,8 @@ python -m http.server 8123 --directory C:/Users/User/Desktop/Turtle
 - [x] 水質變差時水會變混濁、出現漂浮雜質；打氣石會冒泡；水面有波浪
 
 ### 烏龜行為
+- [x] 每隻烏龜頭上顯示名字，選取中的那隻有 ▼ 標示
+- [x] 烏龜不會疊在一起：靠太近會互相推開（2.5D 也會前後錯開）；選曬台、淺灘、睡覺的位置時挑離別隻最遠的地方
 - [x] 水夠深的地方用游的，淺水區和曬台上用走的（小烏龜在淺水區也游得起來）
 - [x] 開燈時爬上曬台曬背、晚上在深水區底部或淺灘睡覺、看到食物會追過去吃
 - [x] 依狀態切換 48 個姿勢：游泳和爬行播 4 幀循環、下潛和上浮有專用姿勢、停下時隨機打哈欠或伸懶腰等
@@ -51,26 +59,62 @@ python -m http.server 8123 --directory C:/Users/User/Desktop/Turtle
 - [x] 沒吃完的食物 2 分鐘後泡爛，會弄髒水
 
 ### 美術素材流程
-- [x] GPT 提示詞：`assets/PROMPTS_ACTIONS.md`（洋紅色底的姿勢表）
-- [x] 切圖工具 `tools/slice_poses.py`：自動去背，濾掉文字和特效，扣掉邊緣殘留的洋紅色，以背甲中心對齊、統一大小
+- [x] GPT 提示詞放在 `assets/prompts/`，檔名用英文俗名，8 個品種全部由 `tools/make_prompts.py` 產生，用同一套撰寫標準（描述看得到的畫面、指定固定部位、對角步態、每格附中文說明）
+- [x] 每個品種都有搖屁屁循環（`loop_shake.png`）：後腿伸直、尾甲翹高，搖向觀眾時看得到腹甲
+- [x] 切圖工具 `tools/slice_poses.py [品種]`：自動去背，濾掉文字和特效，扣掉邊緣殘留的洋紅色，以背甲中心對齊、統一大小；每個品種輸出到 `assets/poses/<品種>/`
+- [x] 某個品種還缺的姿勢，會自動改用最接近的姿勢（例如麝香龜還沒有睡覺圖，就用趴低的姿勢）；完全沒有圖的品種用程式畫的替代圖，選品種時會標示「圖片製作中」
 
 ---
 
 ## 素材進度
 
+### 斑龜（`reference/sheets/bangui/`）
+
 | 姿勢表 | 檔案 | 狀態 |
 |---|---|---|
-| 原型（36 姿勢） | `reference/active2.png` | ✅ 使用中，被正式版覆蓋的姿勢不再使用 |
-| A 陸地日常 | `reference/sheets/sheet_a.png` | ✅ |
-| B 休息 | `reference/sheets/sheet_b.png` | ✅ |
-| C 心情反應 | `reference/sheets/sheet_c.png` | ⬜ 還沒生（開心、驚嚇、生氣等目前用原型） |
-| D 水中動作 | `reference/sheets/sheet_d.png` | ✅ |
-| 游泳循環 | `reference/sheets/loop_swim.png` | ✅ |
-| 爬行循環 | `reference/sheets/loop_walk.png` | ✅ |
-| 搖尾巴循環 | `reference/sheets/loop_wag.png` | ✅ 開心時播放 |
-| 搖屁股循環 | `reference/shakebutton2.png` | 🟡 已生成，還沒接進遊戲 |
+| 原型（36 姿勢） | `proto_36.png`（原名 active2.png） | ✅ 使用中，被正式版覆蓋的姿勢不再使用 |
+| A 日常 | `sheet_a.png` | ✅ |
+| B 休息 | `sheet_b.png` | ✅ |
+| C 心情反應 | `sheet_c.png` | ✅ |
+| D 水中動作 | `sheet_d.png` | ✅ |
+| 游泳／爬行／搖尾巴循環 | `loop_swim.png`、`loop_walk.png`、`loop_wag.png` | ✅ |
+| 搖屁屁循環 | `loop_shake.png` | 🟡 暫用舊版（原 `shakebutton2.png`），新版提示詞已備好 |
 
-其他參考圖：`reference/active.png`（16 種動作概念圖）、`reference/styles_36.png`（36 種畫風樣品，選了 01 溫柔手繪風）
+### 麝香龜（`reference/sheets/musk/`）
+
+| 姿勢表 | 檔案 | 狀態 |
+|---|---|---|
+| 定裝照（4×4，取面向右的 13 格） | `musk_ref.png` | ✅ |
+| A 日常、B 休息、C 心情反應、D 水中動作 | `sheet_a.png`～`sheet_d.png` | ✅ |
+| 游泳／爬行／搖尾巴／搖屁屁循環 | `loop_swim.png`、`loop_walk.png`、`loop_wag.png`、`loop_shake.png` | ✅ |
+
+麝香龜全套完成，共 41 個姿勢。背甲顏色深、跟皮膚分不開，切圖工具對牠改用亮度找背甲（`shell='dark'`）。
+
+### 地圖龜（`reference/sheets/map/`）
+
+| 姿勢表 | 檔案 | 狀態 |
+|---|---|---|
+| 定裝照 | `map_ref.png` | ✅ |
+| A～D 姿勢表 | `sheet_a.png`～`sheet_d.png` | ✅ |
+| 游泳／爬行／搖尾巴／搖屁屁循環 | `loop_*.png` | ✅ |
+
+地圖龜全套完成，共 40 個姿勢。
+
+### 其他品種
+
+巴西龜的提示詞已經備好，還沒生圖（遊戲裡用程式畫的替代圖）。
+
+其他參考圖在 `reference/concept/`：`actions_16.png`（16 種動作概念圖，原名 active.png）、`styles_36.png`（36 種畫風樣品，選了 01 溫柔手繪風）。
+切圖工具的預覽圖輸出到 `reference/previews/`。
+
+---
+
+## 品種研究
+
+- [docs/species.md](docs/species.md)：20 種烏龜總覽、台灣原生種的保育等級、外來種與法規、哪些適合做成可養品種
+- [docs/species_traits.md](docs/species_traits.md)：4 個可養品種的特性研究（權威資料約八成、飼主經驗約兩成，分開標示並附來源），以及對遊戲數值的影響
+
+重點：金龜（中華草龜）、柴棺龜、食蛇龜都是保育類，不做成可購買的寵物。麝香龜、地圖龜是否在 2022 年禁止輸入名單內還沒確認。
 
 ---
 
@@ -80,21 +124,29 @@ python -m http.server 8123 --directory C:/Users/User/Desktop/Turtle
 index.html
 css/style.css
 js/config.js        可調參數（時間倍率、日夜、成長速度、食物泡爛時間）
-js/state.js         存檔／讀檔
+js/state.js         存檔／讀檔、舊存檔升級、隨機寵物名
+js/species.js       品種表（體型、習性、配色）
 js/sim.js           遊戲規則（數值變化、玩家動作），離線補算也走這裡
 js/terrain.js       地形剖面，2D 和 2.5D 共用
-js/tank.js          烏龜行為、食物物理 + 2D 畫面
+js/tank.js          缸子：場景、食物物理、管理多隻烏龜 + 2D 畫面
+js/turtle-agent.js  一隻烏龜的行為（游泳、走路、曬背、追食物）與要畫的姿勢
 js/tank3d.js        2.5D 畫面（繼承 tank.js，只換掉繪圖）
 js/poses.js         姿勢載入、依狀態挑姿勢、程式動感
 js/turtle-shape.js  沒有姿勢圖時用程式畫的烏龜
 js/ui.js            面板顯示
 js/main.js          把上面串起來
-assets/poses/       切好的姿勢圖（由切圖工具產生，不要手動改）
-reference/          GPT 原始圖與姿勢表
-tools/slice_poses.py
+assets/poses/<品種>/ 切好的姿勢圖（由切圖工具產生，不要手動改）
+assets/prompts/     各品種的 GPT 提示詞
+docs/               品種資料與研究
+reference/concept/  概念圖（動作、畫風）
+reference/sheets/<品種>/  GPT 原始圖：定裝照、姿勢表、循環幀
+reference/previews/ 切圖預覽圖
+tools/slice_poses.py   切圖
+tools/make_prompts.py  產生提示詞
 ```
 
 常調的參數：
+- 品種數值：`js/species.js`
 - 食物浮沉：`js/tank.js` 的 `FOOD_PHYSICS`
 - 地形形狀：`js/terrain.js` 的 `PROFILE`
 - 2.5D 裡烏龜和食物的放大倍率：`js/tank3d.js` 的 `TURTLE_SCALE`、`FOOD_SCALE`
@@ -103,18 +155,23 @@ tools/slice_poses.py
 
 ## 已知問題
 
-- 原型圖裡部分姿勢腳下帶著淡色的地面陰影（縮頭、警戒、產卵等），等姿勢表 C 或重生後就會消失
+- 斑龜還有幾個姿勢只來自原型圖，腳下帶著淡色的地面陰影（縮頭、警戒、快速爬等），重生後就會消失
 - 2.5D 裡烏龜放大了 1.4 倍，站在淺灘時看起來比水深還大一點
 - 手機版版面還沒最佳化：按鈕面板排在缸子下面，要捲動才看得到
 - Three.js 從 CDN 載入，沒網路時 2.5D 會自動退回 2D
+- 瀏覽器有時會快取舊版程式，更新後畫面沒變時按 Ctrl+F5 強制重新整理
 
 ---
 
 ## 下一步
 
-1. **GitHub Pages 上線**：repo 已推送，到 Settings → Pages 選 `main` 分支就能啟用
-2. **姿勢表 C**：生好後放到 `reference/sheets/sheet_c.png`，執行 `python tools/slice_poses.py`
-3. **搖屁股接進遊戲**：把 `shakebutton2.png` 搬到 `reference/sheets/loop_shake.png`，加進切圖工具，當作開心或閒置時的小動作
-4. **手機版**：缸子全螢幕，按鈕做成浮在下方的工具列
-5. **養成內容**（擇一開始）：成長相簿、隨機事件（脫殼、打噴嚏）、布置缸子、零用錢和商店、季節與水溫、提醒通知
-6. **畫面**：音效、水底光紋、烏龜影子、在淺灘時身體半露出水面
+1. **GitHub Pages 上線**：到 Settings → Pages 選 `main` 分支就能啟用
+2. **補圖**：斑龜的新版搖屁屁、巴西龜整套（麝香龜、地圖龜已全部完成）
+3. **重生搖屁屁**：用新版提示詞生成後覆蓋 `reference/sheets/bangui/loop_shake.png`
+4. **品種研究帶來的新系統**（見 species_traits.md）：
+   - 性別：地圖龜母龜最大 25 cm、公龜最大 14 cm
+   - 巴西龜隨體型從偏肉食變成偏草食
+5. **更多品種**：錦龜、剃刀龜、歐洲澤龜、東部長頸龜的提示詞已備好，要登記進 `js/species.js` 和切圖工具
+6. **手機版**：缸子全螢幕，按鈕做成浮在下方的工具列
+7. **養成內容**：送養／移出烏龜、成長相簿、隨機事件（脫殼、打噴嚏、撿到保育類烏龜要通報）、布置缸子、提醒通知
+8. **畫面**：音效、水底光紋、烏龜影子、在淺灘時身體半露出水面

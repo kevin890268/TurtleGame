@@ -47,15 +47,15 @@ python -m http.server 8123
 
 ## 烏龜姿勢圖
 
-1. 照 `assets/PROMPTS_ACTIONS.md` 請 GPT 生姿勢表，存到 `reference/sheets/`
+1. 照 `assets/prompts/PROMPTS_<品種英文名>.md` 請 GPT 生姿勢表，存到 `reference/sheets/<品種>/`
 2. 執行切圖工具（需要 Python 的 numpy、scipy、Pillow）：
    ```bash
    python tools/slice_poses.py
    ```
-3. 切好的圖會放在 `assets/poses/`，預覽圖在 `reference/poses_preview.png`
+3. 切好的圖會放在 `assets/poses/<品種>/`，預覽圖在 `reference/previews/`
 
-工具會自動去背、濾掉文字和特效，並以背甲中心對齊、統一大小。`reference/active2.png` 是原型，
-`reference/sheets/` 裡的正式版會覆蓋同名姿勢。
+工具會自動去背、濾掉文字和特效，並以背甲中心對齊、統一大小。`reference/sheets/bangui/proto_36.png` 是原型，
+`reference/sheets/bangui/` 裡的正式版會覆蓋同名姿勢。
 
 ## 檔案結構
 
@@ -73,6 +73,6 @@ js/turtle-shape.js  沒有姿勢圖時用程式畫的烏龜
 js/ui.js       面板顯示
 js/main.js     把上面串起來
 assets/poses/  切好的姿勢圖（由 tools/slice_poses.py 產生）
-reference/     GPT 原始圖、姿勢表（sheets/）
+reference/     GPT 原始圖：concept/ 概念圖、sheets/<品種>/ 姿勢表、previews/ 切圖預覽
 tools/slice_poses.py  姿勢表切圖工具
 ```

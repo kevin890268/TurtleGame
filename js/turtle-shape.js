@@ -1,10 +1,13 @@
 // 程式畫的斑龜與小圖示。沒有姿勢圖時用這個當替代。
 
 // 內建的斑龜側面圖（面向右）。深橄欖色背甲、脖子有細黃線是斑龜的特徵。
-export function drawTurtleShape(ctx, w, pose, anim) {
+const DEFAULT_PALETTE = { shellTop: '#5b5a36', shellBottom: '#3a3822', skin: '#55583a', stripe: '#e6d95c', plastron: '#c7b36a', neckStripes: 3 };
+
+// pal：品種配色（見 species.js 的 palette），沒給就用斑龜的顏色
+export function drawTurtleShape(ctx, w, pose, anim, pal = DEFAULT_PALETTE) {
   const h = w * 0.5;
-  const skin = '#55583a';
-  const stripe = '#e6d95c';
+  const skin = pal.skin;
+  const stripe = pal.stripe;
   const pad = pose === 'swim' ? Math.sin(anim * 7) : 0;
 
   const leg = (x, y, len, ang) => {
@@ -56,7 +59,8 @@ export function drawTurtleShape(ctx, w, pose, anim) {
   if (!retracted) {
     ctx.strokeStyle = stripe;
     ctx.lineWidth = Math.max(1, h * 0.03);
-    for (let i = -1; i <= 1; i++) {
+    const n = pal.neckStripes;
+    for (let i = -(n - 1) / 2; i <= (n - 1) / 2 + 1e-6; i++) {
       ctx.beginPath();
       ctx.moveTo(w * 0.32, h * 0.05 + i * h * 0.07);
       ctx.quadraticCurveTo(hx - hr * 0.6, hy + i * h * 0.06, hx + hr * 1.1, hy + i * h * 0.05 + h * 0.03);
@@ -84,14 +88,22 @@ export function drawTurtleShape(ctx, w, pose, anim) {
   }
 
   // 腹甲
-  ctx.fillStyle = '#c7b36a';
+  // 巴西龜眼睛後面的紅斑
+  if (pal.earPatch && !retracted) {
+    ctx.fillStyle = pal.earPatch;
+    ctx.beginPath();
+    ctx.ellipse(hx - hr * 0.35, hy + hr * 0.05, hr * 0.45, hr * 0.22, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  ctx.fillStyle = pal.plastron;
   roundRect(ctx, -w * 0.43, h * 0.02, w * 0.86, h * 0.17, h * 0.08);
   ctx.fill();
 
   // 背甲
   const shell = ctx.createLinearGradient(0, -h * 0.6, 0, h * 0.1);
-  shell.addColorStop(0, '#5b5a36');
-  shell.addColorStop(1, '#3a3822');
+  shell.addColorStop(0, pal.shellTop);
+  shell.addColorStop(1, pal.shellBottom);
   ctx.fillStyle = shell;
   ctx.beginPath();
   ctx.moveTo(-w * 0.47, h * 0.08);

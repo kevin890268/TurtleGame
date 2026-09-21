@@ -1,9 +1,10 @@
-// 烏龜缸：烏龜的行為（游泳、在淺灘走路、上岸曬背、吃東西）與 2D 畫面。
-// 所有座標都是 1000×600 的邏輯座標；2.5D 版（tank3d.js）繼承這個類別，只換掉繪圖。
+// 烏龜缸：場景、食物物理、多隻烏龜，以及 2D 畫面。
+// 每隻烏龜的行為在 turtle-agent.js；所有座標都是 1000×600 的邏輯座標。
+// 2.5D 版（tank3d.js）繼承這個類別，只換掉繪圖。
 import { CONFIG } from './config.js';
 import { isNight } from './sim.js';
-import { W, H, WATER_TOP, ZONES, LAMP_X, AIR_STONE_X, SHORE_X, groundY, groundSlope, swimLimitX, sampleGround } from './terrain.js';
-import { choosePose, poseMotion, renderTurtle, trackPoseChange } from './poses.js';
+import { W, H, WATER_TOP, LAMP_X, AIR_STONE_X, SHORE_X, groundY, sampleGround } from './terrain.js';
+import { TurtleAgent } from './turtle-agent.js';
 import { drawHeart } from './turtle-shape.js';
 
 const rand = (a, b) => a + Math.random() * (b - a);
@@ -17,26 +18,21 @@ export const FOOD_PHYSICS = {
 };
 const MAX_FOOD = 40;
 
-const REACTIONS = {
-  happy: { key: 'happy', dur: 1.6 },
-  annoyed: { key: 'hide', dur: 2.2 },
-  startled: { key: 'startled', dur: 1.3 },
-  eat: { key: 'nibble', dur: 0.6 },
-};
-
 export class Tank {
+  // assets.poses：{ 品種 id: PoseSet 或 null }
   constructor(canvas, getState, assets, hooks) {
     this.c = canvas;
     this.ctx = null; // 2D 版在第一次繪圖時才取得，讓 2.5D 版可以改用 WebGL
     this.getState = getState;
     this.assets = assets;
-    this.poses = assets.poses || null;
     this.hooks = hooks;
     this.time = 0;
     this.food = [];
     this.bubbles = [];
     this.hearts = [];
     this.ripples = [];
+    this.agents = new Map(); // 烏龜 id → TurtleAgent
+    this.selectedId = null;
     this.tool = null; // 目前選中的食物（投餵模式）
     this.bubbleClock = 0;
     this.lastNight = null;
@@ -55,13 +51,7 @@ export class Tank {
       { x: 690, h: 190, emergent: true }, { x: 745, h: 230, emergent: true },
     ].map(p => ({ ...p, p: rand(0, 6.28) }));
 
-    this.t = {
-      x: 250, y: 400, face: 1, tilt: 0, mode: 'swim', path: [], grounded: false,
-      timer: 0, anim: 0, vy: 0, ignoreFoodUntil: 0,
-      flash: null, idleKey: null, idleUntil: 0, idleNext: 3,
-      pose: 'swim', prevPose: null, poseAt: 0,
-    };
-
+    this.syncAgents();
     this.resize();
     new ResizeObserver(() => this.resize()).observe(canvas);
     canvas.addEventListener('pointerdown', e => this.onPointer(e));
@@ -74,13 +64,41 @@ export class Tank {
     this.c.height = Math.max(1, Math.round(r.height * dpr));
   }
 
-  // w：烏龜全長；shell：背甲寬；foot：站立時背甲中心離地面多高
-  size() {
-    const w = 30 + this.getState().turtle.length * 8;
-    const h = w * 0.5;
-    const shell = w * 0.9;
-    const foot = this.poses ? this.poses.stdBottom * shell : h * 0.42;
-    return { w, h, shell, foot };
+  posesFor(speciesId) {
+    return this.assets.poses?.[speciesId] || null;
+  }
+
+  // 存檔裡的烏龜清單有增減時，缸裡的烏龜跟著增減
+  syncAgents() {
+    const ids = new Set(this.getState().turtles.map(t => t.id));
+    for (const [id, agent] of this.agents) {
+      if (!ids.has(id)) {
+        this.agents.delete(id);
+        this.onAgentRemoved(agent);
+      }
+    }
+    for (const id of ids) {
+      if (!this.agents.has(id)) {
+        const agent = new TurtleAgent(this, id);
+        this.agents.set(id, agent);
+        this.onAgentAdded(agent);
+      }
+    }
+  }
+
+  // 給 2.5D 版建立／移除烏龜的 3D 物件用
+  onAgentAdded() {}
+  onAgentRemoved() {}
+
+  // 點到的烏龜（2D）：離點擊位置夠近的那一隻
+  agentAt(x, y) {
+    let best = null, bd = Infinity;
+    for (const a of this.agents.values()) {
+      const { w } = a.size();
+      const d = Math.hypot(x - a.t.x, y - a.t.y);
+      if (d < w * 0.7 && d < bd) { bd = d; best = a; }
+    }
+    return best;
   }
 
   onPointer(e) {
@@ -91,8 +109,18 @@ export class Tank {
       if (this.dropFoodAt(this.tool, x)) this.hooks.onDrop(this.tool);
       return;
     }
-    const { w } = this.size();
-    if (Math.hypot(x - this.t.x, y - this.t.y) < w * 0.7) this.hooks.onPoke();
+    this.clickAgent(this.agentAt(x, y));
+  }
+
+  // 點一下選取；點已經選取的那隻就是陪牠玩
+  clickAgent(agent) {
+    if (!agent) return;
+    if (agent.id === this.selectedId) this.hooks.onPoke(agent.id);
+    else this.hooks.onSelect(agent.id);
+  }
+
+  setSelected(id) {
+    this.selectedId = id;
   }
 
   // 選擇食物進入投餵模式；null 取消
@@ -101,18 +129,18 @@ export class Tank {
     this.c.style.cursor = type ? 'crosshair' : '';
   }
 
-  // 對玩家動作的反應：換一個表情姿勢一小段時間
-  react(kind) {
-    const r = REACTIONS[kind];
-    if (!r) return;
-    this.t.flash = { key: r.key, until: this.time + r.dur, dur: r.dur };
-    if (kind === 'happy') this.showHearts();
+  react(id, kind) {
+    this.agents.get(id)?.react(kind);
   }
 
-  showHearts(n = 3) {
-    const { h } = this.size();
+  reactAll(kind) {
+    for (const a of this.agents.values()) a.react(kind);
+  }
+
+  showHearts(agent, n = 3) {
+    const { h } = agent.size();
     for (let i = 0; i < n; i++) {
-      this.hearts.push({ x: this.t.x + rand(-20, 20), y: this.t.y - h * 0.8, life: 1.6 + i * 0.25, vx: rand(-10, 10) });
+      this.hearts.push({ x: agent.t.x + rand(-20, 20), y: agent.t.y - h * 0.8, z: agent.z, life: 1.6 + i * 0.25, vx: rand(-10, 10) });
     }
   }
 
@@ -126,10 +154,6 @@ export class Tank {
     return true;
   }
 
-  dropFood(type, pieces) {
-    for (let i = 0; i < pieces; i++) this.dropFoodAt(type, rand(120, SHORE_X - 40));
-  }
-
   // ---------- 更新 ----------
 
   update(dt) {
@@ -137,16 +161,55 @@ export class Tank {
     const s = this.getState();
     const night = isNight(s);
 
+    this.syncAgents();
     this.updateFood(dt);
     this.updateBubbles(dt);
     this.hearts = this.hearts.filter(p => (p.life -= dt) > 0);
     for (const p of this.hearts) { p.y -= 35 * dt; p.x += p.vx * dt; }
 
-    if (night !== this.lastNight) {
-      this.lastNight = night;
-      this.t.timer = 0;
+    const nightChanged = night !== this.lastNight;
+    this.lastNight = night;
+    for (const a of this.agents.values()) {
+      if (nightChanged) a.t.timer = 0;
+      a.update(dt, s, night);
     }
-    this.updateTurtle(dt, s, night);
+    this.separate(dt);
+  }
+
+  // 烏龜靠太近時互相推開，避免疊在一起
+  separate(dt) {
+    const list = [...this.agents.values()];
+    const k = Math.min(1, dt * 4);
+    for (let i = 0; i < list.length; i++) {
+      for (let j = i + 1; j < list.length; j++) {
+        const a = list[i], b = list[j];
+        const sa = a.size(), sb = b.size();
+        const minX = (sa.shell + sb.shell) * 0.45;
+        const minY = (sa.h + sb.h) * 0.5;
+        const dx = b.t.x - a.t.x, dy = b.t.y - a.t.y;
+        if (Math.abs(dx) >= minX || Math.abs(dy) >= minY) continue;
+        const dir = dx === 0 ? (a.id < b.id ? 1 : -1) : Math.sign(dx);
+        const push = (minX - Math.abs(dx)) * k / 2;
+        // 兩隻都在游泳時，也稍微上下錯開
+        const vy = !a.t.grounded && !b.t.grounded ? (dy === 0 ? 1 : Math.sign(dy)) * (minY - Math.abs(dy)) * k / 4 : 0;
+        a.nudge(-dir * push, -vy);
+        b.nudge(dir * push, vy);
+        // 2.5D 裡也前後錯開一點
+        if (Math.abs(a.zTarget - b.zTarget) < 6) {
+          a.zTarget = Math.max(-14, a.zTarget - 3);
+          b.zTarget = Math.min(14, b.zTarget + 3);
+        }
+      }
+    }
+  }
+
+  // 快轉或調時鐘之後，讓烏龜依新的時間重新決定要做什麼
+  onTimeJump() {
+    this.lastNight = null;
+    for (const a of this.agents.values()) {
+      a.t.timer = 0;
+      if (a.t.mode !== 'food') a.t.path = [];
+    }
   }
 
   updateFood(dt) {
@@ -212,191 +275,13 @@ export class Tank {
     this.bubbles = this.bubbles.filter(b => b.y > WATER_TOP);
   }
 
-  updateTurtle(dt, s, night) {
-    const t = this.t;
-    const { w, h, foot } = this.size();
-    this.swimLimit = swimLimitX(h);
-    t.anim += dt;
-    t.timer -= dt;
-
-    const foodInWater = this.food.filter(f => f.inWater);
-    const hungry = s.stats.hunger < 98 && !night && this.time > t.ignoreFoodUntil;
-
-    if (hungry && foodInWater.length && t.mode !== 'food') {
-      t.mode = 'food';
-      t.path = [];
-    }
-
-    if (t.mode === 'food') {
-      if (!hungry || !foodInWater.length) {
-        t.mode = 'swim';
-        t.timer = 0;
-        t.path = [];
-      } else {
-        this.chaseFood(foodInWater, w, h, foot);
-      }
-    }
-
-    if (t.mode !== 'food' && !t.path.length && t.timer <= 0) this.decide(s, night, h, foot);
-
-    this.move(dt, h, foot);
-  }
-
-  chaseFood(foods, w, h, foot) {
-    const t = this.t;
-    const target = nearest(foods, t.x, t.y);
-    const side = target.x > t.x ? 1 : -1;
-    const tx = Math.max(20, target.x - side * w * 0.45);
-    const onBottom = target.y >= groundY(target.x) - 6;
-    if (target.x > this.swimLimit - 10 || (onBottom && t.grounded)) {
-      this.planPath({ x: tx, ground: true }, foot);
-    } else {
-      const ty = Math.max(WATER_TOP + h * 0.3, Math.min(groundY(tx) - foot, target.y + h * 0.1));
-      this.planPath({ x: tx, y: ty, ground: false }, foot);
-    }
-
-    const headX = t.x + t.face * w * 0.5;
-    if (Math.abs(headX - target.x) < 14 + w * 0.12 && Math.abs(t.y - target.y) < foot + 18) {
-      this.food.splice(this.food.indexOf(target), 1);
-      if (this.hooks.onEat(target.type)) {
-        this.react('eat');
-      } else {
-        this.food.push(target); // 吃飽了，食物留在水裡
-        t.ignoreFoodUntil = this.time + 30;
-        t.mode = 'swim';
-        t.timer = 0;
-        t.path = [];
-      }
-    }
-  }
-
-  decide(s, night, h, foot) {
-    const t = this.t;
-    const r = Math.random();
-    if (night) {
-      // 晚上睡在深水區的底部，或淺灘上
-      t.mode = 'sleep';
-      const x = r < 0.5 ? rand(ZONES.deep[0] + 30, ZONES.deep[1] - 40) : rand(...ZONES.shallow);
-      this.planPath({ x, ground: true }, foot);
-      t.timer = rand(400, 800);
-    } else if (s.lamp.on && s.stats.sun < 95 && r < 0.5) {
-      t.mode = 'bask';
-      this.planPath({ x: rand(ZONES.bask[0] + 10, ZONES.bask[1] - 10), ground: true }, foot);
-      t.timer = rand(25, 55);
-    } else if (r < 0.72) {
-      t.mode = 'shallow';
-      this.planPath({ x: rand(...ZONES.shallow), ground: true }, foot);
-      t.timer = rand(8, 20);
-    } else {
-      t.mode = 'swim';
-      const x = rand(30, Math.max(60, this.swimLimit - 20));
-      const y = rand(WATER_TOP + h * 0.4, Math.max(WATER_TOP + h * 0.5, groundY(x) - foot - 5));
-      this.planPath({ x, y, ground: false }, foot);
-      t.timer = rand(2, 6);
-    }
-  }
-
-  // 規劃路線：游不起來的淺灘和岸上要用走的，游泳區可以直線游過去
-  planPath(dest, foot) {
-    const t = this.t;
-    const sm = this.swimLimit;
-    const gy = x => groundY(x) - foot;
-    const path = [];
-    if (t.grounded && dest.ground) {
-      path.push({ x: dest.x, walk: true });
-    } else if (t.grounded && t.x > sm) {
-      path.push({ x: sm - 5, walk: true }, { x: dest.x, y: dest.y });
-    } else if (dest.ground && dest.x > sm) {
-      path.push({ x: sm - 5, y: gy(sm - 5), settle: true }, { x: dest.x, walk: true });
-    } else {
-      path.push({ x: dest.x, y: dest.ground ? gy(dest.x) : dest.y, settle: dest.ground });
-    }
-    t.path = path;
-  }
-
-  move(dt, h, foot) {
-    const t = this.t;
-    const wp = t.path[0];
-    const slopeTilt = () => Math.atan(groundSlope(t.x)) * t.face * 0.8;
-
-    if (!wp) {
-      if (t.grounded) {
-        t.y = groundY(t.x) - foot;
-        t.tilt += (slopeTilt() - t.tilt) * Math.min(1, dt * 5);
-      } else {
-        t.y += Math.sin(this.time * 1.5) * 3 * dt; // 原地輕輕漂浮
-        t.tilt *= 0.9;
-      }
-      t.vy *= 0.9;
-      return;
-    }
-
-    if (wp.walk) {
-      const inWater = t.y > WATER_TOP;
-      const speed = (inWater ? 40 : 26) * (t.mode === 'food' ? 1.8 : 1);
-      const dx = wp.x - t.x;
-      t.grounded = true;
-      t.vy = 0;
-      if (Math.abs(dx) < 1.5) {
-        t.path.shift();
-        return;
-      }
-      t.x += Math.sign(dx) * Math.min(Math.abs(dx), speed * dt);
-      t.face = dx > 0 ? 1 : -1;
-      t.y = groundY(t.x) - foot;
-      t.tilt += (slopeTilt() - t.tilt) * Math.min(1, dt * 6);
-      return;
-    }
-
-    t.grounded = false;
-    const speed = t.mode === 'food' ? 110 : 75;
-    const dx = wp.x - t.x, dy = wp.y - t.y;
-    const dist = Math.hypot(dx, dy);
-    if (dist < 3) {
-      t.path.shift();
-      t.grounded = !!wp.settle;
-      return;
-    }
-    const k = Math.min(1, (speed * dt) / dist);
-    t.x += dx * k;
-    t.y += dy * k;
-    // 不要鑽進地形、也不要游出水面
-    t.y = Math.max(WATER_TOP + h * 0.15, Math.min(groundY(t.x) - foot, t.y));
-    if (Math.abs(dx) > 2) t.face = dx > 0 ? 1 : -1;
-    t.vy += (dy / dist - t.vy) * Math.min(1, dt * 6);
-    // 下潛／上浮的姿勢本身就是斜的，不用再轉
-    const targetTilt = Math.abs(t.vy) > 0.6 ? 0 : Math.max(-0.4, Math.min(0.4, Math.atan2(dy, Math.abs(dx)))) * 0.5;
-    t.tilt += (targetTilt - t.tilt) * Math.min(1, dt * 5);
-  }
-
-  // 目前要畫的姿勢與位移，2D 和 2.5D 共用
-  turtleFrame() {
-    const t = this.t;
-    const s = this.getState();
-    const { w, shell } = this.size();
-    const key = choosePose(t, this.time, {
-      poses: this.poses, sick: s.stats.health < 35, waterTop: WATER_TOP, swimLimit: this.swimLimit ?? W,
-    });
-    const fade = trackPoseChange(t, key, this.time);
-    const m = poseMotion(t, key, this.time, w);
-    // 站在地上時，讓這個姿勢的腳底剛好貼地
-    const ground = t.grounded && this.poses ? (this.poses.stdBottom - this.poses.bottom(key)) * shell : 0;
-    return { key, fade, m, dy: ground + m.dy, shell, w };
-  }
-
-  paintTurtle(ctx, f, shellPx) {
-    const t = this.t;
-    if (f.fade < 1 && t.prevPose) renderTurtle(ctx, this.poses, t.prevPose, shellPx, t.anim, 1 - f.fade);
-    renderTurtle(ctx, this.poses, f.key, shellPx, t.anim, f.fade < 1 && t.prevPose ? f.fade : 1);
-  }
-
   // ---------- 2D 繪圖 ----------
 
   draw() {
     const ctx = this.ctx ||= this.c.getContext('2d');
     const s = this.getState();
     const night = isNight(s);
-    const dirt = 1 - s.stats.water / 100;
+    const dirt = 1 - s.tank.water / 100;
 
     ctx.setTransform(this.c.width / W, 0, 0, this.c.height / H, 0, 0);
     ctx.clearRect(0, 0, W, H);
@@ -406,7 +291,7 @@ export class Tank {
     this.drawPlants(ctx);
     if (s.lamp.on) this.drawLightCone(ctx);
     for (const f of this.food) this.drawFood(ctx, f);
-    this.drawTurtle(ctx);
+    this.drawTurtles(ctx);
     this.drawBubbles(ctx);
     this.drawWater(ctx, dirt);
     this.drawRipples(ctx);
@@ -418,7 +303,8 @@ export class Tank {
       if (s.lamp.on) this.drawLampGlow(ctx);
     }
     this.drawHearts(ctx);
-    if (this.t.mode === 'sleep' && !this.t.path.length) this.drawZzz(ctx);
+    this.drawZzz(ctx);
+    this.drawNames(ctx);
     this.drawGlass(ctx);
   }
 
@@ -639,15 +525,42 @@ export class Tank {
     ctx.restore();
   }
 
-  drawTurtle(ctx) {
-    const t = this.t;
-    const f = this.turtleFrame();
-    ctx.save();
-    ctx.translate(t.x, t.y + f.dy);
-    ctx.scale(t.face * f.m.sx, f.m.sy);
-    ctx.rotate(t.tilt + f.m.rot);
-    this.paintTurtle(ctx, f, f.shell);
-    ctx.restore();
+  drawTurtles(ctx) {
+    // 後面（z 小）的先畫，前面的蓋在上面
+    const agents = [...this.agents.values()].sort((a, b) => a.z - b.z);
+    for (const a of agents) {
+      const t = a.t;
+      const f = a.frame();
+      ctx.save();
+      ctx.translate(t.x, t.y + f.dy);
+      ctx.scale(t.face * f.m.sx, f.m.sy);
+      ctx.rotate(t.tilt + f.m.rot);
+      a.paint(ctx, f, f.shell);
+      ctx.restore();
+    }
+  }
+
+  // 每隻烏龜頭上的名字，選取中的那隻比較明顯
+  drawNames(ctx) {
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 15px sans-serif';
+    const placed = [];
+    for (const a of [...this.agents.values()].sort((p, q) => p.t.y - q.t.y)) {
+      const { h } = a.size();
+      const selected = a.id === this.selectedId;
+      const x = a.t.x;
+      let y = a.t.y - h * 0.95 - 8;
+      // 跟別隻的名字太近就往上錯開（例如一起在曬台曬背）
+      while (placed.some(p => Math.abs(p.x - x) < 70 && Math.abs(p.y - y) < 18)) y -= 18;
+      placed.push({ x, y });
+      const text = (selected ? '▼ ' : '') + a.turtle.name;
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = 'rgba(30, 30, 20, .55)';
+      ctx.strokeText(text, x, y);
+      ctx.fillStyle = selected ? '#ffe27a' : 'rgba(255, 255, 255, .9)';
+      ctx.fillText(text, x, y);
+    }
+    ctx.textAlign = 'start';
   }
 
   drawBubbles(ctx) {
@@ -670,13 +583,16 @@ export class Tank {
   }
 
   drawZzz(ctx) {
-    const { w, h } = this.size();
     ctx.fillStyle = 'rgba(255, 255, 255, .85)';
-    for (let i = 0; i < 3; i++) {
-      const ph = (this.time * 0.5 + i / 3) % 1;
-      ctx.globalAlpha = 1 - ph;
-      ctx.font = `bold ${12 + i * 4}px sans-serif`;
-      ctx.fillText('z', this.t.x + this.t.face * w * 0.3 + ph * 20, this.t.y - h * 0.7 - ph * 50);
+    for (const a of this.agents.values()) {
+      if (!a.sleeping) continue;
+      const { w, h } = a.size();
+      for (let i = 0; i < 3; i++) {
+        const ph = (this.time * 0.5 + i / 3) % 1;
+        ctx.globalAlpha = 1 - ph;
+        ctx.font = `bold ${12 + i * 4}px sans-serif`;
+        ctx.fillText('z', a.t.x + a.t.face * w * 0.3 + ph * 20, a.t.y - h * 0.7 - ph * 50);
+      }
     }
     ctx.globalAlpha = 1;
   }
@@ -692,13 +608,3 @@ export class Tank {
     ctx.fill();
   }
 }
-
-function nearest(list, x, y) {
-  let best = list[0], bd = Infinity;
-  for (const f of list) {
-    const d = Math.hypot(f.x - x, f.y - y);
-    if (d < bd) { bd = d; best = f; }
-  }
-  return best;
-}
-

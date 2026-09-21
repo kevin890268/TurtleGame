@@ -19,16 +19,28 @@ export class PoseSet {
   }
 }
 
-export async function loadPoses() {
+// 哪些品種有姿勢圖（由 tools/slice_poses.py 產生的 assets/poses/index.json）
+export async function loadPoseIndex() {
   try {
-    const res = await fetch('assets/poses/poses.json', { cache: 'no-cache' });
+    const res = await fetch('assets/poses/index.json', { cache: 'no-cache' });
+    return res.ok ? await res.json() : [];
+  } catch {
+    return [];
+  }
+}
+
+// 每個品種的姿勢圖放在 assets/poses/<品種 id>/；沒有的品種回傳 null（改用程式畫的替代圖）
+export async function loadPoses(speciesId) {
+  const dir = `assets/poses/${speciesId}`;
+  try {
+    const res = await fetch(`${dir}/poses.json`, { cache: 'no-cache' });
     if (!res.ok) return null;
     const meta = await res.json();
     const entries = await Promise.all(Object.entries(meta.poses).map(([key, p]) => new Promise(resolve => {
       const img = new Image();
       img.onload = () => resolve([key, img]);
       img.onerror = () => resolve([key, null]);
-      img.src = `assets/poses/${p.file}`;
+      img.src = `${dir}/${p.file}`;
     })));
     const images = Object.fromEntries(entries.filter(([, img]) => img));
     return Object.keys(images).length ? new PoseSet(meta, images) : null;
@@ -39,30 +51,59 @@ export async function loadPoses() {
 
 // 各情境可以隨機穿插的小動作
 const IDLE_EXTRAS = {
-  bask: ['yawn', 'stretch', 'relax', 'neck_up', 'purr', 'look', 'wag'],
-  shallow: ['drink', 'sniff', 'look', 'exhale', 'think', 'neck_up', 'wag'],
+  bask: ['yawn', 'stretch', 'relax', 'neck_up', 'purr', 'look', 'wag', 'shake'],
+  shallow: ['drink', 'sniff', 'look', 'exhale', 'think', 'neck_up', 'wag', 'shake'],
   bottom: ['look', 'sniff', 'think', 'exhale'],
   float: ['exhale', 'float'],
 };
 const IDLE_BASE = { bask: 'bask', shallow: 'observe', bottom: 'rest', float: 'float' };
 
 // 依烏龜目前的狀態決定要用哪個姿勢（t 是 Tank 裡的烏龜狀態）
+// 某個品種還沒有這個姿勢的圖時，依序改用最接近的姿勢（最後退回標準站姿）
+const POSE_FALLBACK = {
+  sleep: ['rest', 'hide', 'head_in'],
+  bask: ['rest', 'relax', 'stretch'],
+  swim: ['walk_b', 'walk_a'],
+  dive: ['swim', 'walk_b'],
+  rise: ['swim', 'neck_up'],
+  float: ['swim', 'rest'],
+  drink: ['neck_up', 'observe'],
+  nibble: ['sniff', 'angry'],
+  exhale: ['neck_up', 'observe'],
+  run: ['walk_b', 'walk_a'],
+  yawn: ['angry', 'relax'],
+  stretch: ['neck_up', 'relax'],
+  purr: ['relax', 'rest'],
+  relax: ['rest', 'walk_a'],
+  startled: ['alert', 'neck_up', 'look'],
+  angry: ['hide'],
+  happy: ['observe', 'look'],
+  wag: ['shake', 'happy', 'relax'],
+  shake: ['wag', 'happy', 'relax'],
+  think: ['look', 'observe'],
+  look: ['observe', 'think'],
+  observe: ['look', 'neck_up'],
+  hide: ['head_in', 'rest'],
+  rest: ['hide', 'relax'],
+};
+
+// 找這個姿勢能用的圖：有循環幀就輪播，沒有圖就照 POSE_FALLBACK 找替代，最後退回標準站姿
+function resolvePose(poses, key, time) {
+  if (!poses) return key;
+  for (const k of [key, ...(POSE_FALLBACK[key] || [])]) {
+    const frame = loopFrame(poses, k, time, 6);
+    if (frame) return frame;
+    if (poses.has(k)) return k;
+  }
+  return poses.has('walk_a') ? 'walk_a' : key;
+}
+
 export function choosePose(t, time, ctx) {
-  const key = baseKey(t, time, ctx);
-  // 有循環幀的動作（搖尾巴等）就輪播
-  const frame = loopFrame(ctx.poses, key, time, 6);
-  if (frame) return frame;
-  // 這個姿勢還沒有圖：用標準站姿代替，不要突然變回程式畫的烏龜
-  if (ctx.poses && !ctx.poses.has(key) && ctx.poses.has('walk_a')) return 'walk_a';
-  return key;
+  return resolvePose(ctx.poses, baseKey(t, time, ctx), time);
 }
 
 function baseKey(t, time, ctx) {
-  if (t.flash && time < t.flash.until) {
-    // 開心時如果有搖尾巴的動畫就用它
-    if (t.flash.key === 'happy' && ctx.poses?.has('wag_1')) return 'wag';
-    return t.flash.key;
-  }
+  if (t.flash && time < t.flash.until) return t.flash.key;
 
   const wp = t.path[0];
   if (wp) {
@@ -121,7 +162,7 @@ export function poseMotion(t, key, time, w) {
   }
   if (t.flash && time < t.flash.until) {
     const k = 1 - (t.flash.until - time) / t.flash.dur;
-    if (t.flash.key === 'happy' || t.flash.key === 'wag') m.dy -= Math.sin(k * Math.PI) * w * 0.12;
+    if (['happy', 'wag', 'shake'].includes(t.flash.key)) m.dy -= Math.sin(k * Math.PI) * w * 0.12;
     if (t.flash.key === 'startled') m.dy -= Math.sin(Math.min(1, k * 3) * Math.PI) * w * 0.08;
     if (t.flash.key === 'hide' || t.flash.key === 'angry') m.rot += Math.sin(k * 40) * 0.03 * (1 - k);
   }
@@ -129,7 +170,7 @@ export function poseMotion(t, key, time, w) {
 }
 
 // 以背甲中心為原點、背甲寬 shellPx 畫出姿勢，alpha 用來做換姿勢時的淡入淡出
-export function renderTurtle(ctx, poses, key, shellPx, anim, alpha = 1) {
+export function renderTurtle(ctx, poses, key, shellPx, anim, alpha = 1, palette) {
   ctx.save();
   ctx.globalAlpha *= alpha;
   const img = poses?.images[key];
@@ -138,7 +179,7 @@ export function renderTurtle(ctx, poses, key, shellPx, anim, alpha = 1) {
     const [ax, ay] = poses.meta.anchor;
     ctx.drawImage(img, -ax * k, -ay * k, img.width * k, img.height * k);
   } else {
-    drawTurtleShape(ctx, shellPx / 0.94, fallbackKind(key), anim);
+    drawTurtleShape(ctx, shellPx / 0.94, fallbackKind(key), anim, palette);
   }
   ctx.restore();
 }

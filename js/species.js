@@ -1,0 +1,96 @@
+// 品種表：每個品種的體型、習性與照顧難度。遊戲規則（sim.js）、烏龜行為（tank.js）和畫面都從這裡讀。
+// 新增品種：在這裡加一筆，再照 assets/prompts/PROMPTS_*.md 生姿勢圖、執行 tools/slice_poses.py <id>。
+// 品種資料來源見 docs/species.md，體型與習性的研究見 docs/species_traits.md。
+
+export const SPECIES = {
+  bangui: {
+    id: 'bangui',
+    name: '斑龜',
+    latin: 'Mauremys sinensis',
+    tag: '台灣原生',
+    difficulty: 1,
+    blurb: '台灣最常見的原生澤龜，脖子有許多細黃線。溫和好養，游泳和曬背都很平均。',
+    intro: '一隻小斑龜來到你家了！',
+    startLength: 3.5,
+    maxLength: 25,
+    stages: [6, 12],          // 小於 6 cm 幼龜、小於 12 cm 亞成龜，之後成龜
+    growth: 1,
+    rates: { hunger: 1, dirt: 1, sun: 1 },        // 數值下降速度的倍率
+    harmBelow: { hunger: 15, water: 20, sun: 15 }, // 低於這個值開始傷害健康
+    diet: { pellet: 1, shrimp: 1, veggie: 1 },     // 各種食物的飽足效果倍率
+    swimSpeed: 1,             // 游泳速度倍率
+    // 白天閒晃時選擇去哪裡的機率（依序判斷：曬背 → 淺水區 → 水底走路 → 游泳）
+    habits: { bask: 0.5, shallow: 0.3, bottom: 0.1 },
+    palette: { shellTop: '#5b5a36', shellBottom: '#3a3822', skin: '#55583a', stripe: '#e6d95c', plastron: '#c7b36a', neckStripes: 3 },
+  },
+
+  musk: {
+    id: 'musk',
+    name: '麝香龜',
+    latin: 'Sternotherus odoratus',
+    tag: '小型・水底派',
+    difficulty: 2,
+    blurb: '小小的蛋龜，游泳笨拙，大多在水底走來走去，很少上岸曬背。受驚時會放出臭味。',
+    intro: '一隻小麝香龜來到你家了！',
+    startLength: 2.5,
+    maxLength: 14,
+    stages: [4, 8],
+    growth: 0.8,
+    rates: { hunger: 0.9, dirt: 1.1, sun: 0.4 },
+    harmBelow: { hunger: 15, water: 20, sun: 5 },
+    diet: { pellet: 1, shrimp: 1.3, veggie: 0.3 },
+    swimSpeed: 0.55,
+    habits: { bask: 0.08, shallow: 0.35, bottom: 0.5 },
+    palette: { shellTop: '#3b3629', shellBottom: '#211e17', skin: '#4a4a3c', stripe: '#e3d9a0', plastron: '#d8c79a', neckStripes: 0 },
+  },
+
+  map: {
+    id: 'map',
+    name: '地圖龜',
+    latin: 'Graptemys pseudogeographica kohnii',
+    tag: '進階・愛曬背',
+    difficulty: 3,
+    blurb: '背甲中線有鋸齒狀突起，非常會游泳也非常愛曬背。對水質很敏感，膽子小。',
+    intro: '一隻小地圖龜來到你家了！',
+    startLength: 3,
+    maxLength: 22,
+    stages: [5, 11],
+    growth: 1,
+    rates: { hunger: 1, dirt: 1, sun: 1.5 },
+    harmBelow: { hunger: 15, water: 40, sun: 30 },
+    diet: { pellet: 1, shrimp: 1.2, veggie: 0.6 },
+    swimSpeed: 1.25,
+    habits: { bask: 0.75, shallow: 0.15, bottom: 0.03 },
+    palette: { shellTop: '#6b6a4a', shellBottom: '#45432c', skin: '#5a5d3e', stripe: '#f0dd62', plastron: '#e2d18c', neckStripes: 4 },
+  },
+
+  slider: {
+    id: 'slider',
+    name: '巴西龜（收容）',
+    latin: 'Trachemys scripta elegans',
+    tag: '收容・大胃王',
+    difficulty: 2,
+    blurb: '被棄養的巴西龜。在台灣是入侵種，禁止商業輸入，請不要棄養或放生。食量大、水髒得快，但很親人。',
+    intro: '一隻被棄養的巴西龜來到你家了。給牠一個新家吧。',
+    startLength: 8,
+    maxLength: 30,
+    stages: [6, 14],
+    growth: 1.2,
+    rates: { hunger: 1.3, dirt: 1.4, sun: 1 },
+    harmBelow: { hunger: 15, water: 15, sun: 15 },
+    diet: { pellet: 1, shrimp: 1, veggie: 0.8 },
+    swimSpeed: 1.1,
+    habits: { bask: 0.55, shallow: 0.2, bottom: 0.05 },
+    palette: { shellTop: '#5d6b3a', shellBottom: '#3b4524', skin: '#56663a', stripe: '#e8e070', plastron: '#e6d27a', neckStripes: 4, earPatch: '#d2452f' },
+  },
+};
+
+export const SPECIES_LIST = Object.values(SPECIES);
+
+export function getSpecies(id) {
+  return SPECIES[id] || SPECIES.bangui;
+}
+
+export function stageOf(len, sp) {
+  return len < sp.stages[0] ? '幼龜' : len < sp.stages[1] ? '亞成龜' : '成龜';
+}
