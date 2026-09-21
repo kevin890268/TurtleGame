@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>斑龜日記</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <h1>🐢 斑龜日記</h1>
+    <div class="top-right">
+      <button id="btnView" class="small"></button>
+      <div class="clock" id="clock"></div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="tank-wrap">
+      <canvas id="tank" aria-label="烏龜缸"></canvas>
+      <div class="toast" id="toast" role="status"></div>
+    </section>
+
+    <aside class="panel">
+      <div class="card profile">
+        <div class="name" id="tName"></div>
+        <div class="meta" id="tMeta"></div>
+        <div class="status" id="tStatus"></div>
+      </div>
+
+      <div class="card" id="stats"></div>
+
+      <div class="card actions">
+        <div class="group-title">餵食</div>
+        <div class="btn-row">
+          <button data-act="feed" data-food="pellet">🟤 飼料</button>
+          <button data-act="feed" data-food="shrimp">🦐 蝦乾</button>
+          <button data-act="feed" data-food="veggie">🥬 蔬菜</button>
+        </div>
+        <div class="group-title">環境</div>
+        <div class="btn-row">
+          <button data-act="water">💧 換水</button>
+          <button data-act="lamp" id="btnLamp">💡 曬背燈</button>
+        </div>
+        <label class="toggle"><input type="checkbox" id="chkTimer"> 曬背燈定時器（08:00–18:00）</label>
+        <div class="group-title">互動</div>
+        <div class="btn-row">
+          <button data-act="play">🤲 陪牠玩</button>
+          <button data-act="vet" id="btnVet">🏥 看獸醫</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="group-title">飼養日誌</div>
+        <ul class="log" id="log"></ul>
+      </div>
+
+      <div class="card save-row">
+        <button id="btnExport">匯出存檔</button>
+        <button id="btnImport">匯入存檔</button>
+        <input type="file" id="fileImport" accept=".json,application/json" hidden>
+        <button id="btnReset" class="danger">重新開始</button>
+      </div>
+    </aside>
+  </main>
+
+  <div class="modal" id="nameModal" hidden>
+    <form class="modal-box" id="nameForm">
+      <h2>一隻小斑龜來到你家了！</h2>
+      <p>背甲只有 3.5 公分，幫牠取個名字吧。</p>
+      <input id="nameInput" maxlength="12" placeholder="例如：小斑" required autocomplete="off">
+      <button type="submit">開始飼養</button>
+    </form>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

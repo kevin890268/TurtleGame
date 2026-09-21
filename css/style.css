@@ -1,0 +1,143 @@
+:root {
+  --bg: #f4efe4;
+  --card: #fffdf8;
+  --ink: #33301f;
+  --muted: #7c7560;
+  --line: #e4dccb;
+  --accent: #4f7a4a;
+  --accent-ink: #fff;
+  --danger: #b5523b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+.topbar h1 { font-size: 20px; margin: 0; }
+.clock { color: var(--muted); font-variant-numeric: tabular-nums; }
+.top-right { display: flex; align-items: center; gap: 12px; }
+button.small { font-size: 13px; padding: 4px 10px; }
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 16px;
+  padding: 0 20px 20px;
+  align-items: start;
+}
+
+.tank-wrap { position: relative; }
+#tank {
+  display: block;
+  width: 100%;
+  aspect-ratio: 5 / 3;
+  border-radius: 14px;
+  background: #cfe3e6;
+  box-shadow: 0 6px 20px rgba(60, 50, 20, .15);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.toast {
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  transform: translate(-50%, -10px);
+  background: rgba(40, 36, 20, .85);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity .25s, transform .25s;
+  pointer-events: none;
+  max-width: 90%;
+  text-align: center;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+.panel { display: flex; flex-direction: column; gap: 12px; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.profile .name { font-size: 20px; font-weight: 700; }
+.profile .meta { color: var(--muted); font-size: 13px; margin-top: 2px; }
+.profile .status { margin-top: 6px; font-size: 14px; }
+
+.stat { display: grid; grid-template-columns: 40px 1fr 32px; align-items: center; gap: 8px; margin: 6px 0; font-size: 13px; }
+.stat .bar { height: 10px; background: #efe8d8; border-radius: 99px; overflow: hidden; }
+.stat .fill { height: 100%; border-radius: 99px; transition: width .4s; }
+.stat .num { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+.stat.low .num { color: var(--danger); font-weight: 700; }
+
+.group-title { font-size: 12px; color: var(--muted); margin: 8px 0 6px; letter-spacing: .05em; }
+.group-title:first-child { margin-top: 0; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+button {
+  font: inherit;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+}
+button:hover:not(:disabled) { border-color: var(--accent); }
+button:active:not(:disabled) { transform: translateY(1px); }
+button:disabled { opacity: .45; cursor: not-allowed; }
+button.on { background: #fff4c2; border-color: #e0b93a; }
+button.danger { color: var(--danger); }
+
+.toggle { display: flex; align-items: center; gap: 6px; font-size: 13px; margin-top: 8px; color: var(--muted); }
+
+.log { list-style: none; margin: 0; padding: 0; max-height: 220px; overflow-y: auto; font-size: 13px; }
+.log li { padding: 4px 0; border-bottom: 1px dashed var(--line); }
+.log time { color: var(--muted); margin-right: 6px; font-variant-numeric: tabular-nums; }
+
+.save-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 28, 15, .5);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+.modal[hidden] { display: none; }
+.modal-box {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 24px;
+  width: min(360px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.modal-box h2 { margin: 0; font-size: 20px; }
+.modal-box p { margin: 0; color: var(--muted); }
+.modal-box input { font: inherit; padding: 10px; border-radius: 10px; border: 1px solid var(--line); }
+.modal-box button { background: var(--accent); color: var(--accent-ink); border: none; padding: 10px; }
+
+@media (max-width: 860px) {
+  .layout { grid-template-columns: 1fr; padding: 0 16px 16px; }
+  .topbar { padding: 10px 16px; }
+}

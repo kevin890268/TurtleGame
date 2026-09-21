@@ -1,0 +1,12 @@
+{
+  "_說明": "把 GPT 產生的圖放進 assets 資料夾，並在下面填上檔名（例如 \"turtle_swim\": \"turtle_swim.png\"）。留空字串就使用內建繪圖。",
+  "bg": "",
+  "dock": "",
+  "lamp": "",
+  "turtle_swim": "",
+  "turtle_bask": "",
+  "turtle_sleep": "",
+  "food_pellet": "",
+  "food_shrimp": "",
+  "food_veggie": ""
+}
