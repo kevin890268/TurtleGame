@@ -29,6 +29,10 @@ export function newTurtle(speciesId, taken = []) {
     vetReadyAt: 0,
     plays: [],
     alerts: {},
+    history: [{ day: 0, len: sp.startLength }], // 成長紀錄
+    eaten: {},                                  // 各種食物吃過幾次
+    flipped: false,                             // 翻身卡住
+    shedAt: 0,                                  // 最近一次脫皮的時間
   };
 }
 
@@ -38,7 +42,7 @@ export function newState() {
   const a = newTurtle('bangui');
   const b = newTurtle('bangui', [a.name]);
   return {
-    version: 3,
+    version: 4,
     createdAt: now,
     lastRealTime: now,
     gameTime: now,
@@ -46,6 +50,7 @@ export function newState() {
     lamp: { on: false, timer: true },
     equip: { filter: 'small', lamp: 'uvb', heater: false },
     turtles: [a, b],
+    relations: {},
     alerts: {},
     log: [],
   };
@@ -108,7 +113,15 @@ function migrate(s) {
   // 第 3 版：加入水溫和設備
   s.tank.temp ??= 26;
   s.equip ??= { filter: 'small', lamp: 'uvb', heater: false };
-  s.version = 3;
+  // 第 4 版：關係、成長紀錄、食物統計、事件
+  s.relations ??= {};
+  for (const t of s.turtles) {
+    t.history ??= [{ day: Math.floor(t.ageHours / 24), len: +t.length.toFixed(2) }];
+    t.eaten ??= {};
+    t.flipped ??= false;
+    t.shedAt ??= 0;
+  }
+  s.version = 4;
   return s;
 }
 

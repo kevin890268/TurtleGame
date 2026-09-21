@@ -62,6 +62,7 @@ const IDLE_BASE = { bask: 'bask', shallow: 'observe', bottom: 'rest', float: 'fl
 // 某個品種還沒有這個姿勢的圖時，依序改用最接近的姿勢（最後退回標準站姿）
 const POSE_FALLBACK = {
   sleep: ['rest', 'hide', 'head_in'],
+  flip: ['hide', 'rest'],
   bask: ['rest', 'relax', 'stretch'],
   swim: ['walk_b', 'walk_a'],
   dive: ['swim', 'walk_b'],
@@ -103,6 +104,7 @@ export function choosePose(t, time, ctx) {
 }
 
 function baseKey(t, time, ctx) {
+  if (t.mode === 'flipped') return 'flip';
   if (t.flash && time < t.flash.until) return t.flash.key;
 
   const wp = t.path[0];

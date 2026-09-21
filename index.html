@@ -27,24 +27,27 @@
     <section class="tank-wrap">
       <canvas id="tank" aria-label="烏龜缸"></canvas>
       <div class="toast" id="toast" role="status"></div>
+      <button id="menuBtn" class="menu-btn" aria-label="功能表" aria-expanded="false">☰</button>
+      <div class="quick-menu" id="quickMenu" hidden></div>
     </section>
 
-    <aside class="panel">
-      <div class="card">
-        <div class="group-title">缸裡的烏龜 <span id="turtleCount"></span></div>
+    <!-- 功能區塊的順序和圖示由 js/menu.js 的 SECTIONS 決定 -->
+    <aside class="panel" id="panel">
+      <details class="card section" data-section="turtles">
+        <summary>缸裡的烏龜 <span id="turtleCount"></span></summary>
         <ul class="turtle-list" id="turtleList"></ul>
         <button id="btnAdd" class="add-btn">＋ 新增烏龜</button>
-      </div>
+        <div id="stats"></div>
+      </details>
 
-      <div class="card" id="stats"></div>
+      <details class="card section" data-section="feed">
+        <summary>餵食</summary>
+        <div class="food-grid" id="foodGrid"></div>
+        <div class="hint">選一種食物，再點水缸就會在那裡丟一顆；再按一次或按 Esc 取消</div>
+      </details>
 
-      <div class="card actions">
-        <div class="group-title">餵食</div>
-        <div class="btn-row">
-          <button data-act="feed" data-food="pellet">🟤 飼料</button>
-          <button data-act="feed" data-food="shrimp">🦐 蝦乾</button>
-          <button data-act="feed" data-food="veggie">🥬 蔬菜</button>
-        </div>
+      <details class="card section" data-section="care">
+        <summary>照顧</summary>
         <div class="group-title">環境</div>
         <div class="btn-row">
           <button data-act="water">💧 換水</button>
@@ -56,10 +59,10 @@
           <button data-act="play">🤲 陪牠玩</button>
           <button data-act="vet" id="btnVet">🏥 看獸醫</button>
         </div>
-      </div>
+      </details>
 
-      <div class="card equipment">
-        <div class="group-title">設備</div>
+      <details class="card section equipment" data-section="equip">
+        <summary>設備</summary>
         <label class="equip-row">過濾器
           <select id="eqFilter">
             <option value="none">沒有過濾器</option>
@@ -75,10 +78,15 @@
         </label>
         <label class="toggle"><input type="checkbox" id="eqHeater"> 加溫棒（水溫維持 26℃）</label>
         <div class="hint" id="eqHint"></div>
-      </div>
+      </details>
 
-      <div class="card">
-        <div class="group-title">時間</div>
+      <details class="card section" data-section="decor">
+        <summary>缸子與造景</summary>
+        <div class="decor-list" id="decorList"></div>
+      </details>
+
+      <details class="card section" data-section="time">
+        <summary>時間</summary>
         <div class="speed-row">
           <input type="range" id="speed" min="1" max="10" step="1" value="1" aria-label="時間速度">
           <output id="speedOut" for="speed">1x</output>
@@ -94,19 +102,22 @@
           <input type="time" id="clockInput" required>
           <button type="submit">設定</button>
         </form>
-      </div>
+      </details>
 
-      <div class="card">
-        <div class="group-title">飼養日誌</div>
+      <details class="card section" data-section="log">
+        <summary>飼養日誌</summary>
         <ul class="log" id="log"></ul>
-      </div>
+      </details>
 
-      <div class="card save-row">
-        <button id="btnExport">匯出存檔</button>
-        <button id="btnImport">匯入存檔</button>
-        <input type="file" id="fileImport" accept=".json,application/json" hidden>
-        <button id="btnReset" class="danger">重新開始</button>
-      </div>
+      <details class="card section" data-section="save">
+        <summary>存檔</summary>
+        <div class="save-row">
+          <button id="btnExport">匯出存檔</button>
+          <button id="btnImport">匯入存檔</button>
+          <input type="file" id="fileImport" accept=".json,application/json" hidden>
+          <button id="btnReset" class="danger">重新開始</button>
+        </div>
+      </details>
     </aside>
   </main>
 
@@ -128,6 +139,13 @@
         <button type="submit">確定</button>
       </div>
     </form>
+  </div>
+
+  <div class="modal" id="detailModal" hidden>
+    <div class="modal-box wide">
+      <div id="detailBody"></div>
+      <button type="button" class="ghost" data-close>關閉</button>
+    </div>
   </div>
 
   <script type="module" src="js/main.js"></script>

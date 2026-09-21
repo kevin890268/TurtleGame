@@ -6,11 +6,22 @@ import { getSpecies, stageOf } from './species.js';
 
 export { stageOf };
 
+// 食物：icon 給按鈕用；bug 是隨機事件掉進水裡的蟲，玩家不能自己丟
 export const FOODS = {
-  pellet: { name: '烏龜飼料', hunger: 4, dirt: 0.4, mood: 0 },
-  shrimp: { name: '蝦乾', hunger: 7, dirt: 1.2, mood: 3 },
-  veggie: { name: '蔬菜', hunger: 3, dirt: 0.3, mood: 1 },
+  pellet: { name: '烏龜飼料', icon: '🟤', hunger: 4, dirt: 0.4, mood: 0 },
+  shrimp: { name: '蝦乾', icon: '🦐', hunger: 7, dirt: 1.2, mood: 3 },
+  veggie: { name: '蔬菜', icon: '🥬', hunger: 3, dirt: 0.3, mood: 1 },
+  snail: { name: '小螺', icon: '🐌', hunger: 6, dirt: 0.5, mood: 3 },
+  worm: { name: '紅蟲', icon: '🪱', hunger: 5, dirt: 0.8, mood: 4 },
+  fish: { name: '小魚', icon: '🐟', hunger: 8, dirt: 0.6, mood: 6 },
+  fruit: { name: '水果', icon: '🍓', hunger: 3, dirt: 0.9, mood: 4 },
+  bug: { name: '小蟲', icon: '🦟', hunger: 3, dirt: 0.1, mood: 6, hidden: true },
 };
+
+// 關係：每一對烏龜一個分數（-100～100）
+export const FRIEND_AT = 40;
+export const BEST_FRIEND_AT = 60;
+export const RIVAL_AT = -40;
 
 // 設備
 export const FILTERS = {
@@ -131,8 +142,28 @@ function stepTurtle(s, t, h, night, events) {
     }
   }
 
+  // 翻身卡住：放著不管會越來越不舒服
+  if (t.flipped) {
+    st.mood -= 8 * h;
+    st.health -= 2 * h;
+  }
+
+  // 幼龜偶爾脫皮（飼主經驗：薄薄一層白色，不要用手剝）
+  if (len < sp.stages[1] && Math.random() < 0.01 * h) {
+    t.shedAt = s.gameTime;
+    const msg = `${t.name} 脫皮了，水裡漂著一層薄薄的白色皮屑。不用幫牠剝，讓牠自己脫就好。`;
+    addLog(s, msg);
+    events.push(msg);
+  }
+
   for (const k of Object.keys(st)) st[k] = clamp(st[k]);
+  const dayBefore = Math.floor(t.ageHours / 24);
   t.ageHours += h;
+  // 成長紀錄：每過一天記一次背甲長度
+  if (Math.floor(t.ageHours / 24) !== dayBefore) {
+    t.history.push({ day: Math.floor(t.ageHours / 24), len: +t.length.toFixed(2) });
+    if (t.history.length > 365) t.history.shift();
+  }
   checkTurtleAlerts(s, t, events);
 }
 
@@ -190,13 +221,15 @@ export function eat(s, t, type) {
   const st = t.stats;
   const sp = getSpecies(t.species);
   if (st.hunger >= 98) return false;
-  // 各品種偏好不同；小烏龜偏肉食，蔬菜吃得少
-  let gain = f.hunger * sp.diet[type];
-  if (type === 'veggie' && t.length < sp.stages[0]) gain *= 0.5;
+  // 各品種偏好不同；小烏龜偏肉食，蔬菜、水果吃得少
+  let gain = f.hunger * (sp.diet[type] ?? 1);
+  if ((type === 'veggie' || type === 'fruit') && t.length < sp.stages[0]) gain *= 0.5;
   st.hunger = clamp(st.hunger + gain);
-  st.mood = clamp(st.mood + f.mood);
+  // 吃到最愛的食物特別開心
+  st.mood = clamp(st.mood + f.mood + (sp.favorites?.includes(type) ? 5 : 0));
   s.tank.water = clamp(s.tank.water - f.dirt);
   t.lastFood[type] = s.gameTime;
+  t.eaten[type] = (t.eaten[type] || 0) + 1;
   return true;
 }
 
@@ -310,6 +343,69 @@ export function setClock(s, hh, mm) {
   const text = `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
   addLog(s, `把時鐘調到 ${text}。`);
   return `時鐘調到 ${text} 了。`;
+}
+
+// ---- 關係 ----
+
+const pairKey = (a, b) => (a < b ? `${a}|${b}` : `${b}|${a}`);
+
+export function relation(s, a, b) {
+  return s.relations[pairKey(a, b)] || 0;
+}
+
+export function relationLabel(score) {
+  if (score >= BEST_FRIEND_AT) return '💞 最要好';
+  if (score >= FRIEND_AT) return '😊 好朋友';
+  if (score <= RIVAL_AT) return '😤 互看不順眼';
+  if (score < -10) return '😒 有點不合';
+  if (score > 10) return '🙂 還不錯';
+  return '😐 普通';
+}
+
+// 調整關係；跨過好朋友／互看不順眼的門檻時回傳要顯示的訊息
+export function addRelation(s, a, b, delta) {
+  const key = pairKey(a, b);
+  const before = s.relations[key] || 0;
+  const after = Math.max(-100, Math.min(100, before + delta));
+  s.relations[key] = after;
+  const ta = s.turtles.find(t => t.id === a), tb = s.turtles.find(t => t.id === b);
+  if (!ta || !tb) return null;
+  let msg = null;
+  // 先檢查比較高的門檻（一次跨過兩個門檻時，記最新的那個）
+  if (before < BEST_FRIEND_AT && after >= BEST_FRIEND_AT) msg = `${ta.name} 和 ${tb.name} 變成最要好的朋友，會疊在一起曬背了。`;
+  else if (before < FRIEND_AT && after >= FRIEND_AT) msg = `${ta.name} 和 ${tb.name} 常常一起曬背，變成好朋友了！`;
+  else if (before > RIVAL_AT && after <= RIVAL_AT) msg = `${ta.name} 和 ${tb.name} 老是搶食，開始互看不順眼了。`;
+  if (msg) addLog(s, msg);
+  return msg;
+}
+
+// ---- 送養 ----
+
+export function adopt(s, t) {
+  s.turtles = s.turtles.filter(x => x.id !== t.id);
+  for (const key of Object.keys(s.relations)) if (key.includes(t.id)) delete s.relations[key];
+  const msg = t.species === 'slider'
+    ? `${t.name} 送到收容單位了。巴西龜是入侵種，請不要放生到野外。`
+    : `${t.name} 送到新家了，祝牠一切順利。`;
+  addLog(s, msg);
+  return msg;
+}
+
+// ---- 事件 ----
+
+export function flip(s, t) {
+  t.flipped = true;
+  const msg = `${t.name} 在曬台上翻過去了，腳在空中亂划！點牠幫忙翻回來。`;
+  addLog(s, msg);
+  return msg;
+}
+
+export function rescue(s, t) {
+  t.flipped = false;
+  t.stats.mood = clamp(t.stats.mood + 5);
+  const msg = `幫 ${t.name} 翻回來了，牠鬆了一口氣。`;
+  addLog(s, msg);
+  return msg;
 }
 
 export function rename(s, t, name) {

@@ -17,7 +17,8 @@ export const SPECIES = {
     growth: 1,
     rates: { hunger: 1, dirt: 1, sun: 1 },        // 數值下降速度的倍率
     harmBelow: { hunger: 15, water: 20, sun: 15 }, // 低於這個值開始傷害健康
-    diet: { pellet: 1, shrimp: 1, veggie: 1 },     // 各種食物的飽足效果倍率
+    diet: { pellet: 1, shrimp: 1, veggie: 1, fruit: 1 }, // 各種食物的飽足效果倍率（沒列的是 1）
+    favorites: ['shrimp', 'worm', 'fruit'],       // 最愛：吃到心情多加分（臺灣生命大百科：也吃漿果、蚯蚓）
     swimSpeed: 1,             // 游泳速度倍率
     // 白天閒晃時選擇去哪裡的機率（依序判斷：曬背 → 淺水區 → 水底走路 → 游泳）
     habits: { bask: 0.5, shallow: 0.3, bottom: 0.1 },
@@ -38,7 +39,8 @@ export const SPECIES = {
     growth: 0.8,
     rates: { hunger: 0.9, dirt: 1.1, sun: 0.4 },
     harmBelow: { hunger: 15, water: 20, sun: 5 },
-    diet: { pellet: 1, shrimp: 1.3, veggie: 0.3 },
+    diet: { pellet: 1, shrimp: 1.3, veggie: 0.3, fruit: 0.3, snail: 1.3 },
+    favorites: ['snail', 'worm'],                  // 研究：主要吃螺類、小型蚌類和水生昆蟲
     swimSpeed: 0.55,
     habits: { bask: 0.08, shallow: 0.35, bottom: 0.5 },
     palette: { shellTop: '#3b3629', shellBottom: '#211e17', skin: '#4a4a3c', stripe: '#e3d9a0', plastron: '#d8c79a', neckStripes: 0 },
@@ -58,7 +60,8 @@ export const SPECIES = {
     growth: 1,
     rates: { hunger: 1, dirt: 1, sun: 1.5 },
     harmBelow: { hunger: 15, water: 40, sun: 30 },
-    diet: { pellet: 1, shrimp: 1.2, veggie: 0.6 },
+    diet: { pellet: 1, shrimp: 1.2, veggie: 0.6, fruit: 0.5, snail: 1.2 },
+    favorites: ['snail', 'fish'],                  // 研究：吃螺、蚌、螯蝦、魚
     swimSpeed: 1.25,
     habits: { bask: 0.75, shallow: 0.15, bottom: 0.03 },
     palette: { shellTop: '#6b6a4a', shellBottom: '#45432c', skin: '#5a5d3e', stripe: '#f0dd62', plastron: '#e2d18c', neckStripes: 4 },
@@ -78,7 +81,8 @@ export const SPECIES = {
     growth: 1.2,
     rates: { hunger: 1.3, dirt: 1.4, sun: 1 },
     harmBelow: { hunger: 15, water: 15, sun: 15 },
-    diet: { pellet: 1, shrimp: 1, veggie: 0.8 },
+    diet: { pellet: 1, shrimp: 1, veggie: 0.8, fruit: 1 },
+    favorites: ['fish', 'veggie'],                 // 研究：什麼都吃，長大越偏草食
     swimSpeed: 1.1,
     habits: { bask: 0.55, shallow: 0.2, bottom: 0.05 },
     palette: { shellTop: '#5d6b3a', shellBottom: '#3b4524', skin: '#56663a', stripe: '#e8e070', plastron: '#e6d27a', neckStripes: 4, earPatch: '#d2452f' },

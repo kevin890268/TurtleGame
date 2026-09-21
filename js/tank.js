@@ -15,7 +15,13 @@ export const FOOD_PHYSICS = {
   pellet: { d0: 0.85, d1: 1.15, soak: 30, k: 60, sway: 0.4 },
   shrimp: { d0: 0.95, d1: 1.3, soak: 12, k: 60, sway: 0.8 },
   veggie: { d0: 0.9, d1: 1.05, soak: 40, k: 80, sway: 3 },
+  snail: { d0: 1.4, d1: 1.4, soak: 1, k: 70, sway: 0 },   // 很重，一下就沉到底，然後慢慢爬
+  worm: { d0: 1.05, d1: 1.1, soak: 10, k: 90, sway: 2 },  // 一邊扭一邊慢慢沉
+  fruit: { d0: 0.95, d1: 1.2, soak: 15, k: 50, sway: 0.5 },
+  bug: { d0: 0.5, d1: 0.5, soak: 1, k: 0, sway: 0 },      // 浮在水面掙扎
+  fish: null,                                             // 活的，會自己游
 };
+const FOOD_LIFETIME = { bug: 60 }; // 蟲子沒被吃掉會飛走（不會弄髒水）
 const MAX_FOOD = 40;
 
 export class Tank {
@@ -36,6 +42,10 @@ export class Tank {
     this.tool = null; // 目前選中的食物（投餵模式）
     this.bubbleClock = 0;
     this.lastNight = null;
+    this.flakes = [];            // 脫皮的皮屑
+    this.eventClock = rand(40, 90); // 下一次隨機事件的倒數（秒）
+    this.relationClock = 0;
+    this.seenShed = new Map();   // 已經畫過皮屑的脫皮（避免重複）
 
     this.motes = Array.from({ length: 60 }, () => {
       const x = rand(0, 820);
@@ -112,10 +122,11 @@ export class Tank {
     this.clickAgent(this.agentAt(x, y));
   }
 
-  // 點一下選取；點已經選取的那隻就是陪牠玩
+  // 點一下選取；點已經選取的那隻就是陪牠玩；翻身卡住的就幫牠翻回來
   clickAgent(agent) {
     if (!agent) return;
-    if (agent.id === this.selectedId) this.hooks.onPoke(agent.id);
+    if (agent.turtle.flipped) this.hooks.onRescue(agent.id);
+    else if (agent.id === this.selectedId) this.hooks.onPoke(agent.id);
     else this.hooks.onSelect(agent.id);
   }
 
@@ -174,6 +185,59 @@ export class Tank {
       a.update(dt, s, night);
     }
     this.separate(dt);
+    this.updateRelations(dt);
+    this.updateEvents(dt, s, night);
+    this.updateFlakes(dt, s);
+  }
+
+  // 一起在曬台上曬背的烏龜，關係會慢慢變好
+  updateRelations(dt) {
+    this.relationClock += dt;
+    if (this.relationClock < 1) return;
+    this.relationClock = 0;
+    const list = [...this.agents.values()];
+    for (let i = 0; i < list.length; i++) {
+      for (let j = i + 1; j < list.length; j++) {
+        const a = list[i], b = list[j];
+        const together = a.t.mode === 'bask' && b.t.mode === 'bask' && !a.t.path.length && !b.t.path.length
+          && Math.abs(a.t.x - b.t.x) < (a.size().shell + b.size().shell) * 1.2;
+        if (together) this.hooks.onRelation(a.id, b.id, 0.5);
+      }
+    }
+  }
+
+  // 隨機事件（網頁開著時才會發生）：蟲子落水、在曬台上翻身
+  updateEvents(dt, s, night) {
+    this.eventClock -= dt;
+    if (this.eventClock > 0 || night) return;
+    this.eventClock = rand(60, 150);
+    const onLand = [...this.agents.values()].filter(a => a.t.grounded && a.t.y < WATER_TOP && !a.t.path.length && !a.t.stackOn && !a.turtle.flipped);
+    if (onLand.length && Math.random() < 0.3) {
+      this.hooks.onFlip(onLand[Math.floor(Math.random() * onLand.length)].id);
+    } else {
+      this.dropFoodAt('bug', rand(80, SHORE_X - 60));
+      this.hooks.onEvent('一隻小蟲掉進水裡了，看誰先抓到！');
+    }
+  }
+
+  // 脫皮：水裡漂著白色的皮屑（離線時發生的只在回來後畫一次）
+  updateFlakes(dt, s) {
+    for (const t of s.turtles) {
+      if (!t.shedAt || this.seenShed.get(t.id) === t.shedAt) continue;
+      this.seenShed.set(t.id, t.shedAt);
+      if (s.gameTime - t.shedAt > 6 * 3.6e6) continue; // 太久以前的就不畫了
+      const a = this.agents.get(t.id);
+      if (!a) continue;
+      for (let i = 0; i < 6; i++) {
+        this.flakes.push({ x: a.t.x + rand(-20, 20), y: Math.max(WATER_TOP + 5, a.t.y + rand(-15, 5)), z: a.z, r: rand(3, 6), life: rand(20, 35), seed: rand(0, 6.28) });
+      }
+    }
+    for (const f of this.flakes) {
+      f.life -= dt;
+      f.y = Math.max(WATER_TOP + 3, f.y - 3 * dt);
+      f.x += Math.sin(this.time + f.seed) * 4 * dt;
+    }
+    this.flakes = this.flakes.filter(f => f.life > 0);
   }
 
   // 烏龜靠太近時互相推開，避免疊在一起
@@ -183,6 +247,7 @@ export class Tank {
     for (let i = 0; i < list.length; i++) {
       for (let j = i + 1; j < list.length; j++) {
         const a = list[i], b = list[j];
+        if (a.t.stackOn === b.id || b.t.stackOn === a.id || a.t.stackOn || b.t.stackOn) continue; // 疊在背上的不推開
         const sa = a.size(), sb = b.size();
         const minX = (sa.shell + sb.shell) * 0.45;
         const minY = (sa.h + sb.h) * 0.5;
@@ -227,6 +292,10 @@ export class Tank {
         continue;
       }
 
+      if (f.type === 'fish') {
+        this.swimFish(f, dt);
+        continue;
+      }
       const P = FOOD_PHYSICS[f.type];
       f.wet += dt;
       const density = P.d0 + (P.d1 - P.d0) * Math.min(1, f.wet / P.soak);
@@ -248,18 +317,38 @@ export class Tank {
         if (f.y >= floor) {
           f.y = floor;
           f.vy = 0;
+          if (f.type === 'snail') f.x += Math.sin(f.seed) * 4 * dt; // 小螺在沙上慢慢爬
         }
       }
+      if (f.type === 'bug' && f.floating) f.x += Math.sin(this.time * 9 + f.seed) * 20 * dt; // 掙扎
       f.x = Math.max(5, Math.min(SHORE_X - 5, f.x));
     }
 
     this.ripples = this.ripples.filter(r => (r.age += dt) < 1.5);
 
-    const rotten = this.food.filter(f => f.age > CONFIG.foodRotSeconds);
+    // 小魚是活的不會爛；蟲子太久沒被吃會飛走
+    this.food = this.food.filter(f => !(FOOD_LIFETIME[f.type] && f.age > FOOD_LIFETIME[f.type]));
+    const rotten = this.food.filter(f => f.type !== 'fish' && f.age > CONFIG.foodRotSeconds);
     if (rotten.length) {
-      this.food = this.food.filter(f => f.age <= CONFIG.foodRotSeconds);
+      this.food = this.food.filter(f => f.type === 'fish' || f.age <= CONFIG.foodRotSeconds);
       this.hooks.onRot(rotten.length);
     }
+  }
+
+  // 小魚：在水裡隨機游動，偶爾轉向
+  swimFish(f, dt) {
+    f.turn = (f.turn ?? 0) - dt;
+    if (f.turn <= 0) {
+      f.turn = rand(1, 3);
+      f.vx = rand(-60, 60);
+      f.vy = rand(-25, 25);
+    }
+    f.x += f.vx * dt;
+    f.y += f.vy * dt;
+    const floor = groundY(f.x) - 8;
+    if (f.x < 15 || f.x > SHORE_X - 15) { f.vx *= -1; f.x = Math.max(15, Math.min(SHORE_X - 15, f.x)); }
+    if (f.y < WATER_TOP + 8 || f.y > floor) { f.vy *= -1; f.y = Math.max(WATER_TOP + 8, Math.min(floor, f.y)); }
+    f.floating = false;
   }
 
   updateBubbles(dt) {
@@ -293,6 +382,7 @@ export class Tank {
     for (const f of this.food) this.drawFood(ctx, f);
     this.drawTurtles(ctx);
     this.drawBubbles(ctx);
+    this.drawFlakes(ctx);
     this.drawWater(ctx, dirt);
     this.drawRipples(ctx);
     this.drawLamp(ctx, s.lamp.on);
@@ -516,10 +606,69 @@ export class Tank {
       ctx.beginPath();
       ctx.arc(0, 0, 7, 0.3, Math.PI * 1.4);
       ctx.stroke();
-    } else {
+    } else if (f.type === 'veggie') {
       ctx.fillStyle = rotting ? '#6f7a3a' : '#6cc04a';
       ctx.beginPath();
       ctx.ellipse(0, 0, 9, 5, f.seed, 0, Math.PI * 2);
+      ctx.fill();
+    } else if (f.type === 'snail') {
+      ctx.fillStyle = '#8a6a48';
+      ctx.beginPath();
+      ctx.arc(0, -2, 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#5a4430';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.arc(0, -2, 2.5, 0, Math.PI * 1.6);
+      ctx.stroke();
+      ctx.fillStyle = '#b8a07a';
+      ctx.fillRect(-6, 2, 11, 2);
+    } else if (f.type === 'worm') {
+      ctx.strokeStyle = rotting ? '#7a4a40' : '#c8322c';
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      for (let i = 0; i <= 6; i++) {
+        const x = -8 + i * 2.7, y = Math.sin(this.time * 6 + f.seed + i) * 2.5;
+        i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+      }
+      ctx.stroke();
+    } else if (f.type === 'fish') {
+      ctx.restore();
+      ctx.save();
+      ctx.translate(f.x, f.y);
+      ctx.scale(f.vx < 0 ? -1 : 1, 1);
+      ctx.fillStyle = '#e8a33c';
+      ctx.beginPath();
+      ctx.ellipse(0, 0, 9, 4, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(-8, 0);
+      ctx.lineTo(-14, -4 + Math.sin(this.time * 12) * 1.5);
+      ctx.lineTo(-14, 4 + Math.sin(this.time * 12) * 1.5);
+      ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle = '#222';
+      ctx.fillRect(4, -1.5, 1.8, 1.8);
+    } else if (f.type === 'fruit') {
+      ctx.fillStyle = rotting ? '#8a4a40' : '#e0424a';
+      ctx.beginPath();
+      ctx.moveTo(0, 6);
+      ctx.bezierCurveTo(-7, 1, -6, -5, 0, -4);
+      ctx.bezierCurveTo(6, -5, 7, 1, 0, 6);
+      ctx.fill();
+      ctx.fillStyle = '#4c9a3c';
+      ctx.fillRect(-2, -6, 4, 2);
+    } else if (f.type === 'bug') {
+      ctx.fillStyle = '#2a2a2a';
+      ctx.beginPath();
+      ctx.ellipse(0, 0, 4, 2.5, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = 'rgba(220, 230, 240, .7)';
+      const flap = Math.sin(this.time * 30) * 2;
+      ctx.beginPath();
+      ctx.ellipse(-1, -3 - flap, 3, 1.5, -0.5, 0, Math.PI * 2);
+      ctx.ellipse(2, -3 + flap, 3, 1.5, 0.5, 0, Math.PI * 2);
       ctx.fill();
     }
     ctx.restore();
@@ -527,7 +676,8 @@ export class Tank {
 
   drawTurtles(ctx) {
     // 後面（z 小）的先畫，前面的蓋在上面
-    const agents = [...this.agents.values()].sort((a, b) => a.z - b.z);
+    // 後面（z 小）的先畫，疊在背上的最後畫
+    const agents = [...this.agents.values()].sort((a, b) => (a.t.stackOn ? 1 : 0) - (b.t.stackOn ? 1 : 0) || a.z - b.z);
     for (const a of agents) {
       const t = a.t;
       const f = a.frame();
@@ -570,6 +720,15 @@ export class Tank {
       ctx.beginPath();
       ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
       ctx.stroke();
+    }
+  }
+
+  drawFlakes(ctx) {
+    for (const f of this.flakes) {
+      ctx.fillStyle = `rgba(245, 245, 235, ${Math.min(0.75, f.life / 10)})`;
+      ctx.beginPath();
+      ctx.ellipse(f.x, f.y, f.r, f.r * 0.45, Math.sin(this.time * 0.8 + f.seed), 0, Math.PI * 2);
+      ctx.fill();
     }
   }
 

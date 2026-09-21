@@ -2,6 +2,7 @@
 // 烏龜的行為、食物、泡泡都沿用 2D 版 Tank 的邏輯（1000×600 的邏輯座標），這裡只負責換成 3D 來畫。
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { Tank } from './tank.js';
 import { W, H, WATER_TOP, LAMP_X, AIR_STONE_X, groundY, sampleGround } from './terrain.js';
 import { drawHeart } from './turtle-shape.js';
@@ -351,16 +352,43 @@ export class Tank3D extends Tank {
     }
     leaf.rotateX(-Math.PI / 2);
     leaf.computeVertexNormals();
+    // 小魚：身體是壓扁的球，尾巴是三角錐
+    const fishBody = new THREE.SphereGeometry(0.5, 12, 8).scale(1.6, 0.8, 0.6);
+    const fishTail = new THREE.ConeGeometry(0.35, 0.6, 4).rotateZ(Math.PI / 2).translate(-0.95, 0, 0);
     this.foodGeo = {
       pellet: new THREE.CylinderGeometry(0.28, 0.28, 1.1, 10).rotateZ(Math.PI / 2),
       shrimp: new THREE.TorusGeometry(0.55, 0.22, 8, 14, Math.PI * 1.3),
       veggie: leaf,
+      snail: new THREE.SphereGeometry(0.45, 12, 10).scale(1, 0.9, 0.8),
+      worm: new THREE.TorusGeometry(0.5, 0.09, 6, 16, Math.PI * 1.5),
+      fish: mergeGeometries([fishBody, fishTail]),
+      fruit: new THREE.SphereGeometry(0.45, 12, 10).scale(1, 1.15, 1),
+      bug: new THREE.SphereGeometry(0.22, 8, 6).scale(1.5, 1, 1),
     };
     this.foodMat = {
       pellet: new THREE.MeshStandardMaterial({ color: 0x8b5a2b, roughness: 0.8 }),
       shrimp: new THREE.MeshStandardMaterial({ color: 0xe58a5c, roughness: 0.6 }),
       veggie: new THREE.MeshStandardMaterial({ color: 0x7cc454, side: THREE.DoubleSide, roughness: 0.7 }),
+      snail: new THREE.MeshStandardMaterial({ color: 0x8a6a48, roughness: 0.6 }),
+      worm: new THREE.MeshStandardMaterial({ color: 0xc8322c, roughness: 0.5 }),
+      fish: new THREE.MeshStandardMaterial({ color: 0xe8a33c, roughness: 0.4 }),
+      fruit: new THREE.MeshStandardMaterial({ color: 0xe0424a, roughness: 0.5 }),
+      bug: new THREE.MeshStandardMaterial({ color: 0x2a2a2a, roughness: 0.6 }),
     };
+
+    // 脫皮的皮屑
+    const flakeTex = canvasTexture(32, 32, ctx => {
+      ctx.fillStyle = 'rgba(248, 248, 238, 0.85)';
+      ctx.beginPath();
+      ctx.ellipse(16, 16, 14, 6, 0.4, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    this.flakeSprites = Array.from({ length: 30 }, () => {
+      const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: flakeTex, transparent: true, depthWrite: false }));
+      sp.visible = false;
+      this.scene.add(sp);
+      return sp;
+    });
 
     // 落水漣漪
     const rippleMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, depthWrite: false, side: THREE.DoubleSide });
@@ -544,6 +572,12 @@ export class Tank3D extends Tank {
       }
       const wx = X(f.x);
       const wz = f.z ?? 0;
+      if (f.type === 'fish') {
+        // 小魚朝游的方向，尾巴擺動
+        mesh.position.set(wx, Y(f.y), wz);
+        mesh.rotation.set(0, (f.vx ?? 1) < 0 ? Math.PI : 0, Math.sin(this.time * 10 + f.seed) * 0.15);
+        continue;
+      }
       if (f.floating) {
         // 浮在水面：大部分泡在水裡，跟著波浪上下、慢慢打轉
         mesh.position.set(wx, this.surfaceHeight(wx, wz) - 0.12 * FOOD_SCALE, wz);
@@ -561,6 +595,15 @@ export class Tank3D extends Tank {
       }
       if (f.age > CONFIG.foodRotSeconds * 0.6) mesh.material = this.rottenMat;
     }
+
+    this.flakeSprites.forEach((sp, i) => {
+      const f = this.flakes[i];
+      sp.visible = !!f;
+      if (!f) return;
+      sp.position.set(X(f.x), Y(f.y), (f.z ?? 0) + 1);
+      sp.scale.setScalar(f.r * S * 3);
+      sp.material.opacity = Math.min(0.8, f.life / 10);
+    });
 
     this.rippleMeshes.forEach((ring, i) => {
       const r = this.ripples[i];

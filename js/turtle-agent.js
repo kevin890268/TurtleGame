@@ -3,12 +3,15 @@
 import { W, WATER_TOP, ZONES, groundY, groundSlope, swimLimitX } from './terrain.js';
 import { choosePose, poseMotion, renderTurtle, trackPoseChange } from './poses.js';
 import { getSpecies } from './species.js';
+import { relation, FRIEND_AT, BEST_FRIEND_AT, RIVAL_AT } from './sim.js';
 
 const rand = (a, b) => a + Math.random() * (b - a);
 
 const REACTIONS = {
   happy: { key: ['wag', 'shake'], dur: 1.8 }, // 開心時隨機搖尾巴或搖屁屁
   annoyed: { key: 'hide', dur: 2.2 },
+  annoyedFood: { key: 'angry', dur: 1.5 },   // 食物被搶走
+  rescued: { key: ['wag', 'shake'], dur: 1.8 },
   startled: { key: 'startled', dur: 1.3 },
   eat: { key: 'nibble', dur: 0.6 },
 };
@@ -26,7 +29,26 @@ export class TurtleAgent {
       timer: rand(0, 2), anim: rand(0, 5), vy: 0, ignoreFoodUntil: 0,
       flash: null, idleKey: null, idleUntil: 0, idleNext: rand(2, 8),
       pose: 'swim', prevPose: null, poseAt: 0,
+      stackOn: null, // 疊在哪隻好朋友的背上曬背
     };
+  }
+
+  others() {
+    return [...this.tank.agents.values()].filter(a => a !== this);
+  }
+
+  rel(other) {
+    return relation(this.tank.getState(), this.id, other.id);
+  }
+
+  // 最要好的朋友（沒有就是 null）
+  bestFriend() {
+    let best = null, score = FRIEND_AT - 1;
+    for (const a of this.others()) {
+      const r = this.rel(a);
+      if (r > score) { score = r; best = a; }
+    }
+    return best;
   }
 
   get turtle() {
@@ -56,7 +78,7 @@ export class TurtleAgent {
     if (!r) return;
     const key = Array.isArray(r.key) ? r.key[Math.floor(Math.random() * r.key.length)] : r.key;
     this.t.flash = { key, until: this.tank.time + r.dur, dur: r.dur };
-    if (kind === 'happy') this.tank.showHearts(this);
+    if (kind === 'happy' || kind === 'rescued') this.tank.showHearts(this);
   }
 
   // ---------- 行為 ----------
@@ -69,12 +91,37 @@ export class TurtleAgent {
     t.anim += dt;
     t.timer -= dt;
 
+    // 翻身卡住：原地腳亂划，等玩家幫忙
+    if (turtle.flipped) {
+      t.mode = 'flipped';
+      t.path = [];
+      t.stackOn = null;
+      t.grounded = true;
+      t.y = groundY(t.x) - foot;
+      this.updateDepth(dt);
+      return;
+    }
+    if (t.mode === 'flipped') {
+      t.mode = 'bask';
+      t.timer = 0;
+    }
+
+    // 疊在朋友背上：朋友一離開就下來
+    if (t.stackOn) {
+      const f = this.tank.agents.get(t.stackOn);
+      if (!f || f.t.path.length || f.t.mode !== 'bask' || t.mode !== 'bask' || night) {
+        t.stackOn = null;
+        t.y = groundY(t.x) - foot;
+      }
+    }
+
     const foodInWater = this.tank.food.filter(f => f.inWater);
     const hungry = turtle.stats.hunger < 98 && !night && this.tank.time > t.ignoreFoodUntil;
 
     if (hungry && foodInWater.length && t.mode !== 'food') {
       t.mode = 'food';
       t.path = [];
+      t.stackOn = null;
     }
 
     if (t.mode === 'food') {
@@ -108,11 +155,19 @@ export class TurtleAgent {
     }
 
     const headX = t.x + t.face * w * 0.5;
+    this.target = target;
     if (Math.abs(headX - target.x) < 14 + w * 0.12 && Math.abs(t.y - target.y) < foot + 18) {
       const food = this.tank.food;
       food.splice(food.indexOf(target), 1);
       if (this.tank.hooks.onEat(this.id, target.type)) {
         this.react('eat');
+        // 搶食：別隻也正追著這一顆、而且就在旁邊，被搶的那隻會生氣
+        for (const o of this.others()) {
+          if (o.t.mode === 'food' && o.target === target && Math.hypot(o.t.x - t.x, o.t.y - t.y) < 120) {
+            o.react('annoyedFood');
+            this.tank.hooks.onRelation(this.id, o.id, -6);
+          }
+        }
       } else {
         food.push(target); // 吃飽了，食物留在水裡給別隻
         t.ignoreFoodUntil = this.tank.time + 30;
@@ -127,10 +182,12 @@ export class TurtleAgent {
   pickX(lo, hi) {
     const others = [...this.tank.agents.values()].filter(a => a !== this);
     const spotOf = a => (a.t.path.length ? a.t.path[a.t.path.length - 1].x : a.t.x);
+    // 互看不順眼的那隻要離更遠（距離打對折來算）
+    const weight = a => (relation(this.tank.getState(), this.id, a.id) <= RIVAL_AT ? 0.5 : 1);
     let best = rand(lo, hi), bestGap = -1;
     for (let i = 0; i < 8; i++) {
       const x = rand(lo, hi);
-      const gap = Math.min(Infinity, ...others.map(a => Math.abs(spotOf(a) - x)));
+      const gap = Math.min(Infinity, ...others.map(a => Math.abs(spotOf(a) - x) * weight(a)));
       if (gap > bestGap) { bestGap = gap; best = x; }
     }
     return best;
@@ -157,6 +214,21 @@ export class TurtleAgent {
       t.timer = rand(60, 120);
       return;
     }
+    // 好朋友：一半的機率跟著朋友做同一件事，待在牠旁邊
+    const friend = this.bestFriend();
+    const fm = friend?.t.mode;
+    if (friend && ['bask', 'shallow', 'bottom'].includes(fm) && (fm !== 'bask' || s.lamp.on) && Math.random() < 0.5) {
+      t.mode = fm;
+      const { shell } = friend.size();
+      const fx = friend.t.path.length ? friend.t.path[friend.t.path.length - 1].x : friend.t.x;
+      this.planPath({ x: fx + (Math.random() < 0.5 ? -1 : 1) * shell * 0.9, ground: true }, foot);
+      t.timer = rand(20, 45);
+      this.zTarget = friend.zTarget + rand(-3, 3);
+      this.followId = friend.id;
+      return;
+    }
+    this.followId = null;
+
     const baskChance = s.lamp.on && this.turtle.stats.sun < 95 ? habits.bask : 0;
     if (r < baskChance) {
       t.mode = 'bask';
@@ -219,6 +291,23 @@ export class TurtleAgent {
     const slopeTilt = () => Math.atan(groundSlope(t.x)) * t.face * 0.8;
 
     if (!wp) {
+      // 最要好的朋友在旁邊曬背，而且自己比較小：爬到牠背上
+      if (!t.stackOn && t.mode === 'bask' && t.grounded && t.y < WATER_TOP) {
+        const f = this.others().find(o => o.t.mode === 'bask' && !o.t.path.length && !o.t.stackOn
+          && Math.abs(o.t.x - t.x) < o.size().shell * 1.2 && this.rel(o) >= BEST_FRIEND_AT
+          && o.turtle.length > this.turtle.length);
+        if (f) t.stackOn = f.id;
+      }
+      if (t.stackOn) {
+        const f = this.tank.agents.get(t.stackOn);
+        const fs = f.size();
+        t.x += (f.t.x - fs.shell * 0.08 * f.t.face - t.x) * Math.min(1, dt * 4);
+        t.y += (f.t.y - fs.h * 0.62 - t.y) * Math.min(1, dt * 4);
+        t.face = f.t.face;
+        t.tilt = f.t.tilt;
+        this.zTarget = f.z + 0.5;
+        return;
+      }
       if (t.grounded) {
         t.y = groundY(t.x) - foot;
         t.tilt += (slopeTilt() - t.tilt) * Math.min(1, dt * 5);
@@ -288,6 +377,11 @@ export class TurtleAgent {
     });
     const fade = trackPoseChange(t, key, this.tank.time);
     const m = poseMotion(t, key, this.tank.time, w);
+    if (t.mode === 'flipped') {
+      // 沒有翻身圖的品種：把縮殼的圖倒過來畫；不管哪種都加上腳亂划的晃動
+      if (key !== 'flip') m.rot += Math.PI;
+      m.rot += Math.sin(this.tank.time * 9) * 0.08;
+    }
     // 站在地上時，讓這個姿勢的腳底剛好貼地
     const ground = t.grounded && poses ? (poses.stdBottom - poses.bottom(key)) * shell : 0;
     return { key, fade, m, dy: ground + m.dy, shell, w };

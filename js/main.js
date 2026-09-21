@@ -5,6 +5,7 @@ import { loadAssets } from './assets.js';
 import { loadPoses, loadPoseIndex } from './poses.js';
 import { SPECIES_LIST, getSpecies } from './species.js';
 import * as ui from './ui.js';
+import { initMenu } from './menu.js';
 
 const $ = id => document.getElementById(id);
 const HOUR = 3.6e6;
@@ -149,8 +150,50 @@ function poke(id) {
   act(msg);
 }
 
+// ---------- 送養、詳細資料、事件、關係 ----------
+
+function adoptTurtle(id) {
+  const t = findTurtle(state, id);
+  if (!t) return;
+  if (state.turtles.length <= 1) return ui.toast('缸裡至少要留一隻烏龜。');
+  const extra = t.species === 'slider' ? '\n巴西龜是入侵種，請送到收容單位，不要放生到野外。' : '';
+  if (!confirm(`確定要把 ${t.name} 送養嗎？送養後就不會回來了。${extra}`)) return;
+  const msg = sim.adopt(state, t);
+  if (selectedId === id) select(state.turtles[0].id);
+  act(msg);
+}
+
+function openDetail(id) {
+  openModal('detailModal');
+  ui.renderDetail(state, id);
+}
+
+function onRelation(a, b, delta) {
+  const msg = sim.addRelation(state, a, b, delta);
+  if (msg) act(msg);
+}
+
+function onFlip(id) {
+  const t = findTurtle(state, id);
+  if (!t) return;
+  act(sim.flip(state, t));
+}
+
+function onRescue(id) {
+  const t = findTurtle(state, id);
+  if (!t) return;
+  tank.react(id, 'rescued');
+  select(id);
+  act(sim.rescue(state, t));
+}
+
+function onEvent(msg) {
+  addLog(state, msg);
+  act(msg);
+}
+
 function bindActions() {
-  document.querySelector('.actions').addEventListener('click', e => {
+  document.addEventListener('click', e => {
     const btn = e.target.closest('button[data-act]');
     if (!btn) return;
     switch (btn.dataset.act) {
@@ -197,12 +240,16 @@ function bindActions() {
     act(msg);
   });
 
-  // 烏龜清單：點一列選取，點 ✏️ 改名
+  // 烏龜清單：點一列選取，點名字看詳細資料，✏️ 改名，🏠 送養
   $('turtleList').addEventListener('click', e => {
     const rename = e.target.closest('[data-rename]');
     if (rename) return openRename(rename.dataset.rename);
+    const adopt = e.target.closest('[data-adopt]');
+    if (adopt) return adoptTurtle(adopt.dataset.adopt);
     const row = e.target.closest('.turtle-row');
-    if (row) select(row.dataset.id);
+    if (!row) return;
+    select(row.dataset.id);
+    if (e.target.closest('[data-detail]')) openDetail(row.dataset.id);
   });
   $('renameForm').addEventListener('submit', e => {
     e.preventDefault();
@@ -286,6 +333,9 @@ async function start() {
     save(state);
   }
   ui.buildStats();
+  ui.buildFoodGrid();
+  ui.buildDecor();
+  initMenu();
   const view = getView();
   const btnView = $('btnView');
   btnView.textContent = view === '3d' ? '切換成 2D' : '切換成 2.5D';
@@ -318,6 +368,10 @@ async function start() {
     onPoke: poke,
     onSelect: select,
     onDrop,
+    onRelation,
+    onFlip,
+    onRescue,
+    onEvent,
   });
   tank.setSelected(selectedId);
   if (CONFIG.timeScale !== 1) window.debug = { tank, state: () => state };
