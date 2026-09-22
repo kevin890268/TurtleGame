@@ -15,7 +15,7 @@ import { isNight } from './sim.js';
 const rand = (a, b) => a + Math.random() * (b - a);
 
 // 烏龜貼圖：512×512 的 canvas，背甲中心在正中央、背甲寬 SHELL_TEX px
-const TEX = 512, SHELL_TEX = 160;
+const TEX = 512, SHELL_TEX = 200;
 // 3D 場景裡烏龜照實際比例會太小，畫面上放大一點（不影響遊戲邏輯）
 const TURTLE_SCALE = 1.4;
 // 食物也一樣，照實際大小（約 1 公分）在畫面上幾乎看不到
