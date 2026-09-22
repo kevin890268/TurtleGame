@@ -67,6 +67,27 @@ export const SPECIES = {
     palette: { shellTop: '#6b6a4a', shellBottom: '#45432c', skin: '#5a5d3e', stripe: '#f0dd62', plastron: '#e2d18c', neckStripes: 4 },
   },
 
+  painted: {
+    id: 'painted',
+    name: '錦龜',
+    latin: 'Chrysemys picta',
+    tag: '外來寵物・愛曬背',
+    difficulty: 2,
+    blurb: '背甲平滑沒有稜、邊緣有紅黑條紋，脖子和四肢也有紅色條紋。很會游泳，曬背曬得比誰都勤，個性活潑。',
+    intro: '一隻小錦龜來到你家了！',
+    startLength: 3,
+    maxLength: 15,
+    stages: [5, 10],
+    growth: 1,
+    rates: { hunger: 1, dirt: 1, sun: 1.3 },
+    harmBelow: { hunger: 15, water: 30, sun: 25 },
+    diet: { pellet: 1, shrimp: 1.1, veggie: 0.7, fruit: 0.4, snail: 1.1, worm: 1.2 },
+    favorites: ['worm', 'snail'],                  // 野外主食水生昆蟲、螺類，也吃一些水生植物
+    swimSpeed: 1.2,
+    habits: { bask: 0.7, shallow: 0.2, bottom: 0.05 },
+    palette: { shellTop: '#3a3a28', shellBottom: '#211e14', skin: '#3f4a2e', stripe: '#f0d94f', plastron: '#e6d27a', neckStripes: 4 },
+  },
+
   slider: {
     id: 'slider',
     name: '巴西龜（收容）',

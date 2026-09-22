@@ -1,7 +1,7 @@
 import { CONFIG } from './config.js';
 import { getSpecies } from './species.js';
 
-export const MAX_TURTLES = 4;
+export const MAX_TURTLES = 8;
 
 // 隨機取名用的寵物名
 const PET_NAMES = [
@@ -42,13 +42,14 @@ export function newState() {
   const a = newTurtle('bangui');
   const b = newTurtle('bangui', [a.name]);
   return {
-    version: 4,
+    version: 5,
     createdAt: now,
     lastRealTime: now,
     gameTime: now,
     tank: { water: 90, temp: 26 },
     lamp: { on: false, timer: true },
     equip: { filter: 'small', lamp: 'uvb', heater: false },
+    scene: 'indoor60',
     turtles: [a, b],
     relations: {},
     alerts: {},
@@ -122,6 +123,9 @@ function migrate(s) {
     t.shedAt ??= 0;
   }
   s.version = 4;
+  // 第 5 版：場景（缸子種類）
+  s.scene ??= 'indoor60';
+  s.version = 5;
   return s;
 }
 

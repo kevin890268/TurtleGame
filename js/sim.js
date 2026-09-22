@@ -3,6 +3,7 @@
 import { CONFIG } from './config.js';
 import { addLog } from './state.js';
 import { getSpecies, stageOf } from './species.js';
+import { SCENES } from './decor.js';
 
 export { stageOf };
 
@@ -45,6 +46,20 @@ export function roomTemp(s) {
   return ROOM_TEMP[d.getMonth()] + 1.5 * Math.sin(((hour - 9) / 24) * Math.PI * 2);
 }
 
+// 戶外的月均溫，日夜溫差比室內大很多（沒有牆壁擋風、擋太陽）
+const OUTDOOR_TEMP = [15, 16, 19, 23, 27, 29, 31, 31, 28, 24, 20, 16];
+
+export function outdoorTemp(s) {
+  const d = new Date(s.gameTime);
+  const hour = d.getHours() + d.getMinutes() / 60;
+  return OUTDOOR_TEMP[d.getMonth()] + 4 * Math.sin(((hour - 9) / 24) * Math.PI * 2);
+}
+
+// 依場景取用室內室溫或戶外氣溫
+export function ambientTemp(s) {
+  return s.scene === 'outdoor' ? outdoorTemp(s) : roomTemp(s);
+}
+
 const H = 3.6e6;
 export const clamp = (v, lo = 0, hi = 100) => Math.max(lo, Math.min(hi, v));
 
@@ -77,9 +92,15 @@ function step(s, h, events) {
 
   if (s.lamp.timer) s.lamp.on = hr >= CONFIG.lampTimer.on && hr < CONFIG.lampTimer.off;
 
-  // 水溫：慢慢接近室溫；開加溫棒時不會低於設定溫度；曬背燈開著會稍微加溫
-  let target = roomTemp(s) + (s.lamp.on ? 0.5 : 0);
-  if (s.equip.heater) target = Math.max(target, HEATER_SET);
+  // 水溫：慢慢接近室溫/氣溫；室內開加溫棒不會低於設定溫度、曬背燈開著會稍微加溫；
+  // 戶外沒有這些設備，完全跟著天氣走
+  let target;
+  if (s.scene === 'outdoor') {
+    target = outdoorTemp(s);
+  } else {
+    target = roomTemp(s) + (s.lamp.on ? 0.5 : 0);
+    if (s.equip.heater) target = Math.max(target, HEATER_SET);
+  }
   s.tank.temp += (target - s.tank.temp) * Math.min(1, 0.3 * h);
 
   // 水質：基本消耗加上每隻烏龜弄髒的量（越大隻、越多隻，髒得越快），過濾器越強髒得越慢
@@ -106,7 +127,10 @@ function stepTurtle(s, t, h, night, events) {
   const hungerRate = len < sp.stages[0] ? 1.5 : len < sp.stages[1] ? 1.1 : 0.8;
   st.hunger -= hungerRate * sp.rates.hunger * warmth * h * (night ? 0.5 : 1);
 
-  if (night) {
+  if (s.scene === 'outdoor') {
+    // 戶外曬真的太陽，比室內 UVB 燈還好，且跟燈具設定無關
+    st.sun += (night ? -0.5 * sp.rates.sun : 13 * sp.rates.sun) * h;
+  } else if (night) {
     st.sun -= 0.5 * sp.rates.sun * h;
     if (s.lamp.on) st.mood -= 6 * h; // 晚上開燈睡不好
   } else {
@@ -323,6 +347,16 @@ export function setHeater(s, on) {
   s.equip.heater = on;
   addLog(s, on ? '打開加溫棒。' : '關掉加溫棒。');
   return on ? `加溫棒打開了，水溫會慢慢升到 ${HEATER_SET}℃。` : '加溫棒關掉了，水溫會跟著室溫變化。';
+}
+
+// ---- 場景 ----
+
+export function setScene(s, id) {
+  const scene = SCENES.find(x => x.id === id);
+  if (!scene || scene.locked || scene.id === s.scene) return null;
+  s.scene = scene.id;
+  addLog(s, `搬到「${scene.name}」了。`);
+  return `搬到${scene.name}了。`;
 }
 
 // ---- 時間 ----

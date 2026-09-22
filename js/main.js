@@ -209,6 +209,18 @@ function bindActions() {
   });
   $('chkTimer').addEventListener('change', e => act(sim.setTimer(state, e.target.checked)));
 
+  // 選場景：換場景要重整才會重建 3D 場景，跟切換 2D/2.5D 一樣
+  $('sceneList').addEventListener('click', e => {
+    const btn = e.target.closest('[data-scene]');
+    if (!btn || btn.disabled) return;
+    const id = btn.dataset.scene;
+    if (id === state.scene) return;
+    const msg = sim.setScene(state, id);
+    if (!msg) return;
+    save(state);
+    location.reload();
+  });
+
   // 設備
   $('eqFilter').addEventListener('change', e => act(sim.setFilter(state, e.target.value)));
   $('eqLamp').addEventListener('change', e => act(sim.setLamp(state, e.target.value)));
@@ -334,16 +346,32 @@ async function start() {
   }
   ui.buildStats();
   ui.buildFoodGrid();
+  ui.buildScenes(state);
   ui.buildDecor();
   initMenu();
   const view = getView();
   const btnView = $('btnView');
-  btnView.textContent = view === '3d' ? '切換成 2D' : '切換成 2.5D';
+  btnView.textContent = view === '3d' ? '2D' : '2.5D';
+  btnView.title = view === '3d' ? '切換成 2D' : '切換成 2.5D';
   btnView.addEventListener('click', () => {
     save(state);
     try { localStorage.setItem(VIEW_KEY, view === '3d' ? '2d' : '3d'); } catch {}
     location.reload();
   });
+
+  const btnFullscreen = $('btnFullscreen');
+  const appFrame = document.getElementById('frame');
+  const syncFullscreenBtn = () => {
+    const on = !!document.fullscreenElement;
+    btnFullscreen.setAttribute('aria-pressed', String(on));
+    btnFullscreen.textContent = on ? '⤡' : '⛶';
+  };
+  btnFullscreen.addEventListener('click', () => {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else appFrame.requestFullscreen?.().catch(() => {});
+  });
+  document.addEventListener('fullscreenchange', syncFullscreenBtn);
+  syncFullscreenBtn();
 
   // 每個品種的姿勢圖都先載入（沒有的品種會是 null，改用程式畫的替代圖）
   const ready = await loadPoseIndex();

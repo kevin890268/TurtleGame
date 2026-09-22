@@ -1,11 +1,15 @@
 // 缸裡的一隻烏龜：行為（游泳、在淺灘走路、上岸曬背、追食物、睡覺）與要畫的姿勢。
 // 數值在存檔的 turtles[] 裡（由 sim.js 管），這裡只管牠在缸裡怎麼動。座標是 1000×600 的邏輯座標。
-import { W, WATER_TOP, ZONES, groundY, groundSlope, swimLimitX } from './terrain.js';
+import { W, WATER_TOP, terrainOf } from './terrain.js';
 import { choosePose, poseMotion, renderTurtle, trackPoseChange } from './poses.js';
 import { getSpecies } from './species.js';
 import { relation, FRIEND_AT, BEST_FRIEND_AT, RIVAL_AT } from './sim.js';
 
 const rand = (a, b) => a + Math.random() * (b - a);
+
+// 移動速度減半了，划水／走路的動畫（腳的頻率、身體擺動）也要跟著減半，
+// 不然身體移得慢、腳卻划得跟原本一樣快，看起來像在滑冰
+const ANIM_RATE = 0.5;
 
 const REACTIONS = {
   happy: { key: ['wag', 'shake'], dur: 1.8 }, // 開心時隨機搖尾巴或搖屁屁
@@ -30,11 +34,18 @@ export class TurtleAgent {
       flash: null, idleKey: null, idleUntil: 0, idleNext: rand(2, 8),
       pose: 'swim', prevPose: null, poseAt: 0,
       stackOn: null, // 疊在哪隻好朋友的背上曬背
+      eatCount: 0, eatPauseUntil: 0, // 一次最多連吃 3 個，吃完要休息一下才會再去找食物
     };
   }
 
   others() {
     return [...this.tank.agents.values()].filter(a => a !== this);
+  }
+
+  // 室內缸跟戶外池是不同的地形剖面，深水/淺水/曬台的範圍也不一樣；
+  // 演算法完全共用，只是依目前場景換一包資料（見 terrain.js 的 terrainOf）
+  get terrain() {
+    return terrainOf(this.tank.getState().scene);
   }
 
   rel(other) {
@@ -87,8 +98,8 @@ export class TurtleAgent {
     const t = this.t;
     const turtle = this.turtle;
     const { w, h, foot } = this.size();
-    this.swimLimit = swimLimitX(h);
-    t.anim += dt;
+    this.swimLimit = this.terrain.swimLimitX(h);
+    t.anim += dt * ANIM_RATE;
     t.timer -= dt;
 
     // 翻身卡住：原地腳亂划，等玩家幫忙
@@ -97,7 +108,7 @@ export class TurtleAgent {
       t.path = [];
       t.stackOn = null;
       t.grounded = true;
-      t.y = groundY(t.x) - foot;
+      t.y = this.terrain.groundY(t.x) - foot;
       this.updateDepth(dt);
       return;
     }
@@ -111,7 +122,7 @@ export class TurtleAgent {
       const f = this.tank.agents.get(t.stackOn);
       if (!f || f.t.path.length || f.t.mode !== 'bask' || t.mode !== 'bask' || night) {
         t.stackOn = null;
-        t.y = groundY(t.x) - foot;
+        t.y = this.terrain.groundY(t.x) - foot;
       }
     }
 
@@ -122,6 +133,7 @@ export class TurtleAgent {
       t.mode = 'food';
       t.path = [];
       t.stackOn = null;
+      t.eatCount = 0;
     }
 
     if (t.mode === 'food') {
@@ -129,6 +141,8 @@ export class TurtleAgent {
         t.mode = 'swim';
         t.timer = 0;
         t.path = [];
+      } else if (this.tank.time < t.eatPauseUntil) {
+        // 剛吃完一口，發呆一下再繼續找下一個（不要一口接一口吃）
       } else {
         this.chaseFood(foodInWater, w, h, foot);
       }
@@ -146,11 +160,11 @@ export class TurtleAgent {
     this.zTarget = target.z ?? this.zTarget;
     const side = target.x > t.x ? 1 : -1;
     const tx = Math.max(20, target.x - side * w * 0.45);
-    const onBottom = target.y >= groundY(target.x) - 6;
+    const onBottom = target.y >= this.terrain.groundY(target.x) - 6;
     if (target.x > this.swimLimit - 10 || (onBottom && t.grounded)) {
       this.planPath({ x: tx, ground: true }, foot);
     } else {
-      const ty = Math.max(WATER_TOP + h * 0.3, Math.min(groundY(tx) - foot, target.y + h * 0.1));
+      const ty = Math.max(WATER_TOP + h * 0.3, Math.min(this.terrain.groundY(tx) - foot, target.y + h * 0.1));
       this.planPath({ x: tx, y: ty, ground: false }, foot);
     }
 
@@ -167,6 +181,17 @@ export class TurtleAgent {
             o.react('annoyedFood');
             this.tank.hooks.onRelation(this.id, o.id, -6);
           }
+        }
+        // 一次最多連吃 3 個，吃完要休息幾秒才會再去找食物；每一口之間也會先發呆一下
+        t.eatCount += 1;
+        if (t.eatCount >= 3) {
+          t.eatCount = 0;
+          t.mode = 'swim';
+          t.timer = 0;
+          t.path = [];
+          t.ignoreFoodUntil = this.tank.time + rand(6, 10);
+        } else {
+          t.eatPauseUntil = this.tank.time + rand(1.5, 3);
         }
       } else {
         food.push(target); // 吃飽了，食物留在水裡給別隻
@@ -201,7 +226,7 @@ export class TurtleAgent {
     if (night) {
       // 晚上睡在深水區的底部，或淺灘上
       t.mode = 'sleep';
-      const x = r < 0.5 ? this.pickX(ZONES.deep[0] + 30, ZONES.deep[1] - 40) : this.pickX(...ZONES.shallow);
+      const x = r < 0.5 ? this.pickX(this.terrain.ZONES.deep[0] + 30, this.terrain.ZONES.deep[1] - 40) : this.pickX(...this.terrain.ZONES.shallow);
       this.planPath({ x, ground: true }, foot);
       t.timer = rand(400, 800);
       this.zTarget = rand(-14, 14);
@@ -210,7 +235,7 @@ export class TurtleAgent {
     if (s.tank.temp < 16) {
       // 太冷：躲在深水區底部不太動（研究資料：斑龜低於 15℃ 會躲起來不動）
       t.mode = 'bottom';
-      this.planPath({ x: this.pickX(ZONES.deep[0] + 20, ZONES.deep[1]), ground: true }, foot);
+      this.planPath({ x: this.pickX(this.terrain.ZONES.deep[0] + 20, this.terrain.ZONES.deep[1]), ground: true }, foot);
       t.timer = rand(60, 120);
       return;
     }
@@ -232,23 +257,23 @@ export class TurtleAgent {
     const baskChance = s.lamp.on && this.turtle.stats.sun < 95 ? habits.bask : 0;
     if (r < baskChance) {
       t.mode = 'bask';
-      this.planPath({ x: this.pickX(ZONES.bask[0] + 10, ZONES.bask[1] - 10), ground: true }, foot);
+      this.planPath({ x: this.pickX(this.terrain.ZONES.bask[0] + 10, this.terrain.ZONES.bask[1] - 10), ground: true }, foot);
       t.timer = rand(25, 55);
       this.zTarget = rand(-8, 8); // 待在燈下附近
     } else if (r < baskChance + habits.shallow) {
       t.mode = 'shallow';
-      this.planPath({ x: this.pickX(...ZONES.shallow), ground: true }, foot);
+      this.planPath({ x: this.pickX(...this.terrain.ZONES.shallow), ground: true }, foot);
       t.timer = rand(8, 20);
       this.zTarget = rand(-14, 14);
     } else if (r < baskChance + habits.shallow + habits.bottom) {
       t.mode = 'bottom';
-      this.planPath({ x: this.pickX(ZONES.deep[0] + 20, ZONES.deep[1]), ground: true }, foot);
+      this.planPath({ x: this.pickX(this.terrain.ZONES.deep[0] + 20, this.terrain.ZONES.deep[1]), ground: true }, foot);
       t.timer = rand(6, 15);
       this.zTarget = rand(-14, 14);
     } else {
       t.mode = 'swim';
       const x = rand(30, Math.max(60, this.swimLimit - 20));
-      const y = rand(WATER_TOP + h * 0.4, Math.max(WATER_TOP + h * 0.5, groundY(x) - foot - 5));
+      const y = rand(WATER_TOP + h * 0.4, Math.max(WATER_TOP + h * 0.5, this.terrain.groundY(x) - foot - 5));
       this.planPath({ x, y, ground: false }, foot);
       t.timer = rand(2, 6);
       this.zTarget = rand(-14, 14);
@@ -261,9 +286,9 @@ export class TurtleAgent {
     const { h, foot } = this.size();
     t.x = Math.max(20, Math.min(W - 15, t.x + dx));
     if (t.grounded) {
-      t.y = groundY(t.x) - foot;
+      t.y = this.terrain.groundY(t.x) - foot;
     } else {
-      t.y = Math.max(WATER_TOP + h * 0.15, Math.min(groundY(t.x) - foot, t.y + dy));
+      t.y = Math.max(WATER_TOP + h * 0.15, Math.min(this.terrain.groundY(t.x) - foot, t.y + dy));
     }
   }
 
@@ -271,7 +296,7 @@ export class TurtleAgent {
   planPath(dest, foot) {
     const t = this.t;
     const sm = this.swimLimit;
-    const gy = x => groundY(x) - foot;
+    const gy = x => this.terrain.groundY(x) - foot;
     const path = [];
     if (t.grounded && dest.ground) {
       path.push({ x: dest.x, walk: true });
@@ -288,7 +313,7 @@ export class TurtleAgent {
   move(dt, h, foot) {
     const t = this.t;
     const wp = t.path[0];
-    const slopeTilt = () => Math.atan(groundSlope(t.x)) * t.face * 0.8;
+    const slopeTilt = () => Math.atan(this.terrain.groundSlope(t.x)) * t.face * 0.8;
 
     if (!wp) {
       // 最要好的朋友在旁邊曬背，而且自己比較小：爬到牠背上
@@ -309,7 +334,7 @@ export class TurtleAgent {
         return;
       }
       if (t.grounded) {
-        t.y = groundY(t.x) - foot;
+        t.y = this.terrain.groundY(t.x) - foot;
         t.tilt += (slopeTilt() - t.tilt) * Math.min(1, dt * 5);
       } else {
         t.y += Math.sin(this.tank.time * 1.5 + t.anim) * 3 * dt; // 原地輕輕漂浮
@@ -321,7 +346,7 @@ export class TurtleAgent {
 
     if (wp.walk) {
       const inWater = t.y > WATER_TOP;
-      const speed = (inWater ? 40 : 26) * (t.mode === 'food' ? 1.8 : 1);
+      const speed = (inWater ? 20 : 13) * (t.mode === 'food' ? 1.8 : 1);
       const dx = wp.x - t.x;
       t.grounded = true;
       t.vy = 0;
@@ -331,14 +356,14 @@ export class TurtleAgent {
       }
       t.x += Math.sign(dx) * Math.min(Math.abs(dx), speed * dt);
       t.face = dx > 0 ? 1 : -1;
-      t.y = groundY(t.x) - foot;
+      t.y = this.terrain.groundY(t.x) - foot;
       t.tilt += (slopeTilt() - t.tilt) * Math.min(1, dt * 6);
       return;
     }
 
     t.grounded = false;
     const cold = this.tank.getState().tank.temp < 20 ? 0.6 : 1; // 冷的時候游得慢
-    const speed = (t.mode === 'food' ? 110 : 75) * this.species.swimSpeed * cold;
+    const speed = (t.mode === 'food' ? 55 : 37.5) * this.species.swimSpeed * cold;
     const dx = wp.x - t.x, dy = wp.y - t.y;
     const dist = Math.hypot(dx, dy);
     if (dist < 3) {
@@ -350,7 +375,7 @@ export class TurtleAgent {
     t.x += dx * k;
     t.y += dy * k;
     // 不要鑽進地形、也不要游出水面
-    t.y = Math.max(WATER_TOP + h * 0.15, Math.min(groundY(t.x) - foot, t.y));
+    t.y = Math.max(WATER_TOP + h * 0.15, Math.min(this.terrain.groundY(t.x) - foot, t.y));
     if (Math.abs(dx) > 2) t.face = dx > 0 ? 1 : -1;
     t.vy += (dy / dist - t.vy) * Math.min(1, dt * 6);
     // 下潛／上浮的姿勢本身就是斜的，不用再轉

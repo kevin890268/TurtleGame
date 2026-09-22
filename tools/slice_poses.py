@@ -86,6 +86,7 @@ SPECIES = {
     'musk': [MUSK_REF, *sheets_in('reference/sheets/musk', shell='dark')],
     'map': sheets_in('reference/sheets/map'),
     'slider': sheets_in('reference/sheets/slider'),
+    'painted': sheets_in('reference/sheets/painted'),
 }
 
 

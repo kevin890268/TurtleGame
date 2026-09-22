@@ -366,6 +366,43 @@ SPECIES = [
         'loops': {},
     },
     {
+        'file': 'PROMPTS_STRIPED_MUD_TURTLE.md',
+        'id': 'stripedmud', 'folder': 'reference/sheets/stripedmud',
+        'zh': '條紋動胸龜', 'en': 'striped mud turtle', 'latin': 'Kinosternon baurii',
+        'look_zh': [
+            '**背甲沿長軸有三條淺黃色縱紋**（最明顯的特徵，其中一條在正中央），底色橄欖褐色，平滑的低矮橢圓形',
+            '**腹甲前後各有一片活動的鉸鏈，可以像蓋子一樣闔起來、幾乎完全封住**（跟麝香龜／剃刀龜只有一小片固定腹甲不一樣）',
+            '頭兩側各有兩條淺黃色細線，一條經過眼睛上方、一條在下方沿著嘴邊',
+            '皮膚深橄欖色，吻部尖，腳短短的',
+        ],
+        'behavior_zh': ['跟麝香龜是近親，很少游泳，大多在水底走路', '很少上岸曬背',
+                        '受到威脅時可以把頭尾和四肢完全收進殼裡、再闔起雙鉸鏈腹甲保護自己（麝香龜做不到這件事）'],
+        'character': (
+            'a young striped mud turtle (Kinosternon baurii): a smooth, low oval olive-brown carapace with THREE '
+            'pale yellow stripes running lengthwise down the back (one right along the center); a small tan '
+            'plastron with TWO well-developed hinges, front and back, that can close up almost completely like a '
+            'lid; dark olive skin with two thin pale yellow stripes on each side of the head (one above the eye, '
+            'one below it along the jaw); a pointed snout and short stubby legs'
+        ),
+        'not': 'NOT a common musk turtle (this one has three pale stripes down the shell and a double-hinged plastron that closes almost shut)',
+        'cells': {
+            ('sheet_a', 0): ('在水底散步', 'WALKING ALONG THE BOTTOM: head held low and forward like a little '
+                           'bulldozer, the near front leg and the far hind leg stepping forward together, the low '
+                           'oval shell close to the ground'),
+            ('sheet_b', 4): ('闔起雙鉸鏈腹甲躲起來', 'CLOSING UP TIGHT: head, tail and all four legs pulled fully '
+                           'inside, and the FRONT AND BACK OF THE PLASTRON HINGE UPWARD AND CLOSE like a box lid, '
+                           'almost completely sealing the shell shut'),
+            ('sheet_d', 0): ('有點笨拙地游泳', 'SWIMMING a little clumsily: paddling with all four short legs at '
+                           'once, neck forward, a determined but slightly flustered look'),
+            ('sheet_d', 4): ('呼吸管換氣', 'SNORKELING: standing on the bottom with the body level and the neck '
+                           'stretched STRAIGHT UP as far as it goes, nostrils at the very top as if breathing at '
+                           'the surface, calm eyes'),
+        },
+        'loops': {
+            'loop_swim': 'A looping, slightly CLUMSY swim cycle; the short legs paddle a bit unevenly, cute and determined:',
+        },
+    },
+    {
         'file': 'PROMPTS_EUROPEAN_POND_TURTLE.md',
         'id': 'european', 'folder': 'reference/sheets/european',
         'zh': '歐洲澤龜', 'en': 'European pond turtle', 'latin': 'Emys orbicularis',
@@ -516,7 +553,7 @@ def build(sp):
 3. 直接複製下面的完整提示詞
 4. 存到 `{folder}/`，檔名照各段標示的名稱，再執行 `python tools/slice_poses.py {sp["id"]}`'''
     note = f'\n> {sp["note_zh"]}\n' if sp.get('note_zh') else ''
-    registered = '' if sp['id'] in ('bangui', 'musk', 'map', 'slider') else \
+    registered = '' if sp['id'] in ('bangui', 'musk', 'map', 'slider', 'painted') else \
         '\n> 這個品種還沒登記進 `js/species.js` 和 `tools/slice_poses.py`，生好圖之後要先登記，遊戲和切圖工具才認得它。\n'
 
     parts = [f'''# {sp["zh"]}姿勢圖：GPT 產圖提示詞

@@ -1,5 +1,5 @@
-import { isNight, hourOf, roomTemp, FILTERS, FOODS, relation, relationLabel } from './sim.js';
-import { DECOR } from './decor.js';
+import { isNight, hourOf, ambientTemp, FILTERS, FOODS, relation, relationLabel } from './sim.js';
+import { SCENES, PROPS } from './decor.js';
 import { getSpecies, stageOf, SPECIES_LIST } from './species.js';
 import { MAX_TURTLES } from './state.js';
 
@@ -78,7 +78,8 @@ export function render(s, tank, selectedId) {
   setStat('water', s.tank.water);
   const temp = s.tank.temp;
   const tempRow = $('tempRow');
-  tempRow.querySelector('.num').textContent = `${temp.toFixed(1)}℃（室溫 ${roomTemp(s).toFixed(0)}℃${s.equip.heater ? '・加溫中' : ''}）`;
+  const outdoor = s.scene === 'outdoor';
+  tempRow.querySelector('.num').textContent = `${temp.toFixed(1)}℃（${outdoor ? '氣溫' : '室溫'} ${ambientTemp(s).toFixed(0)}℃${!outdoor && s.equip.heater ? '・加溫中' : ''}）`;
   tempRow.classList.toggle('low', temp < 18);
   tempRow.classList.toggle('high', temp > 32);
 
@@ -86,17 +87,25 @@ export function render(s, tank, selectedId) {
   if (document.activeElement?.id !== 'eqFilter') $('eqFilter').value = s.equip.filter;
   if (document.activeElement?.id !== 'eqLamp') $('eqLamp').value = s.equip.lamp;
   $('eqHeater').checked = s.equip.heater;
+  $('eqLamp').disabled = outdoor;
+  $('eqHeater').disabled = outdoor;
   const hints = [];
+  if (outdoor) {
+    hints.push('戶外池曬真的太陽，燈具和加溫棒沒有作用');
+  } else {
+    if (s.equip.lamp === 'heat') hints.push('保溫燈沒有 UVB，曬背效果只有一半');
+    if (!s.equip.heater && temp < 20) hints.push('水有點冷，建議開加溫棒');
+  }
   if (s.equip.filter === 'none') hints.push('沒有過濾器，水會髒得很快');
   if (FILTERS[s.equip.filter].current) hints.push('水流強，幼龜和麝香龜會累');
-  if (s.equip.lamp === 'heat') hints.push('保溫燈沒有 UVB，曬背效果只有一半');
-  if (!s.equip.heater && temp < 20) hints.push('水有點冷，建議開加溫棒');
   $('eqHint').textContent = hints.join('；');
 
   const lamp = $('btnLamp');
-  lamp.textContent = `💡 曬背燈：${s.lamp.on ? '開' : '關'}`;
-  lamp.classList.toggle('on', s.lamp.on);
+  lamp.textContent = outdoor ? '💡 曬背燈（戶外不需要）' : `💡 曬背燈：${s.lamp.on ? '開' : '關'}`;
+  lamp.classList.toggle('on', s.lamp.on && !outdoor);
+  lamp.disabled = outdoor;
   $('chkTimer').checked = s.lamp.timer;
+  $('chkTimer').disabled = outdoor;
   $('btnVet').disabled = sel.stats.health >= 40;
 
   const top = s.log[0];
@@ -130,16 +139,28 @@ export function buildFoodGrid() {
     `<button data-act="feed" data-food="${key}"><span>${f.icon}</span>${f.name}</button>`).join('');
 }
 
-// 缸子與造景目錄
+// 選場景：可以點來切換的缸子/戶外池清單
+export function buildScenes(s) {
+  $('sceneList').innerHTML = SCENES.map(sc => {
+    const current = s.scene === sc.id;
+    const badge = current ? '使用中' : sc.locked ? '即將推出' : '點一下切換';
+    return `
+      <button type="button" class="decor-item scene-item${current ? ' current' : ''}" data-scene="${sc.id}" ${sc.locked ? 'disabled' : ''}>
+        <span class="icon">${sc.icon}</span>
+        <span class="title">${sc.name}<span class="badge">${badge}</span></span>
+        <span class="desc">${sc.desc}</span>
+      </button>`;
+  }).join('');
+}
+
+// 造景擺設目錄（先純展示，功能之後再做）
 export function buildDecor() {
-  $('decorList').innerHTML = DECOR.map(g => `
-    <div class="decor-group">${g.group}</div>
-    ${g.items.map(it => `
-      <div class="decor-item">
-        <span class="icon">${it.icon}</span>
-        <span class="title">${it.name}<span class="badge">${it.current ? '使用中' : '即將推出'}</span></span>
-        <span class="desc">${it.desc}</span>
-      </div>`).join('')}`).join('');
+  $('decorList').innerHTML = PROPS.map(it => `
+    <div class="decor-item">
+      <span class="icon">${it.icon}</span>
+      <span class="title">${it.name}<span class="badge">即將推出</span></span>
+      <span class="desc">${it.desc}</span>
+    </div>`).join('');
 }
 
 // 烏龜詳細資料頁
