@@ -229,62 +229,6 @@
       "source": "reference/sheets/map/loop_walk.png",
       "shellFound": true,
       "bottom": 0.41
-    },
-    "wag_1": {
-      "file": "wag_1.png",
-      "name": "搖尾巴1",
-      "source": "reference/sheets/map/loop_wag.png",
-      "shellFound": true,
-      "bottom": 0.55
-    },
-    "wag_2": {
-      "file": "wag_2.png",
-      "name": "搖尾巴2",
-      "source": "reference/sheets/map/loop_wag.png",
-      "shellFound": true,
-      "bottom": 0.465
-    },
-    "wag_3": {
-      "file": "wag_3.png",
-      "name": "搖尾巴3",
-      "source": "reference/sheets/map/loop_wag.png",
-      "shellFound": true,
-      "bottom": 0.455
-    },
-    "wag_4": {
-      "file": "wag_4.png",
-      "name": "搖尾巴4",
-      "source": "reference/sheets/map/loop_wag.png",
-      "shellFound": true,
-      "bottom": 0.545
-    },
-    "shake_1": {
-      "file": "shake_1.png",
-      "name": "搖屁屁1",
-      "source": "reference/sheets/map/loop_shake.png",
-      "shellFound": true,
-      "bottom": 0.54
-    },
-    "shake_2": {
-      "file": "shake_2.png",
-      "name": "搖屁屁2",
-      "source": "reference/sheets/map/loop_shake.png",
-      "shellFound": true,
-      "bottom": 0.545
-    },
-    "shake_3": {
-      "file": "shake_3.png",
-      "name": "搖屁屁3",
-      "source": "reference/sheets/map/loop_shake.png",
-      "shellFound": true,
-      "bottom": 0.515
-    },
-    "shake_4": {
-      "file": "shake_4.png",
-      "name": "搖屁屁4",
-      "source": "reference/sheets/map/loop_shake.png",
-      "shellFound": true,
-      "bottom": 0.555
     }
   }
 }

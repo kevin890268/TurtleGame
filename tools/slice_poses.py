@@ -48,6 +48,54 @@ PROTO = {
 }
 
 
+GUOHE = {
+    'file': 'reference/sheets/Striped Mud/00.png', 'cols': 1, 'rows': 1, 'bg': 'magenta',
+    'poses': [('walk_a', '站立')],
+}
+
+def guohe_sheets(folder):
+    def sheet(name, cols, rows, poses):
+        return {'file': f'{folder}/{name}', 'cols': cols, 'rows': rows, 'bg': 'magenta', 'poses': poses}
+    return [
+        sheet('0A.png', 3, 2, [('walk_a', '散步'), ('walk_b', '慢慢爬'), ('neck_up', '伸長脖子'),
+                                ('look', '張望'), ('observe', '抬頭觀察'), ('sniff', '低頭聞聞')]),
+        sheet('0B.png', 3, 2, [('bask', '曬太陽'), ('sleep', '睡覺'), ('yawn', '打哈欠'),
+                                ('stretch', '伸懶腰'), ('hide', '縮進殼裡'), ('rest', '趴著休息')]),
+        sheet('0C.png', 3, 2, [('happy', '開心'), ('startled', '驚嚇'), ('angry', '生氣'),
+                                ('purr', '滿足'), ('think', '思考'), ('relax', '放鬆')]),
+        sheet('0D.png', 3, 2, [('swim', '游泳'), ('dive', '下潛'), ('rise', '上浮'),
+                                ('float', '漂浮'), ('drink', '淺水換氣'), ('nibble', '咬食物')]),
+        sheet('0E.png', 2, 2, [(f'swim_{i}', f'游泳{i}') for i in range(1, 5)]),
+        sheet('0F.png', 2, 2, [(f'walk_{i}', f'爬行{i}') for i in range(1, 5)]),
+        sheet('0G.png', 2, 2, [(f'wag_{i}', f'搖尾巴{i}') for i in range(1, 5)]),
+        sheet('0H.png', 2, 2, [(f'shake_{i}', f'搖屁屁{i}') for i in range(1, 5)]),
+    ]
+
+
+RAZOR = {
+    'file': 'reference/sheets/Razor-backed Musk/00.png', 'cols': 1, 'rows': 1, 'bg': 'magenta',
+    'poses': [('walk_a', '站立')],
+}
+
+def razor_sheets(folder):
+    def sheet(name, cols, rows, poses):
+        return {'file': f'{folder}/{name}', 'cols': cols, 'rows': rows, 'bg': 'magenta', 'poses': poses}
+    return [
+        sheet('A.png', 3, 2, [('walk_a', '散步'), ('walk_b', '慢慢爬'), ('neck_up', '伸長脖子'),
+                               ('look', '張望'), ('observe', '抬頭觀察'), ('sniff', '低頭聞聞')]),
+        sheet('B.png', 3, 2, [('bask', '曬太陽'), ('sleep', '睡覺'), ('yawn', '打哈欠'),
+                               ('stretch', '伸懶腰'), ('hide', '縮進殼裡'), ('rest', '趴著休息')]),
+        sheet('C.png', 3, 2, [('happy', '開心'), ('startled', '驚嚇'), ('angry', '生氣'),
+                               ('purr', '滿足'), ('think', '思考'), ('relax', '放鬆')]),
+        sheet('D.png', 3, 2, [('swim', '游泳'), ('dive', '下潛'), ('rise', '上浮'),
+                               ('float', '漂浮'), ('drink', '淺水換氣'), ('nibble', '咬食物')]),
+        sheet('E.png', 2, 2, [(f'swim_{i}', f'游泳{i}') for i in range(1, 5)]),
+        sheet('F.png', 2, 2, [(f'walk_{i}', f'爬行{i}') for i in range(1, 5)]),
+        sheet('G.png', 2, 2, [(f'wag_{i}', f'搖尾巴{i}') for i in range(1, 5)]),
+        sheet('H.png', 2, 2, [(f'shake_{i}', f'搖屁屁{i}') for i in range(1, 5)]),
+    ]
+
+
 def sheets_in(folder, shell=None):
     """正式版姿勢表（格式見 assets/prompts/PROMPTS_*.md），每個品種一個資料夾，檔名都一樣。
     shell='dark'：背甲顏色很深、跟皮膚分不開的品種（麝香龜），改用亮度找背甲。"""
@@ -64,8 +112,8 @@ def sheets_in(folder, shell=None):
                                     ('float', '漂浮'), ('drink', '淺水換氣'), ('nibble', '咬食物')]),
         sheet('loop_swim.png', 2, 2, [(f'swim_{i}', f'游泳{i}') for i in range(1, 5)]),
         sheet('loop_walk.png', 2, 2, [(f'walk_{i}', f'爬行{i}') for i in range(1, 5)]),
-        sheet('loop_wag.png', 2, 2, [(f'wag_{i}', f'搖尾巴{i}') for i in range(1, 5)]),
-        sheet('loop_shake.png', 2, 2, [(f'shake_{i}', f'搖屁屁{i}') for i in range(1, 5)]),
+        sheet('G.png', 2, 2, [(f'wag_{i}', f'搖尾巴{i}') for i in range(1, 5)]),
+        sheet('H.png', 2, 2, [(f'shake_{i}', f'搖屁屁{i}') for i in range(1, 5)]),
     ]
 
 
@@ -87,6 +135,9 @@ SPECIES = {
     'map': sheets_in('reference/sheets/map'),
     'slider': sheets_in('reference/sheets/slider'),
     'painted': sheets_in('reference/sheets/painted'),
+    'european': [*sheets_in('reference/sheets/european')],
+    'Striped Mud': [GUOHE, *guohe_sheets('reference/sheets/Striped Mud')],
+    'Razor-backed Musk': [RAZOR, *razor_sheets('reference/sheets/Razor-backed Musk')],
 }
 
 

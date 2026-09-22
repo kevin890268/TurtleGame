@@ -3,7 +3,7 @@
   "configurations": [
     {
       "name": "turtle",
-      "runtimeExecutable": "python",
+      "runtimeExecutable": "C:\\Users\\test\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
       "runtimeArgs": ["-m", "http.server", "8123"],
       "port": 8123
     }
