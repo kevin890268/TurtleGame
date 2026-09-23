@@ -174,6 +174,16 @@ ACTION_NAMES = {**dict(STANDARD_32), **dict(STANDARD_27)}
 ACTION_KEYS = set(ACTION_NAMES)
 
 
+# 補視角用的 sheet：一張圖只有一個視角，每一列是一個動作、每一欄是一幀。
+# 用途是把已經有側面、只缺正面或背面的動作補齊（見 bangui_asset_status.md）。
+# 對應的提示詞：assets/prompts/bangui_back_fill/back_fill_B.md
+FILL_SHEETS = {
+    "back_01": ("B", ["turn", "hide", "rest", "happy"]),
+    "back_02": ("B", ["startled", "angry", "wag", "shake"]),
+    "back_03": ("B", ["dig", "poop", "dive"]),
+}
+
+
 # ============================================================
 # 1. Input sheet discovery
 # ============================================================
@@ -261,6 +271,23 @@ def discover_v32_action_sheets(species: str) -> list[dict]:
         print(f"[{species}] 檔名的動作名稱不在清單裡，略過：{unknown}")
 
     specs = []
+
+    for name, (view, actions) in FILL_SHEETS.items():
+        path = folder / f"{name}.png"
+        if not path.exists():
+            continue
+        specs.append({
+            "file": str(path.relative_to(ROOT)).replace("\\", "/"),
+            "cols": 4,
+            "rows": len(actions),
+            "layout": "fill_view",
+            "bg": "magenta",
+            "view": view,
+            "fillActions": actions,
+            "action": name,
+            "name": f"{view} 視角補圖",
+        })
+
     for key, (action_id, path) in sorted(
         found.items(), key=lambda kv: order.get(kv[0], 999)
     ):
@@ -891,7 +918,30 @@ def process_sheet(spec: dict, results: dict, report: list[str], out_dir: Path):
     rows = int(spec["rows"])
     layout = spec.get("layout", "legacy_8x4")
 
-    if layout == "4x4_action":
+    if layout == "fill_view":
+        view = spec["view"]
+        entries = []
+        for act in spec["fillActions"]:
+            for c in range(4):
+                entries.append((f"{act}_{view}_{c + 1}", ACTION_NAMES.get(act, act),
+                                act, c + 1, view, False))
+
+        # 順便檢查：這張圖如果混進側面，代表生成時視角跑掉了
+        ch_, cw_ = h / rows, w / cols
+        odd = []
+        for r in range(rows):
+            for c in range(cols):
+                cell = img[round(r * ch_):round((r + 1) * ch_),
+                           round(c * cw_):round((c + 1) * cw_)]
+                f = cell_facing(cell, _prepare_cell(cell, spec))
+                if f is not None and abs(f) > SIDE_THRESHOLD:
+                    odd.append(f"{spec['fillActions'][r]}#{c + 1}")
+        if odd:
+            report.append(
+                f"  ⚠ 這幾格看起來是側面不是 {view}，建議重生成：{'、'.join(odd)}"
+            )
+
+    elif layout == "4x4_action":
         validate_raw_4x4_sheet(img, spec, report)
 
         if cols != 4 or rows != 4:
