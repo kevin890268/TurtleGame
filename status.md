@@ -227,6 +227,8 @@ tools/make_prompts.py  產生提示詞
 
 ## 下一步
 
+待辦的玩法與素材項目（含查證資料與程式位置）整理在 **[docs/backlog.md](docs/backlog.md)**：水中吃東西的動作、有飼料時速度太快、食物的營養組成與挑食。
+
 1. **GitHub Pages 上線**：到 Settings → Pages 選 `main` 分支就能啟用
 2. **補圖**：斑龜的新版搖屁屁、巴西龜整套（麝香龜、地圖龜、錦龜、條紋動胸龜、歐洲澤龜、剃刀龜已全部完成）
 3. **重生搖屁屁**：用新版提示詞生成後覆蓋 `reference/sheets/bangui/loop_shake.png`
