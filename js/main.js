@@ -1,5 +1,5 @@
 import { CONFIG } from './config.js';
-import { newState, newTurtle, load, save, clear, isValidSave, addLog, findTurtle, MAX_TURTLES } from './state.js';
+import { newState, newTurtle, load, save, clear, isValidSave, addLog, findTurtle, MAX_TURTLES, SAVE_VERSION } from './state.js';
 import * as sim from './sim.js';
 import { loadAssets } from './assets.js';
 import { loadPoses, loadPoseIndex } from './poses.js';
@@ -318,6 +318,10 @@ function bindActions() {
     if (!file) return;
     try {
       const data = JSON.parse(await file.text());
+      if (data?.version !== SAVE_VERSION) {
+        ui.toast(`這個存檔是舊版本（v${data?.version ?? '?'}），目前的版本是 v${SAVE_VERSION}，沒辦法讀取。`);
+        return;
+      }
       if (!isValidSave(data)) throw new Error('bad save');
       if (!confirm('要用這個存檔取代目前進度嗎？')) return;
       save(data);
@@ -336,12 +340,12 @@ function bindActions() {
 
 async function start() {
   welcomeBack();
-  if (state.migratedBuddy) {
-    // 舊存檔升級：原本那隻多了一個室友
-    const msg = `新室友「${state.migratedBuddy}」搬進缸裡了！`;
+  if (state.droppedRecords) {
+    // 讀檔時清掉了壞掉的紀錄，讓玩家知道少了什麼
+    const msg = `存檔有 ${state.droppedRecords.length} 筆壞掉的紀錄已清除。`;
     addLog(state, msg);
     ui.toast(msg);
-    delete state.migratedBuddy;
+    delete state.droppedRecords;
     save(state);
   }
   ui.buildStats();

@@ -3,6 +3,11 @@ import { getSpecies } from './species.js';
 
 export const MAX_TURTLES = 8;
 
+// 存檔版號。存檔格式一改就 +1。
+// 讀檔時版號不合的存檔會整份丟掉、重新開始，不做舊格式升級——
+// 與其讓半舊的資料混在裡面跑出奇怪的狀態，不如乾脆重來。
+export const SAVE_VERSION = 5;
+
 // 隨機取名用的寵物名
 const PET_NAMES = [
   '小斑', '豆豆', '麻糬', '布丁', '湯圓', '芝麻', '波波', '嘟嘟', '球球', '綠豆',
@@ -42,7 +47,7 @@ export function newState() {
   const a = newTurtle('bangui');
   const b = newTurtle('bangui', [a.name]);
   return {
-    version: 5,
+    version: SAVE_VERSION,
     createdAt: now,
     lastRealTime: now,
     gameTime: now,
@@ -58,74 +63,101 @@ export function newState() {
 }
 
 export function load() {
+  let raw;
   try {
-    const raw = localStorage.getItem(CONFIG.saveKey);
-    return raw ? migrate(JSON.parse(raw)) : null;
+    raw = localStorage.getItem(CONFIG.saveKey);
   } catch {
     return null;
   }
+  if (!raw) return null;
+
+  let data;
+  try {
+    data = JSON.parse(raw);
+  } catch {
+    clear();
+    return null;
+  }
+
+  if (!isValidSave(data)) {
+    // 版號不合或格式壞掉：直接刪掉，下次開就是全新的一缸
+    clear();
+    return null;
+  }
+
+  return cleanSave(data);
 }
 
 export function save(s) {
-  try { localStorage.setItem(CONFIG.saveKey, JSON.stringify(s)); } catch {}
+  try {
+    localStorage.setItem(CONFIG.saveKey, JSON.stringify({ ...s, version: SAVE_VERSION }));
+  } catch {}
 }
 
 export function clear() {
   try { localStorage.removeItem(CONFIG.saveKey); } catch {}
 }
 
+// 這份存檔能不能用：版號要對得上，基本結構也要在
 export function isValidSave(s) {
-  if (!s || typeof s !== 'object' || typeof s.gameTime !== 'number') return false;
-  return Array.isArray(s.turtles) ? s.turtles.length > 0 : !!(s.turtle && s.stats);
+  if (!s || typeof s !== 'object') return false;
+  if (s.version !== SAVE_VERSION) return false;
+  if (typeof s.gameTime !== 'number') return false;
+  return Array.isArray(s.turtles) && s.turtles.some(isValidTurtle);
 }
 
-// 舊版存檔補齊成新版格式
-function migrate(s) {
-  if (!isValidSave(s)) return null;
-  if (!s.turtles) {
-    // 第 1 版：只有一隻烏龜，數值和水質放在一起 → 拆成整缸共用和每隻各自的，並再放一隻斑龜作伴
-    const { water, ...stats } = s.stats;
-    const first = {
-      ...newTurtle('bangui'),
-      name: s.turtle.name,
-      species: s.turtle.species || 'bangui',
-      length: s.turtle.length,
-      ageHours: s.turtle.ageHours,
-      stats,
-      lastFood: s.lastFood || { pellet: 0, shrimp: 0, veggie: 0 },
-      vetReadyAt: s.vetReadyAt || 0,
-      plays: s.plays || [],
-      alerts: { ...s.alerts, water: undefined },
-    };
-    const buddy = newTurtle('bangui', [first.name]);
-    s = {
-      version: 2,
-      createdAt: s.createdAt,
-      lastRealTime: s.lastRealTime,
-      gameTime: s.gameTime,
-      tank: { water },
-      lamp: s.lamp,
-      turtles: [first, buddy],
-      alerts: { water: s.alerts?.water },
-      log: s.log || [],
-      migratedBuddy: buddy.name,
-    };
+function isValidTurtle(t) {
+  return !!t
+    && typeof t === 'object'
+    && typeof t.id === 'string'
+    && typeof t.name === 'string'
+    && typeof t.length === 'number'
+    && Number.isFinite(t.length)
+    && !!t.stats
+    && typeof t.stats.hunger === 'number';
+}
+
+// 版號對得上、但裡面有壞掉的紀錄時，把那幾筆刪掉（而不是整份丟掉）
+function cleanSave(s) {
+  const dropped = [];
+
+  const turtles = s.turtles.filter(t => {
+    if (isValidTurtle(t)) return true;
+    dropped.push(`烏龜 ${t?.name ?? t?.id ?? '(無名)'}`);
+    return false;
+  });
+  s.turtles = turtles.slice(0, MAX_TURTLES);
+  if (turtles.length > MAX_TURTLES) dropped.push(`超過 ${MAX_TURTLES} 隻的部分`);
+
+  const ids = new Set(s.turtles.map(t => t.id));
+
+  // 關係表裡指向已經不存在的烏龜的紀錄
+  if (s.relations && typeof s.relations === 'object') {
+    for (const key of Object.keys(s.relations)) {
+      const pair = key.split('|');
+      if (pair.length !== 2 || !pair.every(id => ids.has(id))) {
+        delete s.relations[key];
+        dropped.push(`關係 ${key}`);
+      }
+    }
+  } else {
+    s.relations = {};
   }
-  // 第 3 版：加入水溫和設備
-  s.tank.temp ??= 26;
-  s.equip ??= { filter: 'small', lamp: 'uvb', heater: false };
-  // 第 4 版：關係、成長紀錄、食物統計、事件
-  s.relations ??= {};
-  for (const t of s.turtles) {
-    t.history ??= [{ day: Math.floor(t.ageHours / 24), len: +t.length.toFixed(2) }];
-    t.eaten ??= {};
-    t.flipped ??= false;
-    t.shedAt ??= 0;
+
+  // 壞掉的日誌
+  if (Array.isArray(s.log)) {
+    const log = s.log.filter(e => e && typeof e.t === 'number' && typeof e.text === 'string');
+    if (log.length !== s.log.length) dropped.push(`${s.log.length - log.length} 筆日誌`);
+    s.log = log;
+  } else {
+    s.log = [];
   }
-  s.version = 4;
-  // 第 5 版：場景（缸子種類）
-  s.scene ??= 'indoor60';
-  s.version = 5;
+
+  if (dropped.length) {
+    console.warn('[存檔] 刪掉不符合格式的紀錄：', dropped.join('、'));
+    s.droppedRecords = dropped;
+  }
+
   return s;
 }
 

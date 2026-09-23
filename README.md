@@ -76,3 +76,15 @@ assets/poses/  切好的姿勢圖（由 tools/slice_poses.py 產生）
 reference/     GPT 原始圖：concept/ 概念圖、sheets/<品種>/ 姿勢表、previews/ 切圖預覽
 tools/slice_poses.py  姿勢表切圖工具
 ```
+
+## 存檔版號
+
+存檔一定帶 `version`，由 `js/state.js` 的 `SAVE_VERSION` 決定，`save()` 每次寫入時自動蓋上。
+
+**改了存檔格式就把 `SAVE_VERSION` +1。** 讀檔時：
+
+- **版號不符** → 整份存檔作廢並從 localStorage 刪掉，開起來就是全新的一缸。不做舊格式升級——
+  與其讓半舊的資料混在裡面跑出奇怪的狀態，不如乾脆重來。
+- **版號相符但有壞掉的紀錄** → 只刪那幾筆（欄位不全的烏龜、指向不存在烏龜的關係、壞掉的日誌），
+  其餘保留，並在遊戲裡提示清掉了幾筆。
+- 匯入舊版號的存檔檔案會被擋下來，並顯示它是第幾版。
