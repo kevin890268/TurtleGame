@@ -67,6 +67,20 @@ function dirOf(t) {
   return t.face > 0 ? 'R' : 'L';
 }
 
+// 把一個 key 換成另一個視角，保持同一個動作和同一幀（walk_a_R_3 → walk_a_F_3）。
+// 那個視角沒有圖就回傳原本的 key。2.5D 鏡頭繞圈時用這個換視角。
+export function withView(poses, key, view) {
+  if (!poses || !key || !view) return key;
+  const m = /^(.*?)_([RLFB])(?:_(\d+))?$/.exec(key);
+  if (!m) return key;
+  const [, action, , frame] = m;
+  for (const candidate of frame ? [`${action}_${view}_${frame}`, `${action}_${view}_1`]
+                                : [`${action}_${view}`]) {
+    if (poses.has(candidate)) return candidate;
+  }
+  return key;
+}
+
 // 找這個動作實際存在的圖：先照方向、再照幀，都沒有就換視角或退回第 1 幀
 function pickPose(poses, action, dir, anim, fps = 6) {
   if (!poses || !action) return null;

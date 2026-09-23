@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { Tank } from './tank.js';
-import { isDirectional } from './poses.js';
+import { isDirectional, withView } from './poses.js';
 import { W, H, WATER_TOP, LAMP_X, AIR_STONE_X, OUTDOOR_GRASS_X, terrainOf } from './terrain.js';
 import { drawHeart } from './turtle-shape.js';
 import { CONFIG } from './config.js';
@@ -607,14 +607,11 @@ export class Tank3D extends Tank {
     // 若有 4 方向圖，依鏡頭選視角並覆蓋 f.key
     const poses = agent.poses;
     if (poses) {
-      const base = f.key.replace(/_[RLFB]$/, '');
       // 先算出鏡頭下的視角（需先有 mesh 位置，第一次用 t.x/z 估算）
       const estPos = v.mesh ? v.mesh.position : new THREE.Vector3(this.X(t.x), 0, t.z);
       const view = this._viewForTurtle(t, estPos);
-      const viewKey = `${base}_${view}`;
-      if (poses.has(viewKey)) {
-        f = { ...f, key: viewKey };
-      }
+      // 這個動作沒有該視角的圖時，withView 會原樣回傳，維持側面
+      f = { ...f, key: withView(poses, f.key, view) };
     }
 
     const ctx = v.ctx;
