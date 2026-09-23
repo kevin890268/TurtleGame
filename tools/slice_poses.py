@@ -91,6 +91,9 @@ def razor_sheets(folder):
                                ('float', '漂浮'), ('drink', '淺水換氣'), ('nibble', '咬食物')]),
         sheet('E.png', 2, 2, [(f'swim_{i}', f'游泳{i}') for i in range(1, 5)]),
         sheet('F.png', 2, 2, [(f'walk_{i}', f'爬行{i}') for i in range(1, 5)]),
+        # 搖尾巴、搖屁屁的檔名有兩種寫法（早期是 loop_*.png，後來改成 G/H.png），兩種都收
+        sheet('loop_wag.png', 2, 2, [(f'wag_{i}', f'搖尾巴{i}') for i in range(1, 5)]),
+        sheet('loop_shake.png', 2, 2, [(f'shake_{i}', f'搖屁屁{i}') for i in range(1, 5)]),
         sheet('G.png', 2, 2, [(f'wag_{i}', f'搖尾巴{i}') for i in range(1, 5)]),
         sheet('H.png', 2, 2, [(f'shake_{i}', f'搖屁屁{i}') for i in range(1, 5)]),
     ]
@@ -112,6 +115,9 @@ def sheets_in(folder, shell=None):
                                     ('float', '漂浮'), ('drink', '淺水換氣'), ('nibble', '咬食物')]),
         sheet('loop_swim.png', 2, 2, [(f'swim_{i}', f'游泳{i}') for i in range(1, 5)]),
         sheet('loop_walk.png', 2, 2, [(f'walk_{i}', f'爬行{i}') for i in range(1, 5)]),
+        # 搖尾巴、搖屁屁的檔名有兩種寫法（早期是 loop_*.png，後來改成 G/H.png），兩種都收
+        sheet('loop_wag.png', 2, 2, [(f'wag_{i}', f'搖尾巴{i}') for i in range(1, 5)]),
+        sheet('loop_shake.png', 2, 2, [(f'shake_{i}', f'搖屁屁{i}') for i in range(1, 5)]),
         sheet('G.png', 2, 2, [(f'wag_{i}', f'搖尾巴{i}') for i in range(1, 5)]),
         sheet('H.png', 2, 2, [(f'shake_{i}', f'搖屁屁{i}') for i in range(1, 5)]),
     ]
@@ -146,22 +152,32 @@ def bangui_4dir_sheets(folder):
             for v in views:
                 poses.append((f"{a}_{v}", f"{a} {v}"))
         return {'file': f"{folder}/{name}", 'cols': 4, 'rows': 6, 'bg': 'magenta', 'poses': poses}
+    # 列＝視角、欄＝幀（5.png、7.png 是這樣排）
     def mkLoop(name, base):
         poses = []
         for v in views:
             for c in range(4):
                 poses.append((f"{base}_{c+1}_{v}", f"{base}{c+1} {v}"))
         return {'file': f"{folder}/{name}", 'cols': 4, 'rows': 4, 'bg': 'magenta', 'poses': poses}
+
+    # 欄＝視角、列＝幀（6.png、8.png 是這樣排，跟上面相反）
+    def mkLoopT(name, base):
+        poses = []
+        for c in range(4):
+            for v in views:
+                poses.append((f"{base}_{c+1}_{v}", f"{base}{c+1} {v}"))
+        return {'file': f"{folder}/{name}", 'cols': 4, 'rows': 4, 'bg': 'magenta', 'poses': poses}
+    # 0.png 跟 1.png 是同一組動作，但它是「每個動作 4 視角連在一起」跨欄換行的排法，
+    # 版面不規則又會被 1.png 覆蓋，所以不用它。
     return [
-        mk6x4('0.png', move),
         mk4x6('1.png', move),
         mk4x6('2.png', rest),
         mk4x6('3.png', mood),
         mk4x6('4.png', water),
         mkLoop('5.png', 'swim'),
-        mkLoop('6.png', 'walk'),
+        mkLoopT('6.png', 'walk'),
         mkLoop('7.png', 'wag'),
-        mkLoop('8.png', 'shake'),
+        mkLoopT('8.png', 'shake'),
     ]
 
 

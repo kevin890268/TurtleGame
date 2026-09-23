@@ -5,6 +5,7 @@ import { CONFIG } from './config.js';
 import { isNight } from './sim.js';
 import { W, H, WATER_TOP, LAMP_X, AIR_STONE_X, SHORE_X, groundY, sampleGround } from './terrain.js';
 import { TurtleAgent } from './turtle-agent.js';
+import { isDirectional } from './poses.js';
 import { drawHeart } from './turtle-shape.js';
 
 const rand = (a, b) => a + Math.random() * (b - a);
@@ -683,8 +684,10 @@ export class Tank {
       const f = a.frame();
       ctx.save();
       ctx.translate(t.x, t.y + f.dy);
-      ctx.scale(t.face * f.m.sx, f.m.sy);
-      ctx.rotate(t.tilt + f.m.rot);
+      // 有 4 方向圖時直接用對應方向的圖，不要再翻轉（翻兩次等於沒翻）
+      const dirPose = isDirectional(f.key);
+      ctx.scale((dirPose ? 1 : t.face) * f.m.sx, f.m.sy);
+      ctx.rotate((t.tilt + f.m.rot) * (dirPose ? t.face : 1));
       a.paint(ctx, f, f.shell);
       ctx.restore();
     }

@@ -1,1 +1,12 @@
-["Razor-backed Musk", "Striped Mud", "bangui", "european", "map", "musk", "painted"]
+{
+  "version": "3.2",
+  "species": [
+    "Razor-backed Musk",
+    "Striped Mud",
+    "bangui",
+    "european",
+    "map",
+    "musk",
+    "painted"
+  ]
+}

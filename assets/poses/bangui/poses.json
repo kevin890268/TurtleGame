@@ -1,1438 +1,4881 @@
 {
+  "version": "3.2",
+  "actions27": [
+    {
+      "id": 1,
+      "key": "walk_a",
+      "name": "地面行走",
+      "views": [
+        "B",
+        "F",
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "B",
+        "F",
+        "R"
+      ],
+      "sources": [
+        "walk_a",
+        "walk_b"
+      ]
+    },
+    {
+      "id": 2,
+      "key": "run",
+      "name": "快速爬行",
+      "views": [
+        "B",
+        "F",
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "B",
+        "F",
+        "R"
+      ],
+      "sources": [
+        "run"
+      ]
+    },
+    {
+      "id": 3,
+      "key": "turn",
+      "name": "轉方向",
+      "views": [
+        "F",
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "F",
+        "R"
+      ],
+      "sources": [
+        "turn"
+      ]
+    },
+    {
+      "id": 4,
+      "key": "look",
+      "name": "停下張望／抬頭伸脖",
+      "views": [
+        "B",
+        "F",
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "B",
+        "F",
+        "R"
+      ],
+      "sources": [
+        "look",
+        "neck_up",
+        "observe"
+      ]
+    },
+    {
+      "id": 5,
+      "key": "sniff",
+      "name": "低頭聞聞",
+      "views": [
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "R"
+      ],
+      "sources": [
+        "sniff"
+      ]
+    },
+    {
+      "id": 6,
+      "key": "bask",
+      "name": "曬太陽",
+      "views": [],
+      "drawn": [],
+      "sources": [
+        "bask"
+      ]
+    },
+    {
+      "id": 7,
+      "key": "sleep",
+      "name": "睡覺",
+      "views": [
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "R"
+      ],
+      "sources": [
+        "sleep"
+      ]
+    },
+    {
+      "id": 8,
+      "key": "yawn",
+      "name": "打哈欠",
+      "views": [
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "R"
+      ],
+      "sources": [
+        "yawn"
+      ]
+    },
+    {
+      "id": 9,
+      "key": "stretch",
+      "name": "伸懶腰",
+      "views": [
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "R"
+      ],
+      "sources": [
+        "stretch"
+      ]
+    },
+    {
+      "id": 10,
+      "key": "hide",
+      "name": "縮進殼裡",
+      "views": [
+        "F",
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "F",
+        "R"
+      ],
+      "sources": [
+        "hide"
+      ]
+    },
+    {
+      "id": 11,
+      "key": "rest",
+      "name": "趴著休息／放鬆",
+      "views": [
+        "F",
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "F",
+        "R"
+      ],
+      "sources": [
+        "rest",
+        "relax"
+      ]
+    },
+    {
+      "id": 12,
+      "key": "happy",
+      "name": "開心",
+      "views": [
+        "F",
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "F",
+        "R"
+      ],
+      "sources": [
+        "happy"
+      ]
+    },
+    {
+      "id": 13,
+      "key": "startled",
+      "name": "驚嚇",
+      "views": [
+        "F",
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "F",
+        "R"
+      ],
+      "sources": [
+        "startled"
+      ]
+    },
+    {
+      "id": 14,
+      "key": "angry",
+      "name": "生氣",
+      "views": [
+        "F",
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "F",
+        "R"
+      ],
+      "sources": [
+        "angry"
+      ]
+    },
+    {
+      "id": 15,
+      "key": "wag",
+      "name": "搖尾巴",
+      "views": [
+        "F",
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "F",
+        "R"
+      ],
+      "sources": [
+        "wag"
+      ]
+    },
+    {
+      "id": 16,
+      "key": "shake",
+      "name": "搖屁屁",
+      "views": [
+        "F",
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "F",
+        "R"
+      ],
+      "sources": [
+        "shake"
+      ]
+    },
+    {
+      "id": 17,
+      "key": "dig",
+      "name": "挖土",
+      "views": [
+        "F",
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "F",
+        "R"
+      ],
+      "sources": [
+        "dig"
+      ]
+    },
+    {
+      "id": 18,
+      "key": "eat",
+      "name": "吃東西",
+      "views": [
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "R"
+      ],
+      "sources": [
+        "eat"
+      ]
+    },
+    {
+      "id": 19,
+      "key": "poop",
+      "name": "排泄",
+      "views": [
+        "F",
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "F",
+        "R"
+      ],
+      "sources": [
+        "poop"
+      ]
+    },
+    {
+      "id": 20,
+      "key": "play",
+      "name": "玩耍",
+      "views": [
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "R"
+      ],
+      "sources": [
+        "play"
+      ]
+    },
+    {
+      "id": 21,
+      "key": "enter_water",
+      "name": "進入水中",
+      "views": [
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "R"
+      ],
+      "sources": [
+        "enter_water"
+      ]
+    },
+    {
+      "id": 22,
+      "key": "swim",
+      "name": "悠閒游泳",
+      "views": [
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "R"
+      ],
+      "sources": [
+        "swim"
+      ]
+    },
+    {
+      "id": 23,
+      "key": "swim_fast",
+      "name": "快速游泳",
+      "views": [
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "R"
+      ],
+      "sources": [
+        "swim_fast"
+      ]
+    },
+    {
+      "id": 24,
+      "key": "swim_turn",
+      "name": "水中轉向",
+      "views": [
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "R"
+      ],
+      "sources": [
+        "swim_turn"
+      ]
+    },
+    {
+      "id": 25,
+      "key": "dive",
+      "name": "下潛",
+      "views": [
+        "F",
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "F",
+        "R"
+      ],
+      "sources": [
+        "dive"
+      ]
+    },
+    {
+      "id": 26,
+      "key": "float",
+      "name": "水中漂浮",
+      "views": [
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "R"
+      ],
+      "sources": [
+        "float"
+      ]
+    },
+    {
+      "id": 27,
+      "key": "surface",
+      "name": "上浮換氣",
+      "views": [
+        "L",
+        "R"
+      ],
+      "drawn": [
+        "R"
+      ],
+      "sources": [
+        "surface",
+        "rise"
+      ]
+    }
+  ],
   "size": 560,
   "anchor": [
     250,
     300
   ],
   "shellWidth": 200,
+  "views": [
+    "F",
+    "R",
+    "B",
+    "L"
+  ],
+  "viewNames": {
+    "F": "Front",
+    "R": "Right",
+    "B": "Back",
+    "L": "Left"
+  },
+  "actions": [
+    {
+      "id": 1,
+      "key": "walk_a",
+      "name": "悠閒散步"
+    },
+    {
+      "id": 2,
+      "key": "walk_b",
+      "name": "慢慢爬"
+    },
+    {
+      "id": 3,
+      "key": "run",
+      "name": "快速爬行"
+    },
+    {
+      "id": 4,
+      "key": "turn",
+      "name": "轉方向"
+    },
+    {
+      "id": 5,
+      "key": "look",
+      "name": "停下張望"
+    },
+    {
+      "id": 6,
+      "key": "neck_up",
+      "name": "伸長脖子"
+    },
+    {
+      "id": 7,
+      "key": "observe",
+      "name": "抬頭觀察"
+    },
+    {
+      "id": 8,
+      "key": "sniff",
+      "name": "低頭聞聞"
+    },
+    {
+      "id": 9,
+      "key": "bask",
+      "name": "曬太陽"
+    },
+    {
+      "id": 10,
+      "key": "sleep",
+      "name": "睡覺"
+    },
+    {
+      "id": 11,
+      "key": "yawn",
+      "name": "打哈欠"
+    },
+    {
+      "id": 12,
+      "key": "stretch",
+      "name": "伸懶腰"
+    },
+    {
+      "id": 13,
+      "key": "hide",
+      "name": "縮進殼裡"
+    },
+    {
+      "id": 14,
+      "key": "rest",
+      "name": "趴著休息"
+    },
+    {
+      "id": 15,
+      "key": "happy",
+      "name": "開心"
+    },
+    {
+      "id": 16,
+      "key": "relax",
+      "name": "放鬆"
+    },
+    {
+      "id": 17,
+      "key": "startled",
+      "name": "驚嚇"
+    },
+    {
+      "id": 18,
+      "key": "angry",
+      "name": "生氣"
+    },
+    {
+      "id": 19,
+      "key": "wag",
+      "name": "搖尾巴"
+    },
+    {
+      "id": 20,
+      "key": "shake",
+      "name": "搖屁屁"
+    },
+    {
+      "id": 21,
+      "key": "dig",
+      "name": "挖土"
+    },
+    {
+      "id": 22,
+      "key": "eat",
+      "name": "吃東西"
+    },
+    {
+      "id": 23,
+      "key": "poop",
+      "name": "排泄"
+    },
+    {
+      "id": 24,
+      "key": "play",
+      "name": "玩耍"
+    },
+    {
+      "id": 25,
+      "key": "enter_water",
+      "name": "進入水中"
+    },
+    {
+      "id": 26,
+      "key": "swim",
+      "name": "悠閒游泳"
+    },
+    {
+      "id": 27,
+      "key": "swim_fast",
+      "name": "快速游泳"
+    },
+    {
+      "id": 28,
+      "key": "swim_turn",
+      "name": "水中轉向"
+    },
+    {
+      "id": 29,
+      "key": "dive",
+      "name": "下潛"
+    },
+    {
+      "id": 30,
+      "key": "rise",
+      "name": "浮出水面"
+    },
+    {
+      "id": 31,
+      "key": "float",
+      "name": "水中漂浮"
+    },
+    {
+      "id": 32,
+      "key": "surface",
+      "name": "水面換氣"
+    }
+  ],
+  "framesPerAction": 4,
+  "expectedFrames": 512,
+  "actualFrames": 328,
+  "viewCounts": {
+    "F": 64,
+    "R": 124,
+    "B": 16,
+    "L": 124
+  },
+  "missing": [
+    "angry_B_1",
+    "angry_B_2",
+    "angry_B_3",
+    "angry_B_4",
+    "bask_B_1",
+    "bask_B_2",
+    "bask_B_3",
+    "bask_B_4",
+    "bask_F_1",
+    "bask_F_2",
+    "bask_F_3",
+    "bask_F_4",
+    "bask_L_1",
+    "bask_L_2",
+    "bask_L_3",
+    "bask_L_4",
+    "bask_R_1",
+    "bask_R_2",
+    "bask_R_3",
+    "bask_R_4",
+    "dig_B_1",
+    "dig_B_2",
+    "dig_B_3",
+    "dig_B_4",
+    "dive_B_1",
+    "dive_B_2",
+    "dive_B_3",
+    "dive_B_4",
+    "eat_B_1",
+    "eat_B_2",
+    "eat_B_3",
+    "eat_B_4",
+    "eat_F_1",
+    "eat_F_2",
+    "eat_F_3",
+    "eat_F_4",
+    "enter_water_B_1",
+    "enter_water_B_2",
+    "enter_water_B_3",
+    "enter_water_B_4",
+    "enter_water_F_1",
+    "enter_water_F_2",
+    "enter_water_F_3",
+    "enter_water_F_4",
+    "float_B_1",
+    "float_B_2",
+    "float_B_3",
+    "float_B_4",
+    "float_F_1",
+    "float_F_2",
+    "float_F_3",
+    "float_F_4",
+    "happy_B_1",
+    "happy_B_2",
+    "happy_B_3",
+    "happy_B_4",
+    "hide_B_1",
+    "hide_B_2",
+    "hide_B_3",
+    "hide_B_4",
+    "observe_B_1",
+    "observe_B_2",
+    "observe_B_3",
+    "observe_B_4",
+    "observe_F_1",
+    "observe_F_2",
+    "observe_F_3",
+    "observe_F_4",
+    "play_B_1",
+    "play_B_2",
+    "play_B_3",
+    "play_B_4",
+    "play_F_1",
+    "play_F_2",
+    "play_F_3",
+    "play_F_4",
+    "poop_B_1",
+    "poop_B_2",
+    "poop_B_3",
+    "poop_B_4",
+    "relax_B_1",
+    "relax_B_2",
+    "relax_B_3",
+    "relax_B_4",
+    "rest_B_1",
+    "rest_B_2",
+    "rest_B_3",
+    "rest_B_4",
+    "rest_F_1",
+    "rest_F_2",
+    "rest_F_3",
+    "rest_F_4",
+    "rise_B_1",
+    "rise_B_2",
+    "rise_B_3",
+    "rise_B_4",
+    "rise_F_1",
+    "rise_F_2",
+    "rise_F_3",
+    "rise_F_4",
+    "shake_B_1",
+    "shake_B_2",
+    "shake_B_3",
+    "shake_B_4",
+    "sleep_B_1",
+    "sleep_B_2",
+    "sleep_B_3",
+    "sleep_B_4",
+    "sleep_F_1",
+    "sleep_F_2",
+    "sleep_F_3",
+    "sleep_F_4",
+    "sniff_B_1",
+    "sniff_B_2",
+    "sniff_B_3",
+    "sniff_B_4",
+    "sniff_F_1",
+    "sniff_F_2",
+    "sniff_F_3",
+    "sniff_F_4",
+    "startled_B_1",
+    "startled_B_2",
+    "startled_B_3",
+    "startled_B_4",
+    "stretch_B_1",
+    "stretch_B_2",
+    "stretch_B_3",
+    "stretch_B_4",
+    "stretch_F_1",
+    "stretch_F_2",
+    "stretch_F_3",
+    "stretch_F_4",
+    "surface_B_1",
+    "surface_B_2",
+    "surface_B_3",
+    "surface_B_4",
+    "surface_F_1",
+    "surface_F_2",
+    "surface_F_3",
+    "surface_F_4",
+    "swim_B_1",
+    "swim_B_2",
+    "swim_B_3",
+    "swim_B_4",
+    "swim_F_1",
+    "swim_F_2",
+    "swim_F_3",
+    "swim_F_4",
+    "swim_fast_B_1",
+    "swim_fast_B_2",
+    "swim_fast_B_3",
+    "swim_fast_B_4",
+    "swim_fast_F_1",
+    "swim_fast_F_2",
+    "swim_fast_F_3",
+    "swim_fast_F_4",
+    "swim_turn_B_1",
+    "swim_turn_B_2",
+    "swim_turn_B_3",
+    "swim_turn_B_4",
+    "swim_turn_F_1",
+    "swim_turn_F_2",
+    "swim_turn_F_3",
+    "swim_turn_F_4",
+    "turn_B_1",
+    "turn_B_2",
+    "turn_B_3",
+    "turn_B_4",
+    "wag_B_1",
+    "wag_B_2",
+    "wag_B_3",
+    "wag_B_4",
+    "walk_a_B_1",
+    "walk_a_B_2",
+    "walk_a_B_3",
+    "walk_a_B_4",
+    "yawn_B_1",
+    "yawn_B_2",
+    "yawn_B_3",
+    "yawn_B_4",
+    "yawn_F_1",
+    "yawn_F_2",
+    "yawn_F_3",
+    "yawn_F_4"
+  ],
   "poses": {
-    "walk_a": {
-      "file": "walk_a.png",
-      "name": "散步",
-      "source": "reference/sheets/bangui/sheet_a.png",
+    "walk_a_F_1": {
+      "file": "walk_a_F_1.png",
+      "action": "walk_a",
+      "name": "地面行走",
+      "frame": 1,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_01_walk_a.png",
       "shellFound": true,
-      "bottom": 0.415
+      "bottom": 0.39,
+      "scale": 0.82435,
+      "clipped": false
     },
-    "look": {
-      "file": "look.png",
-      "name": "張望",
-      "source": "reference/sheets/bangui/sheet_a.png",
+    "walk_a_F_2": {
+      "file": "walk_a_F_2.png",
+      "action": "walk_a",
+      "name": "地面行走",
+      "frame": 2,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_01_walk_a.png",
       "shellFound": true,
-      "bottom": 0.395
+      "bottom": 0.395,
+      "scale": 0.82435,
+      "clipped": false
     },
-    "neck_up": {
-      "file": "neck_up.png",
-      "name": "伸長脖子",
-      "source": "reference/sheets/bangui/sheet_a.png",
+    "walk_a_F_3": {
+      "file": "walk_a_F_3.png",
+      "action": "walk_a",
+      "name": "地面行走",
+      "frame": 3,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_01_walk_a.png",
       "shellFound": true,
-      "bottom": 0.395
+      "bottom": 0.4,
+      "scale": 0.82435,
+      "clipped": false
     },
-    "head_in": {
-      "file": "head_in.png",
-      "name": "縮頭",
-      "source": "reference/sheets/bangui/proto_36.png",
+    "walk_a_F_4": {
+      "file": "walk_a_F_4.png",
+      "action": "walk_a",
+      "name": "地面行走",
+      "frame": 4,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_01_walk_a.png",
       "shellFound": true,
-      "bottom": 0.36
+      "bottom": 0.4,
+      "scale": 0.82435,
+      "clipped": false
     },
-    "observe": {
-      "file": "observe.png",
-      "name": "抬頭觀察",
-      "source": "reference/sheets/bangui/sheet_a.png",
+    "walk_a_R_1": {
+      "file": "walk_a_R_1.png",
+      "action": "walk_a",
+      "name": "地面行走",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_01_walk_a.png",
       "shellFound": true,
-      "bottom": 0.39
+      "bottom": 0.355,
+      "scale": 0.82435,
+      "clipped": false
     },
-    "swim": {
-      "file": "swim.png",
-      "name": "游泳",
-      "source": "reference/sheets/bangui/sheet_d.png",
+    "walk_a_R_2": {
+      "file": "walk_a_R_2.png",
+      "action": "walk_a",
+      "name": "地面行走",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_01_walk_a.png",
       "shellFound": true,
-      "bottom": 0.545
+      "bottom": 0.35,
+      "scale": 0.82435,
+      "clipped": false
     },
-    "dive": {
-      "file": "dive.png",
-      "name": "下潛",
-      "source": "reference/sheets/bangui/sheet_d.png",
+    "walk_a_R_3": {
+      "file": "walk_a_R_3.png",
+      "action": "walk_a",
+      "name": "地面行走",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_01_walk_a.png",
       "shellFound": true,
-      "bottom": 0.88
+      "bottom": 0.64,
+      "scale": 0.82435,
+      "clipped": false
     },
-    "rise": {
-      "file": "rise.png",
-      "name": "上浮",
-      "source": "reference/sheets/bangui/sheet_d.png",
+    "walk_a_R_4": {
+      "file": "walk_a_R_4.png",
+      "action": "walk_a",
+      "name": "地面行走",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_01_walk_a.png",
       "shellFound": true,
-      "bottom": 0.79
+      "bottom": 0.32,
+      "scale": 0.82435,
+      "clipped": false
     },
-    "float": {
-      "file": "float.png",
-      "name": "漂浮",
-      "source": "reference/sheets/bangui/sheet_d.png",
-      "shellFound": false,
-      "bottom": 0.575
-    },
-    "exhale": {
-      "file": "exhale.png",
-      "name": "吐氣",
-      "source": "reference/sheets/bangui/proto_36.png",
+    "run_F_1": {
+      "file": "run_F_1.png",
+      "action": "run",
+      "name": "快速爬行",
+      "frame": 1,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_03_run.png",
       "shellFound": true,
-      "bottom": 0.34
+      "bottom": 0.405,
+      "scale": 0.83841,
+      "clipped": false
     },
-    "nibble": {
-      "file": "nibble.png",
-      "name": "咬食物",
-      "source": "reference/sheets/bangui/sheet_d.png",
+    "run_F_2": {
+      "file": "run_F_2.png",
+      "action": "run",
+      "name": "快速爬行",
+      "frame": 2,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_03_run.png",
       "shellFound": true,
-      "bottom": 0.59
+      "bottom": 0.405,
+      "scale": 0.83841,
+      "clipped": false
     },
-    "drink": {
-      "file": "drink.png",
-      "name": "淺水換氣",
-      "source": "reference/sheets/bangui/sheet_d.png",
+    "run_F_3": {
+      "file": "run_F_3.png",
+      "action": "run",
+      "name": "快速爬行",
+      "frame": 3,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_03_run.png",
       "shellFound": true,
-      "bottom": 0.595
+      "bottom": 0.435,
+      "scale": 0.83841,
+      "clipped": false
     },
-    "bask": {
-      "file": "bask.png",
-      "name": "曬太陽",
-      "source": "reference/sheets/bangui/sheet_b.png",
+    "run_F_4": {
+      "file": "run_F_4.png",
+      "action": "run",
+      "name": "快速爬行",
+      "frame": 4,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_03_run.png",
       "shellFound": true,
-      "bottom": 0.385
+      "bottom": 0.415,
+      "scale": 0.83841,
+      "clipped": false
     },
-    "sleep": {
-      "file": "sleep.png",
-      "name": "睡覺",
-      "source": "reference/sheets/bangui/sheet_b.png",
+    "run_R_1": {
+      "file": "run_R_1.png",
+      "action": "run",
+      "name": "快速爬行",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_03_run.png",
       "shellFound": true,
-      "bottom": 0.395
+      "bottom": 0.665,
+      "scale": 0.83841,
+      "clipped": false
     },
-    "yawn": {
-      "file": "yawn.png",
-      "name": "打哈欠",
-      "source": "reference/sheets/bangui/sheet_b.png",
+    "run_R_2": {
+      "file": "run_R_2.png",
+      "action": "run",
+      "name": "快速爬行",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_03_run.png",
       "shellFound": true,
-      "bottom": 0.475
+      "bottom": 0.675,
+      "scale": 0.83841,
+      "clipped": false
     },
-    "stretch": {
-      "file": "stretch.png",
-      "name": "伸懶腰",
-      "source": "reference/sheets/bangui/sheet_b.png",
+    "run_R_3": {
+      "file": "run_R_3.png",
+      "action": "run",
+      "name": "快速爬行",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_03_run.png",
       "shellFound": true,
-      "bottom": 0.365
+      "bottom": 0.665,
+      "scale": 0.83841,
+      "clipped": false
     },
-    "flip": {
-      "file": "flip.png",
-      "name": "翻身",
-      "source": "reference/sheets/bangui/proto_36.png",
-      "shellFound": false,
-      "bottom": 0.405
-    },
-    "hide": {
-      "file": "hide.png",
-      "name": "縮進殼裡",
-      "source": "reference/sheets/bangui/sheet_b.png",
+    "run_R_4": {
+      "file": "run_R_4.png",
+      "action": "run",
+      "name": "快速爬行",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_03_run.png",
       "shellFound": true,
-      "bottom": 0.355
+      "bottom": 0.66,
+      "scale": 0.83841,
+      "clipped": false
     },
-    "alert": {
-      "file": "alert.png",
-      "name": "警戒觀察",
-      "source": "reference/sheets/bangui/proto_36.png",
+    "run_B_1": {
+      "file": "run_B_1.png",
+      "action": "run",
+      "name": "快速爬行",
+      "frame": 1,
+      "view": "B",
+      "source": "reference/sheets/bangui/action_03_run.png",
       "shellFound": true,
-      "bottom": 0.395
+      "bottom": 0.41,
+      "scale": 0.83841,
+      "clipped": false
     },
-    "sniff": {
-      "file": "sniff.png",
-      "name": "低頭聞聞",
-      "source": "reference/sheets/bangui/sheet_a.png",
+    "run_B_2": {
+      "file": "run_B_2.png",
+      "action": "run",
+      "name": "快速爬行",
+      "frame": 2,
+      "view": "B",
+      "source": "reference/sheets/bangui/action_03_run.png",
       "shellFound": true,
-      "bottom": 0.38
+      "bottom": 0.435,
+      "scale": 0.83841,
+      "clipped": false
     },
-    "walk_b": {
-      "file": "walk_b.png",
-      "name": "慢慢爬",
-      "source": "reference/sheets/bangui/sheet_a.png",
+    "run_B_3": {
+      "file": "run_B_3.png",
+      "action": "run",
+      "name": "快速爬行",
+      "frame": 3,
+      "view": "B",
+      "source": "reference/sheets/bangui/action_03_run.png",
       "shellFound": true,
-      "bottom": 0.36
+      "bottom": 0.435,
+      "scale": 0.83841,
+      "clipped": false
     },
-    "run": {
-      "file": "run.png",
-      "name": "快速爬",
-      "source": "reference/sheets/bangui/proto_36.png",
+    "run_B_4": {
+      "file": "run_B_4.png",
+      "action": "run",
+      "name": "快速爬行",
+      "frame": 4,
+      "view": "B",
+      "source": "reference/sheets/bangui/action_03_run.png",
       "shellFound": true,
-      "bottom": 0.345
+      "bottom": 0.435,
+      "scale": 0.83841,
+      "clipped": false
     },
-    "side": {
-      "file": "side.png",
-      "name": "側身",
-      "source": "reference/sheets/bangui/proto_36.png",
-      "shellFound": true,
-      "bottom": 0.46
-    },
-    "turn": {
-      "file": "turn.png",
+    "turn_F_1": {
+      "file": "turn_F_1.png",
+      "action": "turn",
       "name": "轉方向",
-      "source": "reference/sheets/bangui/proto_36.png",
+      "frame": 1,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_04_turn.png",
       "shellFound": true,
-      "bottom": 0.385
+      "bottom": 0.495,
+      "scale": 0.86527,
+      "clipped": false
     },
-    "jump": {
-      "file": "jump.png",
-      "name": "跳躍",
-      "source": "reference/sheets/bangui/proto_36.png",
+    "turn_F_2": {
+      "file": "turn_F_2.png",
+      "action": "turn",
+      "name": "轉方向",
+      "frame": 2,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_04_turn.png",
       "shellFound": true,
-      "bottom": 0.455
+      "bottom": 0.49,
+      "scale": 0.86527,
+      "clipped": false
     },
-    "land": {
-      "file": "land.png",
-      "name": "落地",
-      "source": "reference/sheets/bangui/proto_36.png",
+    "turn_F_3": {
+      "file": "turn_F_3.png",
+      "action": "turn",
+      "name": "轉方向",
+      "frame": 3,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_04_turn.png",
       "shellFound": true,
-      "bottom": 0.355
+      "bottom": 0.485,
+      "scale": 0.86527,
+      "clipped": false
     },
-    "spin": {
-      "file": "spin.png",
-      "name": "轉圈",
-      "source": "reference/sheets/bangui/proto_36.png",
+    "turn_F_4": {
+      "file": "turn_F_4.png",
+      "action": "turn",
+      "name": "轉方向",
+      "frame": 4,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_04_turn.png",
       "shellFound": true,
-      "bottom": 0.38
+      "bottom": 0.48,
+      "scale": 0.86527,
+      "clipped": false
     },
-    "dig": {
-      "file": "dig.png",
-      "name": "挖土",
-      "source": "reference/sheets/bangui/proto_36.png",
+    "turn_R_1": {
+      "file": "turn_R_1.png",
+      "action": "turn",
+      "name": "轉方向",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_04_turn.png",
       "shellFound": true,
-      "bottom": 0.41
+      "bottom": 0.385,
+      "scale": 0.86527,
+      "clipped": false
     },
-    "lay_eggs": {
-      "file": "lay_eggs.png",
-      "name": "產卵",
-      "source": "reference/sheets/bangui/proto_36.png",
+    "turn_R_2": {
+      "file": "turn_R_2.png",
+      "action": "turn",
+      "name": "轉方向",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_04_turn.png",
       "shellFound": true,
-      "bottom": 0.405
+      "bottom": 0.36,
+      "scale": 0.86527,
+      "clipped": false
     },
-    "startled": {
-      "file": "startled.png",
-      "name": "驚嚇",
-      "source": "reference/sheets/bangui/sheet_c.png",
-      "shellFound": false,
-      "bottom": 0.745
-    },
-    "angry": {
-      "file": "angry.png",
-      "name": "生氣",
-      "source": "reference/sheets/bangui/sheet_c.png",
+    "turn_R_3": {
+      "file": "turn_R_3.png",
+      "action": "turn",
+      "name": "轉方向",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_04_turn.png",
       "shellFound": true,
-      "bottom": 0.585
+      "bottom": 0.375,
+      "scale": 0.86527,
+      "clipped": false
     },
-    "happy": {
-      "file": "happy.png",
+    "turn_R_4": {
+      "file": "turn_R_4.png",
+      "action": "turn",
+      "name": "轉方向",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_04_turn.png",
+      "shellFound": true,
+      "bottom": 0.36,
+      "scale": 0.86527,
+      "clipped": false
+    },
+    "look_R_1": {
+      "file": "look_R_1.png",
+      "action": "look",
+      "name": "停下張望／抬頭伸脖",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_05_look.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.80874,
+      "clipped": false
+    },
+    "look_R_2": {
+      "file": "look_R_2.png",
+      "action": "look",
+      "name": "停下張望／抬頭伸脖",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_05_look.png",
+      "shellFound": true,
+      "bottom": 0.375,
+      "scale": 0.80874,
+      "clipped": false
+    },
+    "look_R_3": {
+      "file": "look_R_3.png",
+      "action": "look",
+      "name": "停下張望／抬頭伸脖",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_05_look.png",
+      "shellFound": true,
+      "bottom": 0.42,
+      "scale": 0.80874,
+      "clipped": false
+    },
+    "look_R_4": {
+      "file": "look_R_4.png",
+      "action": "look",
+      "name": "停下張望／抬頭伸脖",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_05_look.png",
+      "shellFound": true,
+      "bottom": 0.425,
+      "scale": 0.80874,
+      "clipped": false
+    },
+    "look_F_1": {
+      "file": "look_F_1.png",
+      "action": "look",
+      "name": "停下張望／抬頭伸脖",
+      "frame": 1,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_05_look.png",
+      "shellFound": true,
+      "bottom": 0.37,
+      "scale": 0.80874,
+      "clipped": false
+    },
+    "look_F_2": {
+      "file": "look_F_2.png",
+      "action": "look",
+      "name": "停下張望／抬頭伸脖",
+      "frame": 2,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_05_look.png",
+      "shellFound": true,
+      "bottom": 0.37,
+      "scale": 0.80874,
+      "clipped": false
+    },
+    "look_F_3": {
+      "file": "look_F_3.png",
+      "action": "look",
+      "name": "停下張望／抬頭伸脖",
+      "frame": 3,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_05_look.png",
+      "shellFound": true,
+      "bottom": 0.395,
+      "scale": 0.80874,
+      "clipped": false
+    },
+    "look_F_4": {
+      "file": "look_F_4.png",
+      "action": "look",
+      "name": "停下張望／抬頭伸脖",
+      "frame": 4,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_05_look.png",
+      "shellFound": true,
+      "bottom": 0.35,
+      "scale": 0.80874,
+      "clipped": false
+    },
+    "look_B_1": {
+      "file": "look_B_1.png",
+      "action": "look",
+      "name": "停下張望／抬頭伸脖",
+      "frame": 1,
+      "view": "B",
+      "source": "reference/sheets/bangui/action_05_look.png",
+      "shellFound": true,
+      "bottom": 0.435,
+      "scale": 0.80874,
+      "clipped": false
+    },
+    "look_B_2": {
+      "file": "look_B_2.png",
+      "action": "look",
+      "name": "停下張望／抬頭伸脖",
+      "frame": 2,
+      "view": "B",
+      "source": "reference/sheets/bangui/action_05_look.png",
+      "shellFound": true,
+      "bottom": 0.43,
+      "scale": 0.80874,
+      "clipped": false
+    },
+    "look_B_3": {
+      "file": "look_B_3.png",
+      "action": "look",
+      "name": "停下張望／抬頭伸脖",
+      "frame": 3,
+      "view": "B",
+      "source": "reference/sheets/bangui/action_05_look.png",
+      "shellFound": true,
+      "bottom": 0.42,
+      "scale": 0.80874,
+      "clipped": false
+    },
+    "look_B_4": {
+      "file": "look_B_4.png",
+      "action": "look",
+      "name": "停下張望／抬頭伸脖",
+      "frame": 4,
+      "view": "B",
+      "source": "reference/sheets/bangui/action_05_look.png",
+      "shellFound": true,
+      "bottom": 0.435,
+      "scale": 0.80874,
+      "clipped": false
+    },
+    "sniff_R_1": {
+      "file": "sniff_R_1.png",
+      "action": "sniff",
+      "name": "低頭聞聞",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_08_sniff.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.80497,
+      "clipped": false
+    },
+    "sniff_R_2": {
+      "file": "sniff_R_2.png",
+      "action": "sniff",
+      "name": "低頭聞聞",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_08_sniff.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.80497,
+      "clipped": false
+    },
+    "sniff_R_3": {
+      "file": "sniff_R_3.png",
+      "action": "sniff",
+      "name": "低頭聞聞",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_08_sniff.png",
+      "shellFound": true,
+      "bottom": 0.31,
+      "scale": 0.80497,
+      "clipped": false
+    },
+    "sniff_R_4": {
+      "file": "sniff_R_4.png",
+      "action": "sniff",
+      "name": "低頭聞聞",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_08_sniff.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.80497,
+      "clipped": false
+    },
+    "sleep_R_1": {
+      "file": "sleep_R_1.png",
+      "action": "sleep",
+      "name": "睡覺",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_10_sleep.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.78391,
+      "clipped": false
+    },
+    "sleep_R_2": {
+      "file": "sleep_R_2.png",
+      "action": "sleep",
+      "name": "睡覺",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_10_sleep.png",
+      "shellFound": true,
+      "bottom": 0.31,
+      "scale": 0.78391,
+      "clipped": false
+    },
+    "sleep_R_3": {
+      "file": "sleep_R_3.png",
+      "action": "sleep",
+      "name": "睡覺",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_10_sleep.png",
+      "shellFound": true,
+      "bottom": 0.305,
+      "scale": 0.78391,
+      "clipped": false
+    },
+    "sleep_R_4": {
+      "file": "sleep_R_4.png",
+      "action": "sleep",
+      "name": "睡覺",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_10_sleep.png",
+      "shellFound": true,
+      "bottom": 0.305,
+      "scale": 0.78391,
+      "clipped": false
+    },
+    "yawn_R_1": {
+      "file": "yawn_R_1.png",
+      "action": "yawn",
+      "name": "打哈欠",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_11_yawn.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.78062,
+      "clipped": false
+    },
+    "yawn_R_2": {
+      "file": "yawn_R_2.png",
+      "action": "yawn",
+      "name": "打哈欠",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_11_yawn.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.78062,
+      "clipped": false
+    },
+    "yawn_R_3": {
+      "file": "yawn_R_3.png",
+      "action": "yawn",
+      "name": "打哈欠",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_11_yawn.png",
+      "shellFound": true,
+      "bottom": 0.37,
+      "scale": 0.78062,
+      "clipped": false
+    },
+    "yawn_R_4": {
+      "file": "yawn_R_4.png",
+      "action": "yawn",
+      "name": "打哈欠",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_11_yawn.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.78062,
+      "clipped": false
+    },
+    "stretch_R_1": {
+      "file": "stretch_R_1.png",
+      "action": "stretch",
+      "name": "伸懶腰",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_12_stretch.png",
+      "shellFound": true,
+      "bottom": 0.305,
+      "scale": 0.78,
+      "clipped": false
+    },
+    "stretch_R_2": {
+      "file": "stretch_R_2.png",
+      "action": "stretch",
+      "name": "伸懶腰",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_12_stretch.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.78,
+      "clipped": false
+    },
+    "stretch_R_3": {
+      "file": "stretch_R_3.png",
+      "action": "stretch",
+      "name": "伸懶腰",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_12_stretch.png",
+      "shellFound": true,
+      "bottom": 0.365,
+      "scale": 0.78,
+      "clipped": false
+    },
+    "stretch_R_4": {
+      "file": "stretch_R_4.png",
+      "action": "stretch",
+      "name": "伸懶腰",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_12_stretch.png",
+      "shellFound": true,
+      "bottom": 0.305,
+      "scale": 0.78,
+      "clipped": false
+    },
+    "hide_F_1": {
+      "file": "hide_F_1.png",
+      "action": "hide",
+      "name": "縮進殼裡",
+      "frame": 1,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_13_hide.png",
+      "shellFound": true,
+      "bottom": 0.35,
+      "scale": 0.8217,
+      "clipped": false
+    },
+    "hide_F_2": {
+      "file": "hide_F_2.png",
+      "action": "hide",
+      "name": "縮進殼裡",
+      "frame": 2,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_13_hide.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.8217,
+      "clipped": false
+    },
+    "hide_F_3": {
+      "file": "hide_F_3.png",
+      "action": "hide",
+      "name": "縮進殼裡",
+      "frame": 3,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_13_hide.png",
+      "shellFound": true,
+      "bottom": 0.295,
+      "scale": 0.8217,
+      "clipped": false
+    },
+    "hide_F_4": {
+      "file": "hide_F_4.png",
+      "action": "hide",
+      "name": "縮進殼裡",
+      "frame": 4,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_13_hide.png",
+      "shellFound": true,
+      "bottom": 0.345,
+      "scale": 0.8217,
+      "clipped": false
+    },
+    "hide_R_1": {
+      "file": "hide_R_1.png",
+      "action": "hide",
+      "name": "縮進殼裡",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_13_hide.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.8217,
+      "clipped": false
+    },
+    "hide_R_2": {
+      "file": "hide_R_2.png",
+      "action": "hide",
+      "name": "縮進殼裡",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_13_hide.png",
+      "shellFound": true,
+      "bottom": 0.295,
+      "scale": 0.8217,
+      "clipped": false
+    },
+    "hide_R_3": {
+      "file": "hide_R_3.png",
+      "action": "hide",
+      "name": "縮進殼裡",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_13_hide.png",
+      "shellFound": true,
+      "bottom": 0.275,
+      "scale": 0.8217,
+      "clipped": false
+    },
+    "hide_R_4": {
+      "file": "hide_R_4.png",
+      "action": "hide",
+      "name": "縮進殼裡",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_13_hide.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.8217,
+      "clipped": false
+    },
+    "rest_R_1": {
+      "file": "rest_R_1.png",
+      "action": "rest",
+      "name": "趴著休息／放鬆",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_14_rest.png",
+      "shellFound": true,
+      "bottom": 0.31,
+      "scale": 0.78727,
+      "clipped": false
+    },
+    "rest_R_2": {
+      "file": "rest_R_2.png",
+      "action": "rest",
+      "name": "趴著休息／放鬆",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_14_rest.png",
+      "shellFound": true,
+      "bottom": 0.31,
+      "scale": 0.78727,
+      "clipped": false
+    },
+    "rest_R_3": {
+      "file": "rest_R_3.png",
+      "action": "rest",
+      "name": "趴著休息／放鬆",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_14_rest.png",
+      "shellFound": true,
+      "bottom": 0.31,
+      "scale": 0.78727,
+      "clipped": false
+    },
+    "rest_R_4": {
+      "file": "rest_R_4.png",
+      "action": "rest",
+      "name": "趴著休息／放鬆",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_14_rest.png",
+      "shellFound": true,
+      "bottom": 0.305,
+      "scale": 0.78727,
+      "clipped": false
+    },
+    "happy_F_1": {
+      "file": "happy_F_1.png",
+      "action": "happy",
       "name": "開心",
-      "source": "reference/sheets/bangui/sheet_c.png",
+      "frame": 1,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_15_happy.png",
       "shellFound": true,
-      "bottom": 0.625
+      "bottom": 0.42,
+      "scale": 0.76031,
+      "clipped": false
     },
-    "purr": {
-      "file": "purr.png",
-      "name": "滿足",
-      "source": "reference/sheets/bangui/sheet_c.png",
+    "happy_F_2": {
+      "file": "happy_F_2.png",
+      "action": "happy",
+      "name": "開心",
+      "frame": 2,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_15_happy.png",
       "shellFound": true,
-      "bottom": 0.605
+      "bottom": 0.45,
+      "scale": 0.76031,
+      "clipped": false
     },
-    "think": {
-      "file": "think.png",
-      "name": "思考",
-      "source": "reference/sheets/bangui/sheet_c.png",
+    "happy_F_3": {
+      "file": "happy_F_3.png",
+      "action": "happy",
+      "name": "開心",
+      "frame": 3,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_15_happy.png",
       "shellFound": true,
-      "bottom": 0.595
+      "bottom": 0.52,
+      "scale": 0.76031,
+      "clipped": false
     },
-    "relax": {
-      "file": "relax.png",
+    "happy_F_4": {
+      "file": "happy_F_4.png",
+      "action": "happy",
+      "name": "開心",
+      "frame": 4,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_15_happy.png",
+      "shellFound": true,
+      "bottom": 0.435,
+      "scale": 0.76031,
+      "clipped": false
+    },
+    "happy_R_1": {
+      "file": "happy_R_1.png",
+      "action": "happy",
+      "name": "開心",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_15_happy.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.76031,
+      "clipped": false
+    },
+    "happy_R_2": {
+      "file": "happy_R_2.png",
+      "action": "happy",
+      "name": "開心",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_15_happy.png",
+      "shellFound": true,
+      "bottom": 0.345,
+      "scale": 0.76031,
+      "clipped": false
+    },
+    "happy_R_3": {
+      "file": "happy_R_3.png",
+      "action": "happy",
+      "name": "開心",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_15_happy.png",
+      "shellFound": true,
+      "bottom": 0.365,
+      "scale": 0.76031,
+      "clipped": false
+    },
+    "happy_R_4": {
+      "file": "happy_R_4.png",
+      "action": "happy",
+      "name": "開心",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_15_happy.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.76031,
+      "clipped": false
+    },
+    "startled_R_1": {
+      "file": "startled_R_1.png",
+      "action": "startled",
+      "name": "驚嚇",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_17_startled.png",
+      "shellFound": true,
+      "bottom": 0.325,
+      "scale": 0.7968,
+      "clipped": false
+    },
+    "startled_R_2": {
+      "file": "startled_R_2.png",
+      "action": "startled",
+      "name": "驚嚇",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_17_startled.png",
+      "shellFound": true,
+      "bottom": 0.38,
+      "scale": 0.7968,
+      "clipped": false
+    },
+    "startled_R_3": {
+      "file": "startled_R_3.png",
+      "action": "startled",
+      "name": "驚嚇",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_17_startled.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.7968,
+      "clipped": false
+    },
+    "startled_R_4": {
+      "file": "startled_R_4.png",
+      "action": "startled",
+      "name": "驚嚇",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_17_startled.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.7968,
+      "clipped": false
+    },
+    "startled_F_1": {
+      "file": "startled_F_1.png",
+      "action": "startled",
+      "name": "驚嚇",
+      "frame": 1,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_17_startled.png",
+      "shellFound": true,
+      "bottom": 0.47,
+      "scale": 0.7968,
+      "clipped": false
+    },
+    "startled_F_2": {
+      "file": "startled_F_2.png",
+      "action": "startled",
+      "name": "驚嚇",
+      "frame": 2,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_17_startled.png",
+      "shellFound": true,
+      "bottom": 0.5,
+      "scale": 0.7968,
+      "clipped": false
+    },
+    "startled_F_3": {
+      "file": "startled_F_3.png",
+      "action": "startled",
+      "name": "驚嚇",
+      "frame": 3,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_17_startled.png",
+      "shellFound": true,
+      "bottom": 0.41,
+      "scale": 0.7968,
+      "clipped": false
+    },
+    "startled_F_4": {
+      "file": "startled_F_4.png",
+      "action": "startled",
+      "name": "驚嚇",
+      "frame": 4,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_17_startled.png",
+      "shellFound": true,
+      "bottom": 0.455,
+      "scale": 0.7968,
+      "clipped": false
+    },
+    "angry_F_1": {
+      "file": "angry_F_1.png",
+      "action": "angry",
+      "name": "生氣",
+      "frame": 1,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_18_angry.png",
+      "shellFound": true,
+      "bottom": 0.48,
+      "scale": 0.78766,
+      "clipped": false
+    },
+    "angry_F_2": {
+      "file": "angry_F_2.png",
+      "action": "angry",
+      "name": "生氣",
+      "frame": 2,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_18_angry.png",
+      "shellFound": true,
+      "bottom": 0.48,
+      "scale": 0.78766,
+      "clipped": false
+    },
+    "angry_F_3": {
+      "file": "angry_F_3.png",
+      "action": "angry",
+      "name": "生氣",
+      "frame": 3,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_18_angry.png",
+      "shellFound": true,
+      "bottom": 0.51,
+      "scale": 0.78766,
+      "clipped": false
+    },
+    "angry_F_4": {
+      "file": "angry_F_4.png",
+      "action": "angry",
+      "name": "生氣",
+      "frame": 4,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_18_angry.png",
+      "shellFound": true,
+      "bottom": 0.44,
+      "scale": 0.78766,
+      "clipped": false
+    },
+    "angry_R_1": {
+      "file": "angry_R_1.png",
+      "action": "angry",
+      "name": "生氣",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_18_angry.png",
+      "shellFound": true,
+      "bottom": 0.34,
+      "scale": 0.78766,
+      "clipped": false
+    },
+    "angry_R_2": {
+      "file": "angry_R_2.png",
+      "action": "angry",
+      "name": "生氣",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_18_angry.png",
+      "shellFound": true,
+      "bottom": 0.38,
+      "scale": 0.78766,
+      "clipped": false
+    },
+    "angry_R_3": {
+      "file": "angry_R_3.png",
+      "action": "angry",
+      "name": "生氣",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_18_angry.png",
+      "shellFound": true,
+      "bottom": 0.48,
+      "scale": 0.78766,
+      "clipped": false
+    },
+    "angry_R_4": {
+      "file": "angry_R_4.png",
+      "action": "angry",
+      "name": "生氣",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_18_angry.png",
+      "shellFound": true,
+      "bottom": 0.33,
+      "scale": 0.78766,
+      "clipped": false
+    },
+    "wag_F_1": {
+      "file": "wag_F_1.png",
+      "action": "wag",
+      "name": "搖尾巴",
+      "frame": 1,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_19_wag.png",
+      "shellFound": true,
+      "bottom": 0.44,
+      "scale": 0.81127,
+      "clipped": false
+    },
+    "wag_F_2": {
+      "file": "wag_F_2.png",
+      "action": "wag",
+      "name": "搖尾巴",
+      "frame": 2,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_19_wag.png",
+      "shellFound": true,
+      "bottom": 0.43,
+      "scale": 0.81127,
+      "clipped": false
+    },
+    "wag_F_3": {
+      "file": "wag_F_3.png",
+      "action": "wag",
+      "name": "搖尾巴",
+      "frame": 3,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_19_wag.png",
+      "shellFound": true,
+      "bottom": 0.43,
+      "scale": 0.81127,
+      "clipped": false
+    },
+    "wag_F_4": {
+      "file": "wag_F_4.png",
+      "action": "wag",
+      "name": "搖尾巴",
+      "frame": 4,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_19_wag.png",
+      "shellFound": true,
+      "bottom": 0.44,
+      "scale": 0.81127,
+      "clipped": false
+    },
+    "wag_R_1": {
+      "file": "wag_R_1.png",
+      "action": "wag",
+      "name": "搖尾巴",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_19_wag.png",
+      "shellFound": true,
+      "bottom": 0.33,
+      "scale": 0.81127,
+      "clipped": false
+    },
+    "wag_R_2": {
+      "file": "wag_R_2.png",
+      "action": "wag",
+      "name": "搖尾巴",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_19_wag.png",
+      "shellFound": true,
+      "bottom": 0.33,
+      "scale": 0.81127,
+      "clipped": false
+    },
+    "wag_R_3": {
+      "file": "wag_R_3.png",
+      "action": "wag",
+      "name": "搖尾巴",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_19_wag.png",
+      "shellFound": true,
+      "bottom": 0.33,
+      "scale": 0.81127,
+      "clipped": false
+    },
+    "wag_R_4": {
+      "file": "wag_R_4.png",
+      "action": "wag",
+      "name": "搖尾巴",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_19_wag.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.81127,
+      "clipped": false
+    },
+    "shake_F_1": {
+      "file": "shake_F_1.png",
+      "action": "shake",
+      "name": "搖屁屁",
+      "frame": 1,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_20_shake.png",
+      "shellFound": true,
+      "bottom": 0.455,
+      "scale": 0.8228,
+      "clipped": false
+    },
+    "shake_F_2": {
+      "file": "shake_F_2.png",
+      "action": "shake",
+      "name": "搖屁屁",
+      "frame": 2,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_20_shake.png",
+      "shellFound": true,
+      "bottom": 0.435,
+      "scale": 0.8228,
+      "clipped": false
+    },
+    "shake_F_3": {
+      "file": "shake_F_3.png",
+      "action": "shake",
+      "name": "搖屁屁",
+      "frame": 3,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_20_shake.png",
+      "shellFound": true,
+      "bottom": 0.43,
+      "scale": 0.8228,
+      "clipped": false
+    },
+    "shake_F_4": {
+      "file": "shake_F_4.png",
+      "action": "shake",
+      "name": "搖屁屁",
+      "frame": 4,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_20_shake.png",
+      "shellFound": true,
+      "bottom": 0.455,
+      "scale": 0.8228,
+      "clipped": false
+    },
+    "shake_R_1": {
+      "file": "shake_R_1.png",
+      "action": "shake",
+      "name": "搖屁屁",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_20_shake.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.8228,
+      "clipped": false
+    },
+    "shake_R_2": {
+      "file": "shake_R_2.png",
+      "action": "shake",
+      "name": "搖屁屁",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_20_shake.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.8228,
+      "clipped": false
+    },
+    "shake_R_3": {
+      "file": "shake_R_3.png",
+      "action": "shake",
+      "name": "搖屁屁",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_20_shake.png",
+      "shellFound": true,
+      "bottom": 0.325,
+      "scale": 0.8228,
+      "clipped": false
+    },
+    "shake_R_4": {
+      "file": "shake_R_4.png",
+      "action": "shake",
+      "name": "搖屁屁",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_20_shake.png",
+      "shellFound": true,
+      "bottom": 0.325,
+      "scale": 0.8228,
+      "clipped": false
+    },
+    "dig_F_1": {
+      "file": "dig_F_1.png",
+      "action": "dig",
+      "name": "挖土",
+      "frame": 1,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_21_dig.png",
+      "shellFound": true,
+      "bottom": 0.425,
+      "scale": 0.83085,
+      "clipped": false
+    },
+    "dig_F_2": {
+      "file": "dig_F_2.png",
+      "action": "dig",
+      "name": "挖土",
+      "frame": 2,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_21_dig.png",
+      "shellFound": true,
+      "bottom": 0.43,
+      "scale": 0.83085,
+      "clipped": false
+    },
+    "dig_F_3": {
+      "file": "dig_F_3.png",
+      "action": "dig",
+      "name": "挖土",
+      "frame": 3,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_21_dig.png",
+      "shellFound": true,
+      "bottom": 0.43,
+      "scale": 0.83085,
+      "clipped": false
+    },
+    "dig_F_4": {
+      "file": "dig_F_4.png",
+      "action": "dig",
+      "name": "挖土",
+      "frame": 4,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_21_dig.png",
+      "shellFound": true,
+      "bottom": 0.43,
+      "scale": 0.83085,
+      "clipped": false
+    },
+    "dig_R_1": {
+      "file": "dig_R_1.png",
+      "action": "dig",
+      "name": "挖土",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_21_dig.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.83085,
+      "clipped": false
+    },
+    "dig_R_2": {
+      "file": "dig_R_2.png",
+      "action": "dig",
+      "name": "挖土",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_21_dig.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.83085,
+      "clipped": false
+    },
+    "dig_R_3": {
+      "file": "dig_R_3.png",
+      "action": "dig",
+      "name": "挖土",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_21_dig.png",
+      "shellFound": true,
+      "bottom": 0.33,
+      "scale": 0.83085,
+      "clipped": false
+    },
+    "dig_R_4": {
+      "file": "dig_R_4.png",
+      "action": "dig",
+      "name": "挖土",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_21_dig.png",
+      "shellFound": true,
+      "bottom": 0.325,
+      "scale": 0.83085,
+      "clipped": false
+    },
+    "eat_R_1": {
+      "file": "eat_R_1.png",
+      "action": "eat",
+      "name": "吃東西",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_22_eat.png",
+      "shellFound": true,
+      "bottom": 0.295,
+      "scale": 0.76451,
+      "clipped": false
+    },
+    "eat_R_2": {
+      "file": "eat_R_2.png",
+      "action": "eat",
+      "name": "吃東西",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_22_eat.png",
+      "shellFound": true,
+      "bottom": 0.285,
+      "scale": 0.76451,
+      "clipped": false
+    },
+    "eat_R_3": {
+      "file": "eat_R_3.png",
+      "action": "eat",
+      "name": "吃東西",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_22_eat.png",
+      "shellFound": true,
+      "bottom": 0.295,
+      "scale": 0.76451,
+      "clipped": false
+    },
+    "eat_R_4": {
+      "file": "eat_R_4.png",
+      "action": "eat",
+      "name": "吃東西",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_22_eat.png",
+      "shellFound": true,
+      "bottom": 0.3,
+      "scale": 0.76451,
+      "clipped": false
+    },
+    "poop_F_1": {
+      "file": "poop_F_1.png",
+      "action": "poop",
+      "name": "排泄",
+      "frame": 1,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_23_poop.png",
+      "shellFound": true,
+      "bottom": 0.41,
+      "scale": 0.7728,
+      "clipped": false
+    },
+    "poop_F_2": {
+      "file": "poop_F_2.png",
+      "action": "poop",
+      "name": "排泄",
+      "frame": 2,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_23_poop.png",
+      "shellFound": true,
+      "bottom": 0.41,
+      "scale": 0.7728,
+      "clipped": false
+    },
+    "poop_F_3": {
+      "file": "poop_F_3.png",
+      "action": "poop",
+      "name": "排泄",
+      "frame": 3,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_23_poop.png",
+      "shellFound": true,
+      "bottom": 0.385,
+      "scale": 0.7728,
+      "clipped": false
+    },
+    "poop_F_4": {
+      "file": "poop_F_4.png",
+      "action": "poop",
+      "name": "排泄",
+      "frame": 4,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_23_poop.png",
+      "shellFound": true,
+      "bottom": 0.405,
+      "scale": 0.7728,
+      "clipped": false
+    },
+    "poop_R_1": {
+      "file": "poop_R_1.png",
+      "action": "poop",
+      "name": "排泄",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_23_poop.png",
+      "shellFound": true,
+      "bottom": 0.31,
+      "scale": 0.7728,
+      "clipped": false
+    },
+    "poop_R_2": {
+      "file": "poop_R_2.png",
+      "action": "poop",
+      "name": "排泄",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_23_poop.png",
+      "shellFound": true,
+      "bottom": 0.28,
+      "scale": 0.7728,
+      "clipped": false
+    },
+    "poop_R_3": {
+      "file": "poop_R_3.png",
+      "action": "poop",
+      "name": "排泄",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_23_poop.png",
+      "shellFound": true,
+      "bottom": 0.295,
+      "scale": 0.7728,
+      "clipped": false
+    },
+    "poop_R_4": {
+      "file": "poop_R_4.png",
+      "action": "poop",
+      "name": "排泄",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_23_poop.png",
+      "shellFound": true,
+      "bottom": 0.305,
+      "scale": 0.7728,
+      "clipped": false
+    },
+    "play_R_1": {
+      "file": "play_R_1.png",
+      "action": "play",
+      "name": "玩耍",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_24_play.png",
+      "shellFound": true,
+      "bottom": 0.35,
+      "scale": 0.83426,
+      "clipped": false
+    },
+    "play_R_2": {
+      "file": "play_R_2.png",
+      "action": "play",
+      "name": "玩耍",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_24_play.png",
+      "shellFound": true,
+      "bottom": 0.345,
+      "scale": 0.83426,
+      "clipped": false
+    },
+    "play_R_3": {
+      "file": "play_R_3.png",
+      "action": "play",
+      "name": "玩耍",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_24_play.png",
+      "shellFound": true,
+      "bottom": 0.375,
+      "scale": 0.83426,
+      "clipped": false
+    },
+    "play_R_4": {
+      "file": "play_R_4.png",
+      "action": "play",
+      "name": "玩耍",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_24_play.png",
+      "shellFound": true,
+      "bottom": 0.345,
+      "scale": 0.83426,
+      "clipped": false
+    },
+    "enter_water_R_1": {
+      "file": "enter_water_R_1.png",
+      "action": "enter_water",
+      "name": "進入水中",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_25_enter_water.png",
+      "shellFound": true,
+      "bottom": 0.365,
+      "scale": 0.81316,
+      "clipped": false
+    },
+    "enter_water_R_2": {
+      "file": "enter_water_R_2.png",
+      "action": "enter_water",
+      "name": "進入水中",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_25_enter_water.png",
+      "shellFound": true,
+      "bottom": 0.335,
+      "scale": 0.81316,
+      "clipped": false
+    },
+    "enter_water_R_3": {
+      "file": "enter_water_R_3.png",
+      "action": "enter_water",
+      "name": "進入水中",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_25_enter_water.png",
+      "shellFound": true,
+      "bottom": 0.31,
+      "scale": 0.81316,
+      "clipped": false
+    },
+    "enter_water_R_4": {
+      "file": "enter_water_R_4.png",
+      "action": "enter_water",
+      "name": "進入水中",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_25_enter_water.png",
+      "shellFound": true,
+      "bottom": 0.28,
+      "scale": 0.81316,
+      "clipped": false
+    },
+    "swim_R_1": {
+      "file": "swim_R_1.png",
+      "action": "swim",
+      "name": "悠閒游泳",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_26_swim.png",
+      "shellFound": true,
+      "bottom": 0.33,
+      "scale": 0.8173,
+      "clipped": false
+    },
+    "swim_R_2": {
+      "file": "swim_R_2.png",
+      "action": "swim",
+      "name": "悠閒游泳",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_26_swim.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.8173,
+      "clipped": false
+    },
+    "swim_R_3": {
+      "file": "swim_R_3.png",
+      "action": "swim",
+      "name": "悠閒游泳",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_26_swim.png",
+      "shellFound": true,
+      "bottom": 0.35,
+      "scale": 0.8173,
+      "clipped": false
+    },
+    "swim_R_4": {
+      "file": "swim_R_4.png",
+      "action": "swim",
+      "name": "悠閒游泳",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_26_swim.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.8173,
+      "clipped": false
+    },
+    "swim_fast_R_1": {
+      "file": "swim_fast_R_1.png",
+      "action": "swim_fast",
+      "name": "快速游泳",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_27_swim_fast.png",
+      "shellFound": true,
+      "bottom": 0.555,
+      "scale": 0.81661,
+      "clipped": false
+    },
+    "swim_fast_R_2": {
+      "file": "swim_fast_R_2.png",
+      "action": "swim_fast",
+      "name": "快速游泳",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_27_swim_fast.png",
+      "shellFound": true,
+      "bottom": 0.525,
+      "scale": 0.81661,
+      "clipped": false
+    },
+    "swim_fast_R_3": {
+      "file": "swim_fast_R_3.png",
+      "action": "swim_fast",
+      "name": "快速游泳",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_27_swim_fast.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.81661,
+      "clipped": false
+    },
+    "swim_fast_R_4": {
+      "file": "swim_fast_R_4.png",
+      "action": "swim_fast",
+      "name": "快速游泳",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_27_swim_fast.png",
+      "shellFound": true,
+      "bottom": 0.36,
+      "scale": 0.81661,
+      "clipped": false
+    },
+    "swim_turn_R_1": {
+      "file": "swim_turn_R_1.png",
+      "action": "swim_turn",
+      "name": "水中轉向",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_28_swim_turn.png",
+      "shellFound": true,
+      "bottom": 0.36,
+      "scale": 0.86264,
+      "clipped": false
+    },
+    "swim_turn_R_2": {
+      "file": "swim_turn_R_2.png",
+      "action": "swim_turn",
+      "name": "水中轉向",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_28_swim_turn.png",
+      "shellFound": true,
+      "bottom": 0.4,
+      "scale": 0.86264,
+      "clipped": false
+    },
+    "swim_turn_R_3": {
+      "file": "swim_turn_R_3.png",
+      "action": "swim_turn",
+      "name": "水中轉向",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_28_swim_turn.png",
+      "shellFound": true,
+      "bottom": 0.38,
+      "scale": 0.86264,
+      "clipped": false
+    },
+    "swim_turn_R_4": {
+      "file": "swim_turn_R_4.png",
+      "action": "swim_turn",
+      "name": "水中轉向",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_28_swim_turn.png",
+      "shellFound": true,
+      "bottom": 0.37,
+      "scale": 0.86264,
+      "clipped": false
+    },
+    "dive_F_1": {
+      "file": "dive_F_1.png",
+      "action": "dive",
+      "name": "下潛",
+      "frame": 1,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_29_dive.png",
+      "shellFound": true,
+      "bottom": 0.45,
+      "scale": 0.78296,
+      "clipped": false
+    },
+    "dive_F_2": {
+      "file": "dive_F_2.png",
+      "action": "dive",
+      "name": "下潛",
+      "frame": 2,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_29_dive.png",
+      "shellFound": true,
+      "bottom": 0.46,
+      "scale": 0.78296,
+      "clipped": false
+    },
+    "dive_F_3": {
+      "file": "dive_F_3.png",
+      "action": "dive",
+      "name": "下潛",
+      "frame": 3,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_29_dive.png",
+      "shellFound": true,
+      "bottom": 0.45,
+      "scale": 0.78296,
+      "clipped": false
+    },
+    "dive_F_4": {
+      "file": "dive_F_4.png",
+      "action": "dive",
+      "name": "下潛",
+      "frame": 4,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_29_dive.png",
+      "shellFound": true,
+      "bottom": 0.445,
+      "scale": 0.78296,
+      "clipped": false
+    },
+    "dive_R_1": {
+      "file": "dive_R_1.png",
+      "action": "dive",
+      "name": "下潛",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_29_dive.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.78296,
+      "clipped": false
+    },
+    "dive_R_2": {
+      "file": "dive_R_2.png",
+      "action": "dive",
+      "name": "下潛",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_29_dive.png",
+      "shellFound": true,
+      "bottom": 0.31,
+      "scale": 0.78296,
+      "clipped": false
+    },
+    "dive_R_3": {
+      "file": "dive_R_3.png",
+      "action": "dive",
+      "name": "下潛",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_29_dive.png",
+      "shellFound": true,
+      "bottom": 0.345,
+      "scale": 0.78296,
+      "clipped": false
+    },
+    "dive_R_4": {
+      "file": "dive_R_4.png",
+      "action": "dive",
+      "name": "下潛",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_29_dive.png",
+      "shellFound": true,
+      "bottom": 0.43,
+      "scale": 0.78296,
+      "clipped": false
+    },
+    "float_R_1": {
+      "file": "float_R_1.png",
+      "action": "float",
+      "name": "水中漂浮",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_31_float.png",
+      "shellFound": true,
+      "bottom": 0.335,
+      "scale": 0.79833,
+      "clipped": false
+    },
+    "float_R_2": {
+      "file": "float_R_2.png",
+      "action": "float",
+      "name": "水中漂浮",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_31_float.png",
+      "shellFound": true,
+      "bottom": 0.345,
+      "scale": 0.79833,
+      "clipped": false
+    },
+    "float_R_3": {
+      "file": "float_R_3.png",
+      "action": "float",
+      "name": "水中漂浮",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_31_float.png",
+      "shellFound": true,
+      "bottom": 0.355,
+      "scale": 0.79833,
+      "clipped": false
+    },
+    "float_R_4": {
+      "file": "float_R_4.png",
+      "action": "float",
+      "name": "水中漂浮",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_31_float.png",
+      "shellFound": true,
+      "bottom": 0.35,
+      "scale": 0.79833,
+      "clipped": false
+    },
+    "surface_R_1": {
+      "file": "surface_R_1.png",
+      "action": "surface",
+      "name": "上浮換氣",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_32_surface.png",
+      "shellFound": true,
+      "bottom": 0.3,
+      "scale": 0.81646,
+      "clipped": false
+    },
+    "surface_R_2": {
+      "file": "surface_R_2.png",
+      "action": "surface",
+      "name": "上浮換氣",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_32_surface.png",
+      "shellFound": true,
+      "bottom": 0.36,
+      "scale": 0.81646,
+      "clipped": false
+    },
+    "surface_R_3": {
+      "file": "surface_R_3.png",
+      "action": "surface",
+      "name": "上浮換氣",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_32_surface.png",
+      "shellFound": true,
+      "bottom": 0.36,
+      "scale": 0.81646,
+      "clipped": false
+    },
+    "surface_R_4": {
+      "file": "surface_R_4.png",
+      "action": "surface",
+      "name": "上浮換氣",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_32_surface.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.81646,
+      "clipped": false
+    },
+    "walk_b_F_1": {
+      "file": "walk_b_F_1.png",
+      "action": "walk_b",
+      "name": "慢慢爬",
+      "frame": 1,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_02_walk_b.png",
+      "shellFound": true,
+      "bottom": 0.38,
+      "scale": 0.80123,
+      "clipped": false
+    },
+    "walk_b_F_2": {
+      "file": "walk_b_F_2.png",
+      "action": "walk_b",
+      "name": "慢慢爬",
+      "frame": 2,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_02_walk_b.png",
+      "shellFound": true,
+      "bottom": 0.375,
+      "scale": 0.80123,
+      "clipped": false
+    },
+    "walk_b_F_3": {
+      "file": "walk_b_F_3.png",
+      "action": "walk_b",
+      "name": "慢慢爬",
+      "frame": 3,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_02_walk_b.png",
+      "shellFound": true,
+      "bottom": 0.395,
+      "scale": 0.80123,
+      "clipped": false
+    },
+    "walk_b_F_4": {
+      "file": "walk_b_F_4.png",
+      "action": "walk_b",
+      "name": "慢慢爬",
+      "frame": 4,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_02_walk_b.png",
+      "shellFound": true,
+      "bottom": 0.39,
+      "scale": 0.80123,
+      "clipped": false
+    },
+    "walk_b_R_1": {
+      "file": "walk_b_R_1.png",
+      "action": "walk_b",
+      "name": "慢慢爬",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_02_walk_b.png",
+      "shellFound": true,
+      "bottom": 0.675,
+      "scale": 0.80123,
+      "clipped": false
+    },
+    "walk_b_R_2": {
+      "file": "walk_b_R_2.png",
+      "action": "walk_b",
+      "name": "慢慢爬",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_02_walk_b.png",
+      "shellFound": true,
+      "bottom": 0.67,
+      "scale": 0.80123,
+      "clipped": false
+    },
+    "walk_b_R_3": {
+      "file": "walk_b_R_3.png",
+      "action": "walk_b",
+      "name": "慢慢爬",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_02_walk_b.png",
+      "shellFound": true,
+      "bottom": 0.66,
+      "scale": 0.80123,
+      "clipped": false
+    },
+    "walk_b_R_4": {
+      "file": "walk_b_R_4.png",
+      "action": "walk_b",
+      "name": "慢慢爬",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_02_walk_b.png",
+      "shellFound": true,
+      "bottom": 0.665,
+      "scale": 0.80123,
+      "clipped": false
+    },
+    "walk_b_B_1": {
+      "file": "walk_b_B_1.png",
+      "action": "walk_b",
+      "name": "慢慢爬",
+      "frame": 1,
+      "view": "B",
+      "source": "reference/sheets/bangui/action_02_walk_b.png",
+      "shellFound": true,
+      "bottom": 0.39,
+      "scale": 0.80123,
+      "clipped": false
+    },
+    "walk_b_B_2": {
+      "file": "walk_b_B_2.png",
+      "action": "walk_b",
+      "name": "慢慢爬",
+      "frame": 2,
+      "view": "B",
+      "source": "reference/sheets/bangui/action_02_walk_b.png",
+      "shellFound": true,
+      "bottom": 0.41,
+      "scale": 0.80123,
+      "clipped": false
+    },
+    "walk_b_B_3": {
+      "file": "walk_b_B_3.png",
+      "action": "walk_b",
+      "name": "慢慢爬",
+      "frame": 3,
+      "view": "B",
+      "source": "reference/sheets/bangui/action_02_walk_b.png",
+      "shellFound": true,
+      "bottom": 0.41,
+      "scale": 0.80123,
+      "clipped": false
+    },
+    "walk_b_B_4": {
+      "file": "walk_b_B_4.png",
+      "action": "walk_b",
+      "name": "慢慢爬",
+      "frame": 4,
+      "view": "B",
+      "source": "reference/sheets/bangui/action_02_walk_b.png",
+      "shellFound": true,
+      "bottom": 0.42,
+      "scale": 0.80123,
+      "clipped": false
+    },
+    "neck_up_R_1": {
+      "file": "neck_up_R_1.png",
+      "action": "neck_up",
+      "name": "伸長脖子",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_06_neck_up.png",
+      "shellFound": true,
+      "bottom": 0.33,
+      "scale": 0.82153,
+      "clipped": false
+    },
+    "neck_up_R_2": {
+      "file": "neck_up_R_2.png",
+      "action": "neck_up",
+      "name": "伸長脖子",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_06_neck_up.png",
+      "shellFound": true,
+      "bottom": 0.39,
+      "scale": 0.82153,
+      "clipped": false
+    },
+    "neck_up_R_3": {
+      "file": "neck_up_R_3.png",
+      "action": "neck_up",
+      "name": "伸長脖子",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_06_neck_up.png",
+      "shellFound": true,
+      "bottom": 0.39,
+      "scale": 0.82153,
+      "clipped": false
+    },
+    "neck_up_R_4": {
+      "file": "neck_up_R_4.png",
+      "action": "neck_up",
+      "name": "伸長脖子",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_06_neck_up.png",
+      "shellFound": true,
+      "bottom": 0.435,
+      "scale": 0.82153,
+      "clipped": false
+    },
+    "neck_up_F_1": {
+      "file": "neck_up_F_1.png",
+      "action": "neck_up",
+      "name": "伸長脖子",
+      "frame": 1,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_06_neck_up.png",
+      "shellFound": true,
+      "bottom": 0.365,
+      "scale": 0.82153,
+      "clipped": false
+    },
+    "neck_up_F_2": {
+      "file": "neck_up_F_2.png",
+      "action": "neck_up",
+      "name": "伸長脖子",
+      "frame": 2,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_06_neck_up.png",
+      "shellFound": true,
+      "bottom": 0.37,
+      "scale": 0.82153,
+      "clipped": false
+    },
+    "neck_up_F_3": {
+      "file": "neck_up_F_3.png",
+      "action": "neck_up",
+      "name": "伸長脖子",
+      "frame": 3,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_06_neck_up.png",
+      "shellFound": true,
+      "bottom": 0.405,
+      "scale": 0.82153,
+      "clipped": false
+    },
+    "neck_up_F_4": {
+      "file": "neck_up_F_4.png",
+      "action": "neck_up",
+      "name": "伸長脖子",
+      "frame": 4,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_06_neck_up.png",
+      "shellFound": true,
+      "bottom": 0.41,
+      "scale": 0.82153,
+      "clipped": false
+    },
+    "neck_up_B_1": {
+      "file": "neck_up_B_1.png",
+      "action": "neck_up",
+      "name": "伸長脖子",
+      "frame": 1,
+      "view": "B",
+      "source": "reference/sheets/bangui/action_06_neck_up.png",
+      "shellFound": true,
+      "bottom": 0.435,
+      "scale": 0.82153,
+      "clipped": false
+    },
+    "neck_up_B_2": {
+      "file": "neck_up_B_2.png",
+      "action": "neck_up",
+      "name": "伸長脖子",
+      "frame": 2,
+      "view": "B",
+      "source": "reference/sheets/bangui/action_06_neck_up.png",
+      "shellFound": true,
+      "bottom": 0.455,
+      "scale": 0.82153,
+      "clipped": false
+    },
+    "neck_up_B_3": {
+      "file": "neck_up_B_3.png",
+      "action": "neck_up",
+      "name": "伸長脖子",
+      "frame": 3,
+      "view": "B",
+      "source": "reference/sheets/bangui/action_06_neck_up.png",
+      "shellFound": true,
+      "bottom": 0.465,
+      "scale": 0.82153,
+      "clipped": false
+    },
+    "neck_up_B_4": {
+      "file": "neck_up_B_4.png",
+      "action": "neck_up",
+      "name": "伸長脖子",
+      "frame": 4,
+      "view": "B",
+      "source": "reference/sheets/bangui/action_06_neck_up.png",
+      "shellFound": true,
+      "bottom": 0.465,
+      "scale": 0.82153,
+      "clipped": false
+    },
+    "observe_R_1": {
+      "file": "observe_R_1.png",
+      "action": "observe",
+      "name": "抬頭觀察",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_07_observe.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.80139,
+      "clipped": false
+    },
+    "observe_R_2": {
+      "file": "observe_R_2.png",
+      "action": "observe",
+      "name": "抬頭觀察",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_07_observe.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.80139,
+      "clipped": false
+    },
+    "observe_R_3": {
+      "file": "observe_R_3.png",
+      "action": "observe",
+      "name": "抬頭觀察",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_07_observe.png",
+      "shellFound": true,
+      "bottom": 0.365,
+      "scale": 0.80139,
+      "clipped": false
+    },
+    "observe_R_4": {
+      "file": "observe_R_4.png",
+      "action": "observe",
+      "name": "抬頭觀察",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_07_observe.png",
+      "shellFound": true,
+      "bottom": 0.325,
+      "scale": 0.80139,
+      "clipped": false
+    },
+    "relax_F_1": {
+      "file": "relax_F_1.png",
+      "action": "relax",
       "name": "放鬆",
-      "source": "reference/sheets/bangui/sheet_c.png",
-      "shellFound": true,
-      "bottom": 0.57
-    },
-    "rest": {
-      "file": "rest.png",
-      "name": "趴著休息",
-      "source": "reference/sheets/bangui/sheet_b.png",
-      "shellFound": true,
-      "bottom": 0.375
-    },
-    "swim_1": {
-      "file": "swim_1.png",
-      "name": "游泳1",
-      "source": "reference/sheets/bangui/loop_swim.png",
-      "shellFound": true,
-      "bottom": 0.41
-    },
-    "swim_2": {
-      "file": "swim_2.png",
-      "name": "游泳2",
-      "source": "reference/sheets/bangui/loop_swim.png",
-      "shellFound": true,
-      "bottom": 0.58
-    },
-    "swim_3": {
-      "file": "swim_3.png",
-      "name": "游泳3",
-      "source": "reference/sheets/bangui/loop_swim.png",
-      "shellFound": true,
-      "bottom": 0.38
-    },
-    "swim_4": {
-      "file": "swim_4.png",
-      "name": "游泳4",
-      "source": "reference/sheets/bangui/loop_swim.png",
-      "shellFound": true,
-      "bottom": 0.52
-    },
-    "walk_1": {
-      "file": "walk_1.png",
-      "name": "爬行1",
-      "source": "reference/sheets/bangui/loop_walk.png",
-      "shellFound": true,
-      "bottom": 0.48
-    },
-    "walk_2": {
-      "file": "walk_2.png",
-      "name": "爬行2",
-      "source": "reference/sheets/bangui/loop_walk.png",
-      "shellFound": true,
-      "bottom": 0.4
-    },
-    "walk_3": {
-      "file": "walk_3.png",
-      "name": "爬行3",
-      "source": "reference/sheets/bangui/loop_walk.png",
-      "shellFound": true,
-      "bottom": 0.465
-    },
-    "walk_4": {
-      "file": "walk_4.png",
-      "name": "爬行4",
-      "source": "reference/sheets/bangui/loop_walk.png",
-      "shellFound": true,
-      "bottom": 0.4
-    },
-    "walk_a_R": {
-      "file": "walk_a_R.png",
-      "name": "walk_a R",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.505
-    },
-    "walk_b_R": {
-      "file": "walk_b_R.png",
-      "name": "walk_b R",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.4
-    },
-    "look_R": {
-      "file": "look_R.png",
-      "name": "look R",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.48
-    },
-    "neck_up_R": {
-      "file": "neck_up_R.png",
-      "name": "neck_up R",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.325
-    },
-    "observe_R": {
-      "file": "observe_R.png",
-      "name": "observe R",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.375
-    },
-    "sniff_R": {
-      "file": "sniff_R.png",
-      "name": "sniff R",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.455
-    },
-    "walk_a_L": {
-      "file": "walk_a_L.png",
-      "name": "walk_a L",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.5
-    },
-    "walk_b_L": {
-      "file": "walk_b_L.png",
-      "name": "walk_b L",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.415
-    },
-    "look_L": {
-      "file": "look_L.png",
-      "name": "look L",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.48
-    },
-    "neck_up_L": {
-      "file": "neck_up_L.png",
-      "name": "neck_up L",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.35
-    },
-    "observe_L": {
-      "file": "observe_L.png",
-      "name": "observe L",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.405
-    },
-    "sniff_L": {
-      "file": "sniff_L.png",
-      "name": "sniff L",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.485
-    },
-    "walk_a_F": {
-      "file": "walk_a_F.png",
-      "name": "walk_a F",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": false,
-      "bottom": 0.455
-    },
-    "walk_b_F": {
-      "file": "walk_b_F.png",
-      "name": "walk_b F",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.43
-    },
-    "look_F": {
-      "file": "look_F.png",
-      "name": "look F",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": false,
-      "bottom": 0.455
-    },
-    "neck_up_F": {
-      "file": "neck_up_F.png",
-      "name": "neck_up F",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": false,
-      "bottom": 0.525
-    },
-    "observe_F": {
-      "file": "observe_F.png",
-      "name": "observe F",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": false,
-      "bottom": 0.45
-    },
-    "sniff_F": {
-      "file": "sniff_F.png",
-      "name": "sniff F",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.525
-    },
-    "walk_a_B": {
-      "file": "walk_a_B.png",
-      "name": "walk_a B",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.545
-    },
-    "walk_b_B": {
-      "file": "walk_b_B.png",
-      "name": "walk_b B",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.38
-    },
-    "look_B": {
-      "file": "look_B.png",
-      "name": "look B",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.46
-    },
-    "neck_up_B": {
-      "file": "neck_up_B.png",
-      "name": "neck_up B",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.38
-    },
-    "observe_B": {
-      "file": "observe_B.png",
-      "name": "observe B",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.39
-    },
-    "sniff_B": {
-      "file": "sniff_B.png",
-      "name": "sniff B",
-      "source": "reference/sheets/bangui/1.png",
-      "shellFound": true,
-      "bottom": 0.45
-    },
-    "bask_R": {
-      "file": "bask_R.png",
-      "name": "bask R",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.265
-    },
-    "bask_L": {
-      "file": "bask_L.png",
-      "name": "bask L",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.265
-    },
-    "bask_F": {
-      "file": "bask_F.png",
-      "name": "bask F",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": false,
-      "bottom": 0.38
-    },
-    "bask_B": {
-      "file": "bask_B.png",
-      "name": "bask B",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.31
-    },
-    "sleep_R": {
-      "file": "sleep_R.png",
-      "name": "sleep R",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.31
-    },
-    "sleep_L": {
-      "file": "sleep_L.png",
-      "name": "sleep L",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.3
-    },
-    "sleep_F": {
-      "file": "sleep_F.png",
-      "name": "sleep F",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.33
-    },
-    "sleep_B": {
-      "file": "sleep_B.png",
-      "name": "sleep B",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.335
-    },
-    "yawn_R": {
-      "file": "yawn_R.png",
-      "name": "yawn R",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.31
-    },
-    "yawn_L": {
-      "file": "yawn_L.png",
-      "name": "yawn L",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.31
-    },
-    "yawn_F": {
-      "file": "yawn_F.png",
-      "name": "yawn F",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": false,
-      "bottom": 0.43
-    },
-    "yawn_B": {
-      "file": "yawn_B.png",
-      "name": "yawn B",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.29
-    },
-    "stretch_R": {
-      "file": "stretch_R.png",
-      "name": "stretch R",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.3
-    },
-    "stretch_L": {
-      "file": "stretch_L.png",
-      "name": "stretch L",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.31
-    },
-    "stretch_F": {
-      "file": "stretch_F.png",
-      "name": "stretch F",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.365
-    },
-    "stretch_B": {
-      "file": "stretch_B.png",
-      "name": "stretch B",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.285
-    },
-    "hide_R": {
-      "file": "hide_R.png",
-      "name": "hide R",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.325
-    },
-    "hide_L": {
-      "file": "hide_L.png",
-      "name": "hide L",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.32
-    },
-    "hide_F": {
-      "file": "hide_F.png",
-      "name": "hide F",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.3
-    },
-    "hide_B": {
-      "file": "hide_B.png",
-      "name": "hide B",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.33
-    },
-    "rest_R": {
-      "file": "rest_R.png",
-      "name": "rest R",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.345
-    },
-    "rest_L": {
-      "file": "rest_L.png",
-      "name": "rest L",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.345
-    },
-    "rest_F": {
-      "file": "rest_F.png",
-      "name": "rest F",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.425
-    },
-    "rest_B": {
-      "file": "rest_B.png",
-      "name": "rest B",
-      "source": "reference/sheets/bangui/2.png",
-      "shellFound": true,
-      "bottom": 0.345
-    },
-    "happy_R": {
-      "file": "happy_R.png",
-      "name": "happy R",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.365
-    },
-    "happy_L": {
-      "file": "happy_L.png",
-      "name": "happy L",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.335
-    },
-    "happy_F": {
-      "file": "happy_F.png",
-      "name": "happy F",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": false,
-      "bottom": 0.45
-    },
-    "happy_B": {
-      "file": "happy_B.png",
-      "name": "happy B",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.35
-    },
-    "startled_R": {
-      "file": "startled_R.png",
-      "name": "startled R",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.305
-    },
-    "startled_L": {
-      "file": "startled_L.png",
-      "name": "startled L",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.305
-    },
-    "startled_F": {
-      "file": "startled_F.png",
-      "name": "startled F",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": false,
-      "bottom": 0.465
-    },
-    "startled_B": {
-      "file": "startled_B.png",
-      "name": "startled B",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.295
-    },
-    "angry_R": {
-      "file": "angry_R.png",
-      "name": "angry R",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.46
-    },
-    "angry_L": {
-      "file": "angry_L.png",
-      "name": "angry L",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.46
-    },
-    "angry_F": {
-      "file": "angry_F.png",
-      "name": "angry F",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.375
-    },
-    "angry_B": {
-      "file": "angry_B.png",
-      "name": "angry B",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.465
-    },
-    "purr_R": {
-      "file": "purr_R.png",
-      "name": "purr R",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.4
-    },
-    "purr_L": {
-      "file": "purr_L.png",
-      "name": "purr L",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.38
-    },
-    "purr_F": {
-      "file": "purr_F.png",
-      "name": "purr F",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.49
-    },
-    "purr_B": {
-      "file": "purr_B.png",
-      "name": "purr B",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.4
-    },
-    "think_R": {
-      "file": "think_R.png",
-      "name": "think R",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.5
-    },
-    "think_L": {
-      "file": "think_L.png",
-      "name": "think L",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.5
-    },
-    "think_F": {
-      "file": "think_F.png",
-      "name": "think F",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": false,
-      "bottom": 0.45
-    },
-    "think_B": {
-      "file": "think_B.png",
-      "name": "think B",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.42
-    },
-    "relax_R": {
-      "file": "relax_R.png",
-      "name": "relax R",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.485
-    },
-    "relax_L": {
-      "file": "relax_L.png",
-      "name": "relax L",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.55
-    },
-    "relax_F": {
-      "file": "relax_F.png",
-      "name": "relax F",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": false,
-      "bottom": 0.445
-    },
-    "relax_B": {
-      "file": "relax_B.png",
-      "name": "relax B",
-      "source": "reference/sheets/bangui/3.png",
-      "shellFound": true,
-      "bottom": 0.48
-    },
-    "swim_R": {
-      "file": "swim_R.png",
-      "name": "swim R",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.51
-    },
-    "swim_L": {
-      "file": "swim_L.png",
-      "name": "swim L",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.51
-    },
-    "swim_F": {
-      "file": "swim_F.png",
-      "name": "swim F",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": false,
-      "bottom": 0.345
-    },
-    "swim_B": {
-      "file": "swim_B.png",
-      "name": "swim B",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.505
-    },
-    "dive_R": {
-      "file": "dive_R.png",
-      "name": "dive R",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.68
-    },
-    "dive_L": {
-      "file": "dive_L.png",
-      "name": "dive L",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.675
-    },
-    "dive_F": {
-      "file": "dive_F.png",
-      "name": "dive F",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.66
-    },
-    "dive_B": {
-      "file": "dive_B.png",
-      "name": "dive B",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.445
-    },
-    "rise_R": {
-      "file": "rise_R.png",
-      "name": "rise R",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.335
-    },
-    "rise_L": {
-      "file": "rise_L.png",
-      "name": "rise L",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.325
-    },
-    "rise_F": {
-      "file": "rise_F.png",
-      "name": "rise F",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": false,
-      "bottom": 0.435
-    },
-    "rise_B": {
-      "file": "rise_B.png",
-      "name": "rise B",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.355
-    },
-    "float_R": {
-      "file": "float_R.png",
-      "name": "float R",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.335
-    },
-    "float_L": {
-      "file": "float_L.png",
-      "name": "float L",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.335
-    },
-    "float_F": {
-      "file": "float_F.png",
-      "name": "float F",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": false,
-      "bottom": 0.35
-    },
-    "float_B": {
-      "file": "float_B.png",
-      "name": "float B",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.5
-    },
-    "drink_R": {
-      "file": "drink_R.png",
-      "name": "drink R",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.48
-    },
-    "drink_L": {
-      "file": "drink_L.png",
-      "name": "drink L",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.48
-    },
-    "drink_F": {
-      "file": "drink_F.png",
-      "name": "drink F",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": false,
-      "bottom": 0.545
-    },
-    "drink_B": {
-      "file": "drink_B.png",
-      "name": "drink B",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.395
-    },
-    "nibble_R": {
-      "file": "nibble_R.png",
-      "name": "nibble R",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.57
-    },
-    "nibble_L": {
-      "file": "nibble_L.png",
-      "name": "nibble L",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.585
-    },
-    "nibble_F": {
-      "file": "nibble_F.png",
-      "name": "nibble F",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": false,
-      "bottom": 0.425
-    },
-    "nibble_B": {
-      "file": "nibble_B.png",
-      "name": "nibble B",
-      "source": "reference/sheets/bangui/4.png",
-      "shellFound": true,
-      "bottom": 0.545
-    },
-    "swim_1_R": {
-      "file": "swim_1_R.png",
-      "name": "swim1 R",
-      "source": "reference/sheets/bangui/5.png",
-      "shellFound": true,
-      "bottom": 0.37
-    },
-    "swim_2_R": {
-      "file": "swim_2_R.png",
-      "name": "swim2 R",
-      "source": "reference/sheets/bangui/5.png",
-      "shellFound": true,
-      "bottom": 0.52
-    },
-    "swim_3_R": {
-      "file": "swim_3_R.png",
-      "name": "swim3 R",
-      "source": "reference/sheets/bangui/5.png",
-      "shellFound": true,
-      "bottom": 0.345
-    },
-    "swim_4_R": {
-      "file": "swim_4_R.png",
-      "name": "swim4 R",
-      "source": "reference/sheets/bangui/5.png",
-      "shellFound": true,
-      "bottom": 0.515
-    },
-    "swim_1_L": {
-      "file": "swim_1_L.png",
-      "name": "swim1 L",
-      "source": "reference/sheets/bangui/5.png",
-      "shellFound": true,
-      "bottom": 0.31
-    },
-    "swim_2_L": {
-      "file": "swim_2_L.png",
-      "name": "swim2 L",
-      "source": "reference/sheets/bangui/5.png",
-      "shellFound": true,
-      "bottom": 0.455
-    },
-    "swim_3_L": {
-      "file": "swim_3_L.png",
-      "name": "swim3 L",
-      "source": "reference/sheets/bangui/5.png",
-      "shellFound": true,
-      "bottom": 0.375
-    },
-    "swim_4_L": {
-      "file": "swim_4_L.png",
-      "name": "swim4 L",
-      "source": "reference/sheets/bangui/5.png",
-      "shellFound": true,
-      "bottom": 0.455
-    },
-    "swim_1_F": {
-      "file": "swim_1_F.png",
-      "name": "swim1 F",
-      "source": "reference/sheets/bangui/5.png",
-      "shellFound": false,
-      "bottom": 0.4
-    },
-    "swim_2_F": {
-      "file": "swim_2_F.png",
-      "name": "swim2 F",
-      "source": "reference/sheets/bangui/5.png",
-      "shellFound": false,
-      "bottom": 0.45
-    },
-    "swim_3_F": {
-      "file": "swim_3_F.png",
-      "name": "swim3 F",
-      "source": "reference/sheets/bangui/5.png",
-      "shellFound": false,
-      "bottom": 0.435
-    },
-    "swim_4_F": {
-      "file": "swim_4_F.png",
-      "name": "swim4 F",
-      "source": "reference/sheets/bangui/5.png",
-      "shellFound": false,
-      "bottom": 0.415
-    },
-    "swim_1_B": {
-      "file": "swim_1_B.png",
-      "name": "swim1 B",
-      "source": "reference/sheets/bangui/5.png",
-      "shellFound": true,
-      "bottom": 0.63
-    },
-    "swim_2_B": {
-      "file": "swim_2_B.png",
-      "name": "swim2 B",
-      "source": "reference/sheets/bangui/5.png",
-      "shellFound": true,
-      "bottom": 0.65
-    },
-    "swim_3_B": {
-      "file": "swim_3_B.png",
-      "name": "swim3 B",
-      "source": "reference/sheets/bangui/5.png",
-      "shellFound": true,
-      "bottom": 0.625
-    },
-    "swim_4_B": {
-      "file": "swim_4_B.png",
-      "name": "swim4 B",
-      "source": "reference/sheets/bangui/5.png",
-      "shellFound": true,
-      "bottom": 0.615
-    },
-    "walk_1_R": {
-      "file": "walk_1_R.png",
-      "name": "walk1 R",
-      "source": "reference/sheets/bangui/6.png",
-      "shellFound": true,
-      "bottom": 0.52
-    },
-    "walk_2_R": {
-      "file": "walk_2_R.png",
-      "name": "walk2 R",
-      "source": "reference/sheets/bangui/6.png",
-      "shellFound": true,
-      "bottom": 0.57
-    },
-    "walk_3_R": {
-      "file": "walk_3_R.png",
-      "name": "walk3 R",
-      "source": "reference/sheets/bangui/6.png",
-      "shellFound": false,
-      "bottom": 0.47
-    },
-    "walk_4_R": {
-      "file": "walk_4_R.png",
-      "name": "walk4 R",
-      "source": "reference/sheets/bangui/6.png",
-      "shellFound": true,
-      "bottom": 0.71
-    },
-    "walk_1_L": {
-      "file": "walk_1_L.png",
-      "name": "walk1 L",
-      "source": "reference/sheets/bangui/6.png",
-      "shellFound": true,
-      "bottom": 0.595
-    },
-    "walk_2_L": {
-      "file": "walk_2_L.png",
-      "name": "walk2 L",
-      "source": "reference/sheets/bangui/6.png",
-      "shellFound": true,
-      "bottom": 0.59
-    },
-    "walk_3_L": {
-      "file": "walk_3_L.png",
-      "name": "walk3 L",
-      "source": "reference/sheets/bangui/6.png",
-      "shellFound": false,
-      "bottom": 0.465
-    },
-    "walk_4_L": {
-      "file": "walk_4_L.png",
-      "name": "walk4 L",
-      "source": "reference/sheets/bangui/6.png",
-      "shellFound": true,
-      "bottom": 0.655
-    },
-    "walk_1_F": {
-      "file": "walk_1_F.png",
-      "name": "walk1 F",
-      "source": "reference/sheets/bangui/6.png",
-      "shellFound": true,
-      "bottom": 0.525
-    },
-    "walk_2_F": {
-      "file": "walk_2_F.png",
-      "name": "walk2 F",
-      "source": "reference/sheets/bangui/6.png",
-      "shellFound": true,
-      "bottom": 0.465
-    },
-    "walk_3_F": {
-      "file": "walk_3_F.png",
-      "name": "walk3 F",
-      "source": "reference/sheets/bangui/6.png",
-      "shellFound": false,
-      "bottom": 0.48
-    },
-    "walk_4_F": {
-      "file": "walk_4_F.png",
-      "name": "walk4 F",
-      "source": "reference/sheets/bangui/6.png",
-      "shellFound": true,
-      "bottom": 0.715
-    },
-    "walk_1_B": {
-      "file": "walk_1_B.png",
-      "name": "walk1 B",
-      "source": "reference/sheets/bangui/6.png",
-      "shellFound": true,
-      "bottom": 0.62
-    },
-    "walk_2_B": {
-      "file": "walk_2_B.png",
-      "name": "walk2 B",
-      "source": "reference/sheets/bangui/6.png",
-      "shellFound": true,
-      "bottom": 0.61
-    },
-    "walk_3_B": {
-      "file": "walk_3_B.png",
-      "name": "walk3 B",
-      "source": "reference/sheets/bangui/6.png",
-      "shellFound": false,
-      "bottom": 0.455
-    },
-    "walk_4_B": {
-      "file": "walk_4_B.png",
-      "name": "walk4 B",
-      "source": "reference/sheets/bangui/6.png",
-      "shellFound": true,
-      "bottom": 0.64
-    },
-    "wag_1_R": {
-      "file": "wag_1_R.png",
-      "name": "wag1 R",
-      "source": "reference/sheets/bangui/7.png",
-      "shellFound": true,
-      "bottom": 0.49
-    },
-    "wag_2_R": {
-      "file": "wag_2_R.png",
-      "name": "wag2 R",
-      "source": "reference/sheets/bangui/7.png",
-      "shellFound": true,
-      "bottom": 0.495
-    },
-    "wag_3_R": {
-      "file": "wag_3_R.png",
-      "name": "wag3 R",
-      "source": "reference/sheets/bangui/7.png",
-      "shellFound": true,
-      "bottom": 0.435
-    },
-    "wag_4_R": {
-      "file": "wag_4_R.png",
-      "name": "wag4 R",
-      "source": "reference/sheets/bangui/7.png",
-      "shellFound": true,
-      "bottom": 0.49
-    },
-    "wag_1_L": {
-      "file": "wag_1_L.png",
-      "name": "wag1 L",
-      "source": "reference/sheets/bangui/7.png",
-      "shellFound": true,
-      "bottom": 0.505
-    },
-    "wag_2_L": {
-      "file": "wag_2_L.png",
-      "name": "wag2 L",
-      "source": "reference/sheets/bangui/7.png",
-      "shellFound": true,
-      "bottom": 0.51
-    },
-    "wag_3_L": {
-      "file": "wag_3_L.png",
-      "name": "wag3 L",
-      "source": "reference/sheets/bangui/7.png",
-      "shellFound": true,
-      "bottom": 0.51
-    },
-    "wag_4_L": {
-      "file": "wag_4_L.png",
-      "name": "wag4 L",
-      "source": "reference/sheets/bangui/7.png",
-      "shellFound": true,
-      "bottom": 0.51
-    },
-    "wag_1_F": {
-      "file": "wag_1_F.png",
-      "name": "wag1 F",
-      "source": "reference/sheets/bangui/7.png",
-      "shellFound": false,
-      "bottom": 0.475
-    },
-    "wag_2_F": {
-      "file": "wag_2_F.png",
-      "name": "wag2 F",
-      "source": "reference/sheets/bangui/7.png",
-      "shellFound": false,
-      "bottom": 0.515
-    },
-    "wag_3_F": {
-      "file": "wag_3_F.png",
-      "name": "wag3 F",
-      "source": "reference/sheets/bangui/7.png",
-      "shellFound": false,
-      "bottom": 0.475
-    },
-    "wag_4_F": {
-      "file": "wag_4_F.png",
-      "name": "wag4 F",
-      "source": "reference/sheets/bangui/7.png",
-      "shellFound": false,
-      "bottom": 0.47
-    },
-    "wag_1_B": {
-      "file": "wag_1_B.png",
-      "name": "wag1 B",
-      "source": "reference/sheets/bangui/7.png",
-      "shellFound": true,
-      "bottom": 0.67
-    },
-    "wag_2_B": {
-      "file": "wag_2_B.png",
-      "name": "wag2 B",
-      "source": "reference/sheets/bangui/7.png",
-      "shellFound": true,
-      "bottom": 0.66
-    },
-    "wag_3_B": {
-      "file": "wag_3_B.png",
-      "name": "wag3 B",
-      "source": "reference/sheets/bangui/7.png",
-      "shellFound": true,
-      "bottom": 0.67
-    },
-    "wag_4_B": {
-      "file": "wag_4_B.png",
-      "name": "wag4 B",
-      "source": "reference/sheets/bangui/7.png",
-      "shellFound": true,
-      "bottom": 0.675
-    },
-    "shake_1_R": {
-      "file": "shake_1_R.png",
-      "name": "shake1 R",
-      "source": "reference/sheets/bangui/8.png",
-      "shellFound": true,
-      "bottom": 0.72
-    },
-    "shake_2_R": {
-      "file": "shake_2_R.png",
-      "name": "shake2 R",
-      "source": "reference/sheets/bangui/8.png",
-      "shellFound": true,
-      "bottom": 0.73
-    },
-    "shake_3_R": {
-      "file": "shake_3_R.png",
-      "name": "shake3 R",
-      "source": "reference/sheets/bangui/8.png",
-      "shellFound": true,
-      "bottom": 0.765
-    },
-    "shake_4_R": {
-      "file": "shake_4_R.png",
-      "name": "shake4 R",
-      "source": "reference/sheets/bangui/8.png",
-      "shellFound": false,
-      "bottom": 0.685
-    },
-    "shake_1_L": {
-      "file": "shake_1_L.png",
-      "name": "shake1 L",
-      "source": "reference/sheets/bangui/8.png",
-      "shellFound": false,
-      "bottom": 0.685
-    },
-    "shake_2_L": {
-      "file": "shake_2_L.png",
-      "name": "shake2 L",
-      "source": "reference/sheets/bangui/8.png",
-      "shellFound": false,
-      "bottom": 0.685
-    },
-    "shake_3_L": {
-      "file": "shake_3_L.png",
-      "name": "shake3 L",
-      "source": "reference/sheets/bangui/8.png",
-      "shellFound": true,
-      "bottom": 0.79
-    },
-    "shake_4_L": {
-      "file": "shake_4_L.png",
-      "name": "shake4 L",
-      "source": "reference/sheets/bangui/8.png",
-      "shellFound": false,
-      "bottom": 0.695
-    },
-    "shake_1_F": {
-      "file": "shake_1_F.png",
-      "name": "shake1 F",
-      "source": "reference/sheets/bangui/8.png",
-      "shellFound": true,
-      "bottom": 0.66
-    },
-    "shake_2_F": {
-      "file": "shake_2_F.png",
-      "name": "shake2 F",
-      "source": "reference/sheets/bangui/8.png",
-      "shellFound": true,
-      "bottom": 0.65
-    },
-    "shake_3_F": {
-      "file": "shake_3_F.png",
-      "name": "shake3 F",
-      "source": "reference/sheets/bangui/8.png",
-      "shellFound": true,
-      "bottom": 0.71
-    },
-    "shake_4_F": {
-      "file": "shake_4_F.png",
-      "name": "shake4 F",
-      "source": "reference/sheets/bangui/8.png",
-      "shellFound": false,
-      "bottom": 0.595
-    },
-    "shake_1_B": {
-      "file": "shake_1_B.png",
-      "name": "shake1 B",
-      "source": "reference/sheets/bangui/8.png",
-      "shellFound": true,
-      "bottom": 0.72
-    },
-    "shake_2_B": {
-      "file": "shake_2_B.png",
-      "name": "shake2 B",
-      "source": "reference/sheets/bangui/8.png",
-      "shellFound": true,
-      "bottom": 0.715
-    },
-    "shake_3_B": {
-      "file": "shake_3_B.png",
-      "name": "shake3 B",
-      "source": "reference/sheets/bangui/8.png",
-      "shellFound": true,
-      "bottom": 0.775
-    },
-    "shake_4_B": {
-      "file": "shake_4_B.png",
-      "name": "shake4 B",
-      "source": "reference/sheets/bangui/8.png",
-      "shellFound": true,
-      "bottom": 0.74
+      "frame": 1,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_16_relax.png",
+      "shellFound": true,
+      "bottom": 0.425,
+      "scale": 0.74444,
+      "clipped": false
+    },
+    "relax_F_2": {
+      "file": "relax_F_2.png",
+      "action": "relax",
+      "name": "放鬆",
+      "frame": 2,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_16_relax.png",
+      "shellFound": true,
+      "bottom": 0.425,
+      "scale": 0.74444,
+      "clipped": false
+    },
+    "relax_F_3": {
+      "file": "relax_F_3.png",
+      "action": "relax",
+      "name": "放鬆",
+      "frame": 3,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_16_relax.png",
+      "shellFound": true,
+      "bottom": 0.41,
+      "scale": 0.74444,
+      "clipped": false
+    },
+    "relax_F_4": {
+      "file": "relax_F_4.png",
+      "action": "relax",
+      "name": "放鬆",
+      "frame": 4,
+      "view": "F",
+      "source": "reference/sheets/bangui/action_16_relax.png",
+      "shellFound": true,
+      "bottom": 0.425,
+      "scale": 0.74444,
+      "clipped": false
+    },
+    "relax_R_1": {
+      "file": "relax_R_1.png",
+      "action": "relax",
+      "name": "放鬆",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_16_relax.png",
+      "shellFound": true,
+      "bottom": 0.345,
+      "scale": 0.74444,
+      "clipped": false
+    },
+    "relax_R_2": {
+      "file": "relax_R_2.png",
+      "action": "relax",
+      "name": "放鬆",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_16_relax.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.74444,
+      "clipped": false
+    },
+    "relax_R_3": {
+      "file": "relax_R_3.png",
+      "action": "relax",
+      "name": "放鬆",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_16_relax.png",
+      "shellFound": true,
+      "bottom": 0.265,
+      "scale": 0.74444,
+      "clipped": false
+    },
+    "relax_R_4": {
+      "file": "relax_R_4.png",
+      "action": "relax",
+      "name": "放鬆",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_16_relax.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.74444,
+      "clipped": false
+    },
+    "rise_R_1": {
+      "file": "rise_R_1.png",
+      "action": "rise",
+      "name": "浮出水面",
+      "frame": 1,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_30_rise.png",
+      "shellFound": true,
+      "bottom": 0.33,
+      "scale": 0.83177,
+      "clipped": false
+    },
+    "rise_R_2": {
+      "file": "rise_R_2.png",
+      "action": "rise",
+      "name": "浮出水面",
+      "frame": 2,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_30_rise.png",
+      "shellFound": true,
+      "bottom": 0.345,
+      "scale": 0.83177,
+      "clipped": false
+    },
+    "rise_R_3": {
+      "file": "rise_R_3.png",
+      "action": "rise",
+      "name": "浮出水面",
+      "frame": 3,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_30_rise.png",
+      "shellFound": true,
+      "bottom": 0.375,
+      "scale": 0.83177,
+      "clipped": false
+    },
+    "rise_R_4": {
+      "file": "rise_R_4.png",
+      "action": "rise",
+      "name": "浮出水面",
+      "frame": 4,
+      "view": "R",
+      "source": "reference/sheets/bangui/action_30_rise.png",
+      "shellFound": true,
+      "bottom": 0.395,
+      "scale": 0.83177,
+      "clipped": false
+    },
+    "walk_a_L_1": {
+      "file": "walk_a_L_1.png",
+      "action": "walk_a",
+      "name": "地面行走",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_01_walk_a.png",
+      "shellFound": true,
+      "bottom": 0.355,
+      "scale": 0.82435,
+      "clipped": false,
+      "mirroredFrom": "walk_a_R_1"
+    },
+    "walk_a_L_2": {
+      "file": "walk_a_L_2.png",
+      "action": "walk_a",
+      "name": "地面行走",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_01_walk_a.png",
+      "shellFound": true,
+      "bottom": 0.35,
+      "scale": 0.82435,
+      "clipped": false,
+      "mirroredFrom": "walk_a_R_2"
+    },
+    "walk_a_L_3": {
+      "file": "walk_a_L_3.png",
+      "action": "walk_a",
+      "name": "地面行走",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_01_walk_a.png",
+      "shellFound": true,
+      "bottom": 0.64,
+      "scale": 0.82435,
+      "clipped": false,
+      "mirroredFrom": "walk_a_R_3"
+    },
+    "walk_a_L_4": {
+      "file": "walk_a_L_4.png",
+      "action": "walk_a",
+      "name": "地面行走",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_01_walk_a.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.82435,
+      "clipped": false,
+      "mirroredFrom": "walk_a_R_4"
+    },
+    "walk_b_L_1": {
+      "file": "walk_b_L_1.png",
+      "action": "walk_b",
+      "name": "慢慢爬",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_02_walk_b.png",
+      "shellFound": true,
+      "bottom": 0.675,
+      "scale": 0.80123,
+      "clipped": false,
+      "mirroredFrom": "walk_b_R_1"
+    },
+    "walk_b_L_2": {
+      "file": "walk_b_L_2.png",
+      "action": "walk_b",
+      "name": "慢慢爬",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_02_walk_b.png",
+      "shellFound": true,
+      "bottom": 0.67,
+      "scale": 0.80123,
+      "clipped": false,
+      "mirroredFrom": "walk_b_R_2"
+    },
+    "walk_b_L_3": {
+      "file": "walk_b_L_3.png",
+      "action": "walk_b",
+      "name": "慢慢爬",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_02_walk_b.png",
+      "shellFound": true,
+      "bottom": 0.66,
+      "scale": 0.80123,
+      "clipped": false,
+      "mirroredFrom": "walk_b_R_3"
+    },
+    "walk_b_L_4": {
+      "file": "walk_b_L_4.png",
+      "action": "walk_b",
+      "name": "慢慢爬",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_02_walk_b.png",
+      "shellFound": true,
+      "bottom": 0.665,
+      "scale": 0.80123,
+      "clipped": false,
+      "mirroredFrom": "walk_b_R_4"
+    },
+    "run_L_1": {
+      "file": "run_L_1.png",
+      "action": "run",
+      "name": "快速爬行",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_03_run.png",
+      "shellFound": true,
+      "bottom": 0.665,
+      "scale": 0.83841,
+      "clipped": false,
+      "mirroredFrom": "run_R_1"
+    },
+    "run_L_2": {
+      "file": "run_L_2.png",
+      "action": "run",
+      "name": "快速爬行",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_03_run.png",
+      "shellFound": true,
+      "bottom": 0.675,
+      "scale": 0.83841,
+      "clipped": false,
+      "mirroredFrom": "run_R_2"
+    },
+    "run_L_3": {
+      "file": "run_L_3.png",
+      "action": "run",
+      "name": "快速爬行",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_03_run.png",
+      "shellFound": true,
+      "bottom": 0.665,
+      "scale": 0.83841,
+      "clipped": false,
+      "mirroredFrom": "run_R_3"
+    },
+    "run_L_4": {
+      "file": "run_L_4.png",
+      "action": "run",
+      "name": "快速爬行",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_03_run.png",
+      "shellFound": true,
+      "bottom": 0.66,
+      "scale": 0.83841,
+      "clipped": false,
+      "mirroredFrom": "run_R_4"
+    },
+    "turn_L_1": {
+      "file": "turn_L_1.png",
+      "action": "turn",
+      "name": "轉方向",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_04_turn.png",
+      "shellFound": true,
+      "bottom": 0.385,
+      "scale": 0.86527,
+      "clipped": false,
+      "mirroredFrom": "turn_R_1"
+    },
+    "turn_L_2": {
+      "file": "turn_L_2.png",
+      "action": "turn",
+      "name": "轉方向",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_04_turn.png",
+      "shellFound": true,
+      "bottom": 0.36,
+      "scale": 0.86527,
+      "clipped": false,
+      "mirroredFrom": "turn_R_2"
+    },
+    "turn_L_3": {
+      "file": "turn_L_3.png",
+      "action": "turn",
+      "name": "轉方向",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_04_turn.png",
+      "shellFound": true,
+      "bottom": 0.375,
+      "scale": 0.86527,
+      "clipped": false,
+      "mirroredFrom": "turn_R_3"
+    },
+    "turn_L_4": {
+      "file": "turn_L_4.png",
+      "action": "turn",
+      "name": "轉方向",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_04_turn.png",
+      "shellFound": true,
+      "bottom": 0.36,
+      "scale": 0.86527,
+      "clipped": false,
+      "mirroredFrom": "turn_R_4"
+    },
+    "look_L_1": {
+      "file": "look_L_1.png",
+      "action": "look",
+      "name": "停下張望／抬頭伸脖",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_05_look.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.80874,
+      "clipped": false,
+      "mirroredFrom": "look_R_1"
+    },
+    "look_L_2": {
+      "file": "look_L_2.png",
+      "action": "look",
+      "name": "停下張望／抬頭伸脖",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_05_look.png",
+      "shellFound": true,
+      "bottom": 0.375,
+      "scale": 0.80874,
+      "clipped": false,
+      "mirroredFrom": "look_R_2"
+    },
+    "look_L_3": {
+      "file": "look_L_3.png",
+      "action": "look",
+      "name": "停下張望／抬頭伸脖",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_05_look.png",
+      "shellFound": true,
+      "bottom": 0.42,
+      "scale": 0.80874,
+      "clipped": false,
+      "mirroredFrom": "look_R_3"
+    },
+    "look_L_4": {
+      "file": "look_L_4.png",
+      "action": "look",
+      "name": "停下張望／抬頭伸脖",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_05_look.png",
+      "shellFound": true,
+      "bottom": 0.425,
+      "scale": 0.80874,
+      "clipped": false,
+      "mirroredFrom": "look_R_4"
+    },
+    "neck_up_L_1": {
+      "file": "neck_up_L_1.png",
+      "action": "neck_up",
+      "name": "伸長脖子",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_06_neck_up.png",
+      "shellFound": true,
+      "bottom": 0.33,
+      "scale": 0.82153,
+      "clipped": false,
+      "mirroredFrom": "neck_up_R_1"
+    },
+    "neck_up_L_2": {
+      "file": "neck_up_L_2.png",
+      "action": "neck_up",
+      "name": "伸長脖子",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_06_neck_up.png",
+      "shellFound": true,
+      "bottom": 0.39,
+      "scale": 0.82153,
+      "clipped": false,
+      "mirroredFrom": "neck_up_R_2"
+    },
+    "neck_up_L_3": {
+      "file": "neck_up_L_3.png",
+      "action": "neck_up",
+      "name": "伸長脖子",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_06_neck_up.png",
+      "shellFound": true,
+      "bottom": 0.39,
+      "scale": 0.82153,
+      "clipped": false,
+      "mirroredFrom": "neck_up_R_3"
+    },
+    "neck_up_L_4": {
+      "file": "neck_up_L_4.png",
+      "action": "neck_up",
+      "name": "伸長脖子",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_06_neck_up.png",
+      "shellFound": true,
+      "bottom": 0.435,
+      "scale": 0.82153,
+      "clipped": false,
+      "mirroredFrom": "neck_up_R_4"
+    },
+    "observe_L_1": {
+      "file": "observe_L_1.png",
+      "action": "observe",
+      "name": "抬頭觀察",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_07_observe.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.80139,
+      "clipped": false,
+      "mirroredFrom": "observe_R_1"
+    },
+    "observe_L_2": {
+      "file": "observe_L_2.png",
+      "action": "observe",
+      "name": "抬頭觀察",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_07_observe.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.80139,
+      "clipped": false,
+      "mirroredFrom": "observe_R_2"
+    },
+    "observe_L_3": {
+      "file": "observe_L_3.png",
+      "action": "observe",
+      "name": "抬頭觀察",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_07_observe.png",
+      "shellFound": true,
+      "bottom": 0.365,
+      "scale": 0.80139,
+      "clipped": false,
+      "mirroredFrom": "observe_R_3"
+    },
+    "observe_L_4": {
+      "file": "observe_L_4.png",
+      "action": "observe",
+      "name": "抬頭觀察",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_07_observe.png",
+      "shellFound": true,
+      "bottom": 0.325,
+      "scale": 0.80139,
+      "clipped": false,
+      "mirroredFrom": "observe_R_4"
+    },
+    "sniff_L_1": {
+      "file": "sniff_L_1.png",
+      "action": "sniff",
+      "name": "低頭聞聞",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_08_sniff.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.80497,
+      "clipped": false,
+      "mirroredFrom": "sniff_R_1"
+    },
+    "sniff_L_2": {
+      "file": "sniff_L_2.png",
+      "action": "sniff",
+      "name": "低頭聞聞",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_08_sniff.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.80497,
+      "clipped": false,
+      "mirroredFrom": "sniff_R_2"
+    },
+    "sniff_L_3": {
+      "file": "sniff_L_3.png",
+      "action": "sniff",
+      "name": "低頭聞聞",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_08_sniff.png",
+      "shellFound": true,
+      "bottom": 0.31,
+      "scale": 0.80497,
+      "clipped": false,
+      "mirroredFrom": "sniff_R_3"
+    },
+    "sniff_L_4": {
+      "file": "sniff_L_4.png",
+      "action": "sniff",
+      "name": "低頭聞聞",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_08_sniff.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.80497,
+      "clipped": false,
+      "mirroredFrom": "sniff_R_4"
+    },
+    "sleep_L_1": {
+      "file": "sleep_L_1.png",
+      "action": "sleep",
+      "name": "睡覺",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_10_sleep.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.78391,
+      "clipped": false,
+      "mirroredFrom": "sleep_R_1"
+    },
+    "sleep_L_2": {
+      "file": "sleep_L_2.png",
+      "action": "sleep",
+      "name": "睡覺",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_10_sleep.png",
+      "shellFound": true,
+      "bottom": 0.31,
+      "scale": 0.78391,
+      "clipped": false,
+      "mirroredFrom": "sleep_R_2"
+    },
+    "sleep_L_3": {
+      "file": "sleep_L_3.png",
+      "action": "sleep",
+      "name": "睡覺",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_10_sleep.png",
+      "shellFound": true,
+      "bottom": 0.305,
+      "scale": 0.78391,
+      "clipped": false,
+      "mirroredFrom": "sleep_R_3"
+    },
+    "sleep_L_4": {
+      "file": "sleep_L_4.png",
+      "action": "sleep",
+      "name": "睡覺",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_10_sleep.png",
+      "shellFound": true,
+      "bottom": 0.305,
+      "scale": 0.78391,
+      "clipped": false,
+      "mirroredFrom": "sleep_R_4"
+    },
+    "yawn_L_1": {
+      "file": "yawn_L_1.png",
+      "action": "yawn",
+      "name": "打哈欠",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_11_yawn.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.78062,
+      "clipped": false,
+      "mirroredFrom": "yawn_R_1"
+    },
+    "yawn_L_2": {
+      "file": "yawn_L_2.png",
+      "action": "yawn",
+      "name": "打哈欠",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_11_yawn.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.78062,
+      "clipped": false,
+      "mirroredFrom": "yawn_R_2"
+    },
+    "yawn_L_3": {
+      "file": "yawn_L_3.png",
+      "action": "yawn",
+      "name": "打哈欠",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_11_yawn.png",
+      "shellFound": true,
+      "bottom": 0.37,
+      "scale": 0.78062,
+      "clipped": false,
+      "mirroredFrom": "yawn_R_3"
+    },
+    "yawn_L_4": {
+      "file": "yawn_L_4.png",
+      "action": "yawn",
+      "name": "打哈欠",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_11_yawn.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.78062,
+      "clipped": false,
+      "mirroredFrom": "yawn_R_4"
+    },
+    "stretch_L_1": {
+      "file": "stretch_L_1.png",
+      "action": "stretch",
+      "name": "伸懶腰",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_12_stretch.png",
+      "shellFound": true,
+      "bottom": 0.305,
+      "scale": 0.78,
+      "clipped": false,
+      "mirroredFrom": "stretch_R_1"
+    },
+    "stretch_L_2": {
+      "file": "stretch_L_2.png",
+      "action": "stretch",
+      "name": "伸懶腰",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_12_stretch.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.78,
+      "clipped": false,
+      "mirroredFrom": "stretch_R_2"
+    },
+    "stretch_L_3": {
+      "file": "stretch_L_3.png",
+      "action": "stretch",
+      "name": "伸懶腰",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_12_stretch.png",
+      "shellFound": true,
+      "bottom": 0.365,
+      "scale": 0.78,
+      "clipped": false,
+      "mirroredFrom": "stretch_R_3"
+    },
+    "stretch_L_4": {
+      "file": "stretch_L_4.png",
+      "action": "stretch",
+      "name": "伸懶腰",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_12_stretch.png",
+      "shellFound": true,
+      "bottom": 0.305,
+      "scale": 0.78,
+      "clipped": false,
+      "mirroredFrom": "stretch_R_4"
+    },
+    "hide_L_1": {
+      "file": "hide_L_1.png",
+      "action": "hide",
+      "name": "縮進殼裡",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_13_hide.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.8217,
+      "clipped": false,
+      "mirroredFrom": "hide_R_1"
+    },
+    "hide_L_2": {
+      "file": "hide_L_2.png",
+      "action": "hide",
+      "name": "縮進殼裡",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_13_hide.png",
+      "shellFound": true,
+      "bottom": 0.295,
+      "scale": 0.8217,
+      "clipped": false,
+      "mirroredFrom": "hide_R_2"
+    },
+    "hide_L_3": {
+      "file": "hide_L_3.png",
+      "action": "hide",
+      "name": "縮進殼裡",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_13_hide.png",
+      "shellFound": true,
+      "bottom": 0.275,
+      "scale": 0.8217,
+      "clipped": false,
+      "mirroredFrom": "hide_R_3"
+    },
+    "hide_L_4": {
+      "file": "hide_L_4.png",
+      "action": "hide",
+      "name": "縮進殼裡",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_13_hide.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.8217,
+      "clipped": false,
+      "mirroredFrom": "hide_R_4"
+    },
+    "rest_L_1": {
+      "file": "rest_L_1.png",
+      "action": "rest",
+      "name": "趴著休息／放鬆",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_14_rest.png",
+      "shellFound": true,
+      "bottom": 0.31,
+      "scale": 0.78727,
+      "clipped": false,
+      "mirroredFrom": "rest_R_1"
+    },
+    "rest_L_2": {
+      "file": "rest_L_2.png",
+      "action": "rest",
+      "name": "趴著休息／放鬆",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_14_rest.png",
+      "shellFound": true,
+      "bottom": 0.31,
+      "scale": 0.78727,
+      "clipped": false,
+      "mirroredFrom": "rest_R_2"
+    },
+    "rest_L_3": {
+      "file": "rest_L_3.png",
+      "action": "rest",
+      "name": "趴著休息／放鬆",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_14_rest.png",
+      "shellFound": true,
+      "bottom": 0.31,
+      "scale": 0.78727,
+      "clipped": false,
+      "mirroredFrom": "rest_R_3"
+    },
+    "rest_L_4": {
+      "file": "rest_L_4.png",
+      "action": "rest",
+      "name": "趴著休息／放鬆",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_14_rest.png",
+      "shellFound": true,
+      "bottom": 0.305,
+      "scale": 0.78727,
+      "clipped": false,
+      "mirroredFrom": "rest_R_4"
+    },
+    "happy_L_1": {
+      "file": "happy_L_1.png",
+      "action": "happy",
+      "name": "開心",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_15_happy.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.76031,
+      "clipped": false,
+      "mirroredFrom": "happy_R_1"
+    },
+    "happy_L_2": {
+      "file": "happy_L_2.png",
+      "action": "happy",
+      "name": "開心",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_15_happy.png",
+      "shellFound": true,
+      "bottom": 0.345,
+      "scale": 0.76031,
+      "clipped": false,
+      "mirroredFrom": "happy_R_2"
+    },
+    "happy_L_3": {
+      "file": "happy_L_3.png",
+      "action": "happy",
+      "name": "開心",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_15_happy.png",
+      "shellFound": true,
+      "bottom": 0.365,
+      "scale": 0.76031,
+      "clipped": false,
+      "mirroredFrom": "happy_R_3"
+    },
+    "happy_L_4": {
+      "file": "happy_L_4.png",
+      "action": "happy",
+      "name": "開心",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_15_happy.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.76031,
+      "clipped": false,
+      "mirroredFrom": "happy_R_4"
+    },
+    "relax_L_1": {
+      "file": "relax_L_1.png",
+      "action": "relax",
+      "name": "放鬆",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_16_relax.png",
+      "shellFound": true,
+      "bottom": 0.345,
+      "scale": 0.74444,
+      "clipped": false,
+      "mirroredFrom": "relax_R_1"
+    },
+    "relax_L_2": {
+      "file": "relax_L_2.png",
+      "action": "relax",
+      "name": "放鬆",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_16_relax.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.74444,
+      "clipped": false,
+      "mirroredFrom": "relax_R_2"
+    },
+    "relax_L_3": {
+      "file": "relax_L_3.png",
+      "action": "relax",
+      "name": "放鬆",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_16_relax.png",
+      "shellFound": true,
+      "bottom": 0.265,
+      "scale": 0.74444,
+      "clipped": false,
+      "mirroredFrom": "relax_R_3"
+    },
+    "relax_L_4": {
+      "file": "relax_L_4.png",
+      "action": "relax",
+      "name": "放鬆",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_16_relax.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.74444,
+      "clipped": false,
+      "mirroredFrom": "relax_R_4"
+    },
+    "startled_L_1": {
+      "file": "startled_L_1.png",
+      "action": "startled",
+      "name": "驚嚇",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_17_startled.png",
+      "shellFound": true,
+      "bottom": 0.325,
+      "scale": 0.7968,
+      "clipped": false,
+      "mirroredFrom": "startled_R_1"
+    },
+    "startled_L_2": {
+      "file": "startled_L_2.png",
+      "action": "startled",
+      "name": "驚嚇",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_17_startled.png",
+      "shellFound": true,
+      "bottom": 0.38,
+      "scale": 0.7968,
+      "clipped": false,
+      "mirroredFrom": "startled_R_2"
+    },
+    "startled_L_3": {
+      "file": "startled_L_3.png",
+      "action": "startled",
+      "name": "驚嚇",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_17_startled.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.7968,
+      "clipped": false,
+      "mirroredFrom": "startled_R_3"
+    },
+    "startled_L_4": {
+      "file": "startled_L_4.png",
+      "action": "startled",
+      "name": "驚嚇",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_17_startled.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.7968,
+      "clipped": false,
+      "mirroredFrom": "startled_R_4"
+    },
+    "angry_L_1": {
+      "file": "angry_L_1.png",
+      "action": "angry",
+      "name": "生氣",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_18_angry.png",
+      "shellFound": true,
+      "bottom": 0.34,
+      "scale": 0.78766,
+      "clipped": false,
+      "mirroredFrom": "angry_R_1"
+    },
+    "angry_L_2": {
+      "file": "angry_L_2.png",
+      "action": "angry",
+      "name": "生氣",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_18_angry.png",
+      "shellFound": true,
+      "bottom": 0.38,
+      "scale": 0.78766,
+      "clipped": false,
+      "mirroredFrom": "angry_R_2"
+    },
+    "angry_L_3": {
+      "file": "angry_L_3.png",
+      "action": "angry",
+      "name": "生氣",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_18_angry.png",
+      "shellFound": true,
+      "bottom": 0.48,
+      "scale": 0.78766,
+      "clipped": false,
+      "mirroredFrom": "angry_R_3"
+    },
+    "angry_L_4": {
+      "file": "angry_L_4.png",
+      "action": "angry",
+      "name": "生氣",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_18_angry.png",
+      "shellFound": true,
+      "bottom": 0.33,
+      "scale": 0.78766,
+      "clipped": false,
+      "mirroredFrom": "angry_R_4"
+    },
+    "wag_L_1": {
+      "file": "wag_L_1.png",
+      "action": "wag",
+      "name": "搖尾巴",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_19_wag.png",
+      "shellFound": true,
+      "bottom": 0.33,
+      "scale": 0.81127,
+      "clipped": false,
+      "mirroredFrom": "wag_R_1"
+    },
+    "wag_L_2": {
+      "file": "wag_L_2.png",
+      "action": "wag",
+      "name": "搖尾巴",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_19_wag.png",
+      "shellFound": true,
+      "bottom": 0.33,
+      "scale": 0.81127,
+      "clipped": false,
+      "mirroredFrom": "wag_R_2"
+    },
+    "wag_L_3": {
+      "file": "wag_L_3.png",
+      "action": "wag",
+      "name": "搖尾巴",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_19_wag.png",
+      "shellFound": true,
+      "bottom": 0.33,
+      "scale": 0.81127,
+      "clipped": false,
+      "mirroredFrom": "wag_R_3"
+    },
+    "wag_L_4": {
+      "file": "wag_L_4.png",
+      "action": "wag",
+      "name": "搖尾巴",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_19_wag.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.81127,
+      "clipped": false,
+      "mirroredFrom": "wag_R_4"
+    },
+    "shake_L_1": {
+      "file": "shake_L_1.png",
+      "action": "shake",
+      "name": "搖屁屁",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_20_shake.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.8228,
+      "clipped": false,
+      "mirroredFrom": "shake_R_1"
+    },
+    "shake_L_2": {
+      "file": "shake_L_2.png",
+      "action": "shake",
+      "name": "搖屁屁",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_20_shake.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.8228,
+      "clipped": false,
+      "mirroredFrom": "shake_R_2"
+    },
+    "shake_L_3": {
+      "file": "shake_L_3.png",
+      "action": "shake",
+      "name": "搖屁屁",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_20_shake.png",
+      "shellFound": true,
+      "bottom": 0.325,
+      "scale": 0.8228,
+      "clipped": false,
+      "mirroredFrom": "shake_R_3"
+    },
+    "shake_L_4": {
+      "file": "shake_L_4.png",
+      "action": "shake",
+      "name": "搖屁屁",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_20_shake.png",
+      "shellFound": true,
+      "bottom": 0.325,
+      "scale": 0.8228,
+      "clipped": false,
+      "mirroredFrom": "shake_R_4"
+    },
+    "dig_L_1": {
+      "file": "dig_L_1.png",
+      "action": "dig",
+      "name": "挖土",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_21_dig.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.83085,
+      "clipped": false,
+      "mirroredFrom": "dig_R_1"
+    },
+    "dig_L_2": {
+      "file": "dig_L_2.png",
+      "action": "dig",
+      "name": "挖土",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_21_dig.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.83085,
+      "clipped": false,
+      "mirroredFrom": "dig_R_2"
+    },
+    "dig_L_3": {
+      "file": "dig_L_3.png",
+      "action": "dig",
+      "name": "挖土",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_21_dig.png",
+      "shellFound": true,
+      "bottom": 0.33,
+      "scale": 0.83085,
+      "clipped": false,
+      "mirroredFrom": "dig_R_3"
+    },
+    "dig_L_4": {
+      "file": "dig_L_4.png",
+      "action": "dig",
+      "name": "挖土",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_21_dig.png",
+      "shellFound": true,
+      "bottom": 0.325,
+      "scale": 0.83085,
+      "clipped": false,
+      "mirroredFrom": "dig_R_4"
+    },
+    "eat_L_1": {
+      "file": "eat_L_1.png",
+      "action": "eat",
+      "name": "吃東西",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_22_eat.png",
+      "shellFound": true,
+      "bottom": 0.295,
+      "scale": 0.76451,
+      "clipped": false,
+      "mirroredFrom": "eat_R_1"
+    },
+    "eat_L_2": {
+      "file": "eat_L_2.png",
+      "action": "eat",
+      "name": "吃東西",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_22_eat.png",
+      "shellFound": true,
+      "bottom": 0.285,
+      "scale": 0.76451,
+      "clipped": false,
+      "mirroredFrom": "eat_R_2"
+    },
+    "eat_L_3": {
+      "file": "eat_L_3.png",
+      "action": "eat",
+      "name": "吃東西",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_22_eat.png",
+      "shellFound": true,
+      "bottom": 0.295,
+      "scale": 0.76451,
+      "clipped": false,
+      "mirroredFrom": "eat_R_3"
+    },
+    "eat_L_4": {
+      "file": "eat_L_4.png",
+      "action": "eat",
+      "name": "吃東西",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_22_eat.png",
+      "shellFound": true,
+      "bottom": 0.3,
+      "scale": 0.76451,
+      "clipped": false,
+      "mirroredFrom": "eat_R_4"
+    },
+    "poop_L_1": {
+      "file": "poop_L_1.png",
+      "action": "poop",
+      "name": "排泄",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_23_poop.png",
+      "shellFound": true,
+      "bottom": 0.31,
+      "scale": 0.7728,
+      "clipped": false,
+      "mirroredFrom": "poop_R_1"
+    },
+    "poop_L_2": {
+      "file": "poop_L_2.png",
+      "action": "poop",
+      "name": "排泄",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_23_poop.png",
+      "shellFound": true,
+      "bottom": 0.28,
+      "scale": 0.7728,
+      "clipped": false,
+      "mirroredFrom": "poop_R_2"
+    },
+    "poop_L_3": {
+      "file": "poop_L_3.png",
+      "action": "poop",
+      "name": "排泄",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_23_poop.png",
+      "shellFound": true,
+      "bottom": 0.295,
+      "scale": 0.7728,
+      "clipped": false,
+      "mirroredFrom": "poop_R_3"
+    },
+    "poop_L_4": {
+      "file": "poop_L_4.png",
+      "action": "poop",
+      "name": "排泄",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_23_poop.png",
+      "shellFound": true,
+      "bottom": 0.305,
+      "scale": 0.7728,
+      "clipped": false,
+      "mirroredFrom": "poop_R_4"
+    },
+    "play_L_1": {
+      "file": "play_L_1.png",
+      "action": "play",
+      "name": "玩耍",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_24_play.png",
+      "shellFound": true,
+      "bottom": 0.35,
+      "scale": 0.83426,
+      "clipped": false,
+      "mirroredFrom": "play_R_1"
+    },
+    "play_L_2": {
+      "file": "play_L_2.png",
+      "action": "play",
+      "name": "玩耍",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_24_play.png",
+      "shellFound": true,
+      "bottom": 0.345,
+      "scale": 0.83426,
+      "clipped": false,
+      "mirroredFrom": "play_R_2"
+    },
+    "play_L_3": {
+      "file": "play_L_3.png",
+      "action": "play",
+      "name": "玩耍",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_24_play.png",
+      "shellFound": true,
+      "bottom": 0.375,
+      "scale": 0.83426,
+      "clipped": false,
+      "mirroredFrom": "play_R_3"
+    },
+    "play_L_4": {
+      "file": "play_L_4.png",
+      "action": "play",
+      "name": "玩耍",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_24_play.png",
+      "shellFound": true,
+      "bottom": 0.345,
+      "scale": 0.83426,
+      "clipped": false,
+      "mirroredFrom": "play_R_4"
+    },
+    "enter_water_L_1": {
+      "file": "enter_water_L_1.png",
+      "action": "enter_water",
+      "name": "進入水中",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_25_enter_water.png",
+      "shellFound": true,
+      "bottom": 0.365,
+      "scale": 0.81316,
+      "clipped": false,
+      "mirroredFrom": "enter_water_R_1"
+    },
+    "enter_water_L_2": {
+      "file": "enter_water_L_2.png",
+      "action": "enter_water",
+      "name": "進入水中",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_25_enter_water.png",
+      "shellFound": true,
+      "bottom": 0.335,
+      "scale": 0.81316,
+      "clipped": false,
+      "mirroredFrom": "enter_water_R_2"
+    },
+    "enter_water_L_3": {
+      "file": "enter_water_L_3.png",
+      "action": "enter_water",
+      "name": "進入水中",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_25_enter_water.png",
+      "shellFound": true,
+      "bottom": 0.31,
+      "scale": 0.81316,
+      "clipped": false,
+      "mirroredFrom": "enter_water_R_3"
+    },
+    "enter_water_L_4": {
+      "file": "enter_water_L_4.png",
+      "action": "enter_water",
+      "name": "進入水中",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_25_enter_water.png",
+      "shellFound": true,
+      "bottom": 0.28,
+      "scale": 0.81316,
+      "clipped": false,
+      "mirroredFrom": "enter_water_R_4"
+    },
+    "swim_L_1": {
+      "file": "swim_L_1.png",
+      "action": "swim",
+      "name": "悠閒游泳",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_26_swim.png",
+      "shellFound": true,
+      "bottom": 0.33,
+      "scale": 0.8173,
+      "clipped": false,
+      "mirroredFrom": "swim_R_1"
+    },
+    "swim_L_2": {
+      "file": "swim_L_2.png",
+      "action": "swim",
+      "name": "悠閒游泳",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_26_swim.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.8173,
+      "clipped": false,
+      "mirroredFrom": "swim_R_2"
+    },
+    "swim_L_3": {
+      "file": "swim_L_3.png",
+      "action": "swim",
+      "name": "悠閒游泳",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_26_swim.png",
+      "shellFound": true,
+      "bottom": 0.35,
+      "scale": 0.8173,
+      "clipped": false,
+      "mirroredFrom": "swim_R_3"
+    },
+    "swim_L_4": {
+      "file": "swim_L_4.png",
+      "action": "swim",
+      "name": "悠閒游泳",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_26_swim.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.8173,
+      "clipped": false,
+      "mirroredFrom": "swim_R_4"
+    },
+    "swim_fast_L_1": {
+      "file": "swim_fast_L_1.png",
+      "action": "swim_fast",
+      "name": "快速游泳",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_27_swim_fast.png",
+      "shellFound": true,
+      "bottom": 0.555,
+      "scale": 0.81661,
+      "clipped": false,
+      "mirroredFrom": "swim_fast_R_1"
+    },
+    "swim_fast_L_2": {
+      "file": "swim_fast_L_2.png",
+      "action": "swim_fast",
+      "name": "快速游泳",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_27_swim_fast.png",
+      "shellFound": true,
+      "bottom": 0.525,
+      "scale": 0.81661,
+      "clipped": false,
+      "mirroredFrom": "swim_fast_R_2"
+    },
+    "swim_fast_L_3": {
+      "file": "swim_fast_L_3.png",
+      "action": "swim_fast",
+      "name": "快速游泳",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_27_swim_fast.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.81661,
+      "clipped": false,
+      "mirroredFrom": "swim_fast_R_3"
+    },
+    "swim_fast_L_4": {
+      "file": "swim_fast_L_4.png",
+      "action": "swim_fast",
+      "name": "快速游泳",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_27_swim_fast.png",
+      "shellFound": true,
+      "bottom": 0.36,
+      "scale": 0.81661,
+      "clipped": false,
+      "mirroredFrom": "swim_fast_R_4"
+    },
+    "swim_turn_L_1": {
+      "file": "swim_turn_L_1.png",
+      "action": "swim_turn",
+      "name": "水中轉向",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_28_swim_turn.png",
+      "shellFound": true,
+      "bottom": 0.36,
+      "scale": 0.86264,
+      "clipped": false,
+      "mirroredFrom": "swim_turn_R_1"
+    },
+    "swim_turn_L_2": {
+      "file": "swim_turn_L_2.png",
+      "action": "swim_turn",
+      "name": "水中轉向",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_28_swim_turn.png",
+      "shellFound": true,
+      "bottom": 0.4,
+      "scale": 0.86264,
+      "clipped": false,
+      "mirroredFrom": "swim_turn_R_2"
+    },
+    "swim_turn_L_3": {
+      "file": "swim_turn_L_3.png",
+      "action": "swim_turn",
+      "name": "水中轉向",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_28_swim_turn.png",
+      "shellFound": true,
+      "bottom": 0.38,
+      "scale": 0.86264,
+      "clipped": false,
+      "mirroredFrom": "swim_turn_R_3"
+    },
+    "swim_turn_L_4": {
+      "file": "swim_turn_L_4.png",
+      "action": "swim_turn",
+      "name": "水中轉向",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_28_swim_turn.png",
+      "shellFound": true,
+      "bottom": 0.37,
+      "scale": 0.86264,
+      "clipped": false,
+      "mirroredFrom": "swim_turn_R_4"
+    },
+    "dive_L_1": {
+      "file": "dive_L_1.png",
+      "action": "dive",
+      "name": "下潛",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_29_dive.png",
+      "shellFound": true,
+      "bottom": 0.32,
+      "scale": 0.78296,
+      "clipped": false,
+      "mirroredFrom": "dive_R_1"
+    },
+    "dive_L_2": {
+      "file": "dive_L_2.png",
+      "action": "dive",
+      "name": "下潛",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_29_dive.png",
+      "shellFound": true,
+      "bottom": 0.31,
+      "scale": 0.78296,
+      "clipped": false,
+      "mirroredFrom": "dive_R_2"
+    },
+    "dive_L_3": {
+      "file": "dive_L_3.png",
+      "action": "dive",
+      "name": "下潛",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_29_dive.png",
+      "shellFound": true,
+      "bottom": 0.345,
+      "scale": 0.78296,
+      "clipped": false,
+      "mirroredFrom": "dive_R_3"
+    },
+    "dive_L_4": {
+      "file": "dive_L_4.png",
+      "action": "dive",
+      "name": "下潛",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_29_dive.png",
+      "shellFound": true,
+      "bottom": 0.43,
+      "scale": 0.78296,
+      "clipped": false,
+      "mirroredFrom": "dive_R_4"
+    },
+    "rise_L_1": {
+      "file": "rise_L_1.png",
+      "action": "rise",
+      "name": "浮出水面",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_30_rise.png",
+      "shellFound": true,
+      "bottom": 0.33,
+      "scale": 0.83177,
+      "clipped": false,
+      "mirroredFrom": "rise_R_1"
+    },
+    "rise_L_2": {
+      "file": "rise_L_2.png",
+      "action": "rise",
+      "name": "浮出水面",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_30_rise.png",
+      "shellFound": true,
+      "bottom": 0.345,
+      "scale": 0.83177,
+      "clipped": false,
+      "mirroredFrom": "rise_R_2"
+    },
+    "rise_L_3": {
+      "file": "rise_L_3.png",
+      "action": "rise",
+      "name": "浮出水面",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_30_rise.png",
+      "shellFound": true,
+      "bottom": 0.375,
+      "scale": 0.83177,
+      "clipped": false,
+      "mirroredFrom": "rise_R_3"
+    },
+    "rise_L_4": {
+      "file": "rise_L_4.png",
+      "action": "rise",
+      "name": "浮出水面",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_30_rise.png",
+      "shellFound": true,
+      "bottom": 0.395,
+      "scale": 0.83177,
+      "clipped": false,
+      "mirroredFrom": "rise_R_4"
+    },
+    "float_L_1": {
+      "file": "float_L_1.png",
+      "action": "float",
+      "name": "水中漂浮",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_31_float.png",
+      "shellFound": true,
+      "bottom": 0.335,
+      "scale": 0.79833,
+      "clipped": false,
+      "mirroredFrom": "float_R_1"
+    },
+    "float_L_2": {
+      "file": "float_L_2.png",
+      "action": "float",
+      "name": "水中漂浮",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_31_float.png",
+      "shellFound": true,
+      "bottom": 0.345,
+      "scale": 0.79833,
+      "clipped": false,
+      "mirroredFrom": "float_R_2"
+    },
+    "float_L_3": {
+      "file": "float_L_3.png",
+      "action": "float",
+      "name": "水中漂浮",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_31_float.png",
+      "shellFound": true,
+      "bottom": 0.355,
+      "scale": 0.79833,
+      "clipped": false,
+      "mirroredFrom": "float_R_3"
+    },
+    "float_L_4": {
+      "file": "float_L_4.png",
+      "action": "float",
+      "name": "水中漂浮",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_31_float.png",
+      "shellFound": true,
+      "bottom": 0.35,
+      "scale": 0.79833,
+      "clipped": false,
+      "mirroredFrom": "float_R_4"
+    },
+    "surface_L_1": {
+      "file": "surface_L_1.png",
+      "action": "surface",
+      "name": "上浮換氣",
+      "frame": 1,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_32_surface.png",
+      "shellFound": true,
+      "bottom": 0.3,
+      "scale": 0.81646,
+      "clipped": false,
+      "mirroredFrom": "surface_R_1"
+    },
+    "surface_L_2": {
+      "file": "surface_L_2.png",
+      "action": "surface",
+      "name": "上浮換氣",
+      "frame": 2,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_32_surface.png",
+      "shellFound": true,
+      "bottom": 0.36,
+      "scale": 0.81646,
+      "clipped": false,
+      "mirroredFrom": "surface_R_2"
+    },
+    "surface_L_3": {
+      "file": "surface_L_3.png",
+      "action": "surface",
+      "name": "上浮換氣",
+      "frame": 3,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_32_surface.png",
+      "shellFound": true,
+      "bottom": 0.36,
+      "scale": 0.81646,
+      "clipped": false,
+      "mirroredFrom": "surface_R_3"
+    },
+    "surface_L_4": {
+      "file": "surface_L_4.png",
+      "action": "surface",
+      "name": "上浮換氣",
+      "frame": 4,
+      "view": "L",
+      "source": "reference/sheets/bangui/action_32_surface.png",
+      "shellFound": true,
+      "bottom": 0.315,
+      "scale": 0.81646,
+      "clipped": false,
+      "mirroredFrom": "surface_R_4"
     }
   }
 }

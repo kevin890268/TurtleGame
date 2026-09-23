@@ -6,7 +6,7 @@ export class PoseSet {
   constructor(meta, images) {
     this.meta = meta;
     this.images = images;
-    const std = meta.poses.walk_a || Object.values(meta.poses)[0];
+    const std = meta.poses.walk_a_R_1 || meta.poses.walk_a || Object.values(meta.poses)[0];
     this.stdBottom = std.bottom; // 標準站姿時，腳底在背甲中心下方多遠（背甲寬為單位）
   }
 
@@ -23,7 +23,10 @@ export class PoseSet {
 export async function loadPoseIndex() {
   try {
     const res = await fetch('assets/poses/index.json', { cache: 'no-cache' });
-    return res.ok ? await res.json() : [];
+    if (!res.ok) return [];
+    // 舊版切圖工具寫的是陣列，新版是 { version, species }
+    const data = await res.json();
+    return Array.isArray(data) ? data : (data.species || []);
   } catch {
     return [];
   }
@@ -49,15 +52,40 @@ export async function loadPoses(speciesId) {
   }
 }
 
-// 4 方向前綴：R 右側 / L 左側 / F 正面 / B 背面；只有斑龜目前有 4 方向圖，其他品種會自動退回無後綴
+// 4 個視角：R 右側 / L 左側 / F 正面 / B 背面。切圖工具產出的 key 是
+// `動作_視角_第幾幀`（例如 walk_a_R_3），每個動作固定 4 幀。
+// 舊品種還是舊格式（walk_a、walk_a_R、walk_1…），所以下面的候選 key 兩種都找。
+const FRAMES_PER_ACTION = 4;
+
+// 這張圖本身就是朝特定方向畫的（walk_a_R_3、walk_a_R…），畫的時候就不要再左右翻
+export function isDirectional(key) {
+  return /_[RLFB](_\d+)?$/.test(key || '');
+}
+
 function dirOf(t) {
-  // 以臉面向為主；水中垂直游時可改用 F/B（目前先用 R/L 為主，F/B 保留給未來 z 深度的擴充）
+  // 以臉面向為主；未來要用 z 深度時，這裡才會回傳 F / B
   return t.face > 0 ? 'R' : 'L';
 }
-function withDir(poses, key, dir) {
-  if (!poses || !key || !dir) return key;
-  const d = `${key}_${dir}`;
-  return poses.has(d) ? d : key;
+
+// 找這個動作實際存在的圖：先照方向、再照幀，都沒有就換視角或退回第 1 幀
+function pickPose(poses, action, dir, anim, fps = 6) {
+  if (!poses || !action) return null;
+  const idx = Math.floor(Math.max(0, anim) * fps) % FRAMES_PER_ACTION + 1;
+  const views = dir === 'L' ? ['L', 'R', 'F', 'B'] : ['R', 'L', 'F', 'B'];
+  const frames = idx === 1 ? [1] : [idx, 1];
+
+  for (const view of views) {
+    for (const frame of frames) {
+      for (const key of [`${action}_${view}_${frame}`, `${action}_${frame}_${view}`]) {
+        if (poses.has(key)) return key;
+      }
+    }
+    if (poses.has(`${action}_${view}`)) return `${action}_${view}`;
+  }
+  for (const frame of frames) {
+    if (poses.has(`${action}_${frame}`)) return `${action}_${frame}`;
+  }
+  return poses.has(action) ? action : null;
 }
 
 // 各情境可以隨機穿插的小動作
@@ -99,26 +127,21 @@ const POSE_FALLBACK = {
   rest: ['hide', 'relax'],
 };
 
-// 找這個姿勢能用的圖：有循環幀就輪播，沒有圖就照 POSE_FALLBACK 找替代，最後退回標準站姿
-function resolvePose(poses, key, time, dir) {
+// 找這個姿勢能用的圖：沒有這個動作就照 POSE_FALLBACK 找替代，最後退回走路
+function resolvePose(poses, key, anim, dir) {
   if (!poses) return key;
   for (const k of [key, ...(POSE_FALLBACK[key] || [])]) {
-    const frame = loopFrame(poses, k, time, 6, dir);
-    if (frame) return frame;
-    const dk = withDir(poses, k, dir);
-    if (poses.has(dk)) return dk;
-    if (poses.has(k)) return k;
+    const found = pickPose(poses, k, dir, anim);
+    if (found) return found;
   }
-  const fallback = withDir(poses, 'walk_a', dir);
-  return poses.has(fallback) ? fallback : (poses.has('walk_a') ? 'walk_a' : key);
+  return pickPose(poses, 'walk_a', dir, anim) || key;
 }
 
 export function choosePose(t, time, ctx) {
   const dir = dirOf(t);
   const base = baseKey(t, time, ctx);
-  // 循環幀已在 resolvePose 內處理方向，這裡再包一層方向
-  const key = resolvePose(ctx.poses, base, time, dir);
-  return withDir(ctx.poses, key, dir);
+  // 動作的幀用 t.anim 推進，走得快動得就快
+  return resolvePose(ctx.poses, base, t.anim, dir);
 }
 
 function baseKey(t, time, ctx) {
@@ -129,11 +152,12 @@ function baseKey(t, time, ctx) {
   if (wp) {
     if (wp.walk) {
       if (t.mode === 'food') return 'run';
-      return loopFrame(ctx.poses, 'walk', t.anim, 5) || (Math.floor(t.anim * 3) % 2 ? 'walk_b' : 'walk_a');
+      // walk_a / walk_b 是同一組走路的兩個循環，每隔幾步換一組，腳步看起來比較不呆板
+      return Math.floor(t.anim * 1.5) % 2 ? 'walk_b' : 'walk_a';
     }
     if (t.vy > 0.6) return 'dive';
     if (t.vy < -0.6) return 'rise';
-    return loopFrame(ctx.poses, 'swim', t.anim, 6) || 'swim';
+    return 'swim';
   }
 
   if (t.mode === 'sleep') return 'sleep';
@@ -153,20 +177,6 @@ function baseKey(t, time, ctx) {
   }
   if (time < t.idleUntil && t.idleKey) return t.idleKey;
   return IDLE_BASE[where];
-}
-
-function loopFrame(poses, name, anim, fps, dir) {
-  const base = `${name}_1`;
-  const dBase = dir ? `${name}_1_${dir}` : null;
-  const hasDir = dBase && poses?.has(dBase);
-  const hasBase = poses?.has(base);
-  if (!hasDir && !hasBase) return null;
-  const idx = Math.floor(anim * fps) % 4 + 1;
-  if (hasDir) {
-    const dKey = `${name}_${idx}_${dir}`;
-    if (poses.has(dKey)) return dKey;
-  }
-  return `${name}_${idx}`;
 }
 
 // 沒有姿勢圖時，退回程式畫的三種樣子
@@ -217,7 +227,7 @@ export function renderTurtle(ctx, poses, key, shellPx, anim, alpha = 1, palette)
 export function trackPoseChange(t, key, time) {
   if (key !== t.pose) {
     // 同一組循環動畫的幀之間直接切換，不做淡入淡出
-    const sameLoop = t.pose && key.replace(/_\d$/, '') === t.pose.replace(/_\d$/, '') && /_\d$/.test(key);
+    const sameLoop = t.pose && key.replace(/_\d+$/, '') === t.pose.replace(/_\d+$/, '') && /_\d+$/.test(key);
     t.prevPose = sameLoop ? null : t.pose;
     t.pose = key;
     if (!sameLoop) t.poseAt = time;

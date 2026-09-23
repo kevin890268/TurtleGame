@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { Tank } from './tank.js';
+import { isDirectional } from './poses.js';
 import { W, H, WATER_TOP, LAMP_X, AIR_STONE_X, OUTDOOR_GRASS_X, terrainOf } from './terrain.js';
 import { drawHeart } from './turtle-shape.js';
 import { CONFIG } from './config.js';
@@ -630,7 +631,7 @@ export class Tank3D extends Tank {
     // 放大後腳底也要貼地：以背甲中心下方 foot 的位置為準往上撐
     const lift = t.grounded ? foot * (TURTLE_SCALE - 1) : 0;
     mesh.position.set(this.X(t.x), this.Y(t.y + f.dy * TURTLE_SCALE - lift), agent.z);
-    const isDir = poses && /_[RLFB]$/.test(f.key);
+    const isDir = poses && isDirectional(f.key);
     mesh.scale.set(size * (isDir ? 1 : t.face) * f.m.sx, size * f.m.sy, 1);
     // 只繞 Y 軸轉向鏡頭，烏龜保持直立
     const cam = this.camera.position;
