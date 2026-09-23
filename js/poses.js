@@ -49,6 +49,17 @@ export async function loadPoses(speciesId) {
   }
 }
 
+// 4 方向前綴：R 右側 / L 左側 / F 正面 / B 背面；只有斑龜目前有 4 方向圖，其他品種會自動退回無後綴
+function dirOf(t) {
+  // 以臉面向為主；水中垂直游時可改用 F/B（目前先用 R/L 為主，F/B 保留給未來 z 深度的擴充）
+  return t.face > 0 ? 'R' : 'L';
+}
+function withDir(poses, key, dir) {
+  if (!poses || !key || !dir) return key;
+  const d = `${key}_${dir}`;
+  return poses.has(d) ? d : key;
+}
+
 // 各情境可以隨機穿插的小動作
 const IDLE_EXTRAS = {
   bask: ['yawn', 'stretch', 'relax', 'neck_up', 'purr', 'look', 'wag', 'shake'],
@@ -89,18 +100,25 @@ const POSE_FALLBACK = {
 };
 
 // 找這個姿勢能用的圖：有循環幀就輪播，沒有圖就照 POSE_FALLBACK 找替代，最後退回標準站姿
-function resolvePose(poses, key, time) {
+function resolvePose(poses, key, time, dir) {
   if (!poses) return key;
   for (const k of [key, ...(POSE_FALLBACK[key] || [])]) {
-    const frame = loopFrame(poses, k, time, 6);
+    const frame = loopFrame(poses, k, time, 6, dir);
     if (frame) return frame;
+    const dk = withDir(poses, k, dir);
+    if (poses.has(dk)) return dk;
     if (poses.has(k)) return k;
   }
-  return poses.has('walk_a') ? 'walk_a' : key;
+  const fallback = withDir(poses, 'walk_a', dir);
+  return poses.has(fallback) ? fallback : (poses.has('walk_a') ? 'walk_a' : key);
 }
 
 export function choosePose(t, time, ctx) {
-  return resolvePose(ctx.poses, baseKey(t, time, ctx), time);
+  const dir = dirOf(t);
+  const base = baseKey(t, time, ctx);
+  // 循環幀已在 resolvePose 內處理方向，這裡再包一層方向
+  const key = resolvePose(ctx.poses, base, time, dir);
+  return withDir(ctx.poses, key, dir);
 }
 
 function baseKey(t, time, ctx) {
@@ -137,9 +155,18 @@ function baseKey(t, time, ctx) {
   return IDLE_BASE[where];
 }
 
-function loopFrame(poses, name, anim, fps) {
-  if (!poses?.has(`${name}_1`)) return null;
-  return `${name}_${Math.floor(anim * fps) % 4 + 1}`;
+function loopFrame(poses, name, anim, fps, dir) {
+  const base = `${name}_1`;
+  const dBase = dir ? `${name}_1_${dir}` : null;
+  const hasDir = dBase && poses?.has(dBase);
+  const hasBase = poses?.has(base);
+  if (!hasDir && !hasBase) return null;
+  const idx = Math.floor(anim * fps) % 4 + 1;
+  if (hasDir) {
+    const dKey = `${name}_${idx}_${dir}`;
+    if (poses.has(dKey)) return dKey;
+  }
+  return `${name}_${idx}`;
 }
 
 // 沒有姿勢圖時，退回程式畫的三種樣子

@@ -128,9 +128,46 @@ MUSK_REF = {
     ],
 }
 
+def bangui_4dir_sheets(folder):
+    views = ['R', 'L', 'F', 'B']
+    move = ['walk_a', 'walk_b', 'look', 'neck_up', 'observe', 'sniff']
+    rest = ['bask', 'sleep', 'yawn', 'stretch', 'hide', 'rest']
+    mood = ['happy', 'startled', 'angry', 'purr', 'think', 'relax']
+    water = ['swim', 'dive', 'rise', 'float', 'drink', 'nibble']
+    def mk6x4(name, actions):
+        poses = []
+        for v in views:
+            for a in actions:
+                poses.append((f"{a}_{v}", f"{a} {v}"))
+        return {'file': f"{folder}/{name}", 'cols': 6, 'rows': 4, 'bg': 'magenta', 'poses': poses}
+    def mk4x6(name, actions):
+        poses = []
+        for a in actions:
+            for v in views:
+                poses.append((f"{a}_{v}", f"{a} {v}"))
+        return {'file': f"{folder}/{name}", 'cols': 4, 'rows': 6, 'bg': 'magenta', 'poses': poses}
+    def mkLoop(name, base):
+        poses = []
+        for v in views:
+            for c in range(4):
+                poses.append((f"{base}_{c+1}_{v}", f"{base}{c+1} {v}"))
+        return {'file': f"{folder}/{name}", 'cols': 4, 'rows': 4, 'bg': 'magenta', 'poses': poses}
+    return [
+        mk6x4('0.png', move),
+        mk4x6('1.png', move),
+        mk4x6('2.png', rest),
+        mk4x6('3.png', mood),
+        mk4x6('4.png', water),
+        mkLoop('5.png', 'swim'),
+        mkLoop('6.png', 'walk'),
+        mkLoop('7.png', 'wag'),
+        mkLoop('8.png', 'shake'),
+    ]
+
+
 # 每個品種用哪些來源；後面的會覆蓋前面同名的姿勢
 SPECIES = {
-    'bangui': [PROTO, *sheets_in('reference/sheets/bangui')],
+    'bangui': [PROTO, *sheets_in('reference/sheets/bangui'), *bangui_4dir_sheets('reference/sheets/bangui')],
     'musk': [MUSK_REF, *sheets_in('reference/sheets/musk', shell='dark')],
     'map': sheets_in('reference/sheets/map'),
     'slider': sheets_in('reference/sheets/slider'),
