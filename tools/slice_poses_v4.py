@@ -642,6 +642,55 @@ def cell_symmetry(alpha: np.ndarray) -> float | None:
     return float((crop & crop[:, ::-1]).sum() / crop.sum())
 
 
+def content_bands(mask_axis: np.ndarray, min_len: int = 20) -> list[tuple[int, int]]:
+    """把「這一行/這一列有沒有東西」的布林陣列切成連續的區段。"""
+    bands = []
+    start = None
+    for i, filled in enumerate(mask_axis):
+        if filled and start is None:
+            start = i
+        elif not filled and start is not None:
+            bands.append((start, i - 1))
+            start = None
+    if start is not None:
+        bands.append((start, len(mask_axis) - 1))
+    return [b for b in bands if b[1] - b[0] >= min_len]
+
+
+def auto_grid(img: np.ndarray, spec: dict, rows: int, cols: int, report: list[str]):
+    """
+    依「圖上實際有東西的位置」決定格線，而不是平均切。
+
+    GPT 排版並不精準：back.png 第 4 列的烏龜從 y=761 開始，平均切的格線卻在
+    814，直接把頭切掉。找得到剛好 rows/cols 個區段時就用區段之間的中點當格線，
+    找不到就退回平均切。
+    """
+    alpha = clean_alpha(img, spec.get("bg", "magenta"), spec.get("bgColor"))
+    mask = alpha > 0.5
+
+    def cuts(axis_any: np.ndarray, want: int, total: int, label: str):
+        bands = content_bands(axis_any)
+        if len(bands) != want:
+            return None
+        edges = [0]
+        for a, b in zip(bands, bands[1:]):
+            edges.append((a[1] + b[0]) // 2)
+        edges.append(total)
+        return edges
+
+    y = cuts(mask.any(1), rows, img.shape[0], "列")
+    x = cuts(mask.any(0), cols, img.shape[1], "欄")
+
+    if y is None or x is None:
+        return None
+
+    even_y = [round(i * img.shape[0] / rows) for i in range(rows + 1)]
+    shift = max(abs(a - b) for a, b in zip(y, even_y))
+    if shift > 8:
+        report.append(f"  ℹ 排版沒對齊，改用實際內容切格線（最多差 {shift}px）")
+    return y, x
+
+
 def detect_row_views(img: np.ndarray, spec: dict, report: list[str]):
     """
     判斷 4×4 sheet 每一列的視角。
@@ -990,6 +1039,10 @@ def process_sheet(spec: dict, results: dict, report: list[str], out_dir: Path):
     cw = w / cols
     ch = h / rows
 
+    grid = auto_grid(img, spec, rows, cols, report)
+    y_cuts = grid[0] if grid else [round(r * ch) for r in range(rows + 1)]
+    x_cuts = grid[1] if grid else [round(c * cw) for c in range(cols + 1)]
+
     # --------------------------------------------------------
     # First pass: cleanup + shell detection
     # --------------------------------------------------------
@@ -1002,10 +1055,8 @@ def process_sheet(spec: dict, results: dict, report: list[str], out_dir: Path):
         flip = bool(rest[0]) if rest else False
         r, c = divmod(idx, cols)
 
-        y0 = round(r * ch)
-        y1 = round((r + 1) * ch)
-        x0 = round(c * cw)
-        x1 = round((c + 1) * cw)
+        y0, y1 = y_cuts[r], y_cuts[r + 1]
+        x0, x1 = x_cuts[c], x_cuts[c + 1]
 
         cell = img[y0:y1, x0:x1]
 
