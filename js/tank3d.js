@@ -582,11 +582,39 @@ export class Tank3D extends Tank {
     }
   }
 
+  // 依鏡頭方位選 R/L/F/B（只有斑龜有 4 方向圖，其他品種自動退回）
+  _viewForTurtle(t, meshPos) {
+    const cam = this.camera.position;
+    const dx = cam.x - meshPos.x;
+    const dz = cam.z - meshPos.z;
+    const camAngle = Math.atan2(dz, dx);
+    const turtleAngle = t.face > 0 ? 0 : Math.PI;
+    let rel = camAngle - turtleAngle;
+    rel = ((rel % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+    if (rel < Math.PI / 4 || rel >= 7 * Math.PI / 4) return 'F';
+    if (rel < 3 * Math.PI / 4) return 'L';
+    if (rel < 5 * Math.PI / 4) return 'B';
+    return 'R';
+  }
+
   updateTurtleView(agent) {
     const v = this.turtleViews.get(agent.id);
     if (!v) return;
     const t = agent.t;
-    const f = agent.frame();
+    let f = agent.frame();
+
+    // 若有 4 方向圖，依鏡頭選視角並覆蓋 f.key
+    const poses = agent.poses;
+    if (poses) {
+      const base = f.key.replace(/_[RLFB]$/, '');
+      // 先算出鏡頭下的視角（需先有 mesh 位置，第一次用 t.x/z 估算）
+      const estPos = v.mesh ? v.mesh.position : new THREE.Vector3(this.X(t.x), 0, t.z);
+      const view = this._viewForTurtle(t, estPos);
+      const viewKey = `${base}_${view}`;
+      if (poses.has(viewKey)) {
+        f = { ...f, key: viewKey };
+      }
+    }
 
     const ctx = v.ctx;
     ctx.clearRect(0, 0, TEX, TEX);
@@ -602,10 +630,11 @@ export class Tank3D extends Tank {
     // 放大後腳底也要貼地：以背甲中心下方 foot 的位置為準往上撐
     const lift = t.grounded ? foot * (TURTLE_SCALE - 1) : 0;
     mesh.position.set(this.X(t.x), this.Y(t.y + f.dy * TURTLE_SCALE - lift), agent.z);
-    mesh.scale.set(size * t.face * f.m.sx, size * f.m.sy, 1);
+    const isDir = poses && /_[RLFB]$/.test(f.key);
+    mesh.scale.set(size * (isDir ? 1 : t.face) * f.m.sx, size * f.m.sy, 1);
     // 只繞 Y 軸轉向鏡頭，烏龜保持直立
     const cam = this.camera.position;
-    mesh.rotation.set(0, Math.atan2(cam.x - mesh.position.x, cam.z - mesh.position.z), -(t.tilt + f.m.rot) * t.face);
+    mesh.rotation.set(0, Math.atan2(cam.x - mesh.position.x, cam.z - mesh.position.z), -(t.tilt + f.m.rot) * (isDir ? 1 : t.face));
 
     // 名字（有改名或選取狀態改變時才重畫）
     const selected = agent.id === this.selectedId;
