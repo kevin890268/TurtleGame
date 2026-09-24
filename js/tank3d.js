@@ -19,6 +19,8 @@ const rand = (a, b) => a + Math.random() * (b - a);
 const TEX = 512, SHELL_TEX = 200;
 // 3D 場景裡烏龜照實際比例會太小，畫面上放大一點（不影響遊戲邏輯）
 const TURTLE_SCALE = 1.4;
+// 鏡頭仰角（從水平往上）至少多少才用正面／背面圖；那兩張是從上往下 45° 畫的
+const FRONT_BACK_MIN_ELEVATION = 25 * Math.PI / 180;
 // 食物也一樣，照實際大小（約 1 公分）在畫面上幾乎看不到
 const FOOD_SCALE = 2.2;
 
@@ -594,19 +596,27 @@ export class Tank3D extends Tank {
     }
   }
 
-  // 依鏡頭方位選 R/L/F/B（只有斑龜有 4 方向圖，其他品種自動退回）
+  // 依鏡頭方位選 R/L/F/B（沒有 4 方向圖的品種會自動退回側面）
+  //
+  // rel＝鏡頭相對於烏龜前進方向的角度：0 在正前方、π/2 在牠的右手邊、π 在正後方。
+  // 烏龜朝 +x 走、鏡頭在 +z（預設的正面鏡頭）時，看到的是牠的右側、頭朝畫面右邊 → R。
   _viewForTurtle(t, meshPos) {
+    const TAU = Math.PI * 2;
     const cam = this.camera.position;
     const dx = cam.x - meshPos.x;
     const dz = cam.z - meshPos.z;
-    const camAngle = Math.atan2(dz, dx);
-    const turtleAngle = t.face > 0 ? 0 : Math.PI;
-    let rel = camAngle - turtleAngle;
-    rel = ((rel % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
-    if (rel < Math.PI / 4 || rel >= 7 * Math.PI / 4) return 'F';
-    if (rel < 3 * Math.PI / 4) return 'L';
-    if (rel < 5 * Math.PI / 4) return 'B';
-    return 'R';
+    const heading = t.face > 0 ? 0 : Math.PI;
+    let rel = Math.atan2(dz, dx) - heading;
+    rel = ((rel % TAU) + TAU) % TAU;
+
+    // 正面／背面的圖是「從上往下 45°」畫的。鏡頭太平的時候拿來用，
+    // 烏龜看起來會像頭朝上（朝水面）或朝下，所以鏡頭夠高才用正背面，不然一律用側面。
+    const elevation = Math.atan2(cam.y - meshPos.y, Math.hypot(dx, dz));
+    if (elevation >= FRONT_BACK_MIN_ELEVATION) {
+      if (rel < Math.PI / 4 || rel >= 7 * Math.PI / 4) return 'F';
+      if (rel >= 3 * Math.PI / 4 && rel < 5 * Math.PI / 4) return 'B';
+    }
+    return rel < Math.PI ? 'R' : 'L';
   }
 
   updateTurtleView(agent) {
