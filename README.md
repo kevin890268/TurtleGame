@@ -89,6 +89,7 @@ js/
   terrain.js     地形剖面（深水區、淺水區、曬台）
   tank.js        烏龜缸：食物物理、多隻烏龜、2D 畫面
   tank3d.js      2.5D 畫面（繼承 tank.js，只換掉繪圖）
+  outdoor-world.js  戶外池的周遭：挖在草地裡的池子、土層剖面、全景
   turtle-agent.js  每隻烏龜的行為
   poses.js       姿勢圖載入、依狀態挑動作
   requests.js    想互動請求（右下角按鈕）與刷屁屁小遊戲
@@ -102,11 +103,13 @@ README.md
 assets/
   poses/<品種>/                切好的姿勢圖 + poses.json（切圖工具產生，不要手改）
   manifest.json, icon.png      網頁圖示
+  scene/<場景>/                場景貼圖 WebP（tools/pack_scene.py 產生；沒有的話用程式畫的替代圖）
 
 gpt/                           ★ 所有給 ChatGPT 的 md（見 gpt/README.md）
   rules/                       生圖規則（rules_bangui_v3.6.md 是目前版本）
   actions/bangui_v3/           斑龜 v3 動作（23 個）
   character/                   定裝照／角色設計提示詞
+  scene/outdoor/               戶外池場景圖（全景、土層、草地）
   back_fill/                   補背面用
   archive/                     舊版動作、舊規格
 
@@ -117,6 +120,7 @@ reference/                     GPT 產的原始圖
     bangui/_incoming/          還沒分類的新圖（不知道是哪個動作，先放這裡）
     bangui/_v3_archive/        更早期的舊圖
   species/<英文名>/            之後想加的品種的設定板
+  scene/<場景>/                ChatGPT 生的場景原圖（tools/pack_scene.py 的輸入）
   previews/                    切圖預覽
 
 docs/                          想法與紀錄（不是給 GPT 的）

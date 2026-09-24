@@ -33,6 +33,7 @@ python tools/asset_status.py
 | `actions/bangui_v3/` | **斑龜 v3 動作 23 個**（水上 13、水下 10），清單在 `README.md` |
 | `character/PROMPTS_STRIPE_NECKED_TURTLE_MASTER.md` | 斑龜 26 方向定裝照 |
 | `character/character_design_bangui.md` | 斑龜角色設計（最早生 `bangui_character.png` 用的） |
+| `scene/outdoor/` | **戶外池場景**：全景、土層剖面、草地（說明在該資料夾的 `README.md`） |
 | `back_fill/back_fill_B.md` | 舊 4 視角時期補背面用 |
 | `archive/` | 舊版動作（v1 的 32 個、v2 的 27 個）、4 視角共用動作、v4 規格 |
 

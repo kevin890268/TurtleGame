@@ -8,6 +8,7 @@
 | `slice_poses_v4.py` | **目前使用的切圖工具**。`python tools/slice_poses_v4.py bangui`。認得 v3 的 3 × 4 圖（正面／側面／背面）、舊的 4 × 4 圖、補視角圖（`back_01.png` 等），自動去背、對齊、鏡像補左側，輸出到 `assets/poses/<品種>/` |
 | `asset_status.py` | 依切圖結果產生根目錄的 `bangui_asset_status.md`（v3 動作的進度表）。切完圖後跑 |
 | `make_actions_v3.py` | 產生斑龜 v3 動作提示詞 `gpt/actions/bangui_v3/`。要增減或修改動作，改這支再執行 |
+| `pack_scene.py` | 把 ChatGPT 生的場景圖（`reference/scene/<場景>/`）處理接縫、縮小、轉 WebP，輸出到 `assets/scene/<場景>/` |
 | `detect_views.py` | 除錯用：印出每張 sheet 每一列的視角判斷數值 |
 | `slice_poses.py` | 舊版切圖工具，其他品種（麝香龜、錦龜…）的舊素材還是用它切的 |
 | `archive/` | 更舊的版本，留著參考 |

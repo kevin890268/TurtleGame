@@ -233,6 +233,8 @@ tools/make_actions_v3.py  產生斑龜 v3 動作提示詞
 
 **想互動請求**：右下角按鈕＋4 個小遊戲已完成（刷屁屁、擦背甲藻斑、摸下巴、拍照，`js/requests.js`），其餘 6 種規劃在 `docs/interactions.md` A 部分。
 
+**戶外池場景**：池子改成挖在草地裡，正面是土層剖面，四周一圈全景（`js/outdoor-world.js`）。目前用程式畫的替代圖；ChatGPT 的全景、土層、草地提示詞在 `gpt/scene/outdoor/`，生好後跑 `python tools/pack_scene.py outdoor`。
+
 **手機顯示問題**：本機改用 `python tools/serve.py`（不讓瀏覽器暫存舊程式）；畫面壞掉時開「網址?reset=1」，或用設定裡的「重新開始」，會一起清掉存檔、設定和瀏覽器暫存。（之前的「重新開始」其實沒作用：關頁時會把舊存檔寫回去，已修正。）
 
 待辦的玩法與素材項目（含查證資料與程式位置）整理在 **[docs/backlog.md](docs/backlog.md)**：水中吃東西的動作、有飼料時速度太快、食物的營養組成與挑食。
