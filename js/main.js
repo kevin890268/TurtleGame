@@ -6,7 +6,7 @@ import { loadPoses, loadPoseIndex } from './poses.js';
 import { SPECIES_LIST, getSpecies } from './species.js';
 import * as ui from './ui.js';
 import { initMenu } from './menu.js';
-import { Requests } from './requests.js';
+import { Requests, REQUEST_TYPES } from './requests.js';
 
 const $ = id => document.getElementById(id);
 const HOUR = 3.6e6;
@@ -333,9 +333,9 @@ function bindActions() {
   });
   $('btnReset').addEventListener('click', () => {
     const names = state.turtles.map(t => t.name).join('、');
-    if (!confirm(`確定要重新開始嗎？${names} 的紀錄會被清除（建議先匯出存檔）。`)) return;
+    if (!confirm(`確定要重新開始嗎？${names} 的紀錄會被清除（建議先匯出存檔）。\n也會一起清掉這個網頁在瀏覽器裡的暫存，手機畫面怪怪的時候可以用。`)) return;
     clear();
-    location.reload();
+    window.hardReset();
   });
 }
 
@@ -416,14 +416,13 @@ async function start() {
     getPalette: sp => getSpecies(sp).palette,
     onComplete: (id, type) => {
       const t = findTurtle(state, id);
-      if (!t) return;
-      if (type === 'brush') {
-        t.stats.mood = sim.clamp(t.stats.mood + 10);
-        const msg = `${t.name} 被刷屁屁刷得好舒服，心情變好了！`;
-        addLog(state, msg);
-        tank.agents.get(id)?.react('happy');
-        act(msg);
-      }
+      const def = REQUEST_TYPES[type];
+      if (!t || !def) return;
+      for (const [stat, add] of Object.entries(def.reward)) t.stats[stat] = sim.clamp(t.stats[stat] + add);
+      const msg = def.done(t.name);
+      addLog(state, msg);
+      tank.agents.get(id)?.react('happy');
+      act(msg);
     },
   });
 

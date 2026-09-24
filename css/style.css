@@ -478,4 +478,31 @@ button.scene-item:disabled:active { transform: none; }
 }
 .care-progress { height: 10px; border-radius: 999px; background: var(--line); overflow: hidden; }
 .care-progress div { height: 100%; width: 0; background: var(--accent); transition: width .15s; }
+.care-actions { display: flex; gap: 8px; justify-content: center; }
+.care-actions:not(:has(:not([hidden]))) { display: none; }
+.care-shutter, .care-save {
+  font: inherit;
+  font-size: 16px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  background: var(--accent);
+  color: var(--accent-ink);
+  text-decoration: none;
+  cursor: pointer;
+}
+.care-shutter[hidden], .care-save[hidden] { display: none; }
+
+/* 網址 ?reset=1：清除網頁紀錄中 */
+html.resetting body > * { visibility: hidden; }
+html.resetting body::after {
+  content: '正在清除網頁紀錄…';
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  color: var(--ink);
+  background: var(--bg);
+}
 

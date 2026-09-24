@@ -4,13 +4,19 @@
 
 ## 在本機玩
 
-因為用到 ES modules，不能直接雙擊 `index.html` 開啟，必須用本機伺服器：
+因為用到 ES modules，不能直接雙擊 `index.html` 開啟，必須用本機伺服器。在專案根目錄執行：
 
 ```bash
-python -m http.server 8123
+python tools/serve.py
 ```
 
-接著打開 http://localhost:8123
+接著打開 http://localhost:8123。啟動時也會印出**同一個 Wi-Fi 的手機**要連的網址。
+
+用 `tools/serve.py` 而不是 `python -m http.server`：它會叫瀏覽器每次都確認檔案有沒有更新，
+程式改了之後手機不會還在跑舊版（舊版和新版混在一起會讓畫面壞掉）。
+
+**手機畫面怪怪的**：網址後面加 `?reset=1`（例如 `http://192.168.x.x:8123/?reset=1`），
+會清掉存檔、設定和瀏覽器暫存的舊程式，再重新載入。設定裡的「重新開始」也會做一樣的事。
 
 測試用的加速模式：http://localhost:8123/?speed=600（1 秒 = 10 分鐘，使用獨立存檔）
 

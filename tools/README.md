@@ -4,6 +4,7 @@
 
 | 工具 | 用途 |
 |---|---|
+| `serve.py` | **本機伺服器**。`python tools/serve.py`，會印出手機要連的網址；叫瀏覽器每次確認檔案有沒有更新，避免手機跑到舊版程式 |
 | `slice_poses_v4.py` | **目前使用的切圖工具**。`python tools/slice_poses_v4.py bangui`。認得 v3 的 3 × 4 圖（正面／側面／背面）、舊的 4 × 4 圖、補視角圖（`back_01.png` 等），自動去背、對齊、鏡像補左側，輸出到 `assets/poses/<品種>/` |
 | `asset_status.py` | 依切圖結果產生根目錄的 `bangui_asset_status.md`（v3 動作的進度表）。切完圖後跑 |
 | `make_actions_v3.py` | 產生斑龜 v3 動作提示詞 `gpt/actions/bangui_v3/`。要增減或修改動作，改這支再執行 |

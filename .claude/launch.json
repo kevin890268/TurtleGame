@@ -5,8 +5,7 @@
       "name": "turtle",
       "runtimeExecutable": "python",
       "runtimeArgs": [
-        "-m",
-        "http.server",
+        "tools/serve.py",
         "8123"
       ],
       "port": 8123

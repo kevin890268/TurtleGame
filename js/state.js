@@ -89,6 +89,8 @@ export function load() {
 }
 
 export function save(s) {
+  // 正在清除網頁紀錄（index.html 的 hardReset）：不要把舊存檔寫回去
+  if (globalThis.__banGuiResetting) return;
   try {
     localStorage.setItem(CONFIG.saveKey, JSON.stringify({ ...s, version: SAVE_VERSION }));
   } catch {}

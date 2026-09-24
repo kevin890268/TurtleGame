@@ -5,6 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>斑龜日記</title>
   <link rel="stylesheet" href="css/style.css">
+  <script>
+    // 清除網頁紀錄：存檔與設定、瀏覽器暫存的舊版程式，全部清掉後重新載入。
+    // 設定裡的「重新開始」會呼叫它；手機畫面壞掉、按不到按鈕時，直接開「網址?reset=1」。
+    (function () {
+      // 遊戲的程式與樣式（新增 js 檔時要加進來）
+      var FILES = [
+        './',
+        'index.html',
+        'css/style.css',
+        'assets/manifest.json',
+        'assets/poses/index.json',
+        'js/assets.js',
+        'js/config.js',
+        'js/decor.js',
+        'js/main.js',
+        'js/menu.js',
+        'js/poses.js',
+        'js/requests.js',
+        'js/sim.js',
+        'js/species.js',
+        'js/state.js',
+        'js/tank.js',
+        'js/tank3d.js',
+        'js/terrain.js',
+        'js/turtle-agent.js',
+        'js/turtle-shape.js',
+        'js/ui.js'
+      ];
+      window.hardReset = async function () {
+        window.__banGuiResetting = true; // 之後的自動存檔都不要寫（不然關頁時會把舊存檔寫回去）
+        try {
+          for (var i = localStorage.length - 1; i >= 0; i--) {
+            var k = localStorage.key(i);
+            if (k && k.indexOf('banGui.') === 0) localStorage.removeItem(k);
+          }
+        } catch (e) {}
+        try { sessionStorage.clear(); } catch (e) {}
+        try {
+          if (window.caches) {
+            var names = await caches.keys();
+            await Promise.all(names.map(function (n) { return caches.delete(n); }));
+          }
+        } catch (e) {}
+        try {
+          if (navigator.serviceWorker) {
+            var regs = await navigator.serviceWorker.getRegistrations();
+            await Promise.all(regs.map(function (r) { return r.unregister(); }));
+          }
+        } catch (e) {}
+        // 用 cache: 'reload' 重新下載一次，瀏覽器暫存裡的舊版程式就會被換掉
+        var urls = FILES.slice();
+        try {
+          performance.getEntriesByType('resource').forEach(function (e) {
+            if (e.name.indexOf(location.origin) === 0) urls.push(e.name);
+          });
+        } catch (e) {}
+        await Promise.all(urls.map(function (u) {
+          return fetch(u, { cache: 'reload' }).catch(function () { return null; });
+        }));
+        location.replace(location.pathname + '?fresh=' + Date.now());
+      };
+      if (/[?&]reset=1(&|$)/.test(location.search)) {
+        document.documentElement.classList.add('resetting');
+        window.hardReset();
+      }
+    })();
+  </script>
   <script type="importmap">
     {
       "imports": {
@@ -151,7 +218,7 @@
     </div>
   </div>
 
-  <!-- 互動小遊戲視窗（目前：刷屁屁） -->
+  <!-- 互動小遊戲視窗（刷屁屁、擦背甲、摸下巴、拍照共用） -->
   <div class="modal" id="careModal" hidden>
     <div class="modal-box care-box">
       <div class="care-head">
@@ -164,6 +231,10 @@
         <div class="care-tool" id="careTool" aria-hidden="true">🪥</div>
       </div>
       <div class="care-progress" aria-hidden="true"><div id="careBar"></div></div>
+      <div class="care-actions">
+        <button type="button" class="care-shutter" id="careShutter" hidden aria-label="按快門">📸 按快門</button>
+        <a class="care-save" id="careSave" hidden>💾 存照片</a>
+      </div>
     </div>
   </div>
 

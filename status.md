@@ -9,10 +9,10 @@
 ## 怎麼跑
 
 ```bash
-python -m http.server 8123
+python tools/serve.py
 ```
 
-（在專案根目錄執行，或加 `--directory` 指到專案路徑）
+（在專案根目錄執行；會印出同一個 Wi-Fi 的手機要連的網址）
 
 - 本機：http://localhost:8123
 - 同一個 Wi-Fi 的手機：把 `localhost` 換成這台電腦的區網 IP。啟動時要加 `--bind 0.0.0.0`，防火牆也要放行 8123。
@@ -231,7 +231,9 @@ tools/make_actions_v3.py  產生斑龜 v3 動作提示詞
 提示詞在 `gpt/actions/bangui_v3/`，規則 `gpt/rules/rules_bangui_v3.6.md`，進度看根目錄 `bangui_asset_status.md`（目前 0／23）。
 `reference/sheets/bangui/_incoming/` 有 5 張（05～09）還不知道是哪個動作的新圖，要確認後改名。
 
-**想互動請求**：右下角按鈕＋刷屁屁小遊戲已完成（`js/requests.js`），其餘 9 種規劃在 `docs/interactions.md` A 部分。
+**想互動請求**：右下角按鈕＋4 個小遊戲已完成（刷屁屁、擦背甲藻斑、摸下巴、拍照，`js/requests.js`），其餘 6 種規劃在 `docs/interactions.md` A 部分。
+
+**手機顯示問題**：本機改用 `python tools/serve.py`（不讓瀏覽器暫存舊程式）；畫面壞掉時開「網址?reset=1」，或用設定裡的「重新開始」，會一起清掉存檔、設定和瀏覽器暫存。（之前的「重新開始」其實沒作用：關頁時會把舊存檔寫回去，已修正。）
 
 待辦的玩法與素材項目（含查證資料與程式位置）整理在 **[docs/backlog.md](docs/backlog.md)**：水中吃東西的動作、有飼料時速度太快、食物的營養組成與挑食。
 
