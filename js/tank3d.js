@@ -70,9 +70,15 @@ export class Tank3D extends Tank {
     const ctl = this.controls = new OrbitControls(cam, this.c);
     ctl.target.set(0, this.isOutdoor ? 38 : 28, 0);
     ctl.enableDamping = true;
-    ctl.enablePan = false;
+    // 可以小幅度平移看角落的烏龜：滑鼠右鍵拖曳、觸控兩指拖曳；
+    // 平移範圍在 draw() 裡夾住，免得整個缸子被推出畫面外
+    ctl.enablePan = true;
+    ctl.screenSpacePanning = true;
+    ctl.panSpeed = 0.6;
+    ctl.touches = { ONE: THREE.TOUCH.ROTATE, TWO: THREE.TOUCH.DOLLY_PAN };
     ctl.minDistance = this.isOutdoor ? 85 : 60;
-    ctl.maxDistance = this.isOutdoor ? 260 : 180;
+    // 往後拉遠一點，整缸看得到（原本 180/260 拉不太開）
+    ctl.maxDistance = this.isOutdoor ? 420 : 300;
     ctl.minPolarAngle = 0.75;
     ctl.maxPolarAngle = 1.62;
     // 室內缸只有正面做了背景（桌子＋牆），轉太過去會看到沒佈置的地方，所以限制在正面 126°；
@@ -85,6 +91,10 @@ export class Tank3D extends Tank {
       ctl.maxAzimuthAngle = 1.1;
     }
     ctl.update();
+
+    // 平移的可動範圍（以預設的注視點為中心）：左右大約半個缸、上下小一點
+    this.panHome = ctl.target.clone();
+    this.panLimit = this.isOutdoor ? { x: 55, y: 22 } : { x: 32, y: 14 };
 
     this.hemi = new THREE.HemisphereLight(0xfff6e0, 0x6b5a40, 1);
     this.sun = new THREE.DirectionalLight(0xffffff, 1.5);
@@ -526,6 +536,7 @@ export class Tank3D extends Tank {
     const dirt = 1 - s.tank.water / 100;
 
     this.controls.update();
+    this.clampPan();
     this.updateLighting(s);
     this.updateWater(dirt);
     this.updatePlants();
@@ -648,6 +659,23 @@ export class Tank3D extends Tank {
     while (this.placedNames.some(p => Math.abs(p.x - nx) < 9 && Math.abs(p.y - ny) < 2.6)) ny += 2.6;
     this.placedNames.push({ x: nx, y: ny });
     v.name.position.set(nx, ny, agent.z);
+  }
+
+  // 把平移夾在可動範圍內：注視點移多少，鏡頭就要跟著移多少，不然會變成轉向
+  clampPan() {
+    const t = this.controls.target;
+    const cx = Math.min(this.panHome.x + this.panLimit.x,
+                        Math.max(this.panHome.x - this.panLimit.x, t.x));
+    const cy = Math.min(this.panHome.y + this.panLimit.y,
+                        Math.max(this.panHome.y - this.panLimit.y, t.y));
+    const cz = Math.min(this.panHome.z + this.panLimit.x,
+                        Math.max(this.panHome.z - this.panLimit.x, t.z));
+    if (cx !== t.x || cy !== t.y || cz !== t.z) {
+      this.camera.position.x += cx - t.x;
+      this.camera.position.y += cy - t.y;
+      this.camera.position.z += cz - t.z;
+      t.set(cx, cy, cz);
+    }
   }
 
   // 水面高度（跟 updateWater 的波浪公式一樣），讓漂浮的食物跟著起伏
