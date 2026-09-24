@@ -1,5 +1,6 @@
 // 烏龜姿勢：載入切好的姿勢圖、依狀態挑姿勢、加上程式做的小動作（呼吸、擺動、跳一下）。
 // 2D 和 2.5D 都用這裡的 renderTurtle 畫烏龜，所以兩邊長得一樣。
+import { CONFIG } from './config.js';
 import { drawTurtleShape } from './turtle-shape.js';
 
 export class PoseSet {
@@ -193,8 +194,9 @@ function baseKey(t, time, ctx) {
   if (time > t.idleNext) {
     const extras = IDLE_EXTRAS[where];
     t.idleKey = extras[Math.floor(Math.random() * extras.length)];
-    t.idleUntil = time + 2 + Math.random() * 2;
-    t.idleNext = t.idleUntil + 4 + Math.random() * 6;
+    // 動作放慢時，小動作要做久一點才播得完，兩次之間也隔久一點
+    t.idleUntil = time + (2 + Math.random() * 2) / CONFIG.turtlePace;
+    t.idleNext = t.idleUntil + (4 + Math.random() * 6) / CONFIG.turtlePace;
   }
   if (time < t.idleUntil && t.idleKey) return t.idleKey;
   return IDLE_BASE[where];

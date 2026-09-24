@@ -1,5 +1,6 @@
 // 缸裡的一隻烏龜：行為（游泳、在淺灘走路、上岸曬背、追食物、睡覺）與要畫的姿勢。
 // 數值在存檔的 turtles[] 裡（由 sim.js 管），這裡只管牠在缸裡怎麼動。座標是 1000×600 的邏輯座標。
+import { CONFIG } from './config.js';
 import { W, WATER_TOP, terrainOf } from './terrain.js';
 import { choosePose, poseMotion, renderTurtle, trackPoseChange } from './poses.js';
 import { getSpecies } from './species.js';
@@ -7,17 +8,19 @@ import { relation, FRIEND_AT, BEST_FRIEND_AT, RIVAL_AT } from './sim.js';
 
 const rand = (a, b) => a + Math.random() * (b - a);
 
-// 移動速度減半了，划水／走路的動畫（腳的頻率、身體擺動）也要跟著減半，
-// 不然身體移得慢、腳卻划得跟原本一樣快，看起來像在滑冰
-const ANIM_RATE = 0.5;
+// 烏龜整體的快慢（config.js 的 turtlePace）。移動和動畫一定要用同一個倍率，
+// 不然身體移得慢、腳卻划得跟原本一樣快，看起來像在滑冰。
+const PACE = CONFIG.turtlePace;
+const ANIM_RATE = 0.5 * PACE;
 
+// dur 是動作速度為 1 時的秒數；動畫放慢時要播久一點，動作才做得完
 const REACTIONS = {
-  happy: { key: 'happy', dur: 1.8 },       // 開心：搖屁屁
-  annoyed: { key: 'hide', dur: 2.2 },
-  annoyedFood: { key: 'startled', dur: 1.5 }, // 食物被搶走：嚇一跳
-  rescued: { key: 'happy', dur: 1.8 },
-  startled: { key: 'startled', dur: 1.3 },
-  eat: { key: 'eat', dur: 0.6 },           // 水裡會自動換成 eat_water（poses.js）
+  happy: { key: 'happy', dur: 1.8 / PACE },       // 開心：搖屁屁
+  annoyed: { key: 'hide', dur: 2.2 / PACE },
+  annoyedFood: { key: 'startled', dur: 1.5 / PACE }, // 食物被搶走：嚇一跳
+  rescued: { key: 'happy', dur: 1.8 / PACE },
+  startled: { key: 'startled', dur: 1.3 / PACE },
+  eat: { key: 'eat', dur: 0.6 / PACE },           // 水裡會自動換成 eat_water（poses.js）
 };
 
 export class TurtleAgent {
@@ -337,7 +340,7 @@ export class TurtleAgent {
         t.y = this.terrain.groundY(t.x) - foot;
         t.tilt += (slopeTilt() - t.tilt) * Math.min(1, dt * 5);
       } else {
-        t.y += Math.sin(this.tank.time * 1.5 + t.anim) * 3 * dt; // 原地輕輕漂浮
+        t.y += Math.sin(this.tank.time * 1.5 * PACE + t.anim) * 3 * PACE * dt; // 原地輕輕漂浮
         t.tilt *= 0.9;
       }
       t.vy *= 0.9;
@@ -346,7 +349,7 @@ export class TurtleAgent {
 
     if (wp.walk) {
       const inWater = t.y > WATER_TOP;
-      const speed = (inWater ? 20 : 13) * (t.mode === 'food' ? 1.8 : 1);
+      const speed = (inWater ? 20 : 13) * (t.mode === 'food' ? 1.8 : 1) * PACE;
       const dx = wp.x - t.x;
       t.grounded = true;
       t.vy = 0;
@@ -363,7 +366,7 @@ export class TurtleAgent {
 
     t.grounded = false;
     const cold = this.tank.getState().tank.temp < 20 ? 0.6 : 1; // 冷的時候游得慢
-    const speed = (t.mode === 'food' ? 55 : 37.5) * this.species.swimSpeed * cold;
+    const speed = (t.mode === 'food' ? 55 : 37.5) * this.species.swimSpeed * cold * PACE;
     const dx = wp.x - t.x, dy = wp.y - t.y;
     const dist = Math.hypot(dx, dy);
     if (dist < 3) {
@@ -385,7 +388,7 @@ export class TurtleAgent {
 
   // 前後深度（只有 2.5D 看得出來）
   updateDepth(dt) {
-    const speed = this.t.mode === 'food' ? 30 : 8;
+    const speed = (this.t.mode === 'food' ? 30 : 8) * PACE;
     const d = this.zTarget - this.z;
     this.z += Math.sign(d) * Math.min(Math.abs(d), speed * dt);
   }

@@ -4,6 +4,7 @@
 //
 // 已完成：刷屁屁、擦背甲藻斑、摸下巴、拍照。其他的規劃在 docs/interactions.md。
 // 請求只存在記憶體裡（不寫進存檔），重新整理就會清掉，不影響存檔版號。
+import { CONFIG } from './config.js';
 import { renderTurtle, pickPose, withView } from './poses.js';
 
 const $ = id => document.getElementById(id);
@@ -766,7 +767,7 @@ function poseFor(poses, spec, t) {
   if (!poses) return spec.key;
   const anim = spec.loop ? t : 0;
   const dir = spec.view === 'L' ? 'L' : 'R';
-  const k = pickPose(poses, spec.key, dir, anim, spec.fps || 7)
+  const k = pickPose(poses, spec.key, dir, anim, (spec.fps || 7) * CONFIG.turtlePace)
     || pickPose(poses, 'walk', dir, anim) || pickPose(poses, 'walk_a', dir, anim);
   if (spec.view === 'F' || spec.view === 'B') {
     const v = withView(poses, k, spec.view);
