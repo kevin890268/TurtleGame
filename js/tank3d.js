@@ -679,8 +679,11 @@ export class Tank3D extends Tank {
   keepCameraAboveGround() {
     if (!this.world) return;
     const cam = this.camera.position;
-    const minY = this.rim + 4;
-    if (cam.z < this.TD / 2 + 2 && cam.y < minY) cam.y = minY;
+    const { tile, fieldY } = this.world;
+    // 在草地底座上方（剖面後面）：不低於草地
+    const overTile = cam.x > tile.left - 2 && cam.x < tile.right + 2 && cam.z > tile.back - 2 && cam.z < tile.front + 2;
+    const minY = overTile ? tile.top + 4 : fieldY + 4;
+    if (cam.y < minY) cam.y = minY;
   }
 
   // 把平移夾在可動範圍內：注視點移多少，鏡頭就要跟著移多少，不然會變成轉向

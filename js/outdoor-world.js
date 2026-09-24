@@ -9,17 +9,24 @@
 import * as THREE from 'three';
 
 const DIR = 'assets/scene/outdoor/';
-const GROUND_R = 850;      // 草地半徑（3D 單位）
+// 草地底座：池子是九宮格的中間那格，左右各一格、後面一整排（前面那排拿掉，正面要露出剖面）
+const TILE_CELLS_SIDE = 1;   // 池子左右各幾格
+const TILE_CELLS_BACK = 1;   // 池子後面幾排
+const TILE_CORNER = 10;      // 底座四個角的圓角
+const FIELD_DROP = 26;       // 底座外面的遠方田野，比草地低多少（底座看起來像立體模型的台子）
+const FIELD_R = 880;         // 遠方田野的半徑（接到全景）
 const PANO_R = 900;        // 全景圓筒半徑，比草地大一點
 const PANO_H = 520;        // 全景圓筒高度
 // 全景圖繞一圈重複幾次：ChatGPT 最寬只能出 1536×1024，一張拉滿一整圈會變形得很嚴重；
 // 重複 6 次時每張只佔 60°，手機畫面一次看不到兩張，也只橫向拉長約 1.2 倍
 const PANO_REPEAT = 6;
-const SOIL_DEPTH = 320;    // 剖面往下延伸多深（池底以下）：夠深，從高處往下看才不會看到底下的空洞
+const SOIL_DEPTH = 220;    // 剖面在池底以下還有多深：夠深，從高處往下看才不會看到底下的空洞
 const SOIL_TILE = 34;      // 土層紋理每隔多少單位重複一次
 const GRASS_TILE = 36;     // 草地紋理每隔多少單位重複一次
 // 草地的底色：池子地形裡的草地（頂點顏色）也用這個，兩邊才接得起來
 export const GRASS_COLOR = '#6b9a45';
+// 遠方田野的顏色：程式畫的全景最下面那條田野也用這個
+const FIELD_COLOR = '#7ba452';
 
 /**
  * @param {THREE.Scene} scene
@@ -58,30 +65,30 @@ export function buildOutdoorWorld(scene, { TW, TD, rim, renderer }) {
   loadOptional(DIR + 'grass', aniso, img => { grass.image = img; grass.needsUpdate = true; });
   loadOptional(DIR + 'panorama', aniso, img => { pano.image = img; pano.needsUpdate = true; });
 
-  // ---------- 草地：大圓形，沿池子正面切齊，中間挖掉池子 ----------
+  // ---------- 草地底座：池子是九宮格的中間那格 ----------
+  // 左右各一格、後面一整排；前面那排拿掉，池子正面切齊成剖面。四周露出土層側面，像立體模型的台子。
   const hx = TW / 2, hz = TD / 2;
-  const cutAngle = Math.asin(Math.min(1, hz / GROUND_R)); // 切線在圓上的位置
+  const left = -hx - TW * TILE_CELLS_SIDE, right = hx + TW * TILE_CELLS_SIDE;
+  const back = -hz - TD * TILE_CELLS_BACK, front = hz;
+  const rc = TILE_CORNER;
   const shape = new THREE.Shape();
   // Shape 的 (x, y) 對應世界的 (x, -z)
   const P = (x, z) => [x, -z];
-  shape.moveTo(...P(-Math.cos(cutAngle) * GROUND_R, hz));
-  shape.lineTo(...P(-hx, hz));
+  // 前緣（剖面）是直的：左前角 → 池子 → 右前角；後面兩個角做圓角
+  shape.moveTo(...P(left, front));
+  shape.lineTo(...P(-hx, front));
   shape.lineTo(...P(-hx, -hz));
   shape.lineTo(...P(hx, -hz));
-  shape.lineTo(...P(hx, hz));
-  shape.lineTo(...P(Math.cos(cutAngle) * GROUND_R, hz));
-  // 從右前方繞過後面回到左前方：角度 θ 從 +x 軸量起，(x, z) = R(cosθ, sinθ)，
-  // 右前方是 θ = cutAngle，往後繞（θ 變小、經過 -π/2 也就是正後方）到左前方 θ = -(π + cutAngle)
-  const steps = 96;
-  const a0 = cutAngle, a1 = -(Math.PI + cutAngle);
-  for (let i = 1; i < steps; i++) {
-    const a = a0 + (a1 - a0) * (i / steps);
-    shape.lineTo(...P(Math.cos(a) * GROUND_R, Math.sin(a) * GROUND_R));
-  }
+  shape.lineTo(...P(hx, front));
+  shape.lineTo(...P(right, front));
+  shape.lineTo(...P(right, back + rc));
+  shape.quadraticCurveTo(...P(right, back), ...P(right - rc, back));
+  shape.lineTo(...P(left + rc, back));
+  shape.quadraticCurveTo(...P(left, back), ...P(left, back + rc));
   shape.closePath();
 
   const height = rim - base;
-  const geo = new THREE.ExtrudeGeometry(shape, { depth: height, bevelEnabled: false, steps: 1, curveSegments: 1 });
+  const geo = new THREE.ExtrudeGeometry(shape, { depth: height, bevelEnabled: false, steps: 1, curveSegments: 6 });
   geo.rotateX(-Math.PI / 2);   // 擠出方向變成往上
   geo.translate(0, base, 0);
   const ground = new THREE.Mesh(geo, [
@@ -90,9 +97,39 @@ export function buildOutdoorWorld(scene, { TW, TD, rim, renderer }) {
   ]);
   scene.add(ground);
 
-  // ---------- 全景：一圈圓筒，從地面往上 ----------
+  // ---------- 底座外面：低一截的遠方田野，一路接到全景 ----------
+  // 也是一塊沿池子正面切齊、挖掉池子的厚板（不然平面會在剖面前面擋住水下），
+  // 正面往後退一點點，避免跟底座的正面重疊閃爍。
+  const fieldY = rim - FIELD_DROP;
+  const ff = front - 0.3;
+  const cut = Math.asin(Math.min(1, ff / FIELD_R));
+  const fshape = new THREE.Shape();
+  fshape.moveTo(...P(-Math.cos(cut) * FIELD_R, ff));
+  fshape.lineTo(...P(-hx, ff));
+  fshape.lineTo(...P(-hx, -hz));
+  fshape.lineTo(...P(hx, -hz));
+  fshape.lineTo(...P(hx, ff));
+  fshape.lineTo(...P(Math.cos(cut) * FIELD_R, ff));
+  // 從右前方往後繞到左前方：(x, z) = R(cosθ, sinθ)，θ 從 cut 一路減到 -(π + cut)
+  for (let i = 1; i < 96; i++) {
+    const a = cut + (-(Math.PI + cut) - cut) * (i / 96);
+    fshape.lineTo(...P(Math.cos(a) * FIELD_R, Math.sin(a) * FIELD_R));
+  }
+  fshape.closePath();
+  const fgeo = new THREE.ExtrudeGeometry(fshape, { depth: fieldY - base, bevelEnabled: false, steps: 1, curveSegments: 1 });
+  fgeo.rotateX(-Math.PI / 2);
+  fgeo.translate(0, base, 0);
+  // 田野表面跟全景最下面那條田野同色、同樣不受燈光影響，接起來才不會看到一條分界
+  const fieldMat = new THREE.MeshBasicMaterial({ color: FIELD_COLOR });
+  const field = new THREE.Mesh(fgeo, [
+    fieldMat,
+    new THREE.MeshStandardMaterial({ map: soilSide, roughness: 1 }),
+  ]);
+  scene.add(field);
+
+  // ---------- 全景：一圈圓筒，從遠方田野往上 ----------
   const panoGeo = new THREE.CylinderGeometry(PANO_R, PANO_R, PANO_H, 96, 1, true);
-  panoGeo.translate(0, rim - 4 + PANO_H / 2, 0);
+  panoGeo.translate(0, fieldY - 2 + PANO_H / 2, 0);
   pano.wrapS = THREE.RepeatWrapping;
   pano.repeat.x = -PANO_REPEAT; // 負號：從圓筒內側看圖會左右相反，翻回來
   const panoMat = new THREE.MeshBasicMaterial({ map: pano, side: THREE.BackSide, fog: false });
@@ -108,9 +145,9 @@ export function buildOutdoorWorld(scene, { TW, TD, rim, renderer }) {
   bankTex.wrapT = THREE.ClampToEdgeWrapping;
   const bankMat = new THREE.MeshStandardMaterial({ map: bankTex, roughness: 1 });
   const inset = 0.25;
-  const back = new THREE.Mesh(new THREE.PlaneGeometry(TW, rim), bankMat);
-  back.position.set(0, rim / 2, -hz + inset);
-  scene.add(back);
+  const backWall = new THREE.Mesh(new THREE.PlaneGeometry(TW, rim), bankMat);
+  backWall.position.set(0, rim / 2, -hz + inset);
+  scene.add(backWall);
   for (const side of [-1, 1]) {
     const wall = new THREE.Mesh(new THREE.PlaneGeometry(TD, rim), bankMat);
     wall.rotation.y = -side * Math.PI / 2;
@@ -126,9 +163,13 @@ export function buildOutdoorWorld(scene, { TW, TD, rim, renderer }) {
     soilCap,
     speckle,
     grassColor: GRASS_COLOR,
+    // 鏡頭不能鑽進去的範圍：底座（高到 rim）、遠方田野（高到 fieldY）
+    tile: { left, right, back, front, top: rim },
+    fieldY,
     // 日夜：全景不受燈光影響，自己調色
     setDaylight(f) {
       panoMat.color.copy(night).lerp(day, f);
+      fieldMat.color.set(FIELD_COLOR).multiply(panoMat.color);
     },
   };
 }
@@ -290,7 +331,7 @@ function drawPanorama(w, h) {
   ridge(h * 0.72, h * 0.08, [3, 7, 17], '#8fae9a');   // 近一點的丘陵
   ridge(h * 0.84, h * 0.05, [9, 23, 41], '#6f9460');  // 樹叢、竹林
   // 最下面：田地／草地，跟地面的草接起來
-  g.fillStyle = '#7ba452';
+  g.fillStyle = FIELD_COLOR;
   g.fillRect(0, h * 0.9, w, h * 0.1);
   return c;
 }
