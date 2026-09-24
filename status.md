@@ -76,7 +76,7 @@ python -m http.server 8123
 - [ ] 造景擺設（沉木、水草盆等 8 種）還是純展示，功能沒做，標示「即將推出」
 
 ### 美術素材流程
-- [x] GPT 提示詞放在 `assets/prompts/`，檔名用英文俗名，8 個品種全部由 `tools/make_prompts.py` 產生，用同一套撰寫標準（描述看得到的畫面、指定固定部位、對角步態、每格附中文說明）
+- [x] 給 ChatGPT 的 md 集中在 `gpt/`（規則、動作、定裝照）；早期由 Claude 產生的各品種提示詞已移除（git 歷史可找回）
 - [x] 每個品種都有搖屁屁循環（`loop_shake.png`）：後腿伸直、尾甲翹高，搖向觀眾時看得到腹甲
 - [x] 切圖工具 `tools/slice_poses.py [品種]`：自動去背，濾掉文字和特效，扣掉邊緣殘留的洋紅色，以背甲中心對齊、統一大小；每個品種輸出到 `assets/poses/<品種>/`
 - [x] 某個品種還缺的姿勢，會自動改用最接近的姿勢（例如麝香龜還沒有睡覺圖，就用趴低的姿勢）；完全沒有圖的品種用程式畫的替代圖，選品種時會標示「圖片製作中」
@@ -196,13 +196,13 @@ js/turtle-shape.js  沒有姿勢圖時用程式畫的烏龜
 js/ui.js            面板顯示
 js/main.js          把上面串起來
 assets/poses/<品種>/ 切好的姿勢圖（由切圖工具產生，不要手動改）
-assets/prompts/     各品種的 GPT 提示詞
+gpt/               所有給 ChatGPT 的 md（規則、動作、定裝照）
 docs/               品種資料與研究
 reference/concept/  概念圖（動作、畫風）
 reference/sheets/<品種>/  GPT 原始圖：定裝照、姿勢表、循環幀
 reference/previews/ 切圖預覽圖
 tools/slice_poses.py   切圖
-tools/make_prompts.py  產生提示詞
+tools/make_actions_v3.py  產生斑龜 v3 動作提示詞
 ```
 
 常調的參數：
@@ -228,7 +228,7 @@ tools/make_prompts.py  產生提示詞
 ## 下一步
 
 **斑龜 v3 素材**：動作改成水上 13 ＋ 水下 10 ＝ 23 個、三視角（正面俯看 45°／側面／背面俯看 45°），每張 3 × 4。
-提示詞在 `assets/prompts/bangui/actions_v3/`，規則 `docs/spec/rules_bangui_v3.6.md`，進度看根目錄 `bangui_asset_status.md`（目前 0／23）。
+提示詞在 `gpt/actions/bangui_v3/`，規則 `gpt/rules/rules_bangui_v3.6.md`，進度看根目錄 `bangui_asset_status.md`（目前 0／23）。
 `reference/sheets/bangui/_incoming/` 有 5 張（05～09）還不知道是哪個動作的新圖，要確認後改名。
 
 **想互動請求**：右下角按鈕＋刷屁屁小遊戲已完成（`js/requests.js`），其餘 9 種規劃在 `docs/interactions.md` A 部分。

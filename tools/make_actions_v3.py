@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""產生斑龜 v3 動作提示詞：assets/prompts/bangui/actions_v3/
+"""產生斑龜 v3 動作提示詞：gpt/actions/bangui_v3/
 
-v3 的規則（見 docs/spec/rules_bangui_v3.6.md）：
+v3 的規則（見 gpt/rules/rules_bangui_v3.6.md）：
 - 三個視角：正面（前方、俯看 45 度）／側面（面向右）／背面（後方、俯看 45 度）
 - 每個動作一張 3 × 4 的圖（3 列視角 × 4 幀）
 - 動作分成「水上」和「水下」兩類
@@ -16,7 +16,7 @@ from __future__ import annotations
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "assets" / "prompts" / "bangui" / "actions_v3"
+OUT = ROOT / "gpt" / "actions" / "bangui_v3"
 
 LAND = "ABOVE WATER"
 WATER = "UNDERWATER"
@@ -310,7 +310,7 @@ def build_action(i: int, a: dict) -> str:
     return f"""# Action {i:02d} — {a['key']}（{a['zh']}）
 
 > 情境：**{'水上' if a['ctx'] == LAND else '水下'}**｜{'循環' if a['loop'] else '單次'}
-> 搭配 `character_reference.png` 與 `docs/spec/rules_bangui_v3.6.md` 一起使用。
+> 搭配 `character_reference.png` 與 `gpt/rules/rules_bangui_v3.6.md` 一起使用。
 > 產出一張 **3 × 4** 的圖，存成 `reference/sheets/bangui/action_{i:02d}_{a['key']}.png`。
 
 ACTION_ID:
@@ -400,12 +400,12 @@ def build_readme() -> str:
     return f"""# 斑龜動作 v3：水上 {len(land)} ＋ 水下 {len(water)} ＝ {len(ACTIONS)} 個
 
 > 由 `tools/make_actions_v3.py` 產生，要改內容請改那支程式再執行。
-> 規則：`docs/spec/rules_bangui_v3.6.md`（三視角：正面俯看 45°／側面／背面俯看 45°，每張 3 × 4）。
+> 規則：`gpt/rules/rules_bangui_v3.6.md`（三視角：正面俯看 45°／側面／背面俯看 45°，每張 3 × 4）。
 
 ## 怎麼用
 
 1. 上傳 `reference/character/bangui_character.png`（角色參考）
-2. 上傳 `docs/spec/rules_bangui_v3.6.md`（規則）
+2. 上傳 `gpt/rules/rules_bangui_v3.6.md`（規則）
 3. 上傳要做的那一個 `action_NN_xxx.md`
 4. 產出的圖存成 `reference/sheets/bangui/action_NN_xxx.png`，跑 `python tools/slice_poses_v4.py bangui`
 

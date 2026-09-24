@@ -51,8 +51,8 @@ python -m http.server 8123
 
 1. 在 ChatGPT 依序上傳三個檔案：
    - `reference/character/bangui_character.png`（角色參考）
-   - `docs/spec/rules_bangui_v3.6.md`（規則：三視角、3 × 4）
-   - `assets/prompts/bangui/actions_v3/action_NN_xxx.md`（要做的那個動作）
+   - `gpt/rules/rules_bangui_v3.6.md`（規則：三視角、3 × 4）
+   - `gpt/actions/bangui_v3/action_NN_xxx.md`（要做的那個動作）
 2. 產出的圖存成 `reference/sheets/bangui/action_NN_xxx.png`（檔名照動作檔）
 3. 切圖並更新素材狀態表（需要 Python 的 numpy、scipy、Pillow）：
    ```bash
@@ -65,7 +65,7 @@ python -m http.server 8123
 
 v3 的三個視角：**正面**（前方、俯看 45°）、**側面**（面向右）、**背面**（後方、俯看 45°）。
 左側由切圖工具鏡像產生。動作分成水上 13 個、水下 10 個，清單在
-`assets/prompts/bangui/actions_v3/README.md`。
+`gpt/actions/bangui_v3/README.md`。
 
 還沒有 v3 新圖的動作，遊戲會先用舊圖代替（`js/poses.js` 的 `POSE_FALLBACK`），不會缺畫面。
 
@@ -93,14 +93,14 @@ README.md
 
 assets/
   poses/<品種>/                切好的姿勢圖 + poses.json（切圖工具產生，不要手改）
-  prompts/
-    bangui/
-      actions_v3/              ★ 目前使用的斑龜動作提示詞（23 個）
-      back_fill/               補背面用的提示詞（舊 4 視角時期）
-      archive/                 舊版動作（v1 的 32 個、v2 的 27 個）
-      PROMPTS_STRIPE_NECKED_TURTLE_MASTER.md  斑龜 26 方向定裝照
-    shared/                    各品種共用的動作提示詞（舊 4 視角版）
-    species/                   各品種的定裝照與姿勢表提示詞（tools/make_prompts.py 產生）
+  manifest.json, icon.png      網頁圖示
+
+gpt/                           ★ 所有給 ChatGPT 的 md（見 gpt/README.md）
+  rules/                       生圖規則（rules_bangui_v3.6.md 是目前版本）
+  actions/bangui_v3/           斑龜 v3 動作（23 個）
+  character/                   定裝照／角色設計提示詞
+  back_fill/                   補背面用
+  archive/                     舊版動作、舊規格
 
 reference/                     GPT 產的原始圖
   character/                   角色參考圖
@@ -111,8 +111,7 @@ reference/                     GPT 產的原始圖
   species/<英文名>/            之後想加的品種的設定板
   previews/                    切圖預覽
 
-docs/
-  spec/                        生圖規則（rules_*.md）與規格
+docs/                          想法與紀錄（不是給 GPT 的）
   backlog.md                   待辦（含查證資料）
   interactions.md              玩家互動與「想互動請求」規劃
   nature_objects.md            水中／陸上自然物清單（造景用）

@@ -102,7 +102,7 @@ export function pickPose(poses, action, dir, anim, fps = 6) {
   return poses.has(action) ? action : null;
 }
 
-// 各情境可以隨機穿插的小動作（v3 動作名稱，見 assets/prompts/bangui/actions_v3/README.md）
+// 各情境可以隨機穿插的小動作（v3 動作名稱，見 gpt/actions/bangui_v3/README.md）
 const IDLE_EXTRAS = {
   bask: ['yawn', 'look', 'happy', 'sniff'],
   shallow: ['sniff', 'look', 'happy', 'yawn'],

@@ -1,5 +1,5 @@
 // 品種表：每個品種的體型、習性與照顧難度。遊戲規則（sim.js）、烏龜行為（tank.js）和畫面都從這裡讀。
-// 新增品種：在這裡加一筆，再照 assets/prompts/PROMPTS_*.md 生姿勢圖、執行 tools/slice_poses.py <id>。
+// 新增品種：在這裡加一筆，再到 gpt/ 準備生圖提示詞、執行 tools/slice_poses_v4.py <id>。
 // 品種資料來源見 docs/species.md，體型與習性的研究見 docs/species_traits.md。
 
 export const SPECIES = {

@@ -82,14 +82,14 @@
 
 | | 品種 | 遊戲定位 | 素材 |
 |---|---|---|---|
-| 1 | 斑龜 | 標準，原生種 | ✅ 已有；提示詞 [PROMPTS_STRIPE_NECKED_TURTLE.md](../assets/prompts/species/PROMPTS_STRIPE_NECKED_TURTLE.md) |
-| 2 | 麝香龜 | 大多在水底走路，很少曬背 | 🟡 定裝照與姿勢表 A 已完成；提示詞 [PROMPTS_MUSK_TURTLE.md](../assets/prompts/species/PROMPTS_MUSK_TURTLE.md) |
-| 3 | 地圖龜 | 進階：水質和曬背要求高 | 提示詞 [PROMPTS_MAP_TURTLE.md](../assets/prompts/species/PROMPTS_MAP_TURTLE.md) |
-| 4 | 巴西龜（收容） | 劇情：棄養龜的第二個家，體型大、食量大 | 提示詞 [PROMPTS_RED_EARED_SLIDER.md](../assets/prompts/species/PROMPTS_RED_EARED_SLIDER.md) |
-| 5 | 錦龜 | 愛曬背、很會游泳 | ✅ 已有；提示詞 [PROMPTS_PAINTED_TURTLE.md](../assets/prompts/species/PROMPTS_PAINTED_TURTLE.md) |
+| 1 | 斑龜 | 標準，原生種 | ✅ 已有；舊提示詞 `PROMPTS_STRIPE_NECKED_TURTLE.md` 已移除 |
+| 2 | 麝香龜 | 大多在水底走路，很少曬背 | 🟡 定裝照與姿勢表 A 已完成；舊提示詞 `PROMPTS_MUSK_TURTLE.md` 已移除 |
+| 3 | 地圖龜 | 進階：水質和曬背要求高 | 舊提示詞 `PROMPTS_MAP_TURTLE.md` 已移除 |
+| 4 | 巴西龜（收容） | 劇情：棄養龜的第二個家，體型大、食量大 | 舊提示詞 `PROMPTS_RED_EARED_SLIDER.md` 已移除 |
+| 5 | 錦龜 | 愛曬背、很會游泳 | ✅ 已有；舊提示詞 `PROMPTS_PAINTED_TURTLE.md` 已移除 |
 
 之後可以擴充的品種，提示詞也已經備好：
-[剃刀龜](../assets/prompts/species/PROMPTS_RAZORBACK_MUSK_TURTLE.md)、[條紋動胸龜](../assets/prompts/species/PROMPTS_STRIPED_MUD_TURTLE.md)、[歐洲澤龜](../assets/prompts/species/PROMPTS_EUROPEAN_POND_TURTLE.md)、[東部長頸龜](../assets/prompts/species/PROMPTS_EASTERN_LONG_NECKED_TURTLE.md)（這 4 種還沒登記進 `js/species.js`）。
+剃刀龜、條紋動胸龜、歐洲澤龜、東部長頸龜（這 4 種還沒登記進 `js/species.js`）。
 
 ---
 

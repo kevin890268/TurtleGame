@@ -100,7 +100,7 @@ def razor_sheets(folder):
 
 
 def sheets_in(folder, shell=None):
-    """正式版姿勢表（格式見 assets/prompts/PROMPTS_*.md），每個品種一個資料夾，檔名都一樣。
+    """正式版姿勢表（舊格式），每個品種一個資料夾，檔名都一樣。
     shell='dark'：背甲顏色很深、跟皮膚分不開的品種（麝香龜），改用亮度找背甲。"""
     def sheet(name, cols, rows, poses):
         return {'file': f'{folder}/{name}', 'cols': cols, 'rows': rows, 'bg': 'magenta', 'poses': poses, 'shell': shell}

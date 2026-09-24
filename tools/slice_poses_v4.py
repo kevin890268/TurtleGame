@@ -200,7 +200,7 @@ ACTION_KEYS = set(ACTION_NAMES)
 
 # 補視角用的 sheet：一張圖只有一個視角，每一列是一個動作、每一欄是一幀。
 # 用途是把已經有側面、只缺正面或背面的動作補齊（見 bangui_asset_status.md）。
-# 對應的提示詞：assets/prompts/bangui/back_fill/back_fill_B.md
+# 對應的提示詞：gpt/back_fill/back_fill_B.md
 FILL_SHEETS = {
     "back_01": ("B", ["turn", "hide", "rest", "happy"]),
     "back_02": ("B", ["startled", "angry", "wag", "shake"]),
