@@ -1,0 +1,15 @@
+# tools
+
+需要 Python 3 與 numpy、scipy、Pillow。在專案根目錄執行。
+
+| 工具 | 用途 |
+|---|---|
+| `slice_poses_v4.py` | **目前使用的切圖工具**。`python tools/slice_poses_v4.py bangui`。認得 v3 的 3 × 4 圖（正面／側面／背面）、舊的 4 × 4 圖、補視角圖（`back_01.png` 等），自動去背、對齊、鏡像補左側，輸出到 `assets/poses/<品種>/` |
+| `asset_status.py` | 依切圖結果產生根目錄的 `bangui_asset_status.md`（v3 動作的進度表）。切完圖後跑 |
+| `make_actions_v3.py` | 產生斑龜 v3 動作提示詞 `assets/prompts/bangui/actions_v3/`。要增減或修改動作，改這支再執行 |
+| `make_prompts.py` | 產生各品種的定裝照／姿勢表提示詞 `assets/prompts/species/` |
+| `detect_views.py` | 除錯用：印出每張 sheet 每一列的視角判斷數值 |
+| `slice_poses.py` | 舊版切圖工具，其他品種（麝香龜、錦龜…）的舊素材還是用它切的 |
+| `archive/` | 更舊的版本，留著參考 |
+
+新增或刪除 v3 動作時，`make_actions_v3.py` 的 `ACTIONS` 和 `slice_poses_v4.py` 的 `STANDARD_V3` 要一起改。

@@ -227,6 +227,12 @@ tools/make_prompts.py  產生提示詞
 
 ## 下一步
 
+**斑龜 v3 素材**：動作改成水上 13 ＋ 水下 10 ＝ 23 個、三視角（正面俯看 45°／側面／背面俯看 45°），每張 3 × 4。
+提示詞在 `assets/prompts/bangui/actions_v3/`，規則 `docs/spec/rules_bangui_v3.6.md`，進度看根目錄 `bangui_asset_status.md`（目前 0／23）。
+`reference/sheets/bangui/_incoming/` 有 5 張（05～09）還不知道是哪個動作的新圖，要確認後改名。
+
+**想互動請求**：右下角按鈕＋刷屁屁小遊戲已完成（`js/requests.js`），其餘 9 種規劃在 `docs/interactions.md` A 部分。
+
 待辦的玩法與素材項目（含查證資料與程式位置）整理在 **[docs/backlog.md](docs/backlog.md)**：水中吃東西的動作、有飼料時速度太快、食物的營養組成與挑食。
 
 1. **GitHub Pages 上線**：到 Settings → Pages 選 `main` 分支就能啟用

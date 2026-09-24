@@ -12,12 +12,12 @@ const rand = (a, b) => a + Math.random() * (b - a);
 const ANIM_RATE = 0.5;
 
 const REACTIONS = {
-  happy: { key: ['wag', 'shake'], dur: 1.8 }, // 開心時隨機搖尾巴或搖屁屁
+  happy: { key: 'happy', dur: 1.8 },       // 開心：搖屁屁
   annoyed: { key: 'hide', dur: 2.2 },
-  annoyedFood: { key: 'angry', dur: 1.5 },   // 食物被搶走
-  rescued: { key: ['wag', 'shake'], dur: 1.8 },
+  annoyedFood: { key: 'startled', dur: 1.5 }, // 食物被搶走：嚇一跳
+  rescued: { key: 'happy', dur: 1.8 },
   startled: { key: 'startled', dur: 1.3 },
-  eat: { key: 'nibble', dur: 0.6 },
+  eat: { key: 'eat', dur: 0.6 },           // 水裡會自動換成 eat_water（poses.js）
 };
 
 export class TurtleAgent {

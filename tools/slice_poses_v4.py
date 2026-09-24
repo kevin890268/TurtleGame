@@ -170,13 +170,37 @@ MERGED_INTO_27 = {
     "rise": "surface",
 }
 
-ACTION_NAMES = {**dict(STANDARD_32), **dict(STANDARD_27)}
+# v3 動作（目前使用中）：水上 13 ＋ 水下 10，三視角、每張 3 × 4
+# 清單的來源是 tools/make_actions_v3.py，改動作要兩邊一起改。
+STANDARD_V3 = [
+    ("walk", "走路"), ("turn", "轉身"), ("look", "抬頭張望"), ("sniff", "低頭聞聞"),
+    ("eat", "吃東西（陸上）"), ("bask", "曬背"), ("sleep", "睡覺"), ("yawn", "打哈欠"),
+    ("hide", "縮進殼裡"), ("startled", "嚇一跳"), ("happy", "開心（搖屁屁）"),
+    ("enter_water", "下水"), ("flip", "翻過來"),
+    ("swim", "游泳"), ("swim_turn", "水中轉向"), ("hover", "水中懸停"), ("dive", "下潛"),
+    ("surface", "上浮換氣"), ("float", "水面漂浮"), ("eat_water", "水中吃東西"),
+    ("bottom_walk", "水底走路"), ("bottom_rest", "水底休息"), ("climb_out", "上岸"),
+]
+V3_LAND = {"walk", "turn", "look", "sniff", "eat", "bask", "sleep", "yawn", "hide",
+           "startled", "happy", "enter_water", "flip"}
+
+# 新圖還沒生成前，v3 動作可以先用哪些舊素材頂著（狀態表用）
+V3_SOURCES = {
+    "walk": ["walk_a", "walk_b"],
+    "sleep": ["rest", "relax"],
+    "happy": ["shake", "wag"],
+    "bask": ["stretch"],
+    "surface": ["rise"],
+    "look": ["neck_up", "observe"],
+}
+
+ACTION_NAMES = {**dict(STANDARD_32), **dict(STANDARD_27), **dict(STANDARD_V3)}
 ACTION_KEYS = set(ACTION_NAMES)
 
 
 # 補視角用的 sheet：一張圖只有一個視角，每一列是一個動作、每一欄是一幀。
 # 用途是把已經有側面、只缺正面或背面的動作補齊（見 bangui_asset_status.md）。
-# 對應的提示詞：assets/prompts/bangui_back_fill/back_fill_B.md
+# 對應的提示詞：assets/prompts/bangui/back_fill/back_fill_B.md
 FILL_SHEETS = {
     "back_01": ("B", ["turn", "hide", "rest", "happy"]),
     "back_02": ("B", ["startled", "angry", "wag", "shake"]),
@@ -247,15 +271,21 @@ def discover_v32_action_sheets(species: str) -> list[dict]:
     if not folder.is_dir():
         return []
 
-    order = {key: i for i, (key, _) in enumerate(STANDARD_27)}
+    order = {key: i for i, (key, _) in enumerate(STANDARD_V3)}
+    order.update({
+        key: len(STANDARD_V3) + i
+        for i, (key, _) in enumerate(STANDARD_27)
+        if key not in order
+    })
     order.update({
         key: len(STANDARD_27) + i
         for i, (key, _) in enumerate(STANDARD_32)
         if key not in order
     })
 
-    found: dict[str, tuple[int, Path]] = {}
+    found: dict[str, tuple[int, Path, bool]] = {}
     unknown: list[str] = []
+    superseded: list[str] = []
 
     for path in sorted(folder.glob("*.png")):
         m = re.match(r"(?:action_)?(\d{2})_(.+?)(?:_4x4)?$", path.stem)
@@ -265,10 +295,22 @@ def discover_v32_action_sheets(species: str) -> list[dict]:
         if key not in ACTION_KEYS:
             unknown.append(path.name)
             continue
-        found.setdefault(key, (action_id, path))
+        # 編號和名稱都對上 v3 清單才是 v3 圖（3 × 4）；同一個動作有新舊兩張時用 v3 的
+        is_v3 = 1 <= action_id <= len(STANDARD_V3) and STANDARD_V3[action_id - 1][0] == key
+        prev = found.get(key)
+        if prev is None or (is_v3 and not prev[2]):
+            if prev is not None:
+                superseded.append(prev[1].name)
+            found[key] = (action_id, path, is_v3)
+        elif is_v3 == prev[2]:
+            pass
+        else:
+            superseded.append(path.name)
 
     if unknown:
         print(f"[{species}] 檔名的動作名稱不在清單裡，略過：{unknown}")
+    if superseded:
+        print(f"[{species}] 已有 v3 新圖，舊圖不再使用：{superseded}")
 
     specs = []
 
@@ -288,13 +330,14 @@ def discover_v32_action_sheets(species: str) -> list[dict]:
             "name": f"{view} 視角補圖",
         })
 
-    for key, (action_id, path) in sorted(
+    for key, (action_id, path, is_v3) in sorted(
         found.items(), key=lambda kv: order.get(kv[0], 999)
     ):
         spec = make_action_sheet_spec(
             species, action_id, key, ACTION_NAMES.get(key, key)
         )
         spec["file"] = str(path.relative_to(ROOT)).replace("\\", "/")
+        spec["v3"] = is_v3
         specs.append(spec)
 
     return specs
@@ -657,6 +700,14 @@ def content_bands(mask_axis: np.ndarray, min_len: int = 20) -> list[tuple[int, i
     return [b for b in bands if b[1] - b[0] >= min_len]
 
 
+def count_rows(img: np.ndarray, spec: dict) -> int:
+    """圖上實際有幾列烏龜（v3 是 3 列、舊版是 4 列）。"""
+    if "bgColor" not in spec and spec.get("bg", "magenta") != "alpha":
+        spec["bgColor"] = estimate_bg_color(img)
+    alpha = clean_alpha(img, spec.get("bg", "magenta"), spec.get("bgColor"))
+    return len(content_bands((alpha > 0.5).any(1)))
+
+
 def auto_grid(img: np.ndarray, spec: dict, rows: int, cols: int, report: list[str]):
     """
     依「圖上實際有東西的位置」決定格線，而不是平均切。
@@ -990,6 +1041,30 @@ def process_sheet(spec: dict, results: dict, report: list[str], out_dir: Path):
                 f"  ⚠ 這幾格看起來是側面不是 {view}，建議重生成：{'、'.join(odd)}"
             )
 
+    elif layout == "4x4_action" and spec.get("v3"):
+        # v3：3 列固定是 正面 / 側面 / 背面
+        rows = spec["rows"] = 3
+        cw, ch = w / cols, h / rows
+        grid = auto_grid(img, spec, rows, cols, report)
+        y_cuts = grid[0] if grid else [round(r * ch) for r in range(rows + 1)]
+        x_cuts = grid[1] if grid else [round(c * cw) for c in range(cols + 1)]
+
+        action = spec["action"]
+        name = spec["name"]
+        entries = []
+        for r, view in enumerate(("F", "R", "B")):
+            for c in range(4):
+                flip = False
+                if view == "R":
+                    # 側面規定要朝右；畫成朝左的格子鏡像回來
+                    cell = img[y_cuts[r]:y_cuts[r + 1], x_cuts[c]:x_cuts[c + 1]]
+                    f = cell_facing(cell, _prepare_cell(cell, spec))
+                    flip = f is not None and f < -SIDE_THRESHOLD
+                entries.append((f"{action}_{view}_{c + 1}", name, action, c + 1, view, flip))
+        found_rows = count_rows(img, spec)
+        report.append("  視角：F R B（v3 三視角）" + ("" if found_rows == 3 else
+                      f"  ⚠ 圖上看起來有 {found_rows} 列，預期 3 列，請確認排版"))
+
     elif layout == "4x4_action":
         validate_raw_4x4_sheet(img, spec, report)
 
@@ -1250,10 +1325,10 @@ def slice_species(species: str):
         for view in VIEWS
     }
 
-    # 以 27 動作為準，看每個動作實際有哪些視角（舊名字併過去一起算）
+    # 以 v3 動作為準，看每個動作實際有哪些視角（新圖還沒生成時，舊素材一起算）
     coverage = {}
-    for key, _name in STANDARD_27:
-        sources = [key] + [old for old, new_ in MERGED_INTO_27.items() if new_ == key]
+    for key, _name in STANDARD_V3:
+        sources = [key] + V3_SOURCES.get(key, [])
         got = {
             v["view"]
             for v in results.values()
@@ -1272,9 +1347,10 @@ def slice_species(species: str):
 
     meta = {
         "version": "3.2",
-        "actions27": [
-            {"id": i, "key": key, "name": name, **coverage[key]}
-            for i, (key, name) in enumerate(STANDARD_27, start=1)
+        "actionsV3": [
+            {"id": i, "key": key, "name": name,
+             "context": "land" if key in V3_LAND else "water", **coverage[key]}
+            for i, (key, name) in enumerate(STANDARD_V3, start=1)
         ],
         "size": OUT_SIZE,
         "anchor": list(ANCHOR),
@@ -1301,6 +1377,14 @@ def slice_species(species: str):
         json.dumps(meta, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
+
+    # 清掉這次沒有產生的舊圖（換了新圖、刪了動作之後，舊檔不會自己消失）
+    keep = {v["file"] for v in results.values()}
+    stale = [f for f in out_dir.glob("*.png") if f.name not in keep]
+    for f in stale:
+        f.unlink()
+    if stale:
+        report.append(f"  清掉 {len(stale)} 張已不使用的舊圖")
 
     PREVIEW_DIR.mkdir(parents=True, exist_ok=True)
     preview = PREVIEW_DIR / f"poses_preview_{species}_v3.png"

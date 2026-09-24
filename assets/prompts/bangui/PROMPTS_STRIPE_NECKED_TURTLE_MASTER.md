@@ -1,6 +1,6 @@
 # 斑龜全視角姿勢圖：定裝照 26 方向
 
-> 品種 **斑龜** *Mauremys sinensis*。此檔案僅含**定裝照**；動作提示詞已移至共用檔案 [`PROMPTS_ACTIONS_4DIR.md`](./PROMPTS_ACTIONS_4DIR.md)（所有澤龜共用）。
+> 品種 **斑龜** *Mauremys sinensis*。此檔案僅含**定裝照**；動作提示詞已移至共用檔案 [`PROMPTS_ACTIONS_4DIR.md`](../shared/PROMPTS_ACTIONS_4DIR.md)（所有澤龜共用）。
 
 ---
 
@@ -35,4 +35,4 @@ Row 5: 25) SE-DOWN | 26) BOTTOM (directly below, looking straight up at plastron
 
 **此張定案後，後續所有動作皆寫**：「*the same turtle as the attached 26-view reference, EXACT same colors, patterns, stripes, eye color, claw color and style — do NOT alter appearance, only change the pose as described in PROMPTS_ACTIONS_4DIR.md*」。
 
-**下一步**：上傳此 `ref_26.png` 至 [`PROMPTS_ACTIONS_4DIR.md`](./PROMPTS_ACTIONS_4DIR.md) 的各 Sheet 提示詞生成動作。
+**下一步**：上傳此 `ref_26.png` 至 [`PROMPTS_ACTIONS_4DIR.md`](../shared/PROMPTS_ACTIONS_4DIR.md) 的各 Sheet 提示詞生成動作。

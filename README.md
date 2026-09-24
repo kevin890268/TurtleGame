@@ -45,36 +45,80 @@ python -m http.server 8123
 地形定義在 `js/terrain.js` 的 `PROFILE`，2D 和 2.5D 共用。
 烏龜在水夠深的地方用游的，在淺水區和曬台上用走的；小烏龜在淺水區也游得起來，長大後就只能用走的。
 
-## 烏龜姿勢圖
+## 烏龜姿勢圖（斑龜 v3）
 
-1. 照 `assets/prompts/PROMPTS_<品種英文名>.md` 請 GPT 生姿勢表，存到 `reference/sheets/<品種>/`
-2. 執行切圖工具（需要 Python 的 numpy、scipy、Pillow）：
+每個動作一張圖，流程：
+
+1. 在 ChatGPT 依序上傳三個檔案：
+   - `reference/character/bangui_character.png`（角色參考）
+   - `docs/spec/rules_bangui_v3.6.md`（規則：三視角、3 × 4）
+   - `assets/prompts/bangui/actions_v3/action_NN_xxx.md`（要做的那個動作）
+2. 產出的圖存成 `reference/sheets/bangui/action_NN_xxx.png`（檔名照動作檔）
+3. 切圖並更新素材狀態表（需要 Python 的 numpy、scipy、Pillow）：
    ```bash
-   python tools/slice_poses.py
+   python tools/slice_poses_v4.py bangui
    ```
-3. 切好的圖會放在 `assets/poses/<品種>/`，預覽圖在 `reference/previews/`
+   ```bash
+   python tools/asset_status.py
+   ```
+4. 切好的圖在 `assets/poses/bangui/`，進度看根目錄的 `bangui_asset_status.md`
 
-工具會自動去背、濾掉文字和特效，並以背甲中心對齊、統一大小。`reference/sheets/bangui/proto_36.png` 是原型，
-`reference/sheets/bangui/` 裡的正式版會覆蓋同名姿勢。
+v3 的三個視角：**正面**（前方、俯看 45°）、**側面**（面向右）、**背面**（後方、俯看 45°）。
+左側由切圖工具鏡像產生。動作分成水上 13 個、水下 10 個，清單在
+`assets/prompts/bangui/actions_v3/README.md`。
 
-## 檔案結構
+還沒有 v3 新圖的動作，遊戲會先用舊圖代替（`js/poses.js` 的 `POSE_FALLBACK`），不會缺畫面。
+
+## 資料夾結構
 
 ```
-index.html
-css/style.css
-js/config.js   可調參數（時間倍率、日夜時段、成長速度…）
-js/state.js    存檔／讀檔
-js/sim.js      遊戲規則（數值變化、玩家動作）
-js/terrain.js  地形剖面（深水區、淺水區、曬台）
-js/tank.js     烏龜行為（游泳、走路、上岸、吃東西）+ 2D 畫面
-js/tank3d.js   2.5D 畫面（繼承 tank.js，只換掉繪圖）
-js/poses.js    姿勢圖載入、依狀態挑姿勢、程式做的小動作
-js/turtle-shape.js  沒有姿勢圖時用程式畫的烏龜
-js/ui.js       面板顯示
-js/main.js     把上面串起來
-assets/poses/  切好的姿勢圖（由 tools/slice_poses.py 產生）
-reference/     GPT 原始圖：concept/ 概念圖、sheets/<品種>/ 姿勢表、previews/ 切圖預覽
-tools/slice_poses.py  姿勢表切圖工具
+index.html, css/style.css      遊戲本體（靜態網站，不用建置）
+js/
+  config.js      可調參數（時間倍率、日夜時段、成長速度…）
+  state.js       存檔／讀檔（含版號）
+  sim.js         遊戲規則（數值變化、玩家動作）
+  species.js     品種資料
+  terrain.js     地形剖面（深水區、淺水區、曬台）
+  tank.js        烏龜缸：食物物理、多隻烏龜、2D 畫面
+  tank3d.js      2.5D 畫面（繼承 tank.js，只換掉繪圖）
+  turtle-agent.js  每隻烏龜的行為
+  poses.js       姿勢圖載入、依狀態挑動作
+  requests.js    想互動請求（右下角按鈕）與刷屁屁小遊戲
+  turtle-shape.js  沒有姿勢圖時用程式畫的烏龜
+  menu.js, ui.js, decor.js  功能表、面板、造景
+  main.js        把上面串起來
+bangui_asset_status.md         斑龜素材進度（tools/asset_status.py 產生）
+status.md                      開發狀態
+README.md
+
+assets/
+  poses/<品種>/                切好的姿勢圖 + poses.json（切圖工具產生，不要手改）
+  prompts/
+    bangui/
+      actions_v3/              ★ 目前使用的斑龜動作提示詞（23 個）
+      back_fill/               補背面用的提示詞（舊 4 視角時期）
+      archive/                 舊版動作（v1 的 32 個、v2 的 27 個）
+      PROMPTS_STRIPE_NECKED_TURTLE_MASTER.md  斑龜 26 方向定裝照
+    shared/                    各品種共用的動作提示詞（舊 4 視角版）
+    species/                   各品種的定裝照與姿勢表提示詞（tools/make_prompts.py 產生）
+
+reference/                     GPT 產的原始圖
+  character/                   角色參考圖
+  concept/                     概念圖、標題圖
+  sheets/<品種>/               動作圖（切圖工具的輸入）
+    bangui/_incoming/          還沒分類的新圖（不知道是哪個動作，先放這裡）
+    bangui/_v3_archive/        更早期的舊圖
+  species/<英文名>/            之後想加的品種的設定板
+  previews/                    切圖預覽
+
+docs/
+  spec/                        生圖規則（rules_*.md）與規格
+  backlog.md                   待辦（含查證資料）
+  interactions.md              玩家互動與「想互動請求」規劃
+  nature_objects.md            水中／陸上自然物清單（造景用）
+  species*.md, ideas_species.md  品種研究與候選
+
+tools/                         見 tools/README.md
 ```
 
 ## 存檔版號

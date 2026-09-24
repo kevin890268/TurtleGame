@@ -1,37 +1,44 @@
-# 斑龜素材狀態（以 27 動作為準）
+# 斑龜素材狀態（v3 動作）
 
-更新：2026-09-24。切圖工具 `tools/slice_poses_v4.py`，輸出 328 張。
+由 `tools/asset_status.py` 產生。目前切出 344 張。
 
-側面（R/L）是遊戲現在唯一會用到的視角：切圖時所有側面一律正規化成朝右，
-左側由程式鏡像產生，所以左右一定對稱。正面／背面（F/B）目前還沒被算圖用到，
-是留給之後鏡頭轉向（2.5D 深度）用的。
+v3 規則：三視角（正面俯看 45°／側面朝右／背面俯看 45°），每個動作一張 3 × 4 的圖。
+左側由程式鏡像產生，不用畫。動作清單與提示詞：`assets/prompts/bangui/actions_v3/`。
 
-| # | 動作 | 說明 | 已有視角 | 來源舊動作 | 狀態 |
-|---|---|---|---|---|---|
-| 1 | walk_a | 地面行走 | BFLR | walk_a+walk_b | OK |
-| 2 | run | 快速爬行 | BFLR | run | OK |
-| 3 | turn | 轉方向 | FLR | turn | 缺 背面 |
-| 4 | look | 停下張望／抬頭伸脖 | BFLR | look+neck_up+observe | OK |
-| 5 | sniff | 低頭聞聞 | LR | sniff | 缺 正面／背面 |
-| 6 | bask | 曬太陽 | — | bask | **整張缺**：沒有這個動作的圖 |
-| 7 | sleep | 睡覺 | LR | sleep | 缺 正面／背面 |
-| 8 | yawn | 打哈欠 | LR | yawn | 缺 正面／背面 |
-| 9 | stretch | 伸懶腰 | LR | stretch | 缺 正面／背面 |
-| 10 | hide | 縮進殼裡 | FLR | hide | 缺 背面 |
-| 11 | rest | 趴著休息／放鬆 | FLR | rest+relax | 缺 背面 |
-| 12 | happy | 開心 | FLR | happy | 缺 背面 |
-| 13 | startled | 驚嚇 | FLR | startled | 缺 背面 |
-| 14 | angry | 生氣 | FLR | angry | 缺 背面 |
-| 15 | wag | 搖尾巴 | FLR | wag | 缺 背面 |
-| 16 | shake | 搖屁屁 | FLR | shake | 缺 背面 |
-| 17 | dig | 挖土 | FLR | dig | 缺 背面 |
-| 18 | eat | 吃東西 | LR | eat | 缺 正面／背面 |
-| 19 | poop | 排泄 | FLR | poop | 缺 背面 |
-| 20 | play | 玩耍 | LR | play | 缺 正面／背面 |
-| 21 | enter_water | 進入水中 | LR | enter_water | 缺 正面／背面 |
-| 22 | swim | 悠閒游泳 | LR | swim | 缺 正面／背面 |
-| 23 | swim_fast | 快速游泳 | LR | swim_fast | 缺 正面／背面 |
-| 24 | swim_turn | 水中轉向 | LR | swim_turn | 缺 正面／背面 |
-| 25 | dive | 下潛 | FLR | dive | 缺 背面 |
-| 26 | float | 水中漂浮 | LR | float | 缺 正面／背面 |
-| 27 | surface | 上浮換氣 | LR | surface+rise | 缺 正面／背面 |
+還沒有 v3 新圖的動作，遊戲會先用舊圖代替（下表「用舊圖」），所以不會缺畫面；
+但舊圖的正面／背面是舊的平視角度，跟 v3 的俯看 45° 不一樣，最終都要換成新圖。
+
+## 水上（13）
+
+| # | 動作 | 說明 | 現有視角 | 狀態 |
+|---:|---|---|---|---|
+| 01 | `walk` | 走路 | BFLR | 用舊圖 `walk_a`、`walk_b` |
+| 02 | `turn` | 轉身 | BFLR | 用舊圖 `turn` |
+| 03 | `look` | 抬頭張望 | BFLR | 用舊圖 `look`、`neck_up`、`observe` |
+| 04 | `sniff` | 低頭聞聞 | LR | 用舊圖 `sniff`，缺正面／背面 |
+| 05 | `eat` | 吃東西（陸上） | LR | 用舊圖 `eat`，缺正面／背面 |
+| 06 | `bask` | 曬背 | LR | 用舊圖 `stretch`，缺正面／背面 |
+| 07 | `sleep` | 睡覺 | BFLR | 用舊圖 `sleep`、`rest`、`relax` |
+| 08 | `yawn` | 打哈欠 | LR | 用舊圖 `yawn`，缺正面／背面 |
+| 09 | `hide` | 縮進殼裡 | BFLR | 用舊圖 `hide` |
+| 10 | `startled` | 嚇一跳 | FLR | 用舊圖 `startled`，缺背面 |
+| 11 | `happy` | 開心（搖屁屁） | BFLR | 用舊圖 `happy`、`shake`、`wag` |
+| 12 | `enter_water` | 下水 | LR | 用舊圖 `enter_water`，缺正面／背面 |
+| 13 | `flip` | 翻過來 | — | **沒有圖** |
+
+## 水下（10）
+
+| # | 動作 | 說明 | 現有視角 | 狀態 |
+|---:|---|---|---|---|
+| 14 | `swim` | 游泳 | LR | 用舊圖 `swim`，缺正面／背面 |
+| 15 | `swim_turn` | 水中轉向 | LR | 用舊圖 `swim_turn`，缺正面／背面 |
+| 16 | `hover` | 水中懸停 | — | **沒有圖** |
+| 17 | `dive` | 下潛 | FLR | 用舊圖 `dive`，缺背面 |
+| 18 | `surface` | 上浮換氣 | LR | 用舊圖 `surface`、`rise`，缺正面／背面 |
+| 19 | `float` | 水面漂浮 | LR | 用舊圖 `float`，缺正面／背面 |
+| 20 | `eat_water` | 水中吃東西 | — | **沒有圖** |
+| 21 | `bottom_walk` | 水底走路 | — | **沒有圖** |
+| 22 | `bottom_rest` | 水底休息 | — | **沒有圖** |
+| 23 | `climb_out` | 上岸 | — | **沒有圖** |
+
+**進度：0 / 23 個動作有 v3 新圖；6 個完全沒有圖。**

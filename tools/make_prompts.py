@@ -1,4 +1,4 @@
-"""產生各品種的 GPT 姿勢圖提示詞，輸出到 assets/prompts/PROMPTS_<英文名>.md。
+"""產生各品種的 GPT 姿勢圖提示詞，輸出到 assets/prompts/species/PROMPTS_<英文名>.md。
 
   python tools/make_prompts.py
 
@@ -17,7 +17,7 @@
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / 'assets' / 'prompts'
+OUT = ROOT / 'assets' / 'prompts' / 'species'
 
 STANDARDS_ZH = """## 提示詞的撰寫標準
 

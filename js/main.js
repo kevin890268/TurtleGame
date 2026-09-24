@@ -6,6 +6,7 @@ import { loadPoses, loadPoseIndex } from './poses.js';
 import { SPECIES_LIST, getSpecies } from './species.js';
 import * as ui from './ui.js';
 import { initMenu } from './menu.js';
+import { Requests } from './requests.js';
 
 const $ = id => document.getElementById(id);
 const HOUR = 3.6e6;
@@ -406,7 +407,27 @@ async function start() {
     onEvent,
   });
   tank.setSelected(selectedId);
-  if (CONFIG.timeScale !== 1) window.debug = { tank, state: () => state };
+
+  // 想互動請求（右下角的按鈕）
+  const requests = new Requests({
+    getState: () => state,
+    getTank: () => tank,
+    getPoses: sp => assets.poses[sp],
+    getPalette: sp => getSpecies(sp).palette,
+    onComplete: (id, type) => {
+      const t = findTurtle(state, id);
+      if (!t) return;
+      if (type === 'brush') {
+        t.stats.mood = sim.clamp(t.stats.mood + 10);
+        const msg = `${t.name} 被刷屁屁刷得好舒服，心情變好了！`;
+        addLog(state, msg);
+        tank.agents.get(id)?.react('happy');
+        act(msg);
+      }
+    },
+  });
+
+  if (CONFIG.timeScale !== 1) window.debug = { tank, state: () => state, requests };
   bindActions();
   refresh();
 

@@ -82,7 +82,7 @@ export function withView(poses, key, view) {
 }
 
 // 找這個動作實際存在的圖：先照方向、再照幀，都沒有就換視角或退回第 1 幀
-function pickPose(poses, action, dir, anim, fps = 6) {
+export function pickPose(poses, action, dir, anim, fps = 6) {
   if (!poses || !action) return null;
   const idx = Math.floor(Math.max(0, anim) * fps) % FRAMES_PER_ACTION + 1;
   const views = dir === 'L' ? ['L', 'R', 'F', 'B'] : ['R', 'L', 'F', 'B'];
@@ -102,43 +102,48 @@ function pickPose(poses, action, dir, anim, fps = 6) {
   return poses.has(action) ? action : null;
 }
 
-// 各情境可以隨機穿插的小動作
+// 各情境可以隨機穿插的小動作（v3 動作名稱，見 assets/prompts/bangui/actions_v3/README.md）
 const IDLE_EXTRAS = {
-  bask: ['yawn', 'stretch', 'relax', 'neck_up', 'purr', 'look', 'wag', 'shake'],
-  shallow: ['drink', 'sniff', 'look', 'exhale', 'think', 'neck_up', 'wag', 'shake'],
-  bottom: ['look', 'sniff', 'think', 'exhale'],
-  float: ['exhale', 'float'],
+  bask: ['yawn', 'look', 'happy', 'sniff'],
+  shallow: ['sniff', 'look', 'happy', 'yawn'],
+  bottom: ['look', 'sniff'],
+  float: ['surface', 'hover'],
 };
-const IDLE_BASE = { bask: 'bask', shallow: 'observe', bottom: 'rest', float: 'float' };
+const IDLE_BASE = { bask: 'bask', shallow: 'look', bottom: 'bottom_rest', float: 'float' };
 
-// 依烏龜目前的狀態決定要用哪個姿勢（t 是 Tank 裡的烏龜狀態）
-// 某個品種還沒有這個姿勢的圖時，依序改用最接近的姿勢（最後退回標準站姿）
+// 某個動作還沒有圖時，依序改用哪些姿勢（只往下找一層）。
+// v3 的新動作先退回舊版切圖的名稱，所以新圖還沒生成、或其他品種還是舊素材時都有圖可用。
 const POSE_FALLBACK = {
+  // ---- v3 水上 ----
+  walk: ['walk_a', 'walk_b'],
+  turn: ['walk', 'walk_a'],
+  look: ['observe', 'neck_up', 'think'],
+  sniff: ['observe', 'look'],
+  eat: ['nibble', 'sniff'],
+  bask: ['stretch', 'rest', 'relax'],
   sleep: ['rest', 'hide', 'head_in'],
-  flip: ['hide', 'rest'],
-  bask: ['rest', 'relax', 'stretch'],
-  swim: ['walk_b', 'walk_a'],
-  dive: ['swim', 'walk_b'],
-  rise: ['swim', 'neck_up'],
-  float: ['swim', 'rest'],
-  drink: ['neck_up', 'observe'],
-  nibble: ['sniff', 'angry'],
-  exhale: ['neck_up', 'observe'],
-  run: ['walk_b', 'walk_a'],
   yawn: ['angry', 'relax'],
-  stretch: ['neck_up', 'relax'],
-  purr: ['relax', 'rest'],
-  relax: ['rest', 'walk_a'],
-  startled: ['alert', 'neck_up', 'look'],
-  angry: ['hide'],
-  happy: ['observe', 'look'],
-  wag: ['shake', 'happy', 'relax'],
-  shake: ['wag', 'happy', 'relax'],
-  think: ['look', 'observe'],
-  look: ['observe', 'think'],
-  observe: ['look', 'neck_up'],
   hide: ['head_in', 'rest'],
+  startled: ['alert', 'neck_up', 'look'],
+  happy: ['shake', 'wag', 'observe', 'look'],
+  enter_water: ['walk', 'walk_a'],
+  flip: ['hide', 'rest'],
+  // ---- v3 水下 ----
+  swim: ['walk_b', 'walk_a'],
+  swim_turn: ['swim', 'walk_b'],
+  hover: ['float', 'swim'],
+  dive: ['swim', 'walk_b'],
+  surface: ['rise', 'float', 'swim'],
+  float: ['swim', 'rest'],
+  eat_water: ['nibble', 'sniff'],
+  bottom_walk: ['walk', 'walk_a', 'walk_b'],
+  bottom_rest: ['rest', 'sleep', 'relax'],
+  climb_out: ['walk', 'walk_a'],
+  // ---- 舊名稱（其他品種的舊素材還在用） ----
+  rise: ['swim', 'neck_up'],
+  nibble: ['sniff', 'angry'],
   rest: ['hide', 'relax'],
+  observe: ['look', 'neck_up'],
 };
 
 // 找這個姿勢能用的圖：沒有這個動作就照 POSE_FALLBACK 找替代，最後退回走路
@@ -148,7 +153,7 @@ function resolvePose(poses, key, anim, dir) {
     const found = pickPose(poses, k, dir, anim);
     if (found) return found;
   }
-  return pickPose(poses, 'walk_a', dir, anim) || key;
+  return pickPose(poses, 'walk', dir, anim) || pickPose(poses, 'walk_a', dir, anim) || key;
 }
 
 export function choosePose(t, time, ctx) {
@@ -160,27 +165,29 @@ export function choosePose(t, time, ctx) {
 
 function baseKey(t, time, ctx) {
   if (t.mode === 'flipped') return 'flip';
-  if (t.flash && time < t.flash.until) return t.flash.key;
 
-  const wp = t.path[0];
-  if (wp) {
-    if (wp.walk) {
-      if (t.mode === 'food') return 'run';
-      // walk_a / walk_b 是同一組走路的兩個循環，每隔幾步換一組，腳步看起來比較不呆板
-      return Math.floor(t.anim * 1.5) % 2 ? 'walk_b' : 'walk_a';
-    }
-    if (t.vy > 0.6) return 'dive';
-    if (t.vy < -0.6) return 'rise';
-    return 'swim';
-  }
-
-  if (t.mode === 'sleep') return 'sleep';
-  if (ctx.sick) return 'rest';
-  if (t.mode === 'food') return 'sniff';
-
+  // 在哪裡：曬台（陸上）、淺灘（算陸上）、水底、水中
   const where = t.grounded
     ? (t.y < ctx.waterTop ? 'bask' : t.x > ctx.swimLimit - 40 ? 'shallow' : 'bottom')
     : 'float';
+  const underwater = where === 'bottom' || where === 'float';
+
+  if (t.flash && time < t.flash.until) {
+    // 吃東西：水裡用水中版，陸上用陸上版
+    if (t.flash.key === 'eat' && underwater) return 'eat_water';
+    return t.flash.key;
+  }
+
+  const wp = t.path[0];
+  if (wp) {
+    if (wp.walk) return where === 'bottom' ? 'bottom_walk' : 'walk';
+    if (t.vy > 0.6) return 'dive';
+    if (t.vy < -0.6) return 'surface';
+    return 'swim';
+  }
+
+  if (t.mode === 'sleep' || ctx.sick) return underwater ? 'bottom_rest' : 'sleep';
+  if (t.mode === 'food') return where === 'float' ? 'hover' : 'sniff';
 
   // 每隔幾秒隨機做個小動作
   if (time > t.idleNext) {
