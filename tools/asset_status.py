@@ -59,6 +59,9 @@ def main() -> None:
     done = sum(status(a).startswith("✅") for a in actions)
     none = sum(not a["views"] for a in actions)
     lines += [f"**進度：{done} / {len(actions)} 個動作有 v3 新圖；{none} 個完全沒有圖。**", ""]
+    todo = [f"{a['id']:02d} `{a['key']}`（{a['name']}）" for a in actions if not status(a).startswith("✅")]
+    if todo:
+        lines += ["還要生成：" + "、".join(todo), ""]
     OUT.write_text("\n".join(lines), encoding="utf-8")
     print(f"寫入 {OUT}（v3 新圖 {done}／{len(actions)}，沒圖 {none}）")
 

@@ -472,6 +472,13 @@ def keep_main_blob(alpha: np.ndarray) -> np.ndarray:
     keep_ids = np.where(sizes >= max(12, largest_size * 0.025))[0]
     keep_ids = set(int(x) for x in keep_ids if x != 0)
 
+    # 碰到格子邊緣的小塊是隔壁格烏龜被格線切到的一角（例如下一列背面圖的頭），
+    # 不是這隻烏龜的一部分。主體本身碰到邊緣則照留。
+    edge = np.zeros_like(binary)
+    edge[0, :] = edge[-1, :] = edge[:, 0] = edge[:, -1] = True
+    touching = set(int(x) for x in np.unique(labels[edge]) if x != 0)
+    keep_ids -= touching - {largest}
+
     mask = np.isin(labels, list(keep_ids))
 
     # Remove tiny islands left by threshold noise.
@@ -818,7 +825,8 @@ def detect_row_views(img: np.ndarray, spec: dict, report: list[str]):
 def mirror_missing_side(results: dict, out_dir: Path, report: list[str]) -> None:
     """只有一側的動作，用水平翻轉補出另一側（錨點要跟著鏡像回原位）。"""
     made = 0
-    for action, _name in STANDARD_32:
+    # 所有切出來的動作都要補（v3 新增的動作不在舊的 32 個清單裡）
+    for action in sorted({v["action"] for v in results.values()}):
         for src_view, dst_view in (("R", "L"), ("L", "R")):
             for frame in range(1, 5):
                 src_key = f"{action}_{src_view}_{frame}"
@@ -1312,7 +1320,7 @@ def slice_species(species: str):
     # Validate duplicates / missing views.
     expected = {
         f"{action}_{view}_{frame}"
-        for action, _name in STANDARD_32
+        for action, _name in STANDARD_V3
         for view in VIEWS
         for frame in range(1, 5)
     }
@@ -1366,7 +1374,7 @@ def slice_species(species: str):
             for i, (key, name) in enumerate(STANDARD_32, start=1)
         ],
         "framesPerAction": 4,
-        "expectedFrames": len(STANDARD_32) * 4 * 4,
+        "expectedFrames": len(STANDARD_V3) * 4 * 4,
         "actualFrames": len(results),
         "viewCounts": view_counts,
         "missing": missing,
@@ -1395,7 +1403,8 @@ def slice_species(species: str):
     print(f"\n[{species}] v3.2")
     print("\n".join(report))
     print(
-        f"\n輸出：{len(results)} / {meta['expectedFrames']} frames"
+        f"\n輸出：{len(results)} 張（v3 動作 {len(expected & set(results))} / {meta['expectedFrames']}，"
+        f"其餘是舊動作的圖，給還沒有 v3 新圖的動作代替用）"
     )
     print(f"資料夾：{out_dir}")
     print(f"poses.json：{out_dir / 'poses.json'}")
