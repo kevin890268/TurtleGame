@@ -671,12 +671,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_01_walk.png",
       "shellFound": true,
-      "bottom": 0.465,
-      "scale": 0.71207,
+      "bottom": 0.47,
+      "scale": 0.72101,
       "clipped": false,
       "offset": [
-        142,
-        217
+        141,
+        216
       ]
     },
     "walk_F_2": {
@@ -688,11 +688,11 @@
       "source": "reference/sheets/bangui/action_01_walk.png",
       "shellFound": true,
       "bottom": 0.45,
-      "scale": 0.71207,
+      "scale": 0.72101,
       "clipped": false,
       "offset": [
-        162,
-        213
+        161,
+        212
       ]
     },
     "walk_F_3": {
@@ -704,11 +704,11 @@
       "source": "reference/sheets/bangui/action_01_walk.png",
       "shellFound": true,
       "bottom": 0.5,
-      "scale": 0.71207,
+      "scale": 0.72101,
       "clipped": false,
       "offset": [
         163,
-        219
+        218
       ]
     },
     "walk_F_4": {
@@ -720,11 +720,11 @@
       "source": "reference/sheets/bangui/action_01_walk.png",
       "shellFound": true,
       "bottom": 0.465,
-      "scale": 0.71207,
+      "scale": 0.72101,
       "clipped": false,
       "offset": [
-        159,
-        208
+        157,
+        207
       ]
     },
     "walk_R_1": {
@@ -736,11 +736,11 @@
       "source": "reference/sheets/bangui/action_01_walk.png",
       "shellFound": true,
       "bottom": 0.295,
-      "scale": 0.71207,
+      "scale": 0.72101,
       "clipped": false,
       "offset": [
-        124,
-        241
+        122,
+        240
       ]
     },
     "walk_R_2": {
@@ -752,10 +752,10 @@
       "source": "reference/sheets/bangui/action_01_walk.png",
       "shellFound": true,
       "bottom": 0.295,
-      "scale": 0.71207,
+      "scale": 0.72101,
       "clipped": false,
       "offset": [
-        123,
+        122,
         240
       ]
     },
@@ -767,12 +767,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_01_walk.png",
       "shellFound": true,
-      "bottom": 0.295,
-      "scale": 0.71207,
+      "bottom": 0.29,
+      "scale": 0.72101,
       "clipped": false,
       "offset": [
-        125,
-        241
+        123,
+        240
       ]
     },
     "walk_R_4": {
@@ -784,11 +784,11 @@
       "source": "reference/sheets/bangui/action_01_walk.png",
       "shellFound": true,
       "bottom": 0.3,
-      "scale": 0.71207,
+      "scale": 0.72101,
       "clipped": false,
       "offset": [
-        130,
-        240
+        122,
+        239
       ]
     },
     "walk_B_1": {
@@ -799,12 +799,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_01_walk.png",
       "shellFound": true,
-      "bottom": 0.505,
-      "scale": 0.71207,
+      "bottom": 0.57,
+      "scale": 0.72101,
       "clipped": false,
       "offset": [
-        158,
-        198
+        156,
+        184
       ]
     },
     "walk_B_2": {
@@ -815,12 +815,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_01_walk.png",
       "shellFound": true,
-      "bottom": 0.525,
-      "scale": 0.71207,
+      "bottom": 0.595,
+      "scale": 0.72101,
       "clipped": false,
       "offset": [
-        162,
-        200
+        161,
+        184
       ]
     },
     "walk_B_3": {
@@ -831,12 +831,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_01_walk.png",
       "shellFound": true,
-      "bottom": 0.53,
-      "scale": 0.71207,
+      "bottom": 0.595,
+      "scale": 0.72101,
       "clipped": false,
       "offset": [
-        148,
-        199
+        147,
+        183
       ]
     },
     "walk_B_4": {
@@ -847,12 +847,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_01_walk.png",
       "shellFound": true,
-      "bottom": 0.51,
-      "scale": 0.71207,
+      "bottom": 0.585,
+      "scale": 0.72101,
       "clipped": false,
       "offset": [
         152,
-        196
+        179
       ]
     },
     "turn_F_1": {
@@ -863,12 +863,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_02_turn.png",
       "shellFound": true,
-      "bottom": 0.4,
-      "scale": 0.73343,
+      "bottom": 0.395,
+      "scale": 0.74432,
       "clipped": false,
       "offset": [
-        159,
-        219
+        158,
+        217
       ]
     },
     "turn_F_2": {
@@ -880,11 +880,11 @@
       "source": "reference/sheets/bangui/action_02_turn.png",
       "shellFound": true,
       "bottom": 0.415,
-      "scale": 0.73343,
+      "scale": 0.74432,
       "clipped": false,
       "offset": [
-        146,
-        216
+        144,
+        215
       ]
     },
     "turn_F_3": {
@@ -896,10 +896,10 @@
       "source": "reference/sheets/bangui/action_02_turn.png",
       "shellFound": true,
       "bottom": 0.41,
-      "scale": 0.73343,
+      "scale": 0.74432,
       "clipped": false,
       "offset": [
-        137,
+        135,
         218
       ]
     },
@@ -911,12 +911,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_02_turn.png",
       "shellFound": true,
-      "bottom": 0.385,
-      "scale": 0.73343,
+      "bottom": 0.39,
+      "scale": 0.74432,
       "clipped": false,
       "offset": [
-        133,
-        224
+        132,
+        223
       ]
     },
     "turn_R_1": {
@@ -927,12 +927,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_02_turn.png",
       "shellFound": true,
-      "bottom": 0.345,
-      "scale": 0.73343,
+      "bottom": 0.34,
+      "scale": 0.74432,
       "clipped": false,
       "offset": [
-        111,
-        231
+        110,
+        230
       ]
     },
     "turn_R_2": {
@@ -944,11 +944,11 @@
       "source": "reference/sheets/bangui/action_02_turn.png",
       "shellFound": true,
       "bottom": 0.36,
-      "scale": 0.73343,
+      "scale": 0.74432,
       "clipped": false,
       "offset": [
-        118,
-        228
+        116,
+        227
       ]
     },
     "turn_R_3": {
@@ -960,11 +960,11 @@
       "source": "reference/sheets/bangui/action_02_turn.png",
       "shellFound": true,
       "bottom": 0.375,
-      "scale": 0.73343,
+      "scale": 0.74432,
       "clipped": false,
       "offset": [
-        138,
-        224
+        136,
+        223
       ]
     },
     "turn_R_4": {
@@ -975,12 +975,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_02_turn.png",
       "shellFound": true,
-      "bottom": 0.395,
-      "scale": 0.73343,
+      "bottom": 0.39,
+      "scale": 0.74432,
       "clipped": false,
       "offset": [
-        151,
-        222
+        150,
+        221
       ]
     },
     "turn_B_1": {
@@ -992,11 +992,11 @@
       "source": "reference/sheets/bangui/action_02_turn.png",
       "shellFound": true,
       "bottom": 0.565,
-      "scale": 0.73343,
+      "scale": 0.74432,
       "clipped": false,
       "offset": [
-        148,
-        191
+        147,
+        190
       ]
     },
     "turn_B_2": {
@@ -1007,12 +1007,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_02_turn.png",
       "shellFound": true,
-      "bottom": 0.565,
-      "scale": 0.73343,
+      "bottom": 0.57,
+      "scale": 0.74432,
       "clipped": false,
       "offset": [
-        148,
-        194
+        147,
+        193
       ]
     },
     "turn_B_3": {
@@ -1023,12 +1023,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_02_turn.png",
       "shellFound": true,
-      "bottom": 0.51,
-      "scale": 0.73343,
+      "bottom": 0.52,
+      "scale": 0.74432,
       "clipped": false,
       "offset": [
-        142,
-        195
+        141,
+        194
       ]
     },
     "turn_B_4": {
@@ -1040,11 +1040,11 @@
       "source": "reference/sheets/bangui/action_02_turn.png",
       "shellFound": true,
       "bottom": 0.485,
-      "scale": 0.73343,
+      "scale": 0.74432,
       "clipped": false,
       "offset": [
-        132,
-        202
+        131,
+        201
       ]
     },
     "look_F_1": {
@@ -1055,12 +1055,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_03_look.png",
       "shellFound": true,
-      "bottom": 0.405,
-      "scale": 0.77675,
+      "bottom": 0.4,
+      "scale": 0.7879,
       "clipped": false,
       "offset": [
-        151,
-        220
+        150,
+        219
       ]
     },
     "look_F_2": {
@@ -1071,8 +1071,8 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_03_look.png",
       "shellFound": true,
-      "bottom": 0.405,
-      "scale": 0.77675,
+      "bottom": 0.41,
+      "scale": 0.7879,
       "clipped": false,
       "offset": [
         152,
@@ -1087,8 +1087,8 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_03_look.png",
       "shellFound": true,
-      "bottom": 0.4,
-      "scale": 0.77675,
+      "bottom": 0.405,
+      "scale": 0.7879,
       "clipped": false,
       "offset": [
         151,
@@ -1103,8 +1103,8 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_03_look.png",
       "shellFound": true,
-      "bottom": 0.395,
-      "scale": 0.77675,
+      "bottom": 0.4,
+      "scale": 0.7879,
       "clipped": false,
       "offset": [
         153,
@@ -1120,10 +1120,10 @@
       "source": "reference/sheets/bangui/action_03_look.png",
       "shellFound": true,
       "bottom": 0.31,
-      "scale": 0.77675,
+      "scale": 0.7879,
       "clipped": false,
       "offset": [
-        111,
+        101,
         236
       ]
     },
@@ -1136,11 +1136,11 @@
       "source": "reference/sheets/bangui/action_03_look.png",
       "shellFound": true,
       "bottom": 0.39,
-      "scale": 0.77675,
+      "scale": 0.7879,
       "clipped": false,
       "offset": [
-        113,
-        220
+        112,
+        219
       ]
     },
     "look_R_3": {
@@ -1151,12 +1151,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_03_look.png",
       "shellFound": true,
-      "bottom": 0.32,
-      "scale": 0.77675,
+      "bottom": 0.315,
+      "scale": 0.7879,
       "clipped": false,
       "offset": [
-        102,
-        237
+        100,
+        236
       ]
     },
     "look_R_4": {
@@ -1168,10 +1168,10 @@
       "source": "reference/sheets/bangui/action_03_look.png",
       "shellFound": true,
       "bottom": 0.38,
-      "scale": 0.77675,
+      "scale": 0.7879,
       "clipped": false,
       "offset": [
-        123,
+        117,
         223
       ]
     },
@@ -1183,12 +1183,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_03_look.png",
       "shellFound": true,
-      "bottom": 0.575,
-      "scale": 0.77675,
+      "bottom": 0.635,
+      "scale": 0.7879,
       "clipped": false,
       "offset": [
-        155,
-        197
+        156,
+        185
       ]
     },
     "look_B_2": {
@@ -1199,12 +1199,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_03_look.png",
       "shellFound": true,
-      "bottom": 0.565,
-      "scale": 0.77675,
+      "bottom": 0.69,
+      "scale": 0.7879,
       "clipped": false,
       "offset": [
         151,
-        195
+        169
       ]
     },
     "look_B_3": {
@@ -1215,12 +1215,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_03_look.png",
       "shellFound": true,
-      "bottom": 0.57,
-      "scale": 0.77675,
+      "bottom": 0.645,
+      "scale": 0.7879,
       "clipped": false,
       "offset": [
-        155,
-        196
+        154,
+        181
       ]
     },
     "look_B_4": {
@@ -1231,12 +1231,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_03_look.png",
       "shellFound": true,
-      "bottom": 0.555,
-      "scale": 0.77675,
+      "bottom": 0.63,
+      "scale": 0.7879,
       "clipped": false,
       "offset": [
         151,
-        194
+        178
       ]
     },
     "sniff_F_1": {
@@ -1248,10 +1248,10 @@
       "source": "reference/sheets/bangui/action_04_sniff.png",
       "shellFound": true,
       "bottom": 0.42,
-      "scale": 0.67051,
+      "scale": 0.67914,
       "clipped": false,
       "offset": [
-        160,
+        159,
         215
       ]
     },
@@ -1264,11 +1264,11 @@
       "source": "reference/sheets/bangui/action_04_sniff.png",
       "shellFound": true,
       "bottom": 0.43,
-      "scale": 0.67051,
+      "scale": 0.67914,
       "clipped": false,
       "offset": [
         157,
-        217
+        216
       ]
     },
     "sniff_F_3": {
@@ -1280,10 +1280,10 @@
       "source": "reference/sheets/bangui/action_04_sniff.png",
       "shellFound": true,
       "bottom": 0.42,
-      "scale": 0.67051,
+      "scale": 0.67914,
       "clipped": false,
       "offset": [
-        163,
+        162,
         214
       ]
     },
@@ -1296,11 +1296,11 @@
       "source": "reference/sheets/bangui/action_04_sniff.png",
       "shellFound": true,
       "bottom": 0.42,
-      "scale": 0.67051,
+      "scale": 0.67914,
       "clipped": false,
       "offset": [
         159,
-        216
+        215
       ]
     },
     "sniff_R_1": {
@@ -1312,10 +1312,10 @@
       "source": "reference/sheets/bangui/action_04_sniff.png",
       "shellFound": true,
       "bottom": 0.29,
-      "scale": 0.67051,
+      "scale": 0.67914,
       "clipped": false,
       "offset": [
-        128,
+        126,
         242
       ]
     },
@@ -1328,10 +1328,10 @@
       "source": "reference/sheets/bangui/action_04_sniff.png",
       "shellFound": true,
       "bottom": 0.265,
-      "scale": 0.67051,
+      "scale": 0.67914,
       "clipped": false,
       "offset": [
-        126,
+        123,
         246
       ]
     },
@@ -1344,10 +1344,10 @@
       "source": "reference/sheets/bangui/action_04_sniff.png",
       "shellFound": true,
       "bottom": 0.27,
-      "scale": 0.67051,
+      "scale": 0.67914,
       "clipped": false,
       "offset": [
-        134,
+        128,
         245
       ]
     },
@@ -1360,10 +1360,10 @@
       "source": "reference/sheets/bangui/action_04_sniff.png",
       "shellFound": true,
       "bottom": 0.285,
-      "scale": 0.67051,
+      "scale": 0.67914,
       "clipped": false,
       "offset": [
-        136,
+        127,
         241
       ]
     },
@@ -1375,12 +1375,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_04_sniff.png",
       "shellFound": true,
-      "bottom": 0.485,
-      "scale": 0.67051,
+      "bottom": 0.61,
+      "scale": 0.67914,
       "clipped": false,
       "offset": [
-        160,
-        201
+        159,
+        173
       ]
     },
     "sniff_B_2": {
@@ -1391,12 +1391,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_04_sniff.png",
       "shellFound": true,
-      "bottom": 0.495,
-      "scale": 0.67051,
+      "bottom": 0.585,
+      "scale": 0.67914,
       "clipped": false,
       "offset": [
-        159,
-        204
+        158,
+        185
       ]
     },
     "sniff_B_3": {
@@ -1407,12 +1407,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_04_sniff.png",
       "shellFound": true,
-      "bottom": 0.49,
-      "scale": 0.67051,
+      "bottom": 0.555,
+      "scale": 0.67914,
       "clipped": false,
       "offset": [
         160,
-        204
+        191
       ]
     },
     "sniff_B_4": {
@@ -1423,12 +1423,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_04_sniff.png",
       "shellFound": true,
-      "bottom": 0.49,
-      "scale": 0.67051,
+      "bottom": 0.61,
+      "scale": 0.67914,
       "clipped": false,
       "offset": [
-        160,
-        204
+        159,
+        177
       ]
     },
     "eat_F_1": {
@@ -1439,11 +1439,11 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_05_eat.png",
       "shellFound": true,
-      "bottom": 0.405,
-      "scale": 0.66287,
+      "bottom": 0.41,
+      "scale": 0.67118,
       "clipped": false,
       "offset": [
-        160,
+        159,
         215
       ]
     },
@@ -1456,10 +1456,10 @@
       "source": "reference/sheets/bangui/action_05_eat.png",
       "shellFound": true,
       "bottom": 0.425,
-      "scale": 0.66287,
+      "scale": 0.67118,
       "clipped": false,
       "offset": [
-        159,
+        158,
         216
       ]
     },
@@ -1472,11 +1472,11 @@
       "source": "reference/sheets/bangui/action_05_eat.png",
       "shellFound": true,
       "bottom": 0.415,
-      "scale": 0.66287,
+      "scale": 0.67118,
       "clipped": false,
       "offset": [
         160,
-        214
+        213
       ]
     },
     "eat_F_4": {
@@ -1488,11 +1488,11 @@
       "source": "reference/sheets/bangui/action_05_eat.png",
       "shellFound": true,
       "bottom": 0.42,
-      "scale": 0.66287,
+      "scale": 0.67118,
       "clipped": false,
       "offset": [
-        165,
-        218
+        163,
+        217
       ]
     },
     "eat_R_1": {
@@ -1504,10 +1504,10 @@
       "source": "reference/sheets/bangui/action_05_eat.png",
       "shellFound": true,
       "bottom": 0.26,
-      "scale": 0.66287,
+      "scale": 0.67118,
       "clipped": false,
       "offset": [
-        127,
+        123,
         247
       ]
     },
@@ -1519,12 +1519,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_05_eat.png",
       "shellFound": true,
-      "bottom": 0.265,
-      "scale": 0.66287,
+      "bottom": 0.26,
+      "scale": 0.67118,
       "clipped": false,
       "offset": [
-        124,
-        247
+        123,
+        246
       ]
     },
     "eat_R_3": {
@@ -1536,11 +1536,11 @@
       "source": "reference/sheets/bangui/action_05_eat.png",
       "shellFound": true,
       "bottom": 0.26,
-      "scale": 0.66287,
+      "scale": 0.67118,
       "clipped": false,
       "offset": [
         130,
-        248
+        247
       ]
     },
     "eat_R_4": {
@@ -1552,10 +1552,10 @@
       "source": "reference/sheets/bangui/action_05_eat.png",
       "shellFound": true,
       "bottom": 0.285,
-      "scale": 0.66287,
+      "scale": 0.67118,
       "clipped": false,
       "offset": [
-        137,
+        128,
         242
       ]
     },
@@ -1567,12 +1567,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_05_eat.png",
       "shellFound": true,
-      "bottom": 0.48,
-      "scale": 0.66287,
+      "bottom": 0.63,
+      "scale": 0.67118,
       "clipped": false,
       "offset": [
         161,
-        210
+        176
       ]
     },
     "eat_B_2": {
@@ -1583,12 +1583,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_05_eat.png",
       "shellFound": true,
-      "bottom": 0.48,
-      "scale": 0.66287,
+      "bottom": 0.63,
+      "scale": 0.67118,
       "clipped": false,
       "offset": [
         158,
-        208
+        173
       ]
     },
     "eat_B_3": {
@@ -1599,12 +1599,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_05_eat.png",
       "shellFound": true,
-      "bottom": 0.475,
-      "scale": 0.66287,
+      "bottom": 0.59,
+      "scale": 0.67118,
       "clipped": false,
       "offset": [
-        161,
-        208
+        160,
+        184
       ]
     },
     "eat_B_4": {
@@ -1615,12 +1615,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_05_eat.png",
       "shellFound": true,
-      "bottom": 0.48,
-      "scale": 0.66287,
+      "bottom": 0.625,
+      "scale": 0.67118,
       "clipped": false,
       "offset": [
-        162,
-        207
+        161,
+        173
       ]
     },
     "bask_F_1": {
@@ -1631,11 +1631,11 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_06_bask.png",
       "shellFound": true,
-      "bottom": 0.405,
-      "scale": 0.70481,
+      "bottom": 0.41,
+      "scale": 0.71555,
       "clipped": false,
       "offset": [
-        142,
+        141,
         217
       ]
     },
@@ -1647,12 +1647,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_06_bask.png",
       "shellFound": true,
-      "bottom": 0.385,
-      "scale": 0.70481,
+      "bottom": 0.39,
+      "scale": 0.71555,
       "clipped": false,
       "offset": [
-        135,
-        220
+        134,
+        219
       ]
     },
     "bask_F_3": {
@@ -1663,12 +1663,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_06_bask.png",
       "shellFound": true,
-      "bottom": 0.385,
-      "scale": 0.70481,
+      "bottom": 0.39,
+      "scale": 0.71555,
       "clipped": false,
       "offset": [
-        135,
-        219
+        134,
+        218
       ]
     },
     "bask_F_4": {
@@ -1679,12 +1679,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_06_bask.png",
       "shellFound": true,
-      "bottom": 0.415,
-      "scale": 0.70481,
+      "bottom": 0.42,
+      "scale": 0.71555,
       "clipped": false,
       "offset": [
-        141,
-        216
+        139,
+        215
       ]
     },
     "bask_R_1": {
@@ -1695,12 +1695,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_06_bask.png",
       "shellFound": true,
-      "bottom": 0.365,
-      "scale": 0.70481,
+      "bottom": 0.37,
+      "scale": 0.71555,
       "clipped": false,
       "offset": [
-        126,
-        227
+        124,
+        226
       ]
     },
     "bask_R_2": {
@@ -1711,12 +1711,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_06_bask.png",
       "shellFound": true,
-      "bottom": 0.36,
-      "scale": 0.70481,
+      "bottom": 0.365,
+      "scale": 0.71555,
       "clipped": false,
       "offset": [
-        125,
-        225
+        123,
+        224
       ]
     },
     "bask_R_3": {
@@ -1727,12 +1727,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_06_bask.png",
       "shellFound": true,
-      "bottom": 0.36,
-      "scale": 0.70481,
+      "bottom": 0.365,
+      "scale": 0.71555,
       "clipped": false,
       "offset": [
-        131,
-        224
+        122,
+        223
       ]
     },
     "bask_R_4": {
@@ -1743,12 +1743,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_06_bask.png",
       "shellFound": true,
-      "bottom": 0.36,
-      "scale": 0.70481,
+      "bottom": 0.365,
+      "scale": 0.71555,
       "clipped": false,
       "offset": [
-        132,
-        225
+        118,
+        224
       ]
     },
     "bask_B_1": {
@@ -1759,12 +1759,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_06_bask.png",
       "shellFound": true,
-      "bottom": 0.46,
-      "scale": 0.70481,
+      "bottom": 0.62,
+      "scale": 0.71555,
       "clipped": false,
       "offset": [
-        148,
-        205
+        147,
+        173
       ]
     },
     "bask_B_2": {
@@ -1775,12 +1775,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_06_bask.png",
       "shellFound": true,
-      "bottom": 0.495,
-      "scale": 0.70481,
+      "bottom": 0.645,
+      "scale": 0.71555,
       "clipped": false,
       "offset": [
-        144,
-        202
+        142,
+        168
       ]
     },
     "bask_B_3": {
@@ -1791,12 +1791,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_06_bask.png",
       "shellFound": true,
-      "bottom": 0.5,
-      "scale": 0.70481,
+      "bottom": 0.65,
+      "scale": 0.71555,
       "clipped": false,
       "offset": [
-        139,
-        202
+        137,
+        169
       ]
     },
     "bask_B_4": {
@@ -1807,12 +1807,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_06_bask.png",
       "shellFound": true,
-      "bottom": 0.47,
-      "scale": 0.70481,
+      "bottom": 0.625,
+      "scale": 0.71555,
       "clipped": false,
       "offset": [
         147,
-        206
+        172
       ]
     },
     "sleep_F_1": {
@@ -1824,11 +1824,11 @@
       "source": "reference/sheets/bangui/action_07_sleep.png",
       "shellFound": true,
       "bottom": 0.37,
-      "scale": 0.70203,
+      "scale": 0.70947,
       "clipped": false,
       "offset": [
-        154,
-        226
+        153,
+        225
       ]
     },
     "sleep_F_2": {
@@ -1840,7 +1840,7 @@
       "source": "reference/sheets/bangui/action_07_sleep.png",
       "shellFound": true,
       "bottom": 0.355,
-      "scale": 0.70203,
+      "scale": 0.70947,
       "clipped": false,
       "offset": [
         155,
@@ -1855,11 +1855,11 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_07_sleep.png",
       "shellFound": true,
-      "bottom": 0.365,
-      "scale": 0.70203,
+      "bottom": 0.37,
+      "scale": 0.70947,
       "clipped": false,
       "offset": [
-        150,
+        149,
         223
       ]
     },
@@ -1872,10 +1872,10 @@
       "source": "reference/sheets/bangui/action_07_sleep.png",
       "shellFound": true,
       "bottom": 0.37,
-      "scale": 0.70203,
+      "scale": 0.70947,
       "clipped": false,
       "offset": [
-        156,
+        155,
         225
       ]
     },
@@ -1888,10 +1888,10 @@
       "source": "reference/sheets/bangui/action_07_sleep.png",
       "shellFound": true,
       "bottom": 0.245,
-      "scale": 0.70203,
+      "scale": 0.70947,
       "clipped": false,
       "offset": [
-        129,
+        128,
         249
       ]
     },
@@ -1903,11 +1903,11 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_07_sleep.png",
       "shellFound": true,
-      "bottom": 0.25,
-      "scale": 0.70203,
+      "bottom": 0.245,
+      "scale": 0.70947,
       "clipped": false,
       "offset": [
-        127,
+        125,
         249
       ]
     },
@@ -1919,12 +1919,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_07_sleep.png",
       "shellFound": true,
-      "bottom": 0.25,
-      "scale": 0.70203,
+      "bottom": 0.245,
+      "scale": 0.70947,
       "clipped": false,
       "offset": [
-        121,
-        249
+        115,
+        248
       ]
     },
     "sleep_R_4": {
@@ -1936,11 +1936,11 @@
       "source": "reference/sheets/bangui/action_07_sleep.png",
       "shellFound": true,
       "bottom": 0.245,
-      "scale": 0.70203,
+      "scale": 0.70947,
       "clipped": false,
       "offset": [
-        133,
-        248
+        127,
+        249
       ]
     },
     "sleep_B_1": {
@@ -1951,12 +1951,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_07_sleep.png",
       "shellFound": true,
-      "bottom": 0.48,
-      "scale": 0.70203,
+      "bottom": 0.525,
+      "scale": 0.70947,
       "clipped": false,
       "offset": [
-        158,
-        200
+        157,
+        190
       ]
     },
     "sleep_B_2": {
@@ -1967,12 +1967,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_07_sleep.png",
       "shellFound": true,
-      "bottom": 0.485,
-      "scale": 0.70203,
+      "bottom": 0.515,
+      "scale": 0.70947,
       "clipped": false,
       "offset": [
         158,
-        200
+        193
       ]
     },
     "sleep_B_3": {
@@ -1983,12 +1983,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_07_sleep.png",
       "shellFound": true,
-      "bottom": 0.49,
-      "scale": 0.70203,
+      "bottom": 0.535,
+      "scale": 0.70947,
       "clipped": false,
       "offset": [
         158,
-        200
+        189
       ]
     },
     "sleep_B_4": {
@@ -1999,12 +1999,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_07_sleep.png",
       "shellFound": true,
-      "bottom": 0.49,
-      "scale": 0.70203,
+      "bottom": 0.51,
+      "scale": 0.70947,
       "clipped": false,
       "offset": [
         158,
-        200
+        194
       ]
     },
     "yawn_F_1": {
@@ -2016,11 +2016,11 @@
       "source": "reference/sheets/bangui/action_08_yawn.png",
       "shellFound": true,
       "bottom": 0.42,
-      "scale": 0.67448,
+      "scale": 0.68314,
       "clipped": false,
       "offset": [
-        156,
-        215
+        155,
+        214
       ]
     },
     "yawn_F_2": {
@@ -2031,11 +2031,11 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_08_yawn.png",
       "shellFound": true,
-      "bottom": 0.415,
-      "scale": 0.67448,
+      "bottom": 0.42,
+      "scale": 0.68314,
       "clipped": false,
       "offset": [
-        154,
+        153,
         211
       ]
     },
@@ -2047,8 +2047,8 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_08_yawn.png",
       "shellFound": true,
-      "bottom": 0.46,
-      "scale": 0.67448,
+      "bottom": 0.465,
+      "scale": 0.68314,
       "clipped": false,
       "offset": [
         139,
@@ -2064,11 +2064,11 @@
       "source": "reference/sheets/bangui/action_08_yawn.png",
       "shellFound": true,
       "bottom": 0.42,
-      "scale": 0.67448,
+      "scale": 0.68314,
       "clipped": false,
       "offset": [
         154,
-        217
+        216
       ]
     },
     "yawn_R_1": {
@@ -2080,10 +2080,10 @@
       "source": "reference/sheets/bangui/action_08_yawn.png",
       "shellFound": true,
       "bottom": 0.275,
-      "scale": 0.67448,
+      "scale": 0.68314,
       "clipped": false,
       "offset": [
-        123,
+        122,
         244
       ]
     },
@@ -2095,12 +2095,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_08_yawn.png",
       "shellFound": true,
-      "bottom": 0.35,
-      "scale": 0.67448,
+      "bottom": 0.345,
+      "scale": 0.68314,
       "clipped": false,
       "offset": [
-        127,
-        230
+        125,
+        228
       ]
     },
     "yawn_R_3": {
@@ -2112,11 +2112,11 @@
       "source": "reference/sheets/bangui/action_08_yawn.png",
       "shellFound": true,
       "bottom": 0.385,
-      "scale": 0.67448,
+      "scale": 0.68314,
       "clipped": false,
       "offset": [
-        128,
-        223
+        127,
+        222
       ]
     },
     "yawn_R_4": {
@@ -2128,10 +2128,10 @@
       "source": "reference/sheets/bangui/action_08_yawn.png",
       "shellFound": true,
       "bottom": 0.275,
-      "scale": 0.67448,
+      "scale": 0.68314,
       "clipped": false,
       "offset": [
-        123,
+        122,
         245
       ]
     },
@@ -2144,11 +2144,11 @@
       "source": "reference/sheets/bangui/action_08_yawn.png",
       "shellFound": true,
       "bottom": 0.59,
-      "scale": 0.67448,
+      "scale": 0.68314,
       "clipped": false,
       "offset": [
         156,
-        185
+        184
       ]
     },
     "yawn_B_2": {
@@ -2160,11 +2160,11 @@
       "source": "reference/sheets/bangui/action_08_yawn.png",
       "shellFound": true,
       "bottom": 0.625,
-      "scale": 0.67448,
+      "scale": 0.68314,
       "clipped": false,
       "offset": [
-        143,
-        177
+        142,
+        176
       ]
     },
     "yawn_B_3": {
@@ -2175,12 +2175,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_08_yawn.png",
       "shellFound": true,
-      "bottom": 0.63,
-      "scale": 0.67448,
+      "bottom": 0.64,
+      "scale": 0.68314,
       "clipped": false,
       "offset": [
-        148,
-        178
+        147,
+        177
       ]
     },
     "yawn_B_4": {
@@ -2192,11 +2192,11 @@
       "source": "reference/sheets/bangui/action_08_yawn.png",
       "shellFound": true,
       "bottom": 0.595,
-      "scale": 0.67448,
+      "scale": 0.68314,
       "clipped": false,
       "offset": [
-        155,
-        184
+        154,
+        183
       ]
     },
     "hide_F_1": {
@@ -2208,10 +2208,10 @@
       "source": "reference/sheets/bangui/action_09_hide.png",
       "shellFound": true,
       "bottom": 0.42,
-      "scale": 0.69993,
+      "scale": 0.70635,
       "clipped": false,
       "offset": [
-        154,
+        153,
         214
       ]
     },
@@ -2224,11 +2224,11 @@
       "source": "reference/sheets/bangui/action_09_hide.png",
       "shellFound": true,
       "bottom": 0.4,
-      "scale": 0.69993,
+      "scale": 0.70635,
       "clipped": false,
       "offset": [
         158,
-        221
+        220
       ]
     },
     "hide_F_3": {
@@ -2240,10 +2240,10 @@
       "source": "reference/sheets/bangui/action_09_hide.png",
       "shellFound": true,
       "bottom": 0.37,
-      "scale": 0.69993,
+      "scale": 0.70635,
       "clipped": false,
       "offset": [
-        159,
+        158,
         223
       ]
     },
@@ -2256,7 +2256,7 @@
       "source": "reference/sheets/bangui/action_09_hide.png",
       "shellFound": true,
       "bottom": 0.365,
-      "scale": 0.69993,
+      "scale": 0.70635,
       "clipped": false,
       "offset": [
         157,
@@ -2271,11 +2271,11 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_09_hide.png",
       "shellFound": true,
-      "bottom": 0.295,
-      "scale": 0.69993,
+      "bottom": 0.3,
+      "scale": 0.70635,
       "clipped": false,
       "offset": [
-        116,
+        113,
         240
       ]
     },
@@ -2287,11 +2287,11 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_09_hide.png",
       "shellFound": true,
-      "bottom": 0.28,
-      "scale": 0.69993,
+      "bottom": 0.285,
+      "scale": 0.70635,
       "clipped": false,
       "offset": [
-        116,
+        110,
         244
       ]
     },
@@ -2303,11 +2303,11 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_09_hide.png",
       "shellFound": true,
-      "bottom": 0.25,
-      "scale": 0.69993,
+      "bottom": 0.245,
+      "scale": 0.70635,
       "clipped": false,
       "offset": [
-        128,
+        127,
         251
       ]
     },
@@ -2319,12 +2319,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_09_hide.png",
       "shellFound": true,
-      "bottom": 0.245,
-      "scale": 0.69993,
+      "bottom": 0.25,
+      "scale": 0.70635,
       "clipped": false,
       "offset": [
-        128,
-        249
+        127,
+        250
       ]
     },
     "hide_B_1": {
@@ -2335,12 +2335,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_09_hide.png",
       "shellFound": true,
-      "bottom": 0.515,
-      "scale": 0.69993,
+      "bottom": 0.67,
+      "scale": 0.70635,
       "clipped": false,
       "offset": [
-        157,
-        204
+        156,
+        171
       ]
     },
     "hide_B_2": {
@@ -2351,12 +2351,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_09_hide.png",
       "shellFound": true,
-      "bottom": 0.52,
-      "scale": 0.69993,
+      "bottom": 0.605,
+      "scale": 0.70635,
       "clipped": false,
       "offset": [
         159,
-        205
+        185
       ]
     },
     "hide_B_3": {
@@ -2367,12 +2367,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_09_hide.png",
       "shellFound": true,
-      "bottom": 0.515,
-      "scale": 0.69993,
+      "bottom": 0.55,
+      "scale": 0.70635,
       "clipped": false,
       "offset": [
         156,
-        204
+        196
       ]
     },
     "hide_B_4": {
@@ -2383,12 +2383,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_09_hide.png",
       "shellFound": true,
-      "bottom": 0.5,
-      "scale": 0.69993,
+      "bottom": 0.58,
+      "scale": 0.70635,
       "clipped": false,
       "offset": [
-        156,
-        201
+        155,
+        185
       ]
     },
     "startled_F_1": {
@@ -2399,12 +2399,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_10_startled.png",
       "shellFound": true,
-      "bottom": 0.375,
-      "scale": 0.76777,
+      "bottom": 0.38,
+      "scale": 0.77798,
       "clipped": false,
       "offset": [
         148,
-        221
+        222
       ]
     },
     "startled_F_2": {
@@ -2416,11 +2416,11 @@
       "source": "reference/sheets/bangui/action_10_startled.png",
       "shellFound": true,
       "bottom": 0.385,
-      "scale": 0.76777,
+      "scale": 0.77798,
       "clipped": false,
       "offset": [
         147,
-        221
+        220
       ]
     },
     "startled_F_3": {
@@ -2432,10 +2432,10 @@
       "source": "reference/sheets/bangui/action_10_startled.png",
       "shellFound": true,
       "bottom": 0.34,
-      "scale": 0.76777,
+      "scale": 0.77798,
       "clipped": false,
       "offset": [
-        151,
+        150,
         229
       ]
     },
@@ -2447,8 +2447,8 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_10_startled.png",
       "shellFound": true,
-      "bottom": 0.375,
-      "scale": 0.76777,
+      "bottom": 0.38,
+      "scale": 0.77798,
       "clipped": false,
       "offset": [
         148,
@@ -2463,12 +2463,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_10_startled.png",
       "shellFound": true,
-      "bottom": 0.325,
-      "scale": 0.76777,
+      "bottom": 0.33,
+      "scale": 0.77798,
       "clipped": false,
       "offset": [
-        114,
-        230
+        113,
+        231
       ]
     },
     "startled_R_2": {
@@ -2480,10 +2480,10 @@
       "source": "reference/sheets/bangui/action_10_startled.png",
       "shellFound": true,
       "bottom": 0.355,
-      "scale": 0.76777,
+      "scale": 0.77798,
       "clipped": false,
       "offset": [
-        123,
+        122,
         227
       ]
     },
@@ -2496,10 +2496,10 @@
       "source": "reference/sheets/bangui/action_10_startled.png",
       "shellFound": true,
       "bottom": 0.29,
-      "scale": 0.76777,
+      "scale": 0.77798,
       "clipped": false,
       "offset": [
-        135,
+        134,
         241
       ]
     },
@@ -2511,11 +2511,11 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_10_startled.png",
       "shellFound": true,
-      "bottom": 0.345,
-      "scale": 0.76777,
+      "bottom": 0.34,
+      "scale": 0.77798,
       "clipped": false,
       "offset": [
-        111,
+        110,
         231
       ]
     },
@@ -2527,12 +2527,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_10_startled.png",
       "shellFound": true,
-      "bottom": 0.59,
-      "scale": 0.76777,
+      "bottom": 0.595,
+      "scale": 0.77798,
       "clipped": false,
       "offset": [
-        143,
-        188
+        142,
+        187
       ]
     },
     "startled_B_2": {
@@ -2543,12 +2543,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_10_startled.png",
       "shellFound": true,
-      "bottom": 0.545,
-      "scale": 0.76777,
+      "bottom": 0.55,
+      "scale": 0.77798,
       "clipped": false,
       "offset": [
-        135,
-        188
+        134,
+        187
       ]
     },
     "startled_B_3": {
@@ -2559,8 +2559,8 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_10_startled.png",
       "shellFound": true,
-      "bottom": 0.465,
-      "scale": 0.76777,
+      "bottom": 0.47,
+      "scale": 0.77798,
       "clipped": false,
       "offset": [
         150,
@@ -2575,8 +2575,8 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_10_startled.png",
       "shellFound": true,
-      "bottom": 0.565,
-      "scale": 0.76777,
+      "bottom": 0.575,
+      "scale": 0.77798,
       "clipped": false,
       "offset": [
         156,
@@ -2592,11 +2592,11 @@
       "source": "reference/sheets/bangui/action_11_happy.png",
       "shellFound": true,
       "bottom": 0.405,
-      "scale": 0.72308,
+      "scale": 0.73193,
       "clipped": false,
       "offset": [
         153,
-        217
+        216
       ]
     },
     "happy_F_2": {
@@ -2607,12 +2607,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_11_happy.png",
       "shellFound": true,
-      "bottom": 0.395,
-      "scale": 0.72308,
+      "bottom": 0.39,
+      "scale": 0.73193,
       "clipped": false,
       "offset": [
-        143,
-        220
+        142,
+        219
       ]
     },
     "happy_F_3": {
@@ -2623,8 +2623,8 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_11_happy.png",
       "shellFound": true,
-      "bottom": 0.39,
-      "scale": 0.72308,
+      "bottom": 0.395,
+      "scale": 0.73193,
       "clipped": false,
       "offset": [
         144,
@@ -2639,11 +2639,11 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_11_happy.png",
       "shellFound": true,
-      "bottom": 0.4,
-      "scale": 0.72308,
+      "bottom": 0.405,
+      "scale": 0.73193,
       "clipped": false,
       "offset": [
-        155,
+        154,
         217
       ]
     },
@@ -2656,10 +2656,10 @@
       "source": "reference/sheets/bangui/action_11_happy.png",
       "shellFound": true,
       "bottom": 0.335,
-      "scale": 0.72308,
+      "scale": 0.73193,
       "clipped": false,
       "offset": [
-        117,
+        116,
         230
       ]
     },
@@ -2671,12 +2671,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_11_happy.png",
       "shellFound": true,
-      "bottom": 0.365,
-      "scale": 0.72308,
+      "bottom": 0.36,
+      "scale": 0.73193,
       "clipped": false,
       "offset": [
-        132,
-        225
+        131,
+        224
       ]
     },
     "happy_R_3": {
@@ -2688,7 +2688,7 @@
       "source": "reference/sheets/bangui/action_11_happy.png",
       "shellFound": true,
       "bottom": 0.365,
-      "scale": 0.72308,
+      "scale": 0.73193,
       "clipped": false,
       "offset": [
         135,
@@ -2704,10 +2704,10 @@
       "source": "reference/sheets/bangui/action_11_happy.png",
       "shellFound": true,
       "bottom": 0.34,
-      "scale": 0.72308,
+      "scale": 0.73193,
       "clipped": false,
       "offset": [
-        122,
+        121,
         231
       ]
     },
@@ -2719,8 +2719,8 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_11_happy.png",
       "shellFound": true,
-      "bottom": 0.555,
-      "scale": 0.72308,
+      "bottom": 0.56,
+      "scale": 0.73193,
       "clipped": false,
       "offset": [
         148,
@@ -2735,11 +2735,11 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_11_happy.png",
       "shellFound": true,
-      "bottom": 0.555,
-      "scale": 0.72308,
+      "bottom": 0.565,
+      "scale": 0.73193,
       "clipped": false,
       "offset": [
-        153,
+        152,
         191
       ]
     },
@@ -2751,12 +2751,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_11_happy.png",
       "shellFound": true,
-      "bottom": 0.545,
-      "scale": 0.72308,
+      "bottom": 0.55,
+      "scale": 0.73193,
       "clipped": false,
       "offset": [
         150,
-        189
+        188
       ]
     },
     "happy_B_4": {
@@ -2767,11 +2767,11 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_11_happy.png",
       "shellFound": true,
-      "bottom": 0.56,
-      "scale": 0.72308,
+      "bottom": 0.565,
+      "scale": 0.73193,
       "clipped": false,
       "offset": [
-        147,
+        146,
         185
       ]
     },
@@ -2784,7 +2784,7 @@
       "source": "reference/sheets/bangui/action_12_enter_water.png",
       "shellFound": true,
       "bottom": 0.385,
-      "scale": 0.74557,
+      "scale": 0.75701,
       "clipped": false,
       "offset": [
         146,
@@ -2799,12 +2799,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_12_enter_water.png",
       "shellFound": true,
-      "bottom": 0.425,
-      "scale": 0.74557,
+      "bottom": 0.43,
+      "scale": 0.75701,
       "clipped": false,
       "offset": [
-        138,
-        213
+        137,
+        212
       ]
     },
     "enter_water_F_3": {
@@ -2816,11 +2816,11 @@
       "source": "reference/sheets/bangui/action_12_enter_water.png",
       "shellFound": true,
       "bottom": 0.42,
-      "scale": 0.74557,
+      "scale": 0.75701,
       "clipped": false,
       "offset": [
-        135,
-        213
+        134,
+        212
       ]
     },
     "enter_water_F_4": {
@@ -2832,11 +2832,11 @@
       "source": "reference/sheets/bangui/action_12_enter_water.png",
       "shellFound": true,
       "bottom": 0.48,
-      "scale": 0.74557,
+      "scale": 0.75701,
       "clipped": false,
       "offset": [
-        129,
-        206
+        128,
+        205
       ]
     },
     "enter_water_R_1": {
@@ -2847,11 +2847,11 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_12_enter_water.png",
       "shellFound": true,
-      "bottom": 0.3,
-      "scale": 0.74557,
+      "bottom": 0.305,
+      "scale": 0.75701,
       "clipped": false,
       "offset": [
-        117,
+        115,
         240
       ]
     },
@@ -2864,10 +2864,10 @@
       "source": "reference/sheets/bangui/action_12_enter_water.png",
       "shellFound": true,
       "bottom": 0.305,
-      "scale": 0.74557,
+      "scale": 0.75701,
       "clipped": false,
       "offset": [
-        121,
+        120,
         239
       ]
     },
@@ -2879,8 +2879,8 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_12_enter_water.png",
       "shellFound": true,
-      "bottom": 0.325,
-      "scale": 0.74557,
+      "bottom": 0.32,
+      "scale": 0.75701,
       "clipped": false,
       "offset": [
         127,
@@ -2896,10 +2896,10 @@
       "source": "reference/sheets/bangui/action_12_enter_water.png",
       "shellFound": true,
       "bottom": 0.345,
-      "scale": 0.74557,
+      "scale": 0.75701,
       "clipped": false,
       "offset": [
-        108,
+        107,
         233
       ]
     },
@@ -2911,11 +2911,11 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_12_enter_water.png",
       "shellFound": true,
-      "bottom": 0.575,
-      "scale": 0.74557,
+      "bottom": 0.585,
+      "scale": 0.75701,
       "clipped": false,
       "offset": [
-        149,
+        147,
         186
       ]
     },
@@ -2927,12 +2927,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_12_enter_water.png",
       "shellFound": true,
-      "bottom": 0.585,
-      "scale": 0.74557,
+      "bottom": 0.59,
+      "scale": 0.75701,
       "clipped": false,
       "offset": [
-        143,
-        190
+        142,
+        189
       ]
     },
     "enter_water_B_3": {
@@ -2943,12 +2943,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_12_enter_water.png",
       "shellFound": true,
-      "bottom": 0.58,
-      "scale": 0.74557,
+      "bottom": 0.585,
+      "scale": 0.75701,
       "clipped": false,
       "offset": [
-        137,
-        190
+        136,
+        189
       ]
     },
     "enter_water_B_4": {
@@ -2959,12 +2959,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_12_enter_water.png",
       "shellFound": true,
-      "bottom": 0.56,
-      "scale": 0.74557,
+      "bottom": 0.565,
+      "scale": 0.75701,
       "clipped": false,
       "offset": [
-        126,
-        192
+        125,
+        191
       ]
     },
     "flip_F_1": {
@@ -2976,10 +2976,10 @@
       "source": "reference/sheets/bangui/action_13_flip.png",
       "shellFound": true,
       "bottom": 0.37,
-      "scale": 0.69427,
+      "scale": 0.70483,
       "clipped": false,
       "offset": [
-        144,
+        143,
         217
       ]
     },
@@ -2992,11 +2992,11 @@
       "source": "reference/sheets/bangui/action_13_flip.png",
       "shellFound": true,
       "bottom": 0.445,
-      "scale": 0.69427,
+      "scale": 0.70483,
       "clipped": false,
       "offset": [
-        152,
-        204
+        151,
+        203
       ]
     },
     "flip_F_3": {
@@ -3007,12 +3007,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_13_flip.png",
       "shellFound": true,
-      "bottom": 0.425,
-      "scale": 0.69427,
+      "bottom": 0.42,
+      "scale": 0.70483,
       "clipped": false,
       "offset": [
-        131,
-        209
+        130,
+        207
       ]
     },
     "flip_F_4": {
@@ -3023,12 +3023,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_13_flip.png",
       "shellFound": true,
-      "bottom": 0.375,
-      "scale": 0.69427,
+      "bottom": 0.38,
+      "scale": 0.70483,
       "clipped": false,
       "offset": [
-        141,
-        217
+        140,
+        216
       ]
     },
     "flip_R_1": {
@@ -3039,11 +3039,11 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_13_flip.png",
       "shellFound": true,
-      "bottom": 0.305,
-      "scale": 0.69427,
+      "bottom": 0.31,
+      "scale": 0.70483,
       "clipped": false,
       "offset": [
-        133,
+        132,
         230
       ]
     },
@@ -3056,11 +3056,11 @@
       "source": "reference/sheets/bangui/action_13_flip.png",
       "shellFound": true,
       "bottom": 0.34,
-      "scale": 0.69427,
+      "scale": 0.70483,
       "clipped": false,
       "offset": [
-        158,
-        221
+        157,
+        220
       ]
     },
     "flip_R_3": {
@@ -3072,10 +3072,10 @@
       "source": "reference/sheets/bangui/action_13_flip.png",
       "shellFound": true,
       "bottom": 0.315,
-      "scale": 0.69427,
+      "scale": 0.70483,
       "clipped": false,
       "offset": [
-        134,
+        133,
         232
       ]
     },
@@ -3088,11 +3088,11 @@
       "source": "reference/sheets/bangui/action_13_flip.png",
       "shellFound": true,
       "bottom": 0.315,
-      "scale": 0.69427,
+      "scale": 0.70483,
       "clipped": false,
       "offset": [
-        129,
-        228
+        127,
+        227
       ]
     },
     "flip_B_1": {
@@ -3103,12 +3103,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_13_flip.png",
       "shellFound": true,
-      "bottom": 0.44,
-      "scale": 0.69427,
+      "bottom": 0.445,
+      "scale": 0.70483,
       "clipped": false,
       "offset": [
-        156,
-        183
+        155,
+        182
       ]
     },
     "flip_B_2": {
@@ -3119,12 +3119,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_13_flip.png",
       "shellFound": true,
-      "bottom": 0.51,
-      "scale": 0.69427,
+      "bottom": 0.515,
+      "scale": 0.70483,
       "clipped": false,
       "offset": [
-        142,
-        194
+        141,
+        193
       ]
     },
     "flip_B_3": {
@@ -3135,12 +3135,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_13_flip.png",
       "shellFound": true,
-      "bottom": 0.44,
-      "scale": 0.69427,
+      "bottom": 0.445,
+      "scale": 0.70483,
       "clipped": false,
       "offset": [
-        145,
-        205
+        144,
+        204
       ]
     },
     "flip_B_4": {
@@ -3152,11 +3152,11 @@
       "source": "reference/sheets/bangui/action_13_flip.png",
       "shellFound": true,
       "bottom": 0.48,
-      "scale": 0.69427,
+      "scale": 0.70483,
       "clipped": false,
       "offset": [
-        151,
-        186
+        150,
+        184
       ]
     },
     "swim_F_1": {
@@ -3167,12 +3167,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_14_swim.png",
       "shellFound": true,
-      "bottom": 0.44,
-      "scale": 0.75214,
+      "bottom": 0.445,
+      "scale": 0.75638,
       "clipped": false,
       "offset": [
         136,
-        205
+        206
       ]
     },
     "swim_F_2": {
@@ -3184,11 +3184,11 @@
       "source": "reference/sheets/bangui/action_14_swim.png",
       "shellFound": true,
       "bottom": 0.37,
-      "scale": 0.75214,
+      "scale": 0.75638,
       "clipped": false,
       "offset": [
-        110,
-        222
+        109,
+        223
       ]
     },
     "swim_F_3": {
@@ -3200,10 +3200,10 @@
       "source": "reference/sheets/bangui/action_14_swim.png",
       "shellFound": true,
       "bottom": 0.455,
-      "scale": 0.75214,
+      "scale": 0.75638,
       "clipped": false,
       "offset": [
-        160,
+        161,
         210
       ]
     },
@@ -3215,12 +3215,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_14_swim.png",
       "shellFound": true,
-      "bottom": 0.36,
-      "scale": 0.75214,
+      "bottom": 0.37,
+      "scale": 0.75638,
       "clipped": false,
       "offset": [
-        129,
-        224
+        111,
+        225
       ]
     },
     "swim_R_1": {
@@ -3232,11 +3232,11 @@
       "source": "reference/sheets/bangui/action_14_swim.png",
       "shellFound": true,
       "bottom": 0.365,
-      "scale": 0.75214,
+      "scale": 0.75638,
       "clipped": false,
       "offset": [
-        113,
-        224
+        110,
+        225
       ]
     },
     "swim_R_2": {
@@ -3248,11 +3248,11 @@
       "source": "reference/sheets/bangui/action_14_swim.png",
       "shellFound": true,
       "bottom": 0.295,
-      "scale": 0.75214,
+      "scale": 0.75638,
       "clipped": false,
       "offset": [
         115,
-        238
+        239
       ]
     },
     "swim_R_3": {
@@ -3264,11 +3264,11 @@
       "source": "reference/sheets/bangui/action_14_swim.png",
       "shellFound": true,
       "bottom": 0.335,
-      "scale": 0.75214,
+      "scale": 0.75638,
       "clipped": false,
       "offset": [
         129,
-        234
+        235
       ]
     },
     "swim_R_4": {
@@ -3280,11 +3280,11 @@
       "source": "reference/sheets/bangui/action_14_swim.png",
       "shellFound": true,
       "bottom": 0.305,
-      "scale": 0.75214,
+      "scale": 0.75638,
       "clipped": false,
       "offset": [
-        123,
-        237
+        110,
+        238
       ]
     },
     "swim_B_1": {
@@ -3295,12 +3295,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_14_swim.png",
       "shellFound": true,
-      "bottom": 0.545,
-      "scale": 0.75214,
+      "bottom": 0.665,
+      "scale": 0.75638,
       "clipped": false,
       "offset": [
-        146,
-        193
+        147,
+        167
       ]
     },
     "swim_B_2": {
@@ -3311,12 +3311,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_14_swim.png",
       "shellFound": true,
-      "bottom": 0.535,
-      "scale": 0.75214,
+      "bottom": 0.64,
+      "scale": 0.75638,
       "clipped": false,
       "offset": [
         129,
-        194
+        171
       ]
     },
     "swim_B_3": {
@@ -3327,12 +3327,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_14_swim.png",
       "shellFound": true,
-      "bottom": 0.575,
-      "scale": 0.75214,
+      "bottom": 0.685,
+      "scale": 0.75638,
       "clipped": false,
       "offset": [
-        170,
-        198
+        171,
+        177
       ]
     },
     "swim_B_4": {
@@ -3343,12 +3343,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_14_swim.png",
       "shellFound": true,
-      "bottom": 0.545,
-      "scale": 0.75214,
+      "bottom": 0.66,
+      "scale": 0.75638,
       "clipped": false,
       "offset": [
-        134,
-        193
+        125,
+        167
       ]
     },
     "swim_turn_F_1": {
@@ -3359,12 +3359,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_15_swim_turn.png",
       "shellFound": true,
-      "bottom": 0.445,
-      "scale": 0.7342,
+      "bottom": 0.45,
+      "scale": 0.74646,
       "clipped": false,
       "offset": [
-        135,
-        210
+        132,
+        209
       ]
     },
     "swim_turn_F_2": {
@@ -3375,11 +3375,11 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_15_swim_turn.png",
       "shellFound": true,
-      "bottom": 0.455,
-      "scale": 0.7342,
+      "bottom": 0.46,
+      "scale": 0.74646,
       "clipped": false,
       "offset": [
-        134,
+        132,
         210
       ]
     },
@@ -3392,11 +3392,11 @@
       "source": "reference/sheets/bangui/action_15_swim_turn.png",
       "shellFound": true,
       "bottom": 0.46,
-      "scale": 0.7342,
+      "scale": 0.74646,
       "clipped": false,
       "offset": [
         135,
-        211
+        209
       ]
     },
     "swim_turn_F_4": {
@@ -3408,11 +3408,11 @@
       "source": "reference/sheets/bangui/action_15_swim_turn.png",
       "shellFound": true,
       "bottom": 0.455,
-      "scale": 0.7342,
+      "scale": 0.74646,
       "clipped": false,
       "offset": [
-        130,
-        211
+        129,
+        210
       ]
     },
     "swim_turn_R_1": {
@@ -3423,12 +3423,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_15_swim_turn.png",
       "shellFound": true,
-      "bottom": 0.275,
-      "scale": 0.7342,
+      "bottom": 0.28,
+      "scale": 0.74646,
       "clipped": false,
       "offset": [
-        117,
-        242
+        101,
+        241
       ]
     },
     "swim_turn_R_2": {
@@ -3440,11 +3440,11 @@
       "source": "reference/sheets/bangui/action_15_swim_turn.png",
       "shellFound": true,
       "bottom": 0.39,
-      "scale": 0.7342,
+      "scale": 0.74646,
       "clipped": false,
       "offset": [
-        124,
-        221
+        117,
+        219
       ]
     },
     "swim_turn_R_3": {
@@ -3456,10 +3456,10 @@
       "source": "reference/sheets/bangui/action_15_swim_turn.png",
       "shellFound": true,
       "bottom": 0.4,
-      "scale": 0.7342,
+      "scale": 0.74646,
       "clipped": false,
       "offset": [
-        132,
+        131,
         219
       ]
     },
@@ -3471,12 +3471,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_15_swim_turn.png",
       "shellFound": true,
-      "bottom": 0.36,
-      "scale": 0.7342,
+      "bottom": 0.355,
+      "scale": 0.74646,
       "clipped": false,
       "offset": [
-        133,
-        231
+        132,
+        230
       ]
     },
     "swim_turn_B_1": {
@@ -3487,12 +3487,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_15_swim_turn.png",
       "shellFound": true,
-      "bottom": 0.52,
-      "scale": 0.7342,
+      "bottom": 0.63,
+      "scale": 0.74646,
       "clipped": false,
       "offset": [
-        143,
-        198
+        142,
+        175
       ]
     },
     "swim_turn_B_2": {
@@ -3503,12 +3503,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_15_swim_turn.png",
       "shellFound": true,
-      "bottom": 0.495,
-      "scale": 0.7342,
+      "bottom": 0.6,
+      "scale": 0.74646,
       "clipped": false,
       "offset": [
-        125,
-        202
+        124,
+        179
       ]
     },
     "swim_turn_B_3": {
@@ -3519,12 +3519,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_15_swim_turn.png",
       "shellFound": true,
-      "bottom": 0.545,
-      "scale": 0.7342,
+      "bottom": 0.59,
+      "scale": 0.74646,
       "clipped": false,
       "offset": [
-        123,
-        194
+        121,
+        183
       ]
     },
     "swim_turn_B_4": {
@@ -3535,12 +3535,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_15_swim_turn.png",
       "shellFound": true,
-      "bottom": 0.51,
-      "scale": 0.7342,
+      "bottom": 0.59,
+      "scale": 0.74646,
       "clipped": false,
       "offset": [
-        121,
-        197
+        119,
+        179
       ]
     },
     "hover_F_1": {
@@ -3551,11 +3551,11 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_16_hover.png",
       "shellFound": true,
-      "bottom": 0.425,
-      "scale": 0.7399,
+      "bottom": 0.43,
+      "scale": 0.74723,
       "clipped": false,
       "offset": [
-        128,
+        123,
         212
       ]
     },
@@ -3567,8 +3567,8 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_16_hover.png",
       "shellFound": true,
-      "bottom": 0.41,
-      "scale": 0.7399,
+      "bottom": 0.415,
+      "scale": 0.74723,
       "clipped": false,
       "offset": [
         152,
@@ -3584,11 +3584,11 @@
       "source": "reference/sheets/bangui/action_16_hover.png",
       "shellFound": true,
       "bottom": 0.41,
-      "scale": 0.7399,
+      "scale": 0.74723,
       "clipped": false,
       "offset": [
         155,
-        217
+        216
       ]
     },
     "hover_F_4": {
@@ -3599,11 +3599,11 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_16_hover.png",
       "shellFound": true,
-      "bottom": 0.41,
-      "scale": 0.7399,
+      "bottom": 0.415,
+      "scale": 0.74723,
       "clipped": false,
       "offset": [
-        127,
+        115,
         217
       ]
     },
@@ -3615,12 +3615,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_16_hover.png",
       "shellFound": true,
-      "bottom": 0.365,
-      "scale": 0.7399,
+      "bottom": 0.37,
+      "scale": 0.74723,
       "clipped": false,
       "offset": [
-        118,
-        226
+        114,
+        227
       ]
     },
     "hover_R_2": {
@@ -3631,12 +3631,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_16_hover.png",
       "shellFound": true,
-      "bottom": 0.36,
-      "scale": 0.7399,
+      "bottom": 0.355,
+      "scale": 0.74723,
       "clipped": false,
       "offset": [
-        122,
-        228
+        121,
+        227
       ]
     },
     "hover_R_3": {
@@ -3648,11 +3648,11 @@
       "source": "reference/sheets/bangui/action_16_hover.png",
       "shellFound": true,
       "bottom": 0.35,
-      "scale": 0.7399,
+      "scale": 0.74723,
       "clipped": false,
       "offset": [
-        124,
-        232
+        123,
+        231
       ]
     },
     "hover_R_4": {
@@ -3663,12 +3663,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_16_hover.png",
       "shellFound": true,
-      "bottom": 0.35,
-      "scale": 0.7399,
+      "bottom": 0.355,
+      "scale": 0.74723,
       "clipped": false,
       "offset": [
-        126,
-        232
+        117,
+        233
       ]
     },
     "hover_B_1": {
@@ -3679,12 +3679,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_16_hover.png",
       "shellFound": true,
-      "bottom": 0.535,
-      "scale": 0.7399,
+      "bottom": 0.655,
+      "scale": 0.74723,
       "clipped": false,
       "offset": [
         134,
-        200
+        173
       ]
     },
     "hover_B_2": {
@@ -3695,12 +3695,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_16_hover.png",
       "shellFound": true,
-      "bottom": 0.525,
-      "scale": 0.7399,
+      "bottom": 0.64,
+      "scale": 0.74723,
       "clipped": false,
       "offset": [
-        141,
-        197
+        140,
+        171
       ]
     },
     "hover_B_3": {
@@ -3711,12 +3711,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_16_hover.png",
       "shellFound": true,
-      "bottom": 0.54,
-      "scale": 0.7399,
+      "bottom": 0.64,
+      "scale": 0.74723,
       "clipped": false,
       "offset": [
-        156,
-        195
+        155,
+        172
       ]
     },
     "hover_B_4": {
@@ -3727,12 +3727,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_16_hover.png",
       "shellFound": true,
-      "bottom": 0.53,
-      "scale": 0.7399,
+      "bottom": 0.655,
+      "scale": 0.74723,
       "clipped": false,
       "offset": [
-        138,
-        198
+        131,
+        170
       ]
     },
     "dive_F_1": {
@@ -3743,12 +3743,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_17_dive.png",
       "shellFound": true,
-      "bottom": 0.425,
-      "scale": 0.71818,
+      "bottom": 0.43,
+      "scale": 0.72976,
       "clipped": false,
       "offset": [
-        132,
-        216
+        130,
+        214
       ]
     },
     "dive_F_2": {
@@ -3760,11 +3760,11 @@
       "source": "reference/sheets/bangui/action_17_dive.png",
       "shellFound": true,
       "bottom": 0.425,
-      "scale": 0.71818,
+      "scale": 0.72976,
       "clipped": false,
       "offset": [
-        140,
-        217
+        139,
+        215
       ]
     },
     "dive_F_3": {
@@ -3775,12 +3775,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_17_dive.png",
       "shellFound": true,
-      "bottom": 0.485,
-      "scale": 0.71818,
+      "bottom": 0.49,
+      "scale": 0.72976,
       "clipped": false,
       "offset": [
         144,
-        199
+        198
       ]
     },
     "dive_F_4": {
@@ -3791,12 +3791,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_17_dive.png",
       "shellFound": true,
-      "bottom": 0.53,
-      "scale": 0.71818,
+      "bottom": 0.535,
+      "scale": 0.72976,
       "clipped": false,
       "offset": [
-        142,
-        191
+        141,
+        189
       ]
     },
     "dive_R_1": {
@@ -3807,12 +3807,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_17_dive.png",
       "shellFound": true,
-      "bottom": 0.375,
-      "scale": 0.71818,
+      "bottom": 0.38,
+      "scale": 0.72976,
       "clipped": false,
       "offset": [
-        119,
-        228
+        114,
+        227
       ]
     },
     "dive_R_2": {
@@ -3824,11 +3824,11 @@
       "source": "reference/sheets/bangui/action_17_dive.png",
       "shellFound": true,
       "bottom": 0.3,
-      "scale": 0.71818,
+      "scale": 0.72976,
       "clipped": false,
       "offset": [
-        121,
-        242
+        112,
+        241
       ]
     },
     "dive_R_3": {
@@ -3840,11 +3840,11 @@
       "source": "reference/sheets/bangui/action_17_dive.png",
       "shellFound": true,
       "bottom": 0.455,
-      "scale": 0.71818,
+      "scale": 0.72976,
       "clipped": false,
       "offset": [
-        143,
-        200
+        142,
+        199
       ]
     },
     "dive_R_4": {
@@ -3855,12 +3855,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_17_dive.png",
       "shellFound": true,
-      "bottom": 0.5,
-      "scale": 0.71818,
+      "bottom": 0.505,
+      "scale": 0.72976,
       "clipped": false,
       "offset": [
-        147,
-        195
+        145,
+        193
       ]
     },
     "dive_B_1": {
@@ -3871,12 +3871,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_17_dive.png",
       "shellFound": true,
-      "bottom": 0.51,
-      "scale": 0.71818,
+      "bottom": 0.625,
+      "scale": 0.72976,
       "clipped": false,
       "offset": [
-        141,
-        201
+        139,
+        176
       ]
     },
     "dive_B_2": {
@@ -3887,12 +3887,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_17_dive.png",
       "shellFound": true,
-      "bottom": 0.515,
-      "scale": 0.71818,
+      "bottom": 0.61,
+      "scale": 0.72976,
       "clipped": false,
       "offset": [
-        138,
-        201
+        137,
+        178
       ]
     },
     "dive_B_3": {
@@ -3903,12 +3903,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_17_dive.png",
       "shellFound": true,
-      "bottom": 0.53,
-      "scale": 0.71818,
+      "bottom": 0.6,
+      "scale": 0.72976,
       "clipped": false,
       "offset": [
-        138,
-        196
+        136,
+        180
       ]
     },
     "dive_B_4": {
@@ -3919,12 +3919,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_17_dive.png",
       "shellFound": true,
-      "bottom": 0.53,
-      "scale": 0.71818,
+      "bottom": 0.6,
+      "scale": 0.72976,
       "clipped": false,
       "offset": [
-        139,
-        199
+        138,
+        180
       ]
     },
     "surface_F_1": {
@@ -3935,12 +3935,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_18_surface.png",
       "shellFound": true,
-      "bottom": 0.425,
-      "scale": 0.74971,
+      "bottom": 0.43,
+      "scale": 0.75881,
       "clipped": false,
       "offset": [
-        125,
-        215
+        120,
+        216
       ]
     },
     "surface_F_2": {
@@ -3951,12 +3951,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_18_surface.png",
       "shellFound": true,
-      "bottom": 0.46,
-      "scale": 0.74971,
+      "bottom": 0.465,
+      "scale": 0.75881,
       "clipped": false,
       "offset": [
-        123,
-        208
+        122,
+        209
       ]
     },
     "surface_F_3": {
@@ -3967,8 +3967,8 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_18_surface.png",
       "shellFound": true,
-      "bottom": 0.45,
-      "scale": 0.74971,
+      "bottom": 0.455,
+      "scale": 0.75881,
       "clipped": false,
       "offset": [
         136,
@@ -3983,11 +3983,11 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_18_surface.png",
       "shellFound": true,
-      "bottom": 0.435,
-      "scale": 0.74971,
+      "bottom": 0.44,
+      "scale": 0.75881,
       "clipped": false,
       "offset": [
-        126,
+        125,
         213
       ]
     },
@@ -3999,11 +3999,11 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_18_surface.png",
       "shellFound": true,
-      "bottom": 0.44,
-      "scale": 0.74971,
+      "bottom": 0.45,
+      "scale": 0.75881,
       "clipped": false,
       "offset": [
-        114,
+        108,
         207
       ]
     },
@@ -4015,12 +4015,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_18_surface.png",
       "shellFound": true,
-      "bottom": 0.5,
-      "scale": 0.74971,
+      "bottom": 0.51,
+      "scale": 0.75881,
       "clipped": false,
       "offset": [
-        121,
-        197
+        120,
+        198
       ]
     },
     "surface_R_3": {
@@ -4031,12 +4031,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_18_surface.png",
       "shellFound": true,
-      "bottom": 0.565,
-      "scale": 0.74971,
+      "bottom": 0.59,
+      "scale": 0.75881,
       "clipped": false,
       "offset": [
         147,
-        189
+        183
       ]
     },
     "surface_R_4": {
@@ -4047,12 +4047,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_18_surface.png",
       "shellFound": true,
-      "bottom": 0.565,
-      "scale": 0.74971,
+      "bottom": 0.605,
+      "scale": 0.75881,
       "clipped": false,
       "offset": [
         142,
-        187
+        178
       ]
     },
     "surface_B_1": {
@@ -4063,12 +4063,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_18_surface.png",
       "shellFound": true,
-      "bottom": 0.535,
-      "scale": 0.74971,
+      "bottom": 0.65,
+      "scale": 0.75881,
       "clipped": false,
       "offset": [
         126,
-        196
+        173
       ]
     },
     "surface_B_2": {
@@ -4079,12 +4079,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_18_surface.png",
       "shellFound": true,
-      "bottom": 0.535,
-      "scale": 0.74971,
+      "bottom": 0.655,
+      "scale": 0.75881,
       "clipped": false,
       "offset": [
         134,
-        196
+        171
       ]
     },
     "surface_B_3": {
@@ -4095,12 +4095,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_18_surface.png",
       "shellFound": true,
-      "bottom": 0.55,
-      "scale": 0.74971,
+      "bottom": 0.675,
+      "scale": 0.75881,
       "clipped": false,
       "offset": [
-        139,
-        195
+        140,
+        168
       ]
     },
     "surface_B_4": {
@@ -4111,12 +4111,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_18_surface.png",
       "shellFound": true,
-      "bottom": 0.55,
-      "scale": 0.74971,
+      "bottom": 0.675,
+      "scale": 0.75881,
       "clipped": false,
       "offset": [
         127,
-        196
+        168
       ]
     },
     "float_F_1": {
@@ -4127,11 +4127,11 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_19_float.png",
       "shellFound": true,
-      "bottom": 0.41,
-      "scale": 0.71038,
+      "bottom": 0.415,
+      "scale": 0.71962,
       "clipped": false,
       "offset": [
-        118,
+        117,
         220
       ]
     },
@@ -4144,11 +4144,11 @@
       "source": "reference/sheets/bangui/action_19_float.png",
       "shellFound": true,
       "bottom": 0.435,
-      "scale": 0.71038,
+      "scale": 0.71962,
       "clipped": false,
       "offset": [
-        115,
-        214
+        113,
+        213
       ]
     },
     "float_F_3": {
@@ -4159,12 +4159,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_19_float.png",
       "shellFound": true,
-      "bottom": 0.445,
-      "scale": 0.71038,
+      "bottom": 0.45,
+      "scale": 0.71962,
       "clipped": false,
       "offset": [
-        138,
-        209
+        137,
+        208
       ]
     },
     "float_F_4": {
@@ -4175,12 +4175,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_19_float.png",
       "shellFound": true,
-      "bottom": 0.405,
-      "scale": 0.71038,
+      "bottom": 0.41,
+      "scale": 0.71962,
       "clipped": false,
       "offset": [
-        125,
-        221
+        124,
+        220
       ]
     },
     "float_R_1": {
@@ -4191,12 +4191,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_19_float.png",
       "shellFound": true,
-      "bottom": 0.385,
-      "scale": 0.71038,
+      "bottom": 0.39,
+      "scale": 0.71962,
       "clipped": false,
       "offset": [
-        111,
-        228
+        100,
+        226
       ]
     },
     "float_R_2": {
@@ -4208,11 +4208,11 @@
       "source": "reference/sheets/bangui/action_19_float.png",
       "shellFound": true,
       "bottom": 0.39,
-      "scale": 0.71038,
+      "scale": 0.71962,
       "clipped": false,
       "offset": [
-        110,
-        224
+        104,
+        222
       ]
     },
     "float_R_3": {
@@ -4224,11 +4224,11 @@
       "source": "reference/sheets/bangui/action_19_float.png",
       "shellFound": true,
       "bottom": 0.34,
-      "scale": 0.71038,
+      "scale": 0.71962,
       "clipped": false,
       "offset": [
-        103,
-        235
+        101,
+        234
       ]
     },
     "float_R_4": {
@@ -4240,10 +4240,10 @@
       "source": "reference/sheets/bangui/action_19_float.png",
       "shellFound": true,
       "bottom": 0.395,
-      "scale": 0.71038,
+      "scale": 0.71962,
       "clipped": false,
       "offset": [
-        113,
+        106,
         224
       ]
     },
@@ -4255,12 +4255,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_19_float.png",
       "shellFound": true,
-      "bottom": 0.46,
-      "scale": 0.71038,
+      "bottom": 0.575,
+      "scale": 0.71962,
       "clipped": false,
       "offset": [
-        130,
-        214
+        129,
+        190
       ]
     },
     "float_B_2": {
@@ -4271,12 +4271,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_19_float.png",
       "shellFound": true,
-      "bottom": 0.465,
-      "scale": 0.71038,
+      "bottom": 0.58,
+      "scale": 0.71962,
       "clipped": false,
       "offset": [
         142,
-        213
+        189
       ]
     },
     "float_B_3": {
@@ -4287,12 +4287,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_19_float.png",
       "shellFound": true,
-      "bottom": 0.46,
-      "scale": 0.71038,
+      "bottom": 0.58,
+      "scale": 0.71962,
       "clipped": false,
       "offset": [
-        147,
-        209
+        146,
+        184
       ]
     },
     "float_B_4": {
@@ -4303,12 +4303,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_19_float.png",
       "shellFound": true,
-      "bottom": 0.46,
-      "scale": 0.71038,
+      "bottom": 0.575,
+      "scale": 0.71962,
       "clipped": false,
       "offset": [
-        142,
-        213
+        140,
+        189
       ]
     },
     "eat_water_F_1": {
@@ -4320,11 +4320,11 @@
       "source": "reference/sheets/bangui/action_20_eat_water.png",
       "shellFound": true,
       "bottom": 0.415,
-      "scale": 0.71621,
+      "scale": 0.72513,
       "clipped": false,
       "offset": [
-        122,
-        218
+        119,
+        217
       ]
     },
     "eat_water_F_2": {
@@ -4335,11 +4335,11 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_20_eat_water.png",
       "shellFound": true,
-      "bottom": 0.445,
-      "scale": 0.71621,
+      "bottom": 0.45,
+      "scale": 0.72513,
       "clipped": false,
       "offset": [
-        134,
+        133,
         209
       ]
     },
@@ -4351,8 +4351,8 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_20_eat_water.png",
       "shellFound": true,
-      "bottom": 0.4,
-      "scale": 0.71621,
+      "bottom": 0.41,
+      "scale": 0.72513,
       "clipped": false,
       "offset": [
         149,
@@ -4368,11 +4368,11 @@
       "source": "reference/sheets/bangui/action_20_eat_water.png",
       "shellFound": true,
       "bottom": 0.42,
-      "scale": 0.71621,
+      "scale": 0.72513,
       "clipped": false,
       "offset": [
-        124,
-        219
+        123,
+        218
       ]
     },
     "eat_water_R_1": {
@@ -4383,12 +4383,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_20_eat_water.png",
       "shellFound": true,
-      "bottom": 0.345,
-      "scale": 0.71621,
+      "bottom": 0.34,
+      "scale": 0.72513,
       "clipped": false,
       "offset": [
-        109,
-        234
+        105,
+        232
       ]
     },
     "eat_water_R_2": {
@@ -4400,11 +4400,11 @@
       "source": "reference/sheets/bangui/action_20_eat_water.png",
       "shellFound": true,
       "bottom": 0.4,
-      "scale": 0.71621,
+      "scale": 0.72513,
       "clipped": false,
       "offset": [
-        109,
-        223
+        108,
+        222
       ]
     },
     "eat_water_R_3": {
@@ -4415,12 +4415,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_20_eat_water.png",
       "shellFound": true,
-      "bottom": 0.37,
-      "scale": 0.71621,
+      "bottom": 0.375,
+      "scale": 0.72513,
       "clipped": false,
       "offset": [
-        128,
-        226
+        118,
+        225
       ]
     },
     "eat_water_R_4": {
@@ -4432,10 +4432,10 @@
       "source": "reference/sheets/bangui/action_20_eat_water.png",
       "shellFound": true,
       "bottom": 0.34,
-      "scale": 0.71621,
+      "scale": 0.72513,
       "clipped": false,
       "offset": [
-        122,
+        105,
         234
       ]
     },
@@ -4447,12 +4447,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_20_eat_water.png",
       "shellFound": true,
-      "bottom": 0.505,
-      "scale": 0.71621,
+      "bottom": 0.595,
+      "scale": 0.72513,
       "clipped": false,
       "offset": [
-        140,
-        206
+        139,
+        185
       ]
     },
     "eat_water_B_2": {
@@ -4463,12 +4463,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_20_eat_water.png",
       "shellFound": true,
-      "bottom": 0.5,
-      "scale": 0.71621,
+      "bottom": 0.62,
+      "scale": 0.72513,
       "clipped": false,
       "offset": [
-        149,
-        205
+        148,
+        182
       ]
     },
     "eat_water_B_3": {
@@ -4479,12 +4479,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_20_eat_water.png",
       "shellFound": true,
-      "bottom": 0.5,
-      "scale": 0.71621,
+      "bottom": 0.62,
+      "scale": 0.72513,
       "clipped": false,
       "offset": [
-        151,
-        205
+        149,
+        178
       ]
     },
     "eat_water_B_4": {
@@ -4495,12 +4495,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_20_eat_water.png",
       "shellFound": true,
-      "bottom": 0.49,
-      "scale": 0.71621,
+      "bottom": 0.585,
+      "scale": 0.72513,
       "clipped": false,
       "offset": [
-        143,
-        203
+        141,
+        182
       ]
     },
     "bottom_walk_F_1": {
@@ -4512,11 +4512,11 @@
       "source": "reference/sheets/bangui/action_21_bottom_walk.png",
       "shellFound": true,
       "bottom": 0.395,
-      "scale": 0.72403,
+      "scale": 0.73256,
       "clipped": false,
       "offset": [
-        145,
-        221
+        143,
+        220
       ]
     },
     "bottom_walk_F_2": {
@@ -4527,11 +4527,11 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_21_bottom_walk.png",
       "shellFound": true,
-      "bottom": 0.395,
-      "scale": 0.72403,
+      "bottom": 0.4,
+      "scale": 0.73256,
       "clipped": false,
       "offset": [
-        140,
+        139,
         221
       ]
     },
@@ -4543,12 +4543,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_21_bottom_walk.png",
       "shellFound": true,
-      "bottom": 0.395,
-      "scale": 0.72403,
+      "bottom": 0.4,
+      "scale": 0.73256,
       "clipped": false,
       "offset": [
-        144,
-        219
+        143,
+        218
       ]
     },
     "bottom_walk_F_4": {
@@ -4560,11 +4560,11 @@
       "source": "reference/sheets/bangui/action_21_bottom_walk.png",
       "shellFound": true,
       "bottom": 0.4,
-      "scale": 0.72403,
+      "scale": 0.73256,
       "clipped": false,
       "offset": [
-        143,
-        222
+        142,
+        221
       ]
     },
     "bottom_walk_R_1": {
@@ -4575,12 +4575,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_21_bottom_walk.png",
       "shellFound": true,
-      "bottom": 0.325,
-      "scale": 0.72403,
+      "bottom": 0.33,
+      "scale": 0.73256,
       "clipped": false,
       "offset": [
-        111,
-        235
+        98,
+        234
       ]
     },
     "bottom_walk_R_2": {
@@ -4591,12 +4591,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_21_bottom_walk.png",
       "shellFound": true,
-      "bottom": 0.365,
-      "scale": 0.72403,
+      "bottom": 0.37,
+      "scale": 0.73256,
       "clipped": false,
       "offset": [
-        109,
-        230
+        103,
+        229
       ]
     },
     "bottom_walk_R_3": {
@@ -4608,11 +4608,11 @@
       "source": "reference/sheets/bangui/action_21_bottom_walk.png",
       "shellFound": true,
       "bottom": 0.365,
-      "scale": 0.72403,
+      "scale": 0.73256,
       "clipped": false,
       "offset": [
-        105,
-        229
+        103,
+        228
       ]
     },
     "bottom_walk_R_4": {
@@ -4623,12 +4623,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_21_bottom_walk.png",
       "shellFound": true,
-      "bottom": 0.34,
-      "scale": 0.72403,
+      "bottom": 0.335,
+      "scale": 0.73256,
       "clipped": false,
       "offset": [
-        117,
-        236
+        99,
+        235
       ]
     },
     "bottom_walk_B_1": {
@@ -4639,12 +4639,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_21_bottom_walk.png",
       "shellFound": true,
-      "bottom": 0.505,
-      "scale": 0.72403,
+      "bottom": 0.585,
+      "scale": 0.73256,
       "clipped": false,
       "offset": [
-        145,
-        203
+        144,
+        186
       ]
     },
     "bottom_walk_B_2": {
@@ -4655,12 +4655,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_21_bottom_walk.png",
       "shellFound": true,
-      "bottom": 0.505,
-      "scale": 0.72403,
+      "bottom": 0.59,
+      "scale": 0.73256,
       "clipped": false,
       "offset": [
-        158,
-        200
+        157,
+        182
       ]
     },
     "bottom_walk_B_3": {
@@ -4671,12 +4671,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_21_bottom_walk.png",
       "shellFound": true,
-      "bottom": 0.5,
-      "scale": 0.72403,
+      "bottom": 0.585,
+      "scale": 0.73256,
       "clipped": false,
       "offset": [
-        157,
-        206
+        156,
+        188
       ]
     },
     "bottom_walk_B_4": {
@@ -4687,12 +4687,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_21_bottom_walk.png",
       "shellFound": true,
-      "bottom": 0.5,
-      "scale": 0.72403,
+      "bottom": 0.575,
+      "scale": 0.73256,
       "clipped": false,
       "offset": [
-        147,
-        201
+        146,
+        182
       ]
     },
     "bottom_rest_F_1": {
@@ -4704,10 +4704,10 @@
       "source": "reference/sheets/bangui/action_22_bottom_rest.png",
       "shellFound": true,
       "bottom": 0.345,
-      "scale": 0.73079,
+      "scale": 0.73853,
       "clipped": false,
       "offset": [
-        130,
+        129,
         232
       ]
     },
@@ -4720,10 +4720,10 @@
       "source": "reference/sheets/bangui/action_22_bottom_rest.png",
       "shellFound": true,
       "bottom": 0.345,
-      "scale": 0.73079,
+      "scale": 0.73853,
       "clipped": false,
       "offset": [
-        127,
+        126,
         232
       ]
     },
@@ -4736,7 +4736,7 @@
       "source": "reference/sheets/bangui/action_22_bottom_rest.png",
       "shellFound": true,
       "bottom": 0.34,
-      "scale": 0.73079,
+      "scale": 0.73853,
       "clipped": false,
       "offset": [
         128,
@@ -4752,7 +4752,7 @@
       "source": "reference/sheets/bangui/action_22_bottom_rest.png",
       "shellFound": true,
       "bottom": 0.345,
-      "scale": 0.73079,
+      "scale": 0.73853,
       "clipped": false,
       "offset": [
         129,
@@ -4767,12 +4767,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_22_bottom_rest.png",
       "shellFound": true,
-      "bottom": 0.3,
-      "scale": 0.73079,
+      "bottom": 0.295,
+      "scale": 0.73853,
       "clipped": false,
       "offset": [
-        107,
-        243
+        94,
+        241
       ]
     },
     "bottom_rest_R_2": {
@@ -4783,11 +4783,11 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_22_bottom_rest.png",
       "shellFound": true,
-      "bottom": 0.29,
-      "scale": 0.73079,
+      "bottom": 0.3,
+      "scale": 0.73853,
       "clipped": false,
       "offset": [
-        111,
+        109,
         241
       ]
     },
@@ -4799,12 +4799,12 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_22_bottom_rest.png",
       "shellFound": true,
-      "bottom": 0.345,
-      "scale": 0.73079,
+      "bottom": 0.35,
+      "scale": 0.73853,
       "clipped": false,
       "offset": [
-        115,
-        233
+        114,
+        232
       ]
     },
     "bottom_rest_R_4": {
@@ -4816,11 +4816,11 @@
       "source": "reference/sheets/bangui/action_22_bottom_rest.png",
       "shellFound": true,
       "bottom": 0.29,
-      "scale": 0.73079,
+      "scale": 0.73853,
       "clipped": false,
       "offset": [
-        115,
-        244
+        103,
+        243
       ]
     },
     "bottom_rest_B_1": {
@@ -4832,11 +4832,11 @@
       "source": "reference/sheets/bangui/action_22_bottom_rest.png",
       "shellFound": true,
       "bottom": 0.53,
-      "scale": 0.73079,
+      "scale": 0.73853,
       "clipped": false,
       "offset": [
-        145,
-        207
+        144,
+        206
       ]
     },
     "bottom_rest_B_2": {
@@ -4847,12 +4847,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_22_bottom_rest.png",
       "shellFound": true,
-      "bottom": 0.53,
-      "scale": 0.73079,
+      "bottom": 0.56,
+      "scale": 0.73853,
       "clipped": false,
       "offset": [
         144,
-        203
+        194
       ]
     },
     "bottom_rest_B_3": {
@@ -4863,12 +4863,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_22_bottom_rest.png",
       "shellFound": true,
-      "bottom": 0.535,
-      "scale": 0.73079,
+      "bottom": 0.6,
+      "scale": 0.73853,
       "clipped": false,
       "offset": [
-        146,
-        204
+        145,
+        188
       ]
     },
     "bottom_rest_B_4": {
@@ -4879,11 +4879,11 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_22_bottom_rest.png",
       "shellFound": true,
-      "bottom": 0.515,
-      "scale": 0.73079,
+      "bottom": 0.52,
+      "scale": 0.73853,
       "clipped": false,
       "offset": [
-        143,
+        142,
         204
       ]
     },
@@ -4895,11 +4895,11 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_23_climb_out.png",
       "shellFound": true,
-      "bottom": 0.41,
-      "scale": 0.74329,
+      "bottom": 0.415,
+      "scale": 0.75302,
       "clipped": false,
       "offset": [
-        129,
+        128,
         219
       ]
     },
@@ -4911,12 +4911,12 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_23_climb_out.png",
       "shellFound": true,
-      "bottom": 0.475,
-      "scale": 0.74329,
+      "bottom": 0.49,
+      "scale": 0.75302,
       "clipped": false,
       "offset": [
-        141,
-        208
+        140,
+        209
       ]
     },
     "climb_out_F_3": {
@@ -4927,11 +4927,11 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_23_climb_out.png",
       "shellFound": true,
-      "bottom": 0.47,
-      "scale": 0.74329,
+      "bottom": 0.48,
+      "scale": 0.75302,
       "clipped": false,
       "offset": [
-        151,
+        150,
         206
       ]
     },
@@ -4943,8 +4943,8 @@
       "view": "F",
       "source": "reference/sheets/bangui/action_23_climb_out.png",
       "shellFound": true,
-      "bottom": 0.405,
-      "scale": 0.74329,
+      "bottom": 0.41,
+      "scale": 0.75302,
       "clipped": false,
       "offset": [
         147,
@@ -4960,11 +4960,11 @@
       "source": "reference/sheets/bangui/action_23_climb_out.png",
       "shellFound": true,
       "bottom": 0.49,
-      "scale": 0.74329,
+      "scale": 0.75302,
       "clipped": false,
       "offset": [
-        114,
-        202
+        101,
+        200
       ]
     },
     "climb_out_R_2": {
@@ -4975,8 +4975,8 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_23_climb_out.png",
       "shellFound": true,
-      "bottom": 0.48,
-      "scale": 0.74329,
+      "bottom": 0.485,
+      "scale": 0.75302,
       "clipped": false,
       "offset": [
         137,
@@ -4992,11 +4992,11 @@
       "source": "reference/sheets/bangui/action_23_climb_out.png",
       "shellFound": true,
       "bottom": 0.475,
-      "scale": 0.74329,
+      "scale": 0.75302,
       "clipped": false,
       "offset": [
         142,
-        204
+        203
       ]
     },
     "climb_out_R_4": {
@@ -5007,11 +5007,11 @@
       "view": "R",
       "source": "reference/sheets/bangui/action_23_climb_out.png",
       "shellFound": true,
-      "bottom": 0.355,
-      "scale": 0.74329,
+      "bottom": 0.36,
+      "scale": 0.75302,
       "clipped": false,
       "offset": [
-        116,
+        106,
         229
       ]
     },
@@ -5023,12 +5023,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_23_climb_out.png",
       "shellFound": true,
-      "bottom": 0.545,
-      "scale": 0.74329,
+      "bottom": 0.575,
+      "scale": 0.75302,
       "clipped": false,
       "offset": [
         145,
-        190
+        180
       ]
     },
     "climb_out_B_2": {
@@ -5039,12 +5039,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_23_climb_out.png",
       "shellFound": true,
-      "bottom": 0.565,
-      "scale": 0.74329,
+      "bottom": 0.615,
+      "scale": 0.75302,
       "clipped": false,
       "offset": [
         159,
-        204
+        193
       ]
     },
     "climb_out_B_3": {
@@ -5055,12 +5055,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_23_climb_out.png",
       "shellFound": true,
-      "bottom": 0.53,
-      "scale": 0.74329,
+      "bottom": 0.63,
+      "scale": 0.75302,
       "clipped": false,
       "offset": [
         165,
-        197
+        176
       ]
     },
     "climb_out_B_4": {
@@ -5071,12 +5071,12 @@
       "view": "B",
       "source": "reference/sheets/bangui/action_23_climb_out.png",
       "shellFound": true,
-      "bottom": 0.55,
-      "scale": 0.74329,
+      "bottom": 0.615,
+      "scale": 0.75302,
       "clipped": false,
       "offset": [
         139,
-        197
+        181
       ]
     },
     "bask_L_1": {
@@ -5087,13 +5087,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_06_bask.png",
       "shellFound": true,
-      "bottom": 0.365,
-      "scale": 0.70481,
+      "bottom": 0.37,
+      "scale": 0.71555,
       "clipped": false,
       "mirroredFrom": "bask_R_1",
       "offset": [
-        125,
-        227
+        122,
+        226
       ]
     },
     "bask_L_2": {
@@ -5104,13 +5104,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_06_bask.png",
       "shellFound": true,
-      "bottom": 0.36,
-      "scale": 0.70481,
+      "bottom": 0.365,
+      "scale": 0.71555,
       "clipped": false,
       "mirroredFrom": "bask_R_2",
       "offset": [
-        128,
-        225
+        126,
+        224
       ]
     },
     "bask_L_3": {
@@ -5121,13 +5121,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_06_bask.png",
       "shellFound": true,
-      "bottom": 0.36,
-      "scale": 0.70481,
+      "bottom": 0.365,
+      "scale": 0.71555,
       "clipped": false,
       "mirroredFrom": "bask_R_3",
       "offset": [
-        129,
-        224
+        122,
+        223
       ]
     },
     "bask_L_4": {
@@ -5138,13 +5138,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_06_bask.png",
       "shellFound": true,
-      "bottom": 0.36,
-      "scale": 0.70481,
+      "bottom": 0.365,
+      "scale": 0.71555,
       "clipped": false,
       "mirroredFrom": "bask_R_4",
       "offset": [
-        132,
-        225
+        122,
+        224
       ]
     },
     "bottom_rest_L_1": {
@@ -5155,13 +5155,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_22_bottom_rest.png",
       "shellFound": true,
-      "bottom": 0.3,
-      "scale": 0.73079,
+      "bottom": 0.295,
+      "scale": 0.73853,
       "clipped": false,
       "mirroredFrom": "bottom_rest_R_1",
       "offset": [
-        119,
-        243
+        107,
+        241
       ]
     },
     "bottom_rest_L_2": {
@@ -5172,12 +5172,12 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_22_bottom_rest.png",
       "shellFound": true,
-      "bottom": 0.29,
-      "scale": 0.73079,
+      "bottom": 0.3,
+      "scale": 0.73853,
       "clipped": false,
       "mirroredFrom": "bottom_rest_R_2",
       "offset": [
-        126,
+        124,
         241
       ]
     },
@@ -5189,13 +5189,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_22_bottom_rest.png",
       "shellFound": true,
-      "bottom": 0.345,
-      "scale": 0.73079,
+      "bottom": 0.35,
+      "scale": 0.73853,
       "clipped": false,
       "mirroredFrom": "bottom_rest_R_3",
       "offset": [
         131,
-        233
+        232
       ]
     },
     "bottom_rest_L_4": {
@@ -5207,12 +5207,12 @@
       "source": "reference/sheets/bangui/action_22_bottom_rest.png",
       "shellFound": true,
       "bottom": 0.29,
-      "scale": 0.73079,
+      "scale": 0.73853,
       "clipped": false,
       "mirroredFrom": "bottom_rest_R_4",
       "offset": [
-        117,
-        244
+        118,
+        243
       ]
     },
     "bottom_walk_L_1": {
@@ -5223,13 +5223,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_21_bottom_walk.png",
       "shellFound": true,
-      "bottom": 0.325,
-      "scale": 0.72403,
+      "bottom": 0.33,
+      "scale": 0.73256,
       "clipped": false,
       "mirroredFrom": "bottom_walk_R_1",
       "offset": [
-        126,
-        235
+        112,
+        234
       ]
     },
     "bottom_walk_L_2": {
@@ -5240,13 +5240,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_21_bottom_walk.png",
       "shellFound": true,
-      "bottom": 0.365,
-      "scale": 0.72403,
+      "bottom": 0.37,
+      "scale": 0.73256,
       "clipped": false,
       "mirroredFrom": "bottom_walk_R_2",
       "offset": [
-        125,
-        230
+        119,
+        229
       ]
     },
     "bottom_walk_L_3": {
@@ -5258,12 +5258,12 @@
       "source": "reference/sheets/bangui/action_21_bottom_walk.png",
       "shellFound": true,
       "bottom": 0.365,
-      "scale": 0.72403,
+      "scale": 0.73256,
       "clipped": false,
       "mirroredFrom": "bottom_walk_R_3",
       "offset": [
-        124,
-        229
+        123,
+        228
       ]
     },
     "bottom_walk_L_4": {
@@ -5274,13 +5274,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_21_bottom_walk.png",
       "shellFound": true,
-      "bottom": 0.34,
-      "scale": 0.72403,
+      "bottom": 0.335,
+      "scale": 0.73256,
       "clipped": false,
       "mirroredFrom": "bottom_walk_R_4",
       "offset": [
-        118,
-        236
+        116,
+        235
       ]
     },
     "climb_out_L_1": {
@@ -5292,12 +5292,12 @@
       "source": "reference/sheets/bangui/action_23_climb_out.png",
       "shellFound": true,
       "bottom": 0.49,
-      "scale": 0.74329,
+      "scale": 0.75302,
       "clipped": false,
       "mirroredFrom": "climb_out_R_1",
       "offset": [
-        130,
-        202
+        109,
+        200
       ]
     },
     "climb_out_L_2": {
@@ -5308,12 +5308,12 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_23_climb_out.png",
       "shellFound": true,
-      "bottom": 0.48,
-      "scale": 0.74329,
+      "bottom": 0.485,
+      "scale": 0.75302,
       "clipped": false,
       "mirroredFrom": "climb_out_R_2",
       "offset": [
-        144,
+        142,
         202
       ]
     },
@@ -5326,12 +5326,12 @@
       "source": "reference/sheets/bangui/action_23_climb_out.png",
       "shellFound": true,
       "bottom": 0.475,
-      "scale": 0.74329,
+      "scale": 0.75302,
       "clipped": false,
       "mirroredFrom": "climb_out_R_3",
       "offset": [
-        145,
-        204
+        144,
+        203
       ]
     },
     "climb_out_L_4": {
@@ -5342,12 +5342,12 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_23_climb_out.png",
       "shellFound": true,
-      "bottom": 0.355,
-      "scale": 0.74329,
+      "bottom": 0.36,
+      "scale": 0.75302,
       "clipped": false,
       "mirroredFrom": "climb_out_R_4",
       "offset": [
-        121,
+        119,
         229
       ]
     },
@@ -5359,13 +5359,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_17_dive.png",
       "shellFound": true,
-      "bottom": 0.375,
-      "scale": 0.71818,
+      "bottom": 0.38,
+      "scale": 0.72976,
       "clipped": false,
       "mirroredFrom": "dive_R_1",
       "offset": [
-        136,
-        228
+        130,
+        227
       ]
     },
     "dive_L_2": {
@@ -5377,12 +5377,12 @@
       "source": "reference/sheets/bangui/action_17_dive.png",
       "shellFound": true,
       "bottom": 0.3,
-      "scale": 0.71818,
+      "scale": 0.72976,
       "clipped": false,
       "mirroredFrom": "dive_R_2",
       "offset": [
-        132,
-        242
+        124,
+        241
       ]
     },
     "dive_L_3": {
@@ -5394,12 +5394,12 @@
       "source": "reference/sheets/bangui/action_17_dive.png",
       "shellFound": true,
       "bottom": 0.455,
-      "scale": 0.71818,
+      "scale": 0.72976,
       "clipped": false,
       "mirroredFrom": "dive_R_3",
       "offset": [
-        152,
-        200
+        151,
+        199
       ]
     },
     "dive_L_4": {
@@ -5410,13 +5410,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_17_dive.png",
       "shellFound": true,
-      "bottom": 0.5,
-      "scale": 0.71818,
+      "bottom": 0.505,
+      "scale": 0.72976,
       "clipped": false,
       "mirroredFrom": "dive_R_4",
       "offset": [
         154,
-        195
+        193
       ]
     },
     "eat_L_1": {
@@ -5428,11 +5428,11 @@
       "source": "reference/sheets/bangui/action_05_eat.png",
       "shellFound": true,
       "bottom": 0.26,
-      "scale": 0.66287,
+      "scale": 0.67118,
       "clipped": false,
       "mirroredFrom": "eat_R_1",
       "offset": [
-        138,
+        134,
         247
       ]
     },
@@ -5444,13 +5444,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_05_eat.png",
       "shellFound": true,
-      "bottom": 0.265,
-      "scale": 0.66287,
+      "bottom": 0.26,
+      "scale": 0.67118,
       "clipped": false,
       "mirroredFrom": "eat_R_2",
       "offset": [
-        138,
-        247
+        135,
+        246
       ]
     },
     "eat_L_3": {
@@ -5462,12 +5462,12 @@
       "source": "reference/sheets/bangui/action_05_eat.png",
       "shellFound": true,
       "bottom": 0.26,
-      "scale": 0.66287,
+      "scale": 0.67118,
       "clipped": false,
       "mirroredFrom": "eat_R_3",
       "offset": [
-        142,
-        248
+        140,
+        247
       ]
     },
     "eat_L_4": {
@@ -5479,11 +5479,11 @@
       "source": "reference/sheets/bangui/action_05_eat.png",
       "shellFound": true,
       "bottom": 0.285,
-      "scale": 0.66287,
+      "scale": 0.67118,
       "clipped": false,
       "mirroredFrom": "eat_R_4",
       "offset": [
-        141,
+        140,
         242
       ]
     },
@@ -5495,13 +5495,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_20_eat_water.png",
       "shellFound": true,
-      "bottom": 0.345,
-      "scale": 0.71621,
+      "bottom": 0.34,
+      "scale": 0.72513,
       "clipped": false,
       "mirroredFrom": "eat_water_R_1",
       "offset": [
-        123,
-        234
+        120,
+        232
       ]
     },
     "eat_water_L_2": {
@@ -5513,12 +5513,12 @@
       "source": "reference/sheets/bangui/action_20_eat_water.png",
       "shellFound": true,
       "bottom": 0.4,
-      "scale": 0.71621,
+      "scale": 0.72513,
       "clipped": false,
       "mirroredFrom": "eat_water_R_2",
       "offset": [
-        127,
-        223
+        125,
+        222
       ]
     },
     "eat_water_L_3": {
@@ -5529,13 +5529,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_20_eat_water.png",
       "shellFound": true,
-      "bottom": 0.37,
-      "scale": 0.71621,
+      "bottom": 0.375,
+      "scale": 0.72513,
       "clipped": false,
       "mirroredFrom": "eat_water_R_3",
       "offset": [
-        134,
-        226
+        133,
+        225
       ]
     },
     "eat_water_L_4": {
@@ -5547,11 +5547,11 @@
       "source": "reference/sheets/bangui/action_20_eat_water.png",
       "shellFound": true,
       "bottom": 0.34,
-      "scale": 0.71621,
+      "scale": 0.72513,
       "clipped": false,
       "mirroredFrom": "eat_water_R_4",
       "offset": [
-        123,
+        122,
         234
       ]
     },
@@ -5563,8 +5563,8 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_12_enter_water.png",
       "shellFound": true,
-      "bottom": 0.3,
-      "scale": 0.74557,
+      "bottom": 0.305,
+      "scale": 0.75701,
       "clipped": false,
       "mirroredFrom": "enter_water_R_1",
       "offset": [
@@ -5581,11 +5581,11 @@
       "source": "reference/sheets/bangui/action_12_enter_water.png",
       "shellFound": true,
       "bottom": 0.305,
-      "scale": 0.74557,
+      "scale": 0.75701,
       "clipped": false,
       "mirroredFrom": "enter_water_R_2",
       "offset": [
-        129,
+        127,
         239
       ]
     },
@@ -5597,12 +5597,12 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_12_enter_water.png",
       "shellFound": true,
-      "bottom": 0.325,
-      "scale": 0.74557,
+      "bottom": 0.32,
+      "scale": 0.75701,
       "clipped": false,
       "mirroredFrom": "enter_water_R_3",
       "offset": [
-        111,
+        110,
         234
       ]
     },
@@ -5615,7 +5615,7 @@
       "source": "reference/sheets/bangui/action_12_enter_water.png",
       "shellFound": true,
       "bottom": 0.345,
-      "scale": 0.74557,
+      "scale": 0.75701,
       "clipped": false,
       "mirroredFrom": "enter_water_R_4",
       "offset": [
@@ -5631,12 +5631,12 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_13_flip.png",
       "shellFound": true,
-      "bottom": 0.305,
-      "scale": 0.69427,
+      "bottom": 0.31,
+      "scale": 0.70483,
       "clipped": false,
       "mirroredFrom": "flip_R_1",
       "offset": [
-        137,
+        135,
         230
       ]
     },
@@ -5649,12 +5649,12 @@
       "source": "reference/sheets/bangui/action_13_flip.png",
       "shellFound": true,
       "bottom": 0.34,
-      "scale": 0.69427,
+      "scale": 0.70483,
       "clipped": false,
       "mirroredFrom": "flip_R_2",
       "offset": [
-        118,
-        221
+        116,
+        220
       ]
     },
     "flip_L_3": {
@@ -5666,11 +5666,11 @@
       "source": "reference/sheets/bangui/action_13_flip.png",
       "shellFound": true,
       "bottom": 0.315,
-      "scale": 0.69427,
+      "scale": 0.70483,
       "clipped": false,
       "mirroredFrom": "flip_R_3",
       "offset": [
-        136,
+        135,
         232
       ]
     },
@@ -5683,12 +5683,12 @@
       "source": "reference/sheets/bangui/action_13_flip.png",
       "shellFound": true,
       "bottom": 0.315,
-      "scale": 0.69427,
+      "scale": 0.70483,
       "clipped": false,
       "mirroredFrom": "flip_R_4",
       "offset": [
-        132,
-        228
+        131,
+        227
       ]
     },
     "float_L_1": {
@@ -5699,13 +5699,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_19_float.png",
       "shellFound": true,
-      "bottom": 0.385,
-      "scale": 0.71038,
+      "bottom": 0.39,
+      "scale": 0.71962,
       "clipped": false,
       "mirroredFrom": "float_R_1",
       "offset": [
-        130,
-        228
+        118,
+        226
       ]
     },
     "float_L_2": {
@@ -5717,12 +5717,12 @@
       "source": "reference/sheets/bangui/action_19_float.png",
       "shellFound": true,
       "bottom": 0.39,
-      "scale": 0.71038,
+      "scale": 0.71962,
       "clipped": false,
       "mirroredFrom": "float_R_2",
       "offset": [
-        134,
-        224
+        129,
+        222
       ]
     },
     "float_L_3": {
@@ -5734,12 +5734,12 @@
       "source": "reference/sheets/bangui/action_19_float.png",
       "shellFound": true,
       "bottom": 0.34,
-      "scale": 0.71038,
+      "scale": 0.71962,
       "clipped": false,
       "mirroredFrom": "float_R_3",
       "offset": [
-        122,
-        235
+        121,
+        234
       ]
     },
     "float_L_4": {
@@ -5751,11 +5751,11 @@
       "source": "reference/sheets/bangui/action_19_float.png",
       "shellFound": true,
       "bottom": 0.395,
-      "scale": 0.71038,
+      "scale": 0.71962,
       "clipped": false,
       "mirroredFrom": "float_R_4",
       "offset": [
-        128,
+        127,
         224
       ]
     },
@@ -5768,11 +5768,11 @@
       "source": "reference/sheets/bangui/action_11_happy.png",
       "shellFound": true,
       "bottom": 0.335,
-      "scale": 0.72308,
+      "scale": 0.73193,
       "clipped": false,
       "mirroredFrom": "happy_R_1",
       "offset": [
-        130,
+        129,
         230
       ]
     },
@@ -5784,13 +5784,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_11_happy.png",
       "shellFound": true,
-      "bottom": 0.365,
-      "scale": 0.72308,
+      "bottom": 0.36,
+      "scale": 0.73193,
       "clipped": false,
       "mirroredFrom": "happy_R_2",
       "offset": [
-        134,
-        225
+        133,
+        224
       ]
     },
     "happy_L_3": {
@@ -5802,11 +5802,11 @@
       "source": "reference/sheets/bangui/action_11_happy.png",
       "shellFound": true,
       "bottom": 0.365,
-      "scale": 0.72308,
+      "scale": 0.73193,
       "clipped": false,
       "mirroredFrom": "happy_R_3",
       "offset": [
-        138,
+        136,
         225
       ]
     },
@@ -5819,11 +5819,11 @@
       "source": "reference/sheets/bangui/action_11_happy.png",
       "shellFound": true,
       "bottom": 0.34,
-      "scale": 0.72308,
+      "scale": 0.73193,
       "clipped": false,
       "mirroredFrom": "happy_R_4",
       "offset": [
-        128,
+        127,
         231
       ]
     },
@@ -5835,12 +5835,12 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_09_hide.png",
       "shellFound": true,
-      "bottom": 0.295,
-      "scale": 0.69993,
+      "bottom": 0.3,
+      "scale": 0.70635,
       "clipped": false,
       "mirroredFrom": "hide_R_1",
       "offset": [
-        136,
+        132,
         240
       ]
     },
@@ -5852,12 +5852,12 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_09_hide.png",
       "shellFound": true,
-      "bottom": 0.28,
-      "scale": 0.69993,
+      "bottom": 0.285,
+      "scale": 0.70635,
       "clipped": false,
       "mirroredFrom": "hide_R_2",
       "offset": [
-        134,
+        129,
         244
       ]
     },
@@ -5869,12 +5869,12 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_09_hide.png",
       "shellFound": true,
-      "bottom": 0.25,
-      "scale": 0.69993,
+      "bottom": 0.245,
+      "scale": 0.70635,
       "clipped": false,
       "mirroredFrom": "hide_R_3",
       "offset": [
-        148,
+        147,
         251
       ]
     },
@@ -5886,13 +5886,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_09_hide.png",
       "shellFound": true,
-      "bottom": 0.245,
-      "scale": 0.69993,
+      "bottom": 0.25,
+      "scale": 0.70635,
       "clipped": false,
       "mirroredFrom": "hide_R_4",
       "offset": [
         146,
-        249
+        250
       ]
     },
     "hover_L_1": {
@@ -5903,13 +5903,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_16_hover.png",
       "shellFound": true,
-      "bottom": 0.365,
-      "scale": 0.7399,
+      "bottom": 0.37,
+      "scale": 0.74723,
       "clipped": false,
       "mirroredFrom": "hover_R_1",
       "offset": [
-        130,
-        226
+        125,
+        227
       ]
     },
     "hover_L_2": {
@@ -5920,13 +5920,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_16_hover.png",
       "shellFound": true,
-      "bottom": 0.36,
-      "scale": 0.7399,
+      "bottom": 0.355,
+      "scale": 0.74723,
       "clipped": false,
       "mirroredFrom": "hover_R_2",
       "offset": [
-        127,
-        228
+        126,
+        227
       ]
     },
     "hover_L_3": {
@@ -5938,12 +5938,12 @@
       "source": "reference/sheets/bangui/action_16_hover.png",
       "shellFound": true,
       "bottom": 0.35,
-      "scale": 0.7399,
+      "scale": 0.74723,
       "clipped": false,
       "mirroredFrom": "hover_R_3",
       "offset": [
-        129,
-        232
+        128,
+        231
       ]
     },
     "hover_L_4": {
@@ -5954,13 +5954,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_16_hover.png",
       "shellFound": true,
-      "bottom": 0.35,
-      "scale": 0.7399,
+      "bottom": 0.355,
+      "scale": 0.74723,
       "clipped": false,
       "mirroredFrom": "hover_R_4",
       "offset": [
-        125,
-        232
+        122,
+        233
       ]
     },
     "look_L_1": {
@@ -5972,11 +5972,11 @@
       "source": "reference/sheets/bangui/action_03_look.png",
       "shellFound": true,
       "bottom": 0.31,
-      "scale": 0.77675,
+      "scale": 0.7879,
       "clipped": false,
       "mirroredFrom": "look_R_1",
       "offset": [
-        121,
+        112,
         236
       ]
     },
@@ -5989,12 +5989,12 @@
       "source": "reference/sheets/bangui/action_03_look.png",
       "shellFound": true,
       "bottom": 0.39,
-      "scale": 0.77675,
+      "scale": 0.7879,
       "clipped": false,
       "mirroredFrom": "look_R_2",
       "offset": [
-        124,
-        220
+        122,
+        219
       ]
     },
     "look_L_3": {
@@ -6005,13 +6005,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_03_look.png",
       "shellFound": true,
-      "bottom": 0.32,
-      "scale": 0.77675,
+      "bottom": 0.315,
+      "scale": 0.7879,
       "clipped": false,
       "mirroredFrom": "look_R_3",
       "offset": [
-        114,
-        237
+        112,
+        236
       ]
     },
     "look_L_4": {
@@ -6023,11 +6023,11 @@
       "source": "reference/sheets/bangui/action_03_look.png",
       "shellFound": true,
       "bottom": 0.38,
-      "scale": 0.77675,
+      "scale": 0.7879,
       "clipped": false,
       "mirroredFrom": "look_R_4",
       "offset": [
-        124,
+        118,
         223
       ]
     },
@@ -6040,11 +6040,11 @@
       "source": "reference/sheets/bangui/action_07_sleep.png",
       "shellFound": true,
       "bottom": 0.245,
-      "scale": 0.70203,
+      "scale": 0.70947,
       "clipped": false,
       "mirroredFrom": "sleep_R_1",
       "offset": [
-        133,
+        132,
         249
       ]
     },
@@ -6056,12 +6056,12 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_07_sleep.png",
       "shellFound": true,
-      "bottom": 0.25,
-      "scale": 0.70203,
+      "bottom": 0.245,
+      "scale": 0.70947,
       "clipped": false,
       "mirroredFrom": "sleep_R_2",
       "offset": [
-        125,
+        124,
         249
       ]
     },
@@ -6073,13 +6073,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_07_sleep.png",
       "shellFound": true,
-      "bottom": 0.25,
-      "scale": 0.70203,
+      "bottom": 0.245,
+      "scale": 0.70947,
       "clipped": false,
       "mirroredFrom": "sleep_R_3",
       "offset": [
-        122,
-        249
+        117,
+        248
       ]
     },
     "sleep_L_4": {
@@ -6091,12 +6091,12 @@
       "source": "reference/sheets/bangui/action_07_sleep.png",
       "shellFound": true,
       "bottom": 0.245,
-      "scale": 0.70203,
+      "scale": 0.70947,
       "clipped": false,
       "mirroredFrom": "sleep_R_4",
       "offset": [
         138,
-        248
+        249
       ]
     },
     "sniff_L_1": {
@@ -6108,11 +6108,11 @@
       "source": "reference/sheets/bangui/action_04_sniff.png",
       "shellFound": true,
       "bottom": 0.29,
-      "scale": 0.67051,
+      "scale": 0.67914,
       "clipped": false,
       "mirroredFrom": "sniff_R_1",
       "offset": [
-        137,
+        136,
         242
       ]
     },
@@ -6125,7 +6125,7 @@
       "source": "reference/sheets/bangui/action_04_sniff.png",
       "shellFound": true,
       "bottom": 0.265,
-      "scale": 0.67051,
+      "scale": 0.67914,
       "clipped": false,
       "mirroredFrom": "sniff_R_2",
       "offset": [
@@ -6142,11 +6142,11 @@
       "source": "reference/sheets/bangui/action_04_sniff.png",
       "shellFound": true,
       "bottom": 0.27,
-      "scale": 0.67051,
+      "scale": 0.67914,
       "clipped": false,
       "mirroredFrom": "sniff_R_3",
       "offset": [
-        140,
+        138,
         245
       ]
     },
@@ -6159,11 +6159,11 @@
       "source": "reference/sheets/bangui/action_04_sniff.png",
       "shellFound": true,
       "bottom": 0.285,
-      "scale": 0.67051,
+      "scale": 0.67914,
       "clipped": false,
       "mirroredFrom": "sniff_R_4",
       "offset": [
-        137,
+        136,
         241
       ]
     },
@@ -6175,13 +6175,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_10_startled.png",
       "shellFound": true,
-      "bottom": 0.325,
-      "scale": 0.76777,
+      "bottom": 0.33,
+      "scale": 0.77798,
       "clipped": false,
       "mirroredFrom": "startled_R_1",
       "offset": [
-        117,
-        230
+        115,
+        231
       ]
     },
     "startled_L_2": {
@@ -6193,11 +6193,11 @@
       "source": "reference/sheets/bangui/action_10_startled.png",
       "shellFound": true,
       "bottom": 0.355,
-      "scale": 0.76777,
+      "scale": 0.77798,
       "clipped": false,
       "mirroredFrom": "startled_R_2",
       "offset": [
-        127,
+        126,
         227
       ]
     },
@@ -6210,7 +6210,7 @@
       "source": "reference/sheets/bangui/action_10_startled.png",
       "shellFound": true,
       "bottom": 0.29,
-      "scale": 0.76777,
+      "scale": 0.77798,
       "clipped": false,
       "mirroredFrom": "startled_R_3",
       "offset": [
@@ -6226,8 +6226,8 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_10_startled.png",
       "shellFound": true,
-      "bottom": 0.345,
-      "scale": 0.76777,
+      "bottom": 0.34,
+      "scale": 0.77798,
       "clipped": false,
       "mirroredFrom": "startled_R_4",
       "offset": [
@@ -6243,12 +6243,12 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_18_surface.png",
       "shellFound": true,
-      "bottom": 0.44,
-      "scale": 0.74971,
+      "bottom": 0.45,
+      "scale": 0.75881,
       "clipped": false,
       "mirroredFrom": "surface_R_1",
       "offset": [
-        136,
+        128,
         207
       ]
     },
@@ -6260,13 +6260,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_18_surface.png",
       "shellFound": true,
-      "bottom": 0.5,
-      "scale": 0.74971,
+      "bottom": 0.51,
+      "scale": 0.75881,
       "clipped": false,
       "mirroredFrom": "surface_R_2",
       "offset": [
         134,
-        197
+        198
       ]
     },
     "surface_L_3": {
@@ -6277,13 +6277,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_18_surface.png",
       "shellFound": true,
-      "bottom": 0.565,
-      "scale": 0.74971,
+      "bottom": 0.59,
+      "scale": 0.75881,
       "clipped": false,
       "mirroredFrom": "surface_R_3",
       "offset": [
         150,
-        189
+        183
       ]
     },
     "surface_L_4": {
@@ -6294,13 +6294,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_18_surface.png",
       "shellFound": true,
-      "bottom": 0.565,
-      "scale": 0.74971,
+      "bottom": 0.605,
+      "scale": 0.75881,
       "clipped": false,
       "mirroredFrom": "surface_R_4",
       "offset": [
-        149,
-        187
+        148,
+        178
       ]
     },
     "swim_L_1": {
@@ -6312,12 +6312,12 @@
       "source": "reference/sheets/bangui/action_14_swim.png",
       "shellFound": true,
       "bottom": 0.365,
-      "scale": 0.75214,
+      "scale": 0.75638,
       "clipped": false,
       "mirroredFrom": "swim_R_1",
       "offset": [
-        131,
-        224
+        128,
+        225
       ]
     },
     "swim_L_2": {
@@ -6329,12 +6329,12 @@
       "source": "reference/sheets/bangui/action_14_swim.png",
       "shellFound": true,
       "bottom": 0.295,
-      "scale": 0.75214,
+      "scale": 0.75638,
       "clipped": false,
       "mirroredFrom": "swim_R_2",
       "offset": [
-        117,
-        238
+        116,
+        239
       ]
     },
     "swim_L_3": {
@@ -6346,12 +6346,12 @@
       "source": "reference/sheets/bangui/action_14_swim.png",
       "shellFound": true,
       "bottom": 0.335,
-      "scale": 0.75214,
+      "scale": 0.75638,
       "clipped": false,
       "mirroredFrom": "swim_R_3",
       "offset": [
         130,
-        234
+        235
       ]
     },
     "swim_L_4": {
@@ -6363,12 +6363,12 @@
       "source": "reference/sheets/bangui/action_14_swim.png",
       "shellFound": true,
       "bottom": 0.305,
-      "scale": 0.75214,
+      "scale": 0.75638,
       "clipped": false,
       "mirroredFrom": "swim_R_4",
       "offset": [
-        122,
-        237
+        114,
+        238
       ]
     },
     "swim_turn_L_1": {
@@ -6379,13 +6379,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_15_swim_turn.png",
       "shellFound": true,
-      "bottom": 0.275,
-      "scale": 0.7342,
+      "bottom": 0.28,
+      "scale": 0.74646,
       "clipped": false,
       "mirroredFrom": "swim_turn_R_1",
       "offset": [
-        132,
-        242
+        115,
+        241
       ]
     },
     "swim_turn_L_2": {
@@ -6397,12 +6397,12 @@
       "source": "reference/sheets/bangui/action_15_swim_turn.png",
       "shellFound": true,
       "bottom": 0.39,
-      "scale": 0.7342,
+      "scale": 0.74646,
       "clipped": false,
       "mirroredFrom": "swim_turn_R_2",
       "offset": [
-        132,
-        221
+        125,
+        219
       ]
     },
     "swim_turn_L_3": {
@@ -6414,11 +6414,11 @@
       "source": "reference/sheets/bangui/action_15_swim_turn.png",
       "shellFound": true,
       "bottom": 0.4,
-      "scale": 0.7342,
+      "scale": 0.74646,
       "clipped": false,
       "mirroredFrom": "swim_turn_R_3",
       "offset": [
-        138,
+        137,
         219
       ]
     },
@@ -6430,13 +6430,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_15_swim_turn.png",
       "shellFound": true,
-      "bottom": 0.36,
-      "scale": 0.7342,
+      "bottom": 0.355,
+      "scale": 0.74646,
       "clipped": false,
       "mirroredFrom": "swim_turn_R_4",
       "offset": [
-        136,
-        231
+        135,
+        230
       ]
     },
     "turn_L_1": {
@@ -6447,13 +6447,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_02_turn.png",
       "shellFound": true,
-      "bottom": 0.345,
-      "scale": 0.73343,
+      "bottom": 0.34,
+      "scale": 0.74432,
       "clipped": false,
       "mirroredFrom": "turn_R_1",
       "offset": [
-        122,
-        231
+        119,
+        230
       ]
     },
     "turn_L_2": {
@@ -6465,12 +6465,12 @@
       "source": "reference/sheets/bangui/action_02_turn.png",
       "shellFound": true,
       "bottom": 0.36,
-      "scale": 0.73343,
+      "scale": 0.74432,
       "clipped": false,
       "mirroredFrom": "turn_R_2",
       "offset": [
-        124,
-        228
+        123,
+        227
       ]
     },
     "turn_L_3": {
@@ -6482,12 +6482,12 @@
       "source": "reference/sheets/bangui/action_02_turn.png",
       "shellFound": true,
       "bottom": 0.375,
-      "scale": 0.73343,
+      "scale": 0.74432,
       "clipped": false,
       "mirroredFrom": "turn_R_3",
       "offset": [
-        141,
-        224
+        140,
+        223
       ]
     },
     "turn_L_4": {
@@ -6498,13 +6498,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_02_turn.png",
       "shellFound": true,
-      "bottom": 0.395,
-      "scale": 0.73343,
+      "bottom": 0.39,
+      "scale": 0.74432,
       "clipped": false,
       "mirroredFrom": "turn_R_4",
       "offset": [
-        152,
-        222
+        151,
+        221
       ]
     },
     "walk_L_1": {
@@ -6516,12 +6516,12 @@
       "source": "reference/sheets/bangui/action_01_walk.png",
       "shellFound": true,
       "bottom": 0.295,
-      "scale": 0.71207,
+      "scale": 0.72101,
       "clipped": false,
       "mirroredFrom": "walk_R_1",
       "offset": [
-        127,
-        241
+        123,
+        240
       ]
     },
     "walk_L_2": {
@@ -6533,11 +6533,11 @@
       "source": "reference/sheets/bangui/action_01_walk.png",
       "shellFound": true,
       "bottom": 0.295,
-      "scale": 0.71207,
+      "scale": 0.72101,
       "clipped": false,
       "mirroredFrom": "walk_R_2",
       "offset": [
-        125,
+        123,
         240
       ]
     },
@@ -6549,13 +6549,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_01_walk.png",
       "shellFound": true,
-      "bottom": 0.295,
-      "scale": 0.71207,
+      "bottom": 0.29,
+      "scale": 0.72101,
       "clipped": false,
       "mirroredFrom": "walk_R_3",
       "offset": [
-        123,
-        241
+        122,
+        240
       ]
     },
     "walk_L_4": {
@@ -6567,12 +6567,12 @@
       "source": "reference/sheets/bangui/action_01_walk.png",
       "shellFound": true,
       "bottom": 0.3,
-      "scale": 0.71207,
+      "scale": 0.72101,
       "clipped": false,
       "mirroredFrom": "walk_R_4",
       "offset": [
-        129,
-        240
+        127,
+        239
       ]
     },
     "yawn_L_1": {
@@ -6584,11 +6584,11 @@
       "source": "reference/sheets/bangui/action_08_yawn.png",
       "shellFound": true,
       "bottom": 0.275,
-      "scale": 0.67448,
+      "scale": 0.68314,
       "clipped": false,
       "mirroredFrom": "yawn_R_1",
       "offset": [
-        138,
+        136,
         244
       ]
     },
@@ -6600,13 +6600,13 @@
       "view": "L",
       "source": "reference/sheets/bangui/action_08_yawn.png",
       "shellFound": true,
-      "bottom": 0.35,
-      "scale": 0.67448,
+      "bottom": 0.345,
+      "scale": 0.68314,
       "clipped": false,
       "mirroredFrom": "yawn_R_2",
       "offset": [
-        139,
-        230
+        138,
+        228
       ]
     },
     "yawn_L_3": {
@@ -6618,12 +6618,12 @@
       "source": "reference/sheets/bangui/action_08_yawn.png",
       "shellFound": true,
       "bottom": 0.385,
-      "scale": 0.67448,
+      "scale": 0.68314,
       "clipped": false,
       "mirroredFrom": "yawn_R_3",
       "offset": [
-        135,
-        223
+        134,
+        222
       ]
     },
     "yawn_L_4": {
@@ -6635,11 +6635,11 @@
       "source": "reference/sheets/bangui/action_08_yawn.png",
       "shellFound": true,
       "bottom": 0.275,
-      "scale": 0.67448,
+      "scale": 0.68314,
       "clipped": false,
       "mirroredFrom": "yawn_R_4",
       "offset": [
-        136,
+        135,
         245
       ]
     }

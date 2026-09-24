@@ -425,6 +425,12 @@ def clean_alpha(img: np.ndarray, bg: str, bg_color=None) -> np.ndarray:
     # 柔邊：保留烏龜邊緣的抗鋸齒。
     alpha = np.clip((dist - 26.0) / 55.0, 0.0, 1.0)
 
+    # 色調是洋紅的也算背景：腳趾縫、四肢之間常被畫成比較暗的洋紅，跟背景色差很多，
+    # 光看距離會被當成烏龜。烏龜身上（褐、綠、黃，連嘴巴裡的粉紅）都不會紅、藍同時遠高於綠。
+    if bg == "magenta":
+        magenta = np.minimum(rgb[..., 0], rgb[..., 2]) - rgb[..., 1]
+        alpha *= np.clip((70.0 - magenta) / 40.0, 0.0, 1.0)
+
     # Respect an existing alpha channel if it exists.
     if img.shape[-1] == 4:
         alpha *= img[..., 3].astype(np.float32) / 255.0
@@ -749,6 +755,70 @@ def auto_grid(img: np.ndarray, spec: dict, rows: int, cols: int, report: list[st
     return y, x
 
 
+class SheetBlobs:
+    """
+    整張 sheet 的連通區塊（每一塊＝連在一起的一團不透明像素）。
+
+    ChatGPT 畫的烏龜常常超出自己的格子：背面那列的背甲上緣伸進上一列、
+    側面那列的頭伸進右邊一格。照格線硬切，超出的部分就被切成一條直線（遊戲裡看到的「直角」）。
+    改成：哪一塊落在這一格裡最多，就把那一整塊拿走（伸出格子的也一起帶走）。
+    """
+
+    def __init__(self, img: np.ndarray, spec: dict):
+        self.alpha = clean_alpha(img, spec.get("bg", "magenta"), spec.get("bgColor"))
+        self.labels, n = ndimage.label(self.alpha > 0.18, structure=np.ones((3, 3), dtype=np.uint8))
+        self.sizes = np.bincount(self.labels.ravel(), minlength=n + 1)
+        self.sizes[0] = 0
+        self.boxes = ndimage.find_objects(self.labels)  # 每一塊的範圍（slice）
+
+    def owner(self, y0, y1, x0, x1):
+        """這一格裡面佔最多的那一塊（不算背景）"""
+        counts = np.bincount(self.labels[y0:y1, x0:x1].ravel(), minlength=len(self.sizes))
+        counts[0] = 0
+        lab = int(np.argmax(counts))
+        return lab if counts[lab] > 0 else 0
+
+    def extract(self, img, y0, y1, x0, x1, owners: set[int]):
+        """
+        取出這一格的烏龜：主體那一塊整塊拿走；另外把中心落在格子裡、夠大的小塊
+        （抗鋸齒斷開的腳趾、尾巴尖）一起帶上。回傳 (cell 圖, alpha, 狀態)。
+        狀態：'ok'｜'merged'（跟隔壁的烏龜黏在一起，只能照格線切）
+        """
+        main = self.owner(y0, y1, x0, x1)
+        ch, cw = y1 - y0, x1 - x0
+        if main == 0:
+            cell = img[y0:y1, x0:x1]
+            return cell, np.zeros(cell.shape[:2], np.float32), "ok"
+
+        sl = self.boxes[main - 1]
+        bh, bw = sl[0].stop - sl[0].start, sl[1].stop - sl[1].start
+        # 主體大到橫跨好幾格：多半是跟隔壁的烏龜黏在一起，只能照格線切
+        if bh > ch * 1.6 or bw > cw * 1.6:
+            cell = img[y0:y1, x0:x1]
+            mask = self.labels[y0:y1, x0:x1] == main
+            return cell, self.alpha[y0:y1, x0:x1] * mask, "merged"
+
+        keep = {main}
+        min_size = max(12, self.sizes[main] * 0.025)
+        for lab, box in enumerate(self.boxes, start=1):
+            if lab == main or lab in owners or box is None or self.sizes[lab] < min_size:
+                continue
+            cy = (box[0].start + box[0].stop) / 2
+            cx = (box[1].start + box[1].stop) / 2
+            if y0 <= cy < y1 and x0 <= cx < x1:
+                keep.add(lab)
+
+        ys0 = min(self.boxes[l - 1][0].start for l in keep)
+        ys1 = max(self.boxes[l - 1][0].stop for l in keep)
+        xs0 = min(self.boxes[l - 1][1].start for l in keep)
+        xs1 = max(self.boxes[l - 1][1].stop for l in keep)
+        pad = 4
+        ys0, xs0 = max(0, ys0 - pad), max(0, xs0 - pad)
+        ys1, xs1 = min(img.shape[0], ys1 + pad), min(img.shape[1], xs1 + pad)
+        mask = np.isin(self.labels[ys0:ys1, xs0:xs1], list(keep))
+        return img[ys0:ys1, xs0:xs1], self.alpha[ys0:ys1, xs0:xs1] * mask, "ok"
+
+
 def detect_row_views(img: np.ndarray, spec: dict, report: list[str]):
     """
     判斷 4×4 sheet 每一列的視角。
@@ -927,6 +997,22 @@ def _process_one_cell(
             - (1.0 - a) * bg_rgb
         ) / a
         rgba[..., :3] = np.clip(rgb, 0, 255).astype(np.uint8)
+
+        # 去掉輪廓上殘留的洋紅色邊（遊戲裡在淡色的水裡會看到一圈紫邊）。
+        # 烏龜本身的顏色（褐、橄欖綠、奶油黃）藍色都不會比綠色高；洋紅混進來會讓紅、藍一起變高、
+        # 綠不變，所以「藍比綠多出來的量」就是殘留的洋紅，從紅、藍各扣掉。
+        # 只處理靠近輪廓 3px 內的像素：張開的嘴巴裡本來就是粉紅色，不能動。
+        solid = alpha > 0.5
+        inner = ndimage.binary_erosion(solid, iterations=3)
+        edge = (alpha > 0) & ~inner
+        rgb = rgba[..., :3].astype(np.int16)
+        spill = np.clip(rgb[..., 2] - rgb[..., 1], 0, None) * edge
+        rgb[..., 0] -= spill
+        rgb[..., 2] -= spill
+        rgba[..., :3] = np.clip(rgb, 0, 255).astype(np.uint8)
+        # 洋紅很重、覆蓋又低的邊緣像素，其實大部分是背景，淡掉
+        halo = edge & (spill > 40) & (alpha < 0.7)
+        alpha = np.where(halo, alpha * 0.4, alpha)
 
     rgba[..., 3] = np.clip(alpha * 255.0, 0, 255).astype(np.uint8)
     rgba[alpha <= 0] = 0
@@ -1131,6 +1217,17 @@ def process_sheet(spec: dict, results: dict, report: list[str], out_dir: Path):
     # --------------------------------------------------------
     cells = []
 
+    blobs = SheetBlobs(img, spec)
+    # 每一格的主體是哪一塊：小碎塊不能被別格的主體搶走
+    owners = set()
+    for idx, entry in enumerate(entries):
+        if entry is None:
+            continue
+        r, c = divmod(idx, cols)
+        owners.add(blobs.owner(y_cuts[r], y_cuts[r + 1], x_cuts[c], x_cuts[c + 1]))
+    owners.discard(0)
+    merged = []
+
     for idx, entry in enumerate(entries):
         if entry is None:
             continue
@@ -1141,13 +1238,14 @@ def process_sheet(spec: dict, results: dict, report: list[str], out_dir: Path):
         y0, y1 = y_cuts[r], y_cuts[r + 1]
         x0, x1 = x_cuts[c], x_cuts[c + 1]
 
-        cell = img[y0:y1, x0:x1]
+        cell, alpha, status = blobs.extract(img, y0, y1, x0, x1, owners)
+        if status == "merged":
+            merged.append(key)
 
         # 側面一律朝右，朝左的格子先鏡像過來
         if flip:
             cell = np.ascontiguousarray(cell[:, ::-1])
-
-        alpha = _prepare_cell(cell, spec)
+            alpha = np.ascontiguousarray(alpha[:, ::-1])
 
         if alpha.max() <= 0:
             report.append(f"  ✗ {key}: 空白 cell")
@@ -1172,6 +1270,9 @@ def process_sheet(spec: dict, results: dict, report: list[str], out_dir: Path):
                 "shell": shell,
             }
         )
+
+    if merged:
+        report.append(f"  ⚠ 這幾格的烏龜跟隔壁黏在一起，只能照格線切（可能有直線切口，建議重生成）：{'、'.join(merged)}")
 
     if not cells:
         report.append(f"  ✗ {spec['file']}: 沒有可用 cell")
