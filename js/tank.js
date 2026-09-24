@@ -4,7 +4,7 @@
 import { CONFIG } from './config.js';
 import { isNight } from './sim.js';
 import { W, H, WATER_TOP, LAMP_X, AIR_STONE_X, SHORE_X, groundY, sampleGround } from './terrain.js';
-import { TurtleAgent } from './turtle-agent.js';
+import { TurtleAgent, MAX_SHOVE } from './turtle-agent.js';
 import { isDirectional } from './poses.js';
 import { drawHeart } from './turtle-shape.js';
 
@@ -255,9 +255,12 @@ export class Tank {
         const dx = b.t.x - a.t.x, dy = b.t.y - a.t.y;
         if (Math.abs(dx) >= minX || Math.abs(dy) >= minY) continue;
         const dir = dx === 0 ? (a.id < b.id ? 1 : -1) : Math.sign(dx);
-        const push = (minX - Math.abs(dx)) * k / 2;
+        // 慢慢挪開：推開的速度最快也只到追食物時的游泳速度（不然重疊很多時會被彈開）
+        const push = Math.min((minX - Math.abs(dx)) * k / 2, MAX_SHOVE * dt);
         // 兩隻都在游泳時，也稍微上下錯開
-        const vy = !a.t.grounded && !b.t.grounded ? (dy === 0 ? 1 : Math.sign(dy)) * (minY - Math.abs(dy)) * k / 4 : 0;
+        const vy = !a.t.grounded && !b.t.grounded
+          ? (dy === 0 ? 1 : Math.sign(dy)) * Math.min((minY - Math.abs(dy)) * k / 4, MAX_SHOVE * dt / 2)
+          : 0;
         a.nudge(-dir * push, -vy);
         b.nudge(dir * push, vy);
         // 2.5D 裡也前後錯開一點
