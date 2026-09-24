@@ -38,6 +38,7 @@ let state = load();
 let tank = null;
 let assets = null;
 let selectedId = null;
+let posesReady = [];   // 有姿勢圖的品種（assets/poses/index.json）
 
 const selected = () => findTurtle(state, selectedId) || state.turtles[0];
 
@@ -112,10 +113,17 @@ function openRename(id) {
   $('renameInput').select();
 }
 
+// 某個品種的姿勢圖還沒載入就載入（加進新品種的烏龜時）；載入前烏龜先用程式畫的樣子
+async function ensurePoses(speciesId) {
+  if (!assets || assets.poses[speciesId] || !posesReady.includes(speciesId)) return;
+  assets.poses[speciesId] = await loadPoses(speciesId);
+}
+
 function addTurtle(speciesId) {
   if (state.turtles.length >= MAX_TURTLES) return;
   const t = newTurtle(speciesId, state.turtles.map(x => x.name));
   state.turtles.push(t);
+  ensurePoses(speciesId); // 這個品種第一次進缸：現在才載入牠的姿勢圖
   const sp = getSpecies(speciesId);
   addLog(state, `${sp.name}「${t.name}」搬進缸裡了。`);
   closeModals();
@@ -273,7 +281,8 @@ function bindActions() {
   });
 
   $('btnAdd').addEventListener('click', () => {
-    ui.renderSpeciesGrid(assets.poses);
+    // 哪些品種有圖（不管載入了沒）
+    ui.renderSpeciesGrid(Object.fromEntries(posesReady.map(id => [id, true])));
     openModal('speciesModal');
   });
   $('speciesGrid').addEventListener('click', e => {
@@ -379,10 +388,13 @@ async function start() {
   syncFullscreenBtn();
 
   // 每個品種的姿勢圖都先載入（沒有的品種會是 null，改用程式畫的替代圖）
-  const ready = await loadPoseIndex();
+  // 只載入缸裡現在有的品種：全部品種一起載入要解碼幾百張圖，iPhone 的 Safari 會因為記憶體不夠直接關掉網頁。
+  // 之後加進新品種的烏龜時才載入那個品種（ensurePoses）。
+  posesReady = await loadPoseIndex();
+  const inTank = new Set(state.turtles.map(t => t.species));
   const [base, poseList, Tank] = await Promise.all([
     loadAssets(),
-    Promise.all(SPECIES_LIST.map(sp => (ready.includes(sp.id) ? loadPoses(sp.id) : null))),
+    Promise.all(SPECIES_LIST.map(sp => (posesReady.includes(sp.id) && inTank.has(sp.id) ? loadPoses(sp.id) : null))),
     loadTankClass(view),
   ]);
   assets = base;
@@ -448,6 +460,7 @@ async function start() {
   });
   window.addEventListener('pagehide', () => save(state));
   window.__gameStarted = true; // index.html 的載入失敗提示看這個
+  document.getElementById('loadError')?.remove(); // 有錯誤但遊戲還是起來了（例如 2.5D 退回 2D），就不要擋畫面
 }
 
 // 第一次玩：兩隻隨機命名的斑龜

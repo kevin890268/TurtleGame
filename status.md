@@ -235,6 +235,8 @@ tools/make_actions_v3.py  產生斑龜 v3 動作提示詞
 
 **戶外池場景**：池子改成挖在草地裡，正面是土層剖面，四周一圈全景（`js/outdoor-world.js`）。目前用程式畫的替代圖；ChatGPT 的全景、土層、草地提示詞在 `gpt/scene/outdoor/`，生好後跑 `python tools/pack_scene.py outdoor`。
 
+**iPhone 打不開（2026-09-25 修正）**：開遊戲時原本一次解碼 585 張、約 700 MB 的姿勢圖（每張 560×560，大多是透明），iPhone 的 Safari 會因為記憶體不夠關掉網頁。改成裁掉透明部分（`tools/crop_poses.py`）＋只載入缸裡有的品種，現在約 52 MB。
+
 **手機顯示問題**：本機改用 `python tools/serve.py`（不讓瀏覽器暫存舊程式）；畫面壞掉時開「網址?reset=1」，或用設定裡的「重新開始」，會一起清掉存檔、設定和瀏覽器暫存。（之前的「重新開始」其實沒作用：關頁時會把舊存檔寫回去，已修正。）
 
 待辦的玩法與素材項目（含查證資料與程式位置）整理在 **[docs/backlog.md](docs/backlog.md)**：水中吃東西的動作、有飼料時速度太快、食物的營養組成與挑食。

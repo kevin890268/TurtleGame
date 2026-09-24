@@ -1386,6 +1386,10 @@ def slice_species(species: str):
         encoding="utf-8",
     )
 
+    # 裁掉每張圖四周的透明部分（省記憶體，iPhone 才開得起來），裁切位置寫回 poses.json
+    from crop_poses import crop_dir
+    crop_dir(out_dir)
+
     # 清掉這次沒有產生的舊圖（換了新圖、刪了動作之後，舊檔不會自己消失）
     keep = {v["file"] for v in results.values()}
     stale = [f for f in out_dir.glob("*.png") if f.name not in keep]

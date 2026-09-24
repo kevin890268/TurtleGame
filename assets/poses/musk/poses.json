@@ -11,231 +11,364 @@
       "name": "散步",
       "source": "reference/sheets/musk/sheet_a.png",
       "shellFound": true,
-      "bottom": 0.335
+      "bottom": 0.335,
+      "offset": [
+        133,
+        228
+      ]
     },
     "relax": {
       "file": "relax.png",
       "name": "放鬆",
       "source": "reference/sheets/musk/sheet_c.png",
       "shellFound": true,
-      "bottom": 0.43
+      "bottom": 0.43,
+      "offset": [
+        131,
+        229
+      ]
     },
     "think": {
       "file": "think.png",
       "name": "思考",
       "source": "reference/sheets/musk/sheet_c.png",
       "shellFound": true,
-      "bottom": 0.535
+      "bottom": 0.535,
+      "offset": [
+        156,
+        198
+      ]
     },
     "neck_up": {
       "file": "neck_up.png",
       "name": "伸長脖子",
       "source": "reference/sheets/musk/sheet_a.png",
       "shellFound": true,
-      "bottom": 0.39
+      "bottom": 0.39,
+      "offset": [
+        153,
+        152
+      ]
     },
     "stretch": {
       "file": "stretch.png",
       "name": "伸懶腰",
       "source": "reference/sheets/musk/sheet_b.png",
       "shellFound": true,
-      "bottom": 0.315
+      "bottom": 0.315,
+      "offset": [
+        89,
+        241
+      ]
     },
     "rest": {
       "file": "rest.png",
       "name": "趴著休息",
       "source": "reference/sheets/musk/sheet_b.png",
       "shellFound": true,
-      "bottom": 0.31
+      "bottom": 0.31,
+      "offset": [
+        139,
+        239
+      ]
     },
     "walk_b": {
       "file": "walk_b.png",
       "name": "慢慢爬",
       "source": "reference/sheets/musk/sheet_a.png",
       "shellFound": true,
-      "bottom": 0.325
+      "bottom": 0.325,
+      "offset": [
+        130,
+        240
+      ]
     },
     "observe": {
       "file": "observe.png",
       "name": "抬頭觀察",
       "source": "reference/sheets/musk/sheet_a.png",
       "shellFound": true,
-      "bottom": 0.5
+      "bottom": 0.5,
+      "offset": [
+        141,
+        206
+      ]
     },
     "sniff": {
       "file": "sniff.png",
       "name": "低頭聞聞",
       "source": "reference/sheets/musk/sheet_a.png",
       "shellFound": true,
-      "bottom": 0.42
+      "bottom": 0.42,
+      "offset": [
+        123,
+        226
+      ]
     },
     "hide": {
       "file": "hide.png",
       "name": "縮進殼裡",
       "source": "reference/sheets/musk/sheet_b.png",
       "shellFound": true,
-      "bottom": 0.31
+      "bottom": 0.31,
+      "offset": [
+        154,
+        236
+      ]
     },
     "angry": {
       "file": "angry.png",
       "name": "生氣",
       "source": "reference/sheets/musk/sheet_c.png",
       "shellFound": true,
-      "bottom": 0.425
+      "bottom": 0.425,
+      "offset": [
+        124,
+        229
+      ]
     },
     "run": {
       "file": "run.png",
       "name": "快步走",
       "source": "reference/sheets/musk/musk_ref.png",
       "shellFound": true,
-      "bottom": 0.46
+      "bottom": 0.46,
+      "offset": [
+        124,
+        228
+      ]
     },
     "happy": {
       "file": "happy.png",
       "name": "開心",
       "source": "reference/sheets/musk/sheet_c.png",
       "shellFound": true,
-      "bottom": 0.475
+      "bottom": 0.475,
+      "offset": [
+        132,
+        206
+      ]
     },
     "look": {
       "file": "look.png",
       "name": "張望",
       "source": "reference/sheets/musk/sheet_a.png",
       "shellFound": true,
-      "bottom": 0.475
+      "bottom": 0.475,
+      "offset": [
+        139,
+        212
+      ]
     },
     "bask": {
       "file": "bask.png",
       "name": "曬太陽",
       "source": "reference/sheets/musk/sheet_b.png",
       "shellFound": true,
-      "bottom": 0.31
+      "bottom": 0.31,
+      "offset": [
+        115,
+        239
+      ]
     },
     "sleep": {
       "file": "sleep.png",
       "name": "睡覺",
       "source": "reference/sheets/musk/sheet_b.png",
       "shellFound": true,
-      "bottom": 0.305
+      "bottom": 0.305,
+      "offset": [
+        146,
+        242
+      ]
     },
     "yawn": {
       "file": "yawn.png",
       "name": "打哈欠",
       "source": "reference/sheets/musk/sheet_b.png",
       "shellFound": true,
-      "bottom": 0.42
+      "bottom": 0.42,
+      "offset": [
+        124,
+        219
+      ]
     },
     "startled": {
       "file": "startled.png",
       "name": "驚嚇",
       "source": "reference/sheets/musk/sheet_c.png",
       "shellFound": true,
-      "bottom": 0.42
+      "bottom": 0.42,
+      "offset": [
+        171,
+        124
+      ]
     },
     "purr": {
       "file": "purr.png",
       "name": "滿足",
       "source": "reference/sheets/musk/sheet_c.png",
       "shellFound": true,
-      "bottom": 0.455
+      "bottom": 0.455,
+      "offset": [
+        144,
+        206
+      ]
     },
     "swim": {
       "file": "swim.png",
       "name": "游泳",
       "source": "reference/sheets/musk/sheet_d.png",
       "shellFound": true,
-      "bottom": 0.355
+      "bottom": 0.355,
+      "offset": [
+        97,
+        227
+      ]
     },
     "dive": {
       "file": "dive.png",
       "name": "下潛",
       "source": "reference/sheets/musk/sheet_d.png",
       "shellFound": true,
-      "bottom": 0.565
+      "bottom": 0.565,
+      "offset": [
+        135,
+        182
+      ]
     },
     "rise": {
       "file": "rise.png",
       "name": "上浮",
       "source": "reference/sheets/musk/sheet_d.png",
       "shellFound": true,
-      "bottom": 0.42
+      "bottom": 0.42,
+      "offset": [
+        131,
+        142
+      ]
     },
     "float": {
       "file": "float.png",
       "name": "漂浮",
       "source": "reference/sheets/musk/sheet_d.png",
       "shellFound": true,
-      "bottom": 0.56
+      "bottom": 0.56,
+      "offset": [
+        97,
+        220
+      ]
     },
     "drink": {
       "file": "drink.png",
       "name": "淺水換氣",
       "source": "reference/sheets/musk/sheet_d.png",
       "shellFound": true,
-      "bottom": 0.43
+      "bottom": 0.43,
+      "offset": [
+        132,
+        112
+      ]
     },
     "nibble": {
       "file": "nibble.png",
       "name": "咬食物",
       "source": "reference/sheets/musk/sheet_d.png",
       "shellFound": true,
-      "bottom": 0.525
+      "bottom": 0.525,
+      "offset": [
+        104,
+        229
+      ]
     },
     "swim_1": {
       "file": "swim_1.png",
       "name": "游泳1",
       "source": "reference/sheets/musk/loop_swim.png",
       "shellFound": true,
-      "bottom": 0.28
+      "bottom": 0.28,
+      "offset": [
+        127,
+        244
+      ]
     },
     "swim_2": {
       "file": "swim_2.png",
       "name": "游泳2",
       "source": "reference/sheets/musk/loop_swim.png",
       "shellFound": true,
-      "bottom": 0.42
+      "bottom": 0.42,
+      "offset": [
+        128,
+        245
+      ]
     },
     "swim_3": {
       "file": "swim_3.png",
       "name": "游泳3",
       "source": "reference/sheets/musk/loop_swim.png",
       "shellFound": true,
-      "bottom": 0.28
+      "bottom": 0.28,
+      "offset": [
+        121,
+        242
+      ]
     },
     "swim_4": {
       "file": "swim_4.png",
       "name": "游泳4",
       "source": "reference/sheets/musk/loop_swim.png",
       "shellFound": true,
-      "bottom": 0.375
+      "bottom": 0.375,
+      "offset": [
+        127,
+        247
+      ]
     },
     "walk_1": {
       "file": "walk_1.png",
       "name": "爬行1",
       "source": "reference/sheets/musk/loop_walk.png",
       "shellFound": true,
-      "bottom": 0.33
+      "bottom": 0.33,
+      "offset": [
+        117,
+        234
+      ]
     },
     "walk_2": {
       "file": "walk_2.png",
       "name": "爬行2",
       "source": "reference/sheets/musk/loop_walk.png",
       "shellFound": true,
-      "bottom": 0.345
+      "bottom": 0.345,
+      "offset": [
+        143,
+        236
+      ]
     },
     "walk_3": {
       "file": "walk_3.png",
       "name": "爬行3",
       "source": "reference/sheets/musk/loop_walk.png",
       "shellFound": true,
-      "bottom": 0.325
+      "bottom": 0.325,
+      "offset": [
+        117,
+        233
+      ]
     },
     "walk_4": {
       "file": "walk_4.png",
       "name": "爬行4",
       "source": "reference/sheets/musk/loop_walk.png",
       "shellFound": true,
-      "bottom": 0.32
+      "bottom": 0.32,
+      "offset": [
+        143,
+        232
+      ]
     }
-  }
+  },
+  "cropped": true
 }

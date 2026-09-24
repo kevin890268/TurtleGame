@@ -11,280 +11,441 @@
       "name": "散步",
       "source": "reference/sheets/european/sheet_a.png",
       "shellFound": true,
-      "bottom": 0.285
+      "bottom": 0.285,
+      "offset": [
+        141,
+        240
+      ]
     },
     "walk_b": {
       "file": "walk_b.png",
       "name": "慢慢爬",
       "source": "reference/sheets/european/sheet_a.png",
       "shellFound": true,
-      "bottom": 0.23
+      "bottom": 0.23,
+      "offset": [
+        141,
+        250
+      ]
     },
     "look": {
       "file": "look.png",
       "name": "張望",
       "source": "reference/sheets/european/sheet_a.png",
       "shellFound": true,
-      "bottom": 0.385
+      "bottom": 0.385,
+      "offset": [
+        155,
+        219
+      ]
     },
     "neck_up": {
       "file": "neck_up.png",
       "name": "伸長脖子",
       "source": "reference/sheets/european/sheet_a.png",
       "shellFound": true,
-      "bottom": 0.445
+      "bottom": 0.445,
+      "offset": [
+        159,
+        205
+      ]
     },
     "observe": {
       "file": "observe.png",
       "name": "抬頭觀察",
       "source": "reference/sheets/european/sheet_a.png",
       "shellFound": true,
-      "bottom": 0.375
+      "bottom": 0.375,
+      "offset": [
+        148,
+        221
+      ]
     },
     "sniff": {
       "file": "sniff.png",
       "name": "低頭聞聞",
       "source": "reference/sheets/european/sheet_a.png",
       "shellFound": true,
-      "bottom": 0.285
+      "bottom": 0.285,
+      "offset": [
+        149,
+        240
+      ]
     },
     "bask": {
       "file": "bask.png",
       "name": "曬太陽",
       "source": "reference/sheets/european/sheet_b.png",
       "shellFound": true,
-      "bottom": 0.31
+      "bottom": 0.31,
+      "offset": [
+        141,
+        234
+      ]
     },
     "sleep": {
       "file": "sleep.png",
       "name": "睡覺",
       "source": "reference/sheets/european/sheet_b.png",
       "shellFound": true,
-      "bottom": 0.22
+      "bottom": 0.22,
+      "offset": [
+        165,
+        251
+      ]
     },
     "yawn": {
       "file": "yawn.png",
       "name": "打哈欠",
       "source": "reference/sheets/european/sheet_b.png",
       "shellFound": true,
-      "bottom": 0.36
+      "bottom": 0.36,
+      "offset": [
+        152,
+        224
+      ]
     },
     "stretch": {
       "file": "stretch.png",
       "name": "伸懶腰",
       "source": "reference/sheets/european/sheet_b.png",
       "shellFound": true,
-      "bottom": 0.185
+      "bottom": 0.185,
+      "offset": [
+        140,
+        258
+      ]
     },
     "hide": {
       "file": "hide.png",
       "name": "縮進殼裡",
       "source": "reference/sheets/european/sheet_b.png",
       "shellFound": true,
-      "bottom": 0.225
+      "bottom": 0.225,
+      "offset": [
+        104,
+        253
+      ]
     },
     "rest": {
       "file": "rest.png",
       "name": "趴著休息",
       "source": "reference/sheets/european/sheet_b.png",
       "shellFound": true,
-      "bottom": 0.205
+      "bottom": 0.205,
+      "offset": [
+        146,
+        255
+      ]
     },
     "happy": {
       "file": "happy.png",
       "name": "開心",
       "source": "reference/sheets/european/sheet_c.png",
       "shellFound": true,
-      "bottom": 0.355
+      "bottom": 0.355,
+      "offset": [
+        140,
+        225
+      ]
     },
     "startled": {
       "file": "startled.png",
       "name": "驚嚇",
       "source": "reference/sheets/european/sheet_c.png",
       "shellFound": true,
-      "bottom": 0.455
+      "bottom": 0.455,
+      "offset": [
+        169,
+        205
+      ]
     },
     "angry": {
       "file": "angry.png",
       "name": "生氣",
       "source": "reference/sheets/european/sheet_c.png",
       "shellFound": true,
-      "bottom": 0.295
+      "bottom": 0.295,
+      "offset": [
+        149,
+        237
+      ]
     },
     "purr": {
       "file": "purr.png",
       "name": "滿足",
       "source": "reference/sheets/european/sheet_c.png",
       "shellFound": true,
-      "bottom": 0.275
+      "bottom": 0.275,
+      "offset": [
+        142,
+        236
+      ]
     },
     "think": {
       "file": "think.png",
       "name": "思考",
       "source": "reference/sheets/european/sheet_c.png",
       "shellFound": true,
-      "bottom": 0.39
+      "bottom": 0.39,
+      "offset": [
+        152,
+        219
+      ]
     },
     "relax": {
       "file": "relax.png",
       "name": "放鬆",
       "source": "reference/sheets/european/sheet_c.png",
       "shellFound": true,
-      "bottom": 0.335
+      "bottom": 0.335,
+      "offset": [
+        149,
+        218
+      ]
     },
     "swim": {
       "file": "swim.png",
       "name": "游泳",
       "source": "reference/sheets/european/sheet_d.png",
       "shellFound": true,
-      "bottom": 0.24
+      "bottom": 0.24,
+      "offset": [
+        141,
+        250
+      ]
     },
     "dive": {
       "file": "dive.png",
       "name": "下潛",
       "source": "reference/sheets/european/sheet_d.png",
       "shellFound": true,
-      "bottom": 0.44
+      "bottom": 0.44,
+      "offset": [
+        157,
+        209
+      ]
     },
     "rise": {
       "file": "rise.png",
       "name": "上浮",
       "source": "reference/sheets/european/sheet_d.png",
       "shellFound": true,
-      "bottom": 0.42
+      "bottom": 0.42,
+      "offset": [
+        158,
+        211
+      ]
     },
     "float": {
       "file": "float.png",
       "name": "漂浮",
       "source": "reference/sheets/european/sheet_d.png",
       "shellFound": true,
-      "bottom": 0.25
+      "bottom": 0.25,
+      "offset": [
+        141,
+        248
+      ]
     },
     "drink": {
       "file": "drink.png",
       "name": "淺水換氣",
       "source": "reference/sheets/european/sheet_d.png",
       "shellFound": true,
-      "bottom": 0.44
+      "bottom": 0.44,
+      "offset": [
+        166,
+        205
+      ]
     },
     "nibble": {
       "file": "nibble.png",
       "name": "咬食物",
       "source": "reference/sheets/european/sheet_d.png",
       "shellFound": true,
-      "bottom": 0.26
+      "bottom": 0.26,
+      "offset": [
+        138,
+        244
+      ]
     },
     "swim_1": {
       "file": "swim_1.png",
       "name": "游泳1",
       "source": "reference/sheets/european/loop_swim.png",
       "shellFound": true,
-      "bottom": 0.2
+      "bottom": 0.2,
+      "offset": [
+        148,
+        256
+      ]
     },
     "swim_2": {
       "file": "swim_2.png",
       "name": "游泳2",
       "source": "reference/sheets/european/loop_swim.png",
       "shellFound": true,
-      "bottom": 0.25
+      "bottom": 0.25,
+      "offset": [
+        150,
+        247
+      ]
     },
     "swim_3": {
       "file": "swim_3.png",
       "name": "游泳3",
       "source": "reference/sheets/european/loop_swim.png",
       "shellFound": true,
-      "bottom": 0.175
+      "bottom": 0.175,
+      "offset": [
+        147,
+        262
+      ]
     },
     "swim_4": {
       "file": "swim_4.png",
       "name": "游泳4",
       "source": "reference/sheets/european/loop_swim.png",
       "shellFound": true,
-      "bottom": 0.21
+      "bottom": 0.21,
+      "offset": [
+        149,
+        256
+      ]
     },
     "walk_1": {
       "file": "walk_1.png",
       "name": "爬行1",
       "source": "reference/sheets/european/loop_walk.png",
       "shellFound": true,
-      "bottom": 0.22
+      "bottom": 0.22,
+      "offset": [
+        146,
+        253
+      ]
     },
     "walk_2": {
       "file": "walk_2.png",
       "name": "爬行2",
       "source": "reference/sheets/european/loop_walk.png",
       "shellFound": true,
-      "bottom": 0.25
+      "bottom": 0.25,
+      "offset": [
+        152,
+        246
+      ]
     },
     "walk_3": {
       "file": "walk_3.png",
       "name": "爬行3",
       "source": "reference/sheets/european/loop_walk.png",
       "shellFound": true,
-      "bottom": 0.235
+      "bottom": 0.235,
+      "offset": [
+        144,
+        249
+      ]
     },
     "walk_4": {
       "file": "walk_4.png",
       "name": "爬行4",
       "source": "reference/sheets/european/loop_walk.png",
       "shellFound": true,
-      "bottom": 0.23
+      "bottom": 0.23,
+      "offset": [
+        154,
+        251
+      ]
     },
     "wag_1": {
       "file": "wag_1.png",
       "name": "搖尾巴1",
       "source": "reference/sheets/european/G.png",
       "shellFound": true,
-      "bottom": 0.275
+      "bottom": 0.275,
+      "offset": [
+        149,
+        242
+      ]
     },
     "wag_2": {
       "file": "wag_2.png",
       "name": "搖尾巴2",
       "source": "reference/sheets/european/G.png",
       "shellFound": true,
-      "bottom": 0.28
+      "bottom": 0.28,
+      "offset": [
+        141,
+        241
+      ]
     },
     "wag_3": {
       "file": "wag_3.png",
       "name": "搖尾巴3",
       "source": "reference/sheets/european/G.png",
       "shellFound": true,
-      "bottom": 0.28
+      "bottom": 0.28,
+      "offset": [
+        149,
+        241
+      ]
     },
     "wag_4": {
       "file": "wag_4.png",
       "name": "搖尾巴4",
       "source": "reference/sheets/european/G.png",
       "shellFound": true,
-      "bottom": 0.28
+      "bottom": 0.28,
+      "offset": [
+        149,
+        241
+      ]
     },
     "shake_1": {
       "file": "shake_1.png",
       "name": "搖屁屁1",
       "source": "reference/sheets/european/H.png",
       "shellFound": true,
-      "bottom": 0.335
+      "bottom": 0.335,
+      "offset": [
+        147,
+        225
+      ]
     },
     "shake_2": {
       "file": "shake_2.png",
       "name": "搖屁屁2",
       "source": "reference/sheets/european/H.png",
       "shellFound": true,
-      "bottom": 0.325
+      "bottom": 0.325,
+      "offset": [
+        152,
+        229
+      ]
     },
     "shake_3": {
       "file": "shake_3.png",
       "name": "搖屁屁3",
       "source": "reference/sheets/european/H.png",
       "shellFound": true,
-      "bottom": 0.295
+      "bottom": 0.295,
+      "offset": [
+        147,
+        234
+      ]
     },
     "shake_4": {
       "file": "shake_4.png",
       "name": "搖屁屁4",
       "source": "reference/sheets/european/H.png",
       "shellFound": true,
-      "bottom": 0.31
+      "bottom": 0.31,
+      "offset": [
+        150,
+        228
+      ]
     }
-  }
+  },
+  "cropped": true
 }

@@ -239,7 +239,9 @@ export function renderTurtle(ctx, poses, key, shellPx, anim, alpha = 1, palette)
   if (img) {
     const k = shellPx / poses.meta.shellWidth;
     const [ax, ay] = poses.meta.anchor;
-    ctx.drawImage(img, -ax * k, -ay * k, img.width * k, img.height * k);
+    // 圖有裁掉四周的透明部分（tools/crop_poses.py），offset 是裁切後的圖在原本畫布上的位置
+    const [ox, oy] = poses.meta.poses[key]?.offset || [0, 0];
+    ctx.drawImage(img, (ox - ax) * k, (oy - ay) * k, img.width * k, img.height * k);
   } else {
     drawTurtleShape(ctx, shellPx / 0.94, fallbackKind(key), anim, palette);
   }

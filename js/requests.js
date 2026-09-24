@@ -796,7 +796,10 @@ function analyze(poses, key) {
   const g = c.getContext('2d', { willReadFrequently: true });
   g.drawImage(img, 0, 0);
   const px = g.getImageData(0, 0, c.width, c.height).data;
-  const [ax, ay] = poses.meta.anchor;
+  const [ax0, ay0] = poses.meta.anchor;
+  // 圖有裁切過：把裁切位置扣回來，座標才會跟原本的錨點對齊
+  const [ox, oy] = poses.meta.poses[key]?.offset || [0, 0];
+  const ax = ax0 - ox, ay = ay0 - oy;
   const sw = poses.meta.shellWidth;
 
   let x0 = c.width, y0 = c.height, x1 = 0, y1 = 0;

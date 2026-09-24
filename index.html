@@ -83,9 +83,18 @@
       };
       // 程式載入失敗時（多半是瀏覽器把新舊版的程式檔混在一起用），顯示提示和按鈕，
       // 不要只剩一片空白的水缸。遊戲啟動完成後（main.js 設 __gameStarted）就不再攔截。
+      // 有錯誤時先等 5 秒：很多錯誤不影響遊玩（例如 2.5D 載不到、自動退回 2D），
+      // 遊戲有起來（__gameStarted）就不顯示；真的沒起來才擋住畫面給按鈕。
+      var pendingError = null;
       window.showLoadError = function (detail) {
         if (window.__gameStarted || document.getElementById('loadError')) return;
+        if (pendingError === null) {
+          setTimeout(function () { if (!window.__gameStarted) show(); }, 5000);
+        }
+        pendingError = detail || pendingError || '';
         var show = function () {
+          detail = pendingError;
+          if (document.getElementById('loadError')) return;
           var box = document.createElement('div');
           box.id = 'loadError';
           box.className = 'load-error';
@@ -95,7 +104,6 @@
           box.querySelector('button').addEventListener('click', function () { window.refreshCode(); });
           document.body.appendChild(box);
         };
-        if (document.body) show(); else document.addEventListener('DOMContentLoaded', show);
       };
       window.addEventListener('error', function (e) {
         window.showLoadError(e.message || (e.target && e.target.src) || '程式檔載入失敗');

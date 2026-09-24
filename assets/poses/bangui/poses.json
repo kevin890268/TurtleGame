@@ -673,7 +673,11 @@
       "shellFound": true,
       "bottom": 0.465,
       "scale": 0.71207,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        142,
+        217
+      ]
     },
     "walk_F_2": {
       "file": "walk_F_2.png",
@@ -685,7 +689,11 @@
       "shellFound": true,
       "bottom": 0.45,
       "scale": 0.71207,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        162,
+        213
+      ]
     },
     "walk_F_3": {
       "file": "walk_F_3.png",
@@ -697,7 +705,11 @@
       "shellFound": true,
       "bottom": 0.5,
       "scale": 0.71207,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        163,
+        219
+      ]
     },
     "walk_F_4": {
       "file": "walk_F_4.png",
@@ -709,7 +721,11 @@
       "shellFound": true,
       "bottom": 0.465,
       "scale": 0.71207,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        159,
+        208
+      ]
     },
     "walk_R_1": {
       "file": "walk_R_1.png",
@@ -721,7 +737,11 @@
       "shellFound": true,
       "bottom": 0.295,
       "scale": 0.71207,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        124,
+        241
+      ]
     },
     "walk_R_2": {
       "file": "walk_R_2.png",
@@ -733,7 +753,11 @@
       "shellFound": true,
       "bottom": 0.295,
       "scale": 0.71207,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        123,
+        240
+      ]
     },
     "walk_R_3": {
       "file": "walk_R_3.png",
@@ -745,7 +769,11 @@
       "shellFound": true,
       "bottom": 0.295,
       "scale": 0.71207,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        125,
+        241
+      ]
     },
     "walk_R_4": {
       "file": "walk_R_4.png",
@@ -757,7 +785,11 @@
       "shellFound": true,
       "bottom": 0.3,
       "scale": 0.71207,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        130,
+        240
+      ]
     },
     "walk_B_1": {
       "file": "walk_B_1.png",
@@ -769,7 +801,11 @@
       "shellFound": true,
       "bottom": 0.505,
       "scale": 0.71207,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        158,
+        198
+      ]
     },
     "walk_B_2": {
       "file": "walk_B_2.png",
@@ -781,7 +817,11 @@
       "shellFound": true,
       "bottom": 0.525,
       "scale": 0.71207,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        162,
+        200
+      ]
     },
     "walk_B_3": {
       "file": "walk_B_3.png",
@@ -793,7 +833,11 @@
       "shellFound": true,
       "bottom": 0.53,
       "scale": 0.71207,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        148,
+        199
+      ]
     },
     "walk_B_4": {
       "file": "walk_B_4.png",
@@ -805,7 +849,11 @@
       "shellFound": true,
       "bottom": 0.51,
       "scale": 0.71207,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        152,
+        196
+      ]
     },
     "turn_F_1": {
       "file": "turn_F_1.png",
@@ -817,7 +865,11 @@
       "shellFound": true,
       "bottom": 0.4,
       "scale": 0.73343,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        159,
+        219
+      ]
     },
     "turn_F_2": {
       "file": "turn_F_2.png",
@@ -829,7 +881,11 @@
       "shellFound": true,
       "bottom": 0.415,
       "scale": 0.73343,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        146,
+        216
+      ]
     },
     "turn_F_3": {
       "file": "turn_F_3.png",
@@ -841,7 +897,11 @@
       "shellFound": true,
       "bottom": 0.41,
       "scale": 0.73343,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        137,
+        218
+      ]
     },
     "turn_F_4": {
       "file": "turn_F_4.png",
@@ -853,7 +913,11 @@
       "shellFound": true,
       "bottom": 0.385,
       "scale": 0.73343,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        133,
+        224
+      ]
     },
     "turn_R_1": {
       "file": "turn_R_1.png",
@@ -865,7 +929,11 @@
       "shellFound": true,
       "bottom": 0.345,
       "scale": 0.73343,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        111,
+        231
+      ]
     },
     "turn_R_2": {
       "file": "turn_R_2.png",
@@ -877,7 +945,11 @@
       "shellFound": true,
       "bottom": 0.36,
       "scale": 0.73343,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        118,
+        228
+      ]
     },
     "turn_R_3": {
       "file": "turn_R_3.png",
@@ -889,7 +961,11 @@
       "shellFound": true,
       "bottom": 0.375,
       "scale": 0.73343,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        138,
+        224
+      ]
     },
     "turn_R_4": {
       "file": "turn_R_4.png",
@@ -901,7 +977,11 @@
       "shellFound": true,
       "bottom": 0.395,
       "scale": 0.73343,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        151,
+        222
+      ]
     },
     "turn_B_1": {
       "file": "turn_B_1.png",
@@ -913,7 +993,11 @@
       "shellFound": true,
       "bottom": 0.565,
       "scale": 0.73343,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        148,
+        191
+      ]
     },
     "turn_B_2": {
       "file": "turn_B_2.png",
@@ -925,7 +1009,11 @@
       "shellFound": true,
       "bottom": 0.565,
       "scale": 0.73343,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        148,
+        194
+      ]
     },
     "turn_B_3": {
       "file": "turn_B_3.png",
@@ -937,7 +1025,11 @@
       "shellFound": true,
       "bottom": 0.51,
       "scale": 0.73343,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        142,
+        195
+      ]
     },
     "turn_B_4": {
       "file": "turn_B_4.png",
@@ -949,7 +1041,11 @@
       "shellFound": true,
       "bottom": 0.485,
       "scale": 0.73343,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        132,
+        202
+      ]
     },
     "look_F_1": {
       "file": "look_F_1.png",
@@ -961,7 +1057,11 @@
       "shellFound": true,
       "bottom": 0.405,
       "scale": 0.77675,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        151,
+        220
+      ]
     },
     "look_F_2": {
       "file": "look_F_2.png",
@@ -973,7 +1073,11 @@
       "shellFound": true,
       "bottom": 0.405,
       "scale": 0.77675,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        152,
+        214
+      ]
     },
     "look_F_3": {
       "file": "look_F_3.png",
@@ -985,7 +1089,11 @@
       "shellFound": true,
       "bottom": 0.4,
       "scale": 0.77675,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        151,
+        218
+      ]
     },
     "look_F_4": {
       "file": "look_F_4.png",
@@ -997,7 +1105,11 @@
       "shellFound": true,
       "bottom": 0.395,
       "scale": 0.77675,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        153,
+        216
+      ]
     },
     "look_R_1": {
       "file": "look_R_1.png",
@@ -1009,7 +1121,11 @@
       "shellFound": true,
       "bottom": 0.31,
       "scale": 0.77675,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        111,
+        236
+      ]
     },
     "look_R_2": {
       "file": "look_R_2.png",
@@ -1021,7 +1137,11 @@
       "shellFound": true,
       "bottom": 0.39,
       "scale": 0.77675,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        113,
+        220
+      ]
     },
     "look_R_3": {
       "file": "look_R_3.png",
@@ -1033,7 +1153,11 @@
       "shellFound": true,
       "bottom": 0.32,
       "scale": 0.77675,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        102,
+        237
+      ]
     },
     "look_R_4": {
       "file": "look_R_4.png",
@@ -1045,7 +1169,11 @@
       "shellFound": true,
       "bottom": 0.38,
       "scale": 0.77675,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        123,
+        223
+      ]
     },
     "look_B_1": {
       "file": "look_B_1.png",
@@ -1057,7 +1185,11 @@
       "shellFound": true,
       "bottom": 0.575,
       "scale": 0.77675,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        155,
+        197
+      ]
     },
     "look_B_2": {
       "file": "look_B_2.png",
@@ -1069,7 +1201,11 @@
       "shellFound": true,
       "bottom": 0.565,
       "scale": 0.77675,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        151,
+        195
+      ]
     },
     "look_B_3": {
       "file": "look_B_3.png",
@@ -1081,7 +1217,11 @@
       "shellFound": true,
       "bottom": 0.57,
       "scale": 0.77675,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        155,
+        196
+      ]
     },
     "look_B_4": {
       "file": "look_B_4.png",
@@ -1093,7 +1233,11 @@
       "shellFound": true,
       "bottom": 0.555,
       "scale": 0.77675,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        151,
+        194
+      ]
     },
     "sniff_F_1": {
       "file": "sniff_F_1.png",
@@ -1105,7 +1249,11 @@
       "shellFound": true,
       "bottom": 0.42,
       "scale": 0.67051,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        160,
+        215
+      ]
     },
     "sniff_F_2": {
       "file": "sniff_F_2.png",
@@ -1117,7 +1265,11 @@
       "shellFound": true,
       "bottom": 0.43,
       "scale": 0.67051,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        157,
+        217
+      ]
     },
     "sniff_F_3": {
       "file": "sniff_F_3.png",
@@ -1129,7 +1281,11 @@
       "shellFound": true,
       "bottom": 0.42,
       "scale": 0.67051,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        163,
+        214
+      ]
     },
     "sniff_F_4": {
       "file": "sniff_F_4.png",
@@ -1141,7 +1297,11 @@
       "shellFound": true,
       "bottom": 0.42,
       "scale": 0.67051,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        159,
+        216
+      ]
     },
     "sniff_R_1": {
       "file": "sniff_R_1.png",
@@ -1153,7 +1313,11 @@
       "shellFound": true,
       "bottom": 0.29,
       "scale": 0.67051,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        128,
+        242
+      ]
     },
     "sniff_R_2": {
       "file": "sniff_R_2.png",
@@ -1165,7 +1329,11 @@
       "shellFound": true,
       "bottom": 0.265,
       "scale": 0.67051,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        126,
+        246
+      ]
     },
     "sniff_R_3": {
       "file": "sniff_R_3.png",
@@ -1177,7 +1345,11 @@
       "shellFound": true,
       "bottom": 0.27,
       "scale": 0.67051,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        134,
+        245
+      ]
     },
     "sniff_R_4": {
       "file": "sniff_R_4.png",
@@ -1189,7 +1361,11 @@
       "shellFound": true,
       "bottom": 0.285,
       "scale": 0.67051,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        136,
+        241
+      ]
     },
     "sniff_B_1": {
       "file": "sniff_B_1.png",
@@ -1201,7 +1377,11 @@
       "shellFound": true,
       "bottom": 0.485,
       "scale": 0.67051,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        160,
+        201
+      ]
     },
     "sniff_B_2": {
       "file": "sniff_B_2.png",
@@ -1213,7 +1393,11 @@
       "shellFound": true,
       "bottom": 0.495,
       "scale": 0.67051,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        159,
+        204
+      ]
     },
     "sniff_B_3": {
       "file": "sniff_B_3.png",
@@ -1225,7 +1409,11 @@
       "shellFound": true,
       "bottom": 0.49,
       "scale": 0.67051,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        160,
+        204
+      ]
     },
     "sniff_B_4": {
       "file": "sniff_B_4.png",
@@ -1237,7 +1425,11 @@
       "shellFound": true,
       "bottom": 0.49,
       "scale": 0.67051,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        160,
+        204
+      ]
     },
     "eat_F_1": {
       "file": "eat_F_1.png",
@@ -1249,7 +1441,11 @@
       "shellFound": true,
       "bottom": 0.405,
       "scale": 0.66287,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        160,
+        215
+      ]
     },
     "eat_F_2": {
       "file": "eat_F_2.png",
@@ -1261,7 +1457,11 @@
       "shellFound": true,
       "bottom": 0.425,
       "scale": 0.66287,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        159,
+        216
+      ]
     },
     "eat_F_3": {
       "file": "eat_F_3.png",
@@ -1273,7 +1473,11 @@
       "shellFound": true,
       "bottom": 0.415,
       "scale": 0.66287,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        160,
+        214
+      ]
     },
     "eat_F_4": {
       "file": "eat_F_4.png",
@@ -1285,7 +1489,11 @@
       "shellFound": true,
       "bottom": 0.42,
       "scale": 0.66287,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        165,
+        218
+      ]
     },
     "eat_R_1": {
       "file": "eat_R_1.png",
@@ -1297,7 +1505,11 @@
       "shellFound": true,
       "bottom": 0.26,
       "scale": 0.66287,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        127,
+        247
+      ]
     },
     "eat_R_2": {
       "file": "eat_R_2.png",
@@ -1309,7 +1521,11 @@
       "shellFound": true,
       "bottom": 0.265,
       "scale": 0.66287,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        124,
+        247
+      ]
     },
     "eat_R_3": {
       "file": "eat_R_3.png",
@@ -1321,7 +1537,11 @@
       "shellFound": true,
       "bottom": 0.26,
       "scale": 0.66287,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        130,
+        248
+      ]
     },
     "eat_R_4": {
       "file": "eat_R_4.png",
@@ -1333,7 +1553,11 @@
       "shellFound": true,
       "bottom": 0.285,
       "scale": 0.66287,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        137,
+        242
+      ]
     },
     "eat_B_1": {
       "file": "eat_B_1.png",
@@ -1345,7 +1569,11 @@
       "shellFound": true,
       "bottom": 0.48,
       "scale": 0.66287,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        161,
+        210
+      ]
     },
     "eat_B_2": {
       "file": "eat_B_2.png",
@@ -1357,7 +1585,11 @@
       "shellFound": true,
       "bottom": 0.48,
       "scale": 0.66287,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        158,
+        208
+      ]
     },
     "eat_B_3": {
       "file": "eat_B_3.png",
@@ -1369,7 +1601,11 @@
       "shellFound": true,
       "bottom": 0.475,
       "scale": 0.66287,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        161,
+        208
+      ]
     },
     "eat_B_4": {
       "file": "eat_B_4.png",
@@ -1381,7 +1617,11 @@
       "shellFound": true,
       "bottom": 0.48,
       "scale": 0.66287,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        162,
+        207
+      ]
     },
     "bask_F_1": {
       "file": "bask_F_1.png",
@@ -1393,7 +1633,11 @@
       "shellFound": true,
       "bottom": 0.405,
       "scale": 0.70481,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        142,
+        217
+      ]
     },
     "bask_F_2": {
       "file": "bask_F_2.png",
@@ -1405,7 +1649,11 @@
       "shellFound": true,
       "bottom": 0.385,
       "scale": 0.70481,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        135,
+        220
+      ]
     },
     "bask_F_3": {
       "file": "bask_F_3.png",
@@ -1417,7 +1665,11 @@
       "shellFound": true,
       "bottom": 0.385,
       "scale": 0.70481,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        135,
+        219
+      ]
     },
     "bask_F_4": {
       "file": "bask_F_4.png",
@@ -1429,7 +1681,11 @@
       "shellFound": true,
       "bottom": 0.415,
       "scale": 0.70481,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        141,
+        216
+      ]
     },
     "bask_R_1": {
       "file": "bask_R_1.png",
@@ -1441,7 +1697,11 @@
       "shellFound": true,
       "bottom": 0.365,
       "scale": 0.70481,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        126,
+        227
+      ]
     },
     "bask_R_2": {
       "file": "bask_R_2.png",
@@ -1453,7 +1713,11 @@
       "shellFound": true,
       "bottom": 0.36,
       "scale": 0.70481,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        125,
+        225
+      ]
     },
     "bask_R_3": {
       "file": "bask_R_3.png",
@@ -1465,7 +1729,11 @@
       "shellFound": true,
       "bottom": 0.36,
       "scale": 0.70481,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        131,
+        224
+      ]
     },
     "bask_R_4": {
       "file": "bask_R_4.png",
@@ -1477,7 +1745,11 @@
       "shellFound": true,
       "bottom": 0.36,
       "scale": 0.70481,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        132,
+        225
+      ]
     },
     "bask_B_1": {
       "file": "bask_B_1.png",
@@ -1489,7 +1761,11 @@
       "shellFound": true,
       "bottom": 0.46,
       "scale": 0.70481,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        148,
+        205
+      ]
     },
     "bask_B_2": {
       "file": "bask_B_2.png",
@@ -1501,7 +1777,11 @@
       "shellFound": true,
       "bottom": 0.495,
       "scale": 0.70481,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        144,
+        202
+      ]
     },
     "bask_B_3": {
       "file": "bask_B_3.png",
@@ -1513,7 +1793,11 @@
       "shellFound": true,
       "bottom": 0.5,
       "scale": 0.70481,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        139,
+        202
+      ]
     },
     "bask_B_4": {
       "file": "bask_B_4.png",
@@ -1525,7 +1809,11 @@
       "shellFound": true,
       "bottom": 0.47,
       "scale": 0.70481,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        147,
+        206
+      ]
     },
     "sleep_F_1": {
       "file": "sleep_F_1.png",
@@ -1537,7 +1825,11 @@
       "shellFound": true,
       "bottom": 0.37,
       "scale": 0.70203,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        154,
+        226
+      ]
     },
     "sleep_F_2": {
       "file": "sleep_F_2.png",
@@ -1549,7 +1841,11 @@
       "shellFound": true,
       "bottom": 0.355,
       "scale": 0.70203,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        155,
+        225
+      ]
     },
     "sleep_F_3": {
       "file": "sleep_F_3.png",
@@ -1561,7 +1857,11 @@
       "shellFound": true,
       "bottom": 0.365,
       "scale": 0.70203,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        150,
+        223
+      ]
     },
     "sleep_F_4": {
       "file": "sleep_F_4.png",
@@ -1573,7 +1873,11 @@
       "shellFound": true,
       "bottom": 0.37,
       "scale": 0.70203,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        156,
+        225
+      ]
     },
     "sleep_R_1": {
       "file": "sleep_R_1.png",
@@ -1585,7 +1889,11 @@
       "shellFound": true,
       "bottom": 0.245,
       "scale": 0.70203,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        129,
+        249
+      ]
     },
     "sleep_R_2": {
       "file": "sleep_R_2.png",
@@ -1597,7 +1905,11 @@
       "shellFound": true,
       "bottom": 0.25,
       "scale": 0.70203,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        127,
+        249
+      ]
     },
     "sleep_R_3": {
       "file": "sleep_R_3.png",
@@ -1609,7 +1921,11 @@
       "shellFound": true,
       "bottom": 0.25,
       "scale": 0.70203,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        121,
+        249
+      ]
     },
     "sleep_R_4": {
       "file": "sleep_R_4.png",
@@ -1621,7 +1937,11 @@
       "shellFound": true,
       "bottom": 0.245,
       "scale": 0.70203,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        133,
+        248
+      ]
     },
     "sleep_B_1": {
       "file": "sleep_B_1.png",
@@ -1633,7 +1953,11 @@
       "shellFound": true,
       "bottom": 0.48,
       "scale": 0.70203,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        158,
+        200
+      ]
     },
     "sleep_B_2": {
       "file": "sleep_B_2.png",
@@ -1645,7 +1969,11 @@
       "shellFound": true,
       "bottom": 0.485,
       "scale": 0.70203,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        158,
+        200
+      ]
     },
     "sleep_B_3": {
       "file": "sleep_B_3.png",
@@ -1657,7 +1985,11 @@
       "shellFound": true,
       "bottom": 0.49,
       "scale": 0.70203,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        158,
+        200
+      ]
     },
     "sleep_B_4": {
       "file": "sleep_B_4.png",
@@ -1669,7 +2001,11 @@
       "shellFound": true,
       "bottom": 0.49,
       "scale": 0.70203,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        158,
+        200
+      ]
     },
     "yawn_F_1": {
       "file": "yawn_F_1.png",
@@ -1681,7 +2017,11 @@
       "shellFound": true,
       "bottom": 0.42,
       "scale": 0.67448,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        156,
+        215
+      ]
     },
     "yawn_F_2": {
       "file": "yawn_F_2.png",
@@ -1693,7 +2033,11 @@
       "shellFound": true,
       "bottom": 0.415,
       "scale": 0.67448,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        154,
+        211
+      ]
     },
     "yawn_F_3": {
       "file": "yawn_F_3.png",
@@ -1705,7 +2049,11 @@
       "shellFound": true,
       "bottom": 0.46,
       "scale": 0.67448,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        139,
+        207
+      ]
     },
     "yawn_F_4": {
       "file": "yawn_F_4.png",
@@ -1717,7 +2065,11 @@
       "shellFound": true,
       "bottom": 0.42,
       "scale": 0.67448,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        154,
+        217
+      ]
     },
     "yawn_R_1": {
       "file": "yawn_R_1.png",
@@ -1729,7 +2081,11 @@
       "shellFound": true,
       "bottom": 0.275,
       "scale": 0.67448,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        123,
+        244
+      ]
     },
     "yawn_R_2": {
       "file": "yawn_R_2.png",
@@ -1741,7 +2097,11 @@
       "shellFound": true,
       "bottom": 0.35,
       "scale": 0.67448,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        127,
+        230
+      ]
     },
     "yawn_R_3": {
       "file": "yawn_R_3.png",
@@ -1753,7 +2113,11 @@
       "shellFound": true,
       "bottom": 0.385,
       "scale": 0.67448,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        128,
+        223
+      ]
     },
     "yawn_R_4": {
       "file": "yawn_R_4.png",
@@ -1765,7 +2129,11 @@
       "shellFound": true,
       "bottom": 0.275,
       "scale": 0.67448,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        123,
+        245
+      ]
     },
     "yawn_B_1": {
       "file": "yawn_B_1.png",
@@ -1777,7 +2145,11 @@
       "shellFound": true,
       "bottom": 0.59,
       "scale": 0.67448,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        156,
+        185
+      ]
     },
     "yawn_B_2": {
       "file": "yawn_B_2.png",
@@ -1789,7 +2161,11 @@
       "shellFound": true,
       "bottom": 0.625,
       "scale": 0.67448,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        143,
+        177
+      ]
     },
     "yawn_B_3": {
       "file": "yawn_B_3.png",
@@ -1801,7 +2177,11 @@
       "shellFound": true,
       "bottom": 0.63,
       "scale": 0.67448,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        148,
+        178
+      ]
     },
     "yawn_B_4": {
       "file": "yawn_B_4.png",
@@ -1813,7 +2193,11 @@
       "shellFound": true,
       "bottom": 0.595,
       "scale": 0.67448,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        155,
+        184
+      ]
     },
     "hide_F_1": {
       "file": "hide_F_1.png",
@@ -1825,7 +2209,11 @@
       "shellFound": true,
       "bottom": 0.42,
       "scale": 0.69993,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        154,
+        214
+      ]
     },
     "hide_F_2": {
       "file": "hide_F_2.png",
@@ -1837,7 +2225,11 @@
       "shellFound": true,
       "bottom": 0.4,
       "scale": 0.69993,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        158,
+        221
+      ]
     },
     "hide_F_3": {
       "file": "hide_F_3.png",
@@ -1849,7 +2241,11 @@
       "shellFound": true,
       "bottom": 0.37,
       "scale": 0.69993,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        159,
+        223
+      ]
     },
     "hide_F_4": {
       "file": "hide_F_4.png",
@@ -1861,7 +2257,11 @@
       "shellFound": true,
       "bottom": 0.365,
       "scale": 0.69993,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        157,
+        226
+      ]
     },
     "hide_R_1": {
       "file": "hide_R_1.png",
@@ -1873,7 +2273,11 @@
       "shellFound": true,
       "bottom": 0.295,
       "scale": 0.69993,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        116,
+        240
+      ]
     },
     "hide_R_2": {
       "file": "hide_R_2.png",
@@ -1885,7 +2289,11 @@
       "shellFound": true,
       "bottom": 0.28,
       "scale": 0.69993,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        116,
+        244
+      ]
     },
     "hide_R_3": {
       "file": "hide_R_3.png",
@@ -1897,7 +2305,11 @@
       "shellFound": true,
       "bottom": 0.25,
       "scale": 0.69993,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        128,
+        251
+      ]
     },
     "hide_R_4": {
       "file": "hide_R_4.png",
@@ -1909,7 +2321,11 @@
       "shellFound": true,
       "bottom": 0.245,
       "scale": 0.69993,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        128,
+        249
+      ]
     },
     "hide_B_1": {
       "file": "hide_B_1.png",
@@ -1921,7 +2337,11 @@
       "shellFound": true,
       "bottom": 0.515,
       "scale": 0.69993,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        157,
+        204
+      ]
     },
     "hide_B_2": {
       "file": "hide_B_2.png",
@@ -1933,7 +2353,11 @@
       "shellFound": true,
       "bottom": 0.52,
       "scale": 0.69993,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        159,
+        205
+      ]
     },
     "hide_B_3": {
       "file": "hide_B_3.png",
@@ -1945,7 +2369,11 @@
       "shellFound": true,
       "bottom": 0.515,
       "scale": 0.69993,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        156,
+        204
+      ]
     },
     "hide_B_4": {
       "file": "hide_B_4.png",
@@ -1957,7 +2385,11 @@
       "shellFound": true,
       "bottom": 0.5,
       "scale": 0.69993,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        156,
+        201
+      ]
     },
     "startled_F_1": {
       "file": "startled_F_1.png",
@@ -1969,7 +2401,11 @@
       "shellFound": true,
       "bottom": 0.375,
       "scale": 0.76777,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        148,
+        221
+      ]
     },
     "startled_F_2": {
       "file": "startled_F_2.png",
@@ -1981,7 +2417,11 @@
       "shellFound": true,
       "bottom": 0.385,
       "scale": 0.76777,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        147,
+        221
+      ]
     },
     "startled_F_3": {
       "file": "startled_F_3.png",
@@ -1993,7 +2433,11 @@
       "shellFound": true,
       "bottom": 0.34,
       "scale": 0.76777,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        151,
+        229
+      ]
     },
     "startled_F_4": {
       "file": "startled_F_4.png",
@@ -2005,7 +2449,11 @@
       "shellFound": true,
       "bottom": 0.375,
       "scale": 0.76777,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        148,
+        220
+      ]
     },
     "startled_R_1": {
       "file": "startled_R_1.png",
@@ -2017,7 +2465,11 @@
       "shellFound": true,
       "bottom": 0.325,
       "scale": 0.76777,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        114,
+        230
+      ]
     },
     "startled_R_2": {
       "file": "startled_R_2.png",
@@ -2029,7 +2481,11 @@
       "shellFound": true,
       "bottom": 0.355,
       "scale": 0.76777,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        123,
+        227
+      ]
     },
     "startled_R_3": {
       "file": "startled_R_3.png",
@@ -2041,7 +2497,11 @@
       "shellFound": true,
       "bottom": 0.29,
       "scale": 0.76777,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        135,
+        241
+      ]
     },
     "startled_R_4": {
       "file": "startled_R_4.png",
@@ -2053,7 +2513,11 @@
       "shellFound": true,
       "bottom": 0.345,
       "scale": 0.76777,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        111,
+        231
+      ]
     },
     "startled_B_1": {
       "file": "startled_B_1.png",
@@ -2065,7 +2529,11 @@
       "shellFound": true,
       "bottom": 0.59,
       "scale": 0.76777,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        143,
+        188
+      ]
     },
     "startled_B_2": {
       "file": "startled_B_2.png",
@@ -2077,7 +2545,11 @@
       "shellFound": true,
       "bottom": 0.545,
       "scale": 0.76777,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        135,
+        188
+      ]
     },
     "startled_B_3": {
       "file": "startled_B_3.png",
@@ -2089,7 +2561,11 @@
       "shellFound": true,
       "bottom": 0.465,
       "scale": 0.76777,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        150,
+        209
+      ]
     },
     "startled_B_4": {
       "file": "startled_B_4.png",
@@ -2101,7 +2577,11 @@
       "shellFound": true,
       "bottom": 0.565,
       "scale": 0.76777,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        156,
+        184
+      ]
     },
     "happy_F_1": {
       "file": "happy_F_1.png",
@@ -2113,7 +2593,11 @@
       "shellFound": true,
       "bottom": 0.405,
       "scale": 0.72308,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        153,
+        217
+      ]
     },
     "happy_F_2": {
       "file": "happy_F_2.png",
@@ -2125,7 +2609,11 @@
       "shellFound": true,
       "bottom": 0.395,
       "scale": 0.72308,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        143,
+        220
+      ]
     },
     "happy_F_3": {
       "file": "happy_F_3.png",
@@ -2137,7 +2625,11 @@
       "shellFound": true,
       "bottom": 0.39,
       "scale": 0.72308,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        144,
+        219
+      ]
     },
     "happy_F_4": {
       "file": "happy_F_4.png",
@@ -2149,7 +2641,11 @@
       "shellFound": true,
       "bottom": 0.4,
       "scale": 0.72308,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        155,
+        217
+      ]
     },
     "happy_R_1": {
       "file": "happy_R_1.png",
@@ -2161,7 +2657,11 @@
       "shellFound": true,
       "bottom": 0.335,
       "scale": 0.72308,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        117,
+        230
+      ]
     },
     "happy_R_2": {
       "file": "happy_R_2.png",
@@ -2173,7 +2673,11 @@
       "shellFound": true,
       "bottom": 0.365,
       "scale": 0.72308,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        132,
+        225
+      ]
     },
     "happy_R_3": {
       "file": "happy_R_3.png",
@@ -2185,7 +2689,11 @@
       "shellFound": true,
       "bottom": 0.365,
       "scale": 0.72308,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        135,
+        225
+      ]
     },
     "happy_R_4": {
       "file": "happy_R_4.png",
@@ -2197,7 +2705,11 @@
       "shellFound": true,
       "bottom": 0.34,
       "scale": 0.72308,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        122,
+        231
+      ]
     },
     "happy_B_1": {
       "file": "happy_B_1.png",
@@ -2209,7 +2721,11 @@
       "shellFound": true,
       "bottom": 0.555,
       "scale": 0.72308,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        148,
+        183
+      ]
     },
     "happy_B_2": {
       "file": "happy_B_2.png",
@@ -2221,7 +2737,11 @@
       "shellFound": true,
       "bottom": 0.555,
       "scale": 0.72308,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        153,
+        191
+      ]
     },
     "happy_B_3": {
       "file": "happy_B_3.png",
@@ -2233,7 +2753,11 @@
       "shellFound": true,
       "bottom": 0.545,
       "scale": 0.72308,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        150,
+        189
+      ]
     },
     "happy_B_4": {
       "file": "happy_B_4.png",
@@ -2245,7 +2769,11 @@
       "shellFound": true,
       "bottom": 0.56,
       "scale": 0.72308,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        147,
+        185
+      ]
     },
     "enter_water_F_1": {
       "file": "enter_water_F_1.png",
@@ -2257,7 +2785,11 @@
       "shellFound": true,
       "bottom": 0.385,
       "scale": 0.74557,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        146,
+        220
+      ]
     },
     "enter_water_F_2": {
       "file": "enter_water_F_2.png",
@@ -2269,7 +2801,11 @@
       "shellFound": true,
       "bottom": 0.425,
       "scale": 0.74557,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        138,
+        213
+      ]
     },
     "enter_water_F_3": {
       "file": "enter_water_F_3.png",
@@ -2281,7 +2817,11 @@
       "shellFound": true,
       "bottom": 0.42,
       "scale": 0.74557,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        135,
+        213
+      ]
     },
     "enter_water_F_4": {
       "file": "enter_water_F_4.png",
@@ -2293,7 +2833,11 @@
       "shellFound": true,
       "bottom": 0.48,
       "scale": 0.74557,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        129,
+        206
+      ]
     },
     "enter_water_R_1": {
       "file": "enter_water_R_1.png",
@@ -2305,7 +2849,11 @@
       "shellFound": true,
       "bottom": 0.3,
       "scale": 0.74557,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        117,
+        240
+      ]
     },
     "enter_water_R_2": {
       "file": "enter_water_R_2.png",
@@ -2317,7 +2865,11 @@
       "shellFound": true,
       "bottom": 0.305,
       "scale": 0.74557,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        121,
+        239
+      ]
     },
     "enter_water_R_3": {
       "file": "enter_water_R_3.png",
@@ -2329,7 +2881,11 @@
       "shellFound": true,
       "bottom": 0.325,
       "scale": 0.74557,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        127,
+        234
+      ]
     },
     "enter_water_R_4": {
       "file": "enter_water_R_4.png",
@@ -2341,7 +2897,11 @@
       "shellFound": true,
       "bottom": 0.345,
       "scale": 0.74557,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        108,
+        233
+      ]
     },
     "enter_water_B_1": {
       "file": "enter_water_B_1.png",
@@ -2353,7 +2913,11 @@
       "shellFound": true,
       "bottom": 0.575,
       "scale": 0.74557,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        149,
+        186
+      ]
     },
     "enter_water_B_2": {
       "file": "enter_water_B_2.png",
@@ -2365,7 +2929,11 @@
       "shellFound": true,
       "bottom": 0.585,
       "scale": 0.74557,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        143,
+        190
+      ]
     },
     "enter_water_B_3": {
       "file": "enter_water_B_3.png",
@@ -2377,7 +2945,11 @@
       "shellFound": true,
       "bottom": 0.58,
       "scale": 0.74557,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        137,
+        190
+      ]
     },
     "enter_water_B_4": {
       "file": "enter_water_B_4.png",
@@ -2389,7 +2961,11 @@
       "shellFound": true,
       "bottom": 0.56,
       "scale": 0.74557,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        126,
+        192
+      ]
     },
     "flip_F_1": {
       "file": "flip_F_1.png",
@@ -2401,7 +2977,11 @@
       "shellFound": true,
       "bottom": 0.37,
       "scale": 0.69427,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        144,
+        217
+      ]
     },
     "flip_F_2": {
       "file": "flip_F_2.png",
@@ -2413,7 +2993,11 @@
       "shellFound": true,
       "bottom": 0.445,
       "scale": 0.69427,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        152,
+        204
+      ]
     },
     "flip_F_3": {
       "file": "flip_F_3.png",
@@ -2425,7 +3009,11 @@
       "shellFound": true,
       "bottom": 0.425,
       "scale": 0.69427,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        131,
+        209
+      ]
     },
     "flip_F_4": {
       "file": "flip_F_4.png",
@@ -2437,7 +3025,11 @@
       "shellFound": true,
       "bottom": 0.375,
       "scale": 0.69427,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        141,
+        217
+      ]
     },
     "flip_R_1": {
       "file": "flip_R_1.png",
@@ -2449,7 +3041,11 @@
       "shellFound": true,
       "bottom": 0.305,
       "scale": 0.69427,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        133,
+        230
+      ]
     },
     "flip_R_2": {
       "file": "flip_R_2.png",
@@ -2461,7 +3057,11 @@
       "shellFound": true,
       "bottom": 0.34,
       "scale": 0.69427,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        158,
+        221
+      ]
     },
     "flip_R_3": {
       "file": "flip_R_3.png",
@@ -2473,7 +3073,11 @@
       "shellFound": true,
       "bottom": 0.315,
       "scale": 0.69427,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        134,
+        232
+      ]
     },
     "flip_R_4": {
       "file": "flip_R_4.png",
@@ -2485,7 +3089,11 @@
       "shellFound": true,
       "bottom": 0.315,
       "scale": 0.69427,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        129,
+        228
+      ]
     },
     "flip_B_1": {
       "file": "flip_B_1.png",
@@ -2497,7 +3105,11 @@
       "shellFound": true,
       "bottom": 0.44,
       "scale": 0.69427,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        156,
+        183
+      ]
     },
     "flip_B_2": {
       "file": "flip_B_2.png",
@@ -2509,7 +3121,11 @@
       "shellFound": true,
       "bottom": 0.51,
       "scale": 0.69427,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        142,
+        194
+      ]
     },
     "flip_B_3": {
       "file": "flip_B_3.png",
@@ -2521,7 +3137,11 @@
       "shellFound": true,
       "bottom": 0.44,
       "scale": 0.69427,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        145,
+        205
+      ]
     },
     "flip_B_4": {
       "file": "flip_B_4.png",
@@ -2533,7 +3153,11 @@
       "shellFound": true,
       "bottom": 0.48,
       "scale": 0.69427,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        151,
+        186
+      ]
     },
     "swim_F_1": {
       "file": "swim_F_1.png",
@@ -2545,7 +3169,11 @@
       "shellFound": true,
       "bottom": 0.44,
       "scale": 0.75214,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        136,
+        205
+      ]
     },
     "swim_F_2": {
       "file": "swim_F_2.png",
@@ -2557,7 +3185,11 @@
       "shellFound": true,
       "bottom": 0.37,
       "scale": 0.75214,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        110,
+        222
+      ]
     },
     "swim_F_3": {
       "file": "swim_F_3.png",
@@ -2569,7 +3201,11 @@
       "shellFound": true,
       "bottom": 0.455,
       "scale": 0.75214,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        160,
+        210
+      ]
     },
     "swim_F_4": {
       "file": "swim_F_4.png",
@@ -2581,7 +3217,11 @@
       "shellFound": true,
       "bottom": 0.36,
       "scale": 0.75214,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        129,
+        224
+      ]
     },
     "swim_R_1": {
       "file": "swim_R_1.png",
@@ -2593,7 +3233,11 @@
       "shellFound": true,
       "bottom": 0.365,
       "scale": 0.75214,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        113,
+        224
+      ]
     },
     "swim_R_2": {
       "file": "swim_R_2.png",
@@ -2605,7 +3249,11 @@
       "shellFound": true,
       "bottom": 0.295,
       "scale": 0.75214,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        115,
+        238
+      ]
     },
     "swim_R_3": {
       "file": "swim_R_3.png",
@@ -2617,7 +3265,11 @@
       "shellFound": true,
       "bottom": 0.335,
       "scale": 0.75214,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        129,
+        234
+      ]
     },
     "swim_R_4": {
       "file": "swim_R_4.png",
@@ -2629,7 +3281,11 @@
       "shellFound": true,
       "bottom": 0.305,
       "scale": 0.75214,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        123,
+        237
+      ]
     },
     "swim_B_1": {
       "file": "swim_B_1.png",
@@ -2641,7 +3297,11 @@
       "shellFound": true,
       "bottom": 0.545,
       "scale": 0.75214,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        146,
+        193
+      ]
     },
     "swim_B_2": {
       "file": "swim_B_2.png",
@@ -2653,7 +3313,11 @@
       "shellFound": true,
       "bottom": 0.535,
       "scale": 0.75214,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        129,
+        194
+      ]
     },
     "swim_B_3": {
       "file": "swim_B_3.png",
@@ -2665,7 +3329,11 @@
       "shellFound": true,
       "bottom": 0.575,
       "scale": 0.75214,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        170,
+        198
+      ]
     },
     "swim_B_4": {
       "file": "swim_B_4.png",
@@ -2677,7 +3345,11 @@
       "shellFound": true,
       "bottom": 0.545,
       "scale": 0.75214,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        134,
+        193
+      ]
     },
     "swim_turn_F_1": {
       "file": "swim_turn_F_1.png",
@@ -2689,7 +3361,11 @@
       "shellFound": true,
       "bottom": 0.445,
       "scale": 0.7342,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        135,
+        210
+      ]
     },
     "swim_turn_F_2": {
       "file": "swim_turn_F_2.png",
@@ -2701,7 +3377,11 @@
       "shellFound": true,
       "bottom": 0.455,
       "scale": 0.7342,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        134,
+        210
+      ]
     },
     "swim_turn_F_3": {
       "file": "swim_turn_F_3.png",
@@ -2713,7 +3393,11 @@
       "shellFound": true,
       "bottom": 0.46,
       "scale": 0.7342,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        135,
+        211
+      ]
     },
     "swim_turn_F_4": {
       "file": "swim_turn_F_4.png",
@@ -2725,7 +3409,11 @@
       "shellFound": true,
       "bottom": 0.455,
       "scale": 0.7342,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        130,
+        211
+      ]
     },
     "swim_turn_R_1": {
       "file": "swim_turn_R_1.png",
@@ -2737,7 +3425,11 @@
       "shellFound": true,
       "bottom": 0.275,
       "scale": 0.7342,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        117,
+        242
+      ]
     },
     "swim_turn_R_2": {
       "file": "swim_turn_R_2.png",
@@ -2749,7 +3441,11 @@
       "shellFound": true,
       "bottom": 0.39,
       "scale": 0.7342,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        124,
+        221
+      ]
     },
     "swim_turn_R_3": {
       "file": "swim_turn_R_3.png",
@@ -2761,7 +3457,11 @@
       "shellFound": true,
       "bottom": 0.4,
       "scale": 0.7342,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        132,
+        219
+      ]
     },
     "swim_turn_R_4": {
       "file": "swim_turn_R_4.png",
@@ -2773,7 +3473,11 @@
       "shellFound": true,
       "bottom": 0.36,
       "scale": 0.7342,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        133,
+        231
+      ]
     },
     "swim_turn_B_1": {
       "file": "swim_turn_B_1.png",
@@ -2785,7 +3489,11 @@
       "shellFound": true,
       "bottom": 0.52,
       "scale": 0.7342,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        143,
+        198
+      ]
     },
     "swim_turn_B_2": {
       "file": "swim_turn_B_2.png",
@@ -2797,7 +3505,11 @@
       "shellFound": true,
       "bottom": 0.495,
       "scale": 0.7342,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        125,
+        202
+      ]
     },
     "swim_turn_B_3": {
       "file": "swim_turn_B_3.png",
@@ -2809,7 +3521,11 @@
       "shellFound": true,
       "bottom": 0.545,
       "scale": 0.7342,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        123,
+        194
+      ]
     },
     "swim_turn_B_4": {
       "file": "swim_turn_B_4.png",
@@ -2821,7 +3537,11 @@
       "shellFound": true,
       "bottom": 0.51,
       "scale": 0.7342,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        121,
+        197
+      ]
     },
     "hover_F_1": {
       "file": "hover_F_1.png",
@@ -2833,7 +3553,11 @@
       "shellFound": true,
       "bottom": 0.425,
       "scale": 0.7399,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        128,
+        212
+      ]
     },
     "hover_F_2": {
       "file": "hover_F_2.png",
@@ -2845,7 +3569,11 @@
       "shellFound": true,
       "bottom": 0.41,
       "scale": 0.7399,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        152,
+        220
+      ]
     },
     "hover_F_3": {
       "file": "hover_F_3.png",
@@ -2857,7 +3585,11 @@
       "shellFound": true,
       "bottom": 0.41,
       "scale": 0.7399,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        155,
+        217
+      ]
     },
     "hover_F_4": {
       "file": "hover_F_4.png",
@@ -2869,7 +3601,11 @@
       "shellFound": true,
       "bottom": 0.41,
       "scale": 0.7399,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        127,
+        217
+      ]
     },
     "hover_R_1": {
       "file": "hover_R_1.png",
@@ -2881,7 +3617,11 @@
       "shellFound": true,
       "bottom": 0.365,
       "scale": 0.7399,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        118,
+        226
+      ]
     },
     "hover_R_2": {
       "file": "hover_R_2.png",
@@ -2893,7 +3633,11 @@
       "shellFound": true,
       "bottom": 0.36,
       "scale": 0.7399,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        122,
+        228
+      ]
     },
     "hover_R_3": {
       "file": "hover_R_3.png",
@@ -2905,7 +3649,11 @@
       "shellFound": true,
       "bottom": 0.35,
       "scale": 0.7399,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        124,
+        232
+      ]
     },
     "hover_R_4": {
       "file": "hover_R_4.png",
@@ -2917,7 +3665,11 @@
       "shellFound": true,
       "bottom": 0.35,
       "scale": 0.7399,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        126,
+        232
+      ]
     },
     "hover_B_1": {
       "file": "hover_B_1.png",
@@ -2929,7 +3681,11 @@
       "shellFound": true,
       "bottom": 0.535,
       "scale": 0.7399,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        134,
+        200
+      ]
     },
     "hover_B_2": {
       "file": "hover_B_2.png",
@@ -2941,7 +3697,11 @@
       "shellFound": true,
       "bottom": 0.525,
       "scale": 0.7399,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        141,
+        197
+      ]
     },
     "hover_B_3": {
       "file": "hover_B_3.png",
@@ -2953,7 +3713,11 @@
       "shellFound": true,
       "bottom": 0.54,
       "scale": 0.7399,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        156,
+        195
+      ]
     },
     "hover_B_4": {
       "file": "hover_B_4.png",
@@ -2965,7 +3729,11 @@
       "shellFound": true,
       "bottom": 0.53,
       "scale": 0.7399,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        138,
+        198
+      ]
     },
     "dive_F_1": {
       "file": "dive_F_1.png",
@@ -2977,7 +3745,11 @@
       "shellFound": true,
       "bottom": 0.425,
       "scale": 0.71818,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        132,
+        216
+      ]
     },
     "dive_F_2": {
       "file": "dive_F_2.png",
@@ -2989,7 +3761,11 @@
       "shellFound": true,
       "bottom": 0.425,
       "scale": 0.71818,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        140,
+        217
+      ]
     },
     "dive_F_3": {
       "file": "dive_F_3.png",
@@ -3001,7 +3777,11 @@
       "shellFound": true,
       "bottom": 0.485,
       "scale": 0.71818,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        144,
+        199
+      ]
     },
     "dive_F_4": {
       "file": "dive_F_4.png",
@@ -3013,7 +3793,11 @@
       "shellFound": true,
       "bottom": 0.53,
       "scale": 0.71818,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        142,
+        191
+      ]
     },
     "dive_R_1": {
       "file": "dive_R_1.png",
@@ -3025,7 +3809,11 @@
       "shellFound": true,
       "bottom": 0.375,
       "scale": 0.71818,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        119,
+        228
+      ]
     },
     "dive_R_2": {
       "file": "dive_R_2.png",
@@ -3037,7 +3825,11 @@
       "shellFound": true,
       "bottom": 0.3,
       "scale": 0.71818,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        121,
+        242
+      ]
     },
     "dive_R_3": {
       "file": "dive_R_3.png",
@@ -3049,7 +3841,11 @@
       "shellFound": true,
       "bottom": 0.455,
       "scale": 0.71818,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        143,
+        200
+      ]
     },
     "dive_R_4": {
       "file": "dive_R_4.png",
@@ -3061,7 +3857,11 @@
       "shellFound": true,
       "bottom": 0.5,
       "scale": 0.71818,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        147,
+        195
+      ]
     },
     "dive_B_1": {
       "file": "dive_B_1.png",
@@ -3073,7 +3873,11 @@
       "shellFound": true,
       "bottom": 0.51,
       "scale": 0.71818,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        141,
+        201
+      ]
     },
     "dive_B_2": {
       "file": "dive_B_2.png",
@@ -3085,7 +3889,11 @@
       "shellFound": true,
       "bottom": 0.515,
       "scale": 0.71818,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        138,
+        201
+      ]
     },
     "dive_B_3": {
       "file": "dive_B_3.png",
@@ -3097,7 +3905,11 @@
       "shellFound": true,
       "bottom": 0.53,
       "scale": 0.71818,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        138,
+        196
+      ]
     },
     "dive_B_4": {
       "file": "dive_B_4.png",
@@ -3109,7 +3921,11 @@
       "shellFound": true,
       "bottom": 0.53,
       "scale": 0.71818,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        139,
+        199
+      ]
     },
     "surface_F_1": {
       "file": "surface_F_1.png",
@@ -3121,7 +3937,11 @@
       "shellFound": true,
       "bottom": 0.425,
       "scale": 0.74971,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        125,
+        215
+      ]
     },
     "surface_F_2": {
       "file": "surface_F_2.png",
@@ -3133,7 +3953,11 @@
       "shellFound": true,
       "bottom": 0.46,
       "scale": 0.74971,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        123,
+        208
+      ]
     },
     "surface_F_3": {
       "file": "surface_F_3.png",
@@ -3145,7 +3969,11 @@
       "shellFound": true,
       "bottom": 0.45,
       "scale": 0.74971,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        136,
+        209
+      ]
     },
     "surface_F_4": {
       "file": "surface_F_4.png",
@@ -3157,7 +3985,11 @@
       "shellFound": true,
       "bottom": 0.435,
       "scale": 0.74971,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        126,
+        213
+      ]
     },
     "surface_R_1": {
       "file": "surface_R_1.png",
@@ -3169,7 +4001,11 @@
       "shellFound": true,
       "bottom": 0.44,
       "scale": 0.74971,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        114,
+        207
+      ]
     },
     "surface_R_2": {
       "file": "surface_R_2.png",
@@ -3181,7 +4017,11 @@
       "shellFound": true,
       "bottom": 0.5,
       "scale": 0.74971,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        121,
+        197
+      ]
     },
     "surface_R_3": {
       "file": "surface_R_3.png",
@@ -3193,7 +4033,11 @@
       "shellFound": true,
       "bottom": 0.565,
       "scale": 0.74971,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        147,
+        189
+      ]
     },
     "surface_R_4": {
       "file": "surface_R_4.png",
@@ -3205,7 +4049,11 @@
       "shellFound": true,
       "bottom": 0.565,
       "scale": 0.74971,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        142,
+        187
+      ]
     },
     "surface_B_1": {
       "file": "surface_B_1.png",
@@ -3217,7 +4065,11 @@
       "shellFound": true,
       "bottom": 0.535,
       "scale": 0.74971,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        126,
+        196
+      ]
     },
     "surface_B_2": {
       "file": "surface_B_2.png",
@@ -3229,7 +4081,11 @@
       "shellFound": true,
       "bottom": 0.535,
       "scale": 0.74971,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        134,
+        196
+      ]
     },
     "surface_B_3": {
       "file": "surface_B_3.png",
@@ -3241,7 +4097,11 @@
       "shellFound": true,
       "bottom": 0.55,
       "scale": 0.74971,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        139,
+        195
+      ]
     },
     "surface_B_4": {
       "file": "surface_B_4.png",
@@ -3253,7 +4113,11 @@
       "shellFound": true,
       "bottom": 0.55,
       "scale": 0.74971,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        127,
+        196
+      ]
     },
     "float_F_1": {
       "file": "float_F_1.png",
@@ -3265,7 +4129,11 @@
       "shellFound": true,
       "bottom": 0.41,
       "scale": 0.71038,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        118,
+        220
+      ]
     },
     "float_F_2": {
       "file": "float_F_2.png",
@@ -3277,7 +4145,11 @@
       "shellFound": true,
       "bottom": 0.435,
       "scale": 0.71038,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        115,
+        214
+      ]
     },
     "float_F_3": {
       "file": "float_F_3.png",
@@ -3289,7 +4161,11 @@
       "shellFound": true,
       "bottom": 0.445,
       "scale": 0.71038,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        138,
+        209
+      ]
     },
     "float_F_4": {
       "file": "float_F_4.png",
@@ -3301,7 +4177,11 @@
       "shellFound": true,
       "bottom": 0.405,
       "scale": 0.71038,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        125,
+        221
+      ]
     },
     "float_R_1": {
       "file": "float_R_1.png",
@@ -3313,7 +4193,11 @@
       "shellFound": true,
       "bottom": 0.385,
       "scale": 0.71038,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        111,
+        228
+      ]
     },
     "float_R_2": {
       "file": "float_R_2.png",
@@ -3325,7 +4209,11 @@
       "shellFound": true,
       "bottom": 0.39,
       "scale": 0.71038,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        110,
+        224
+      ]
     },
     "float_R_3": {
       "file": "float_R_3.png",
@@ -3337,7 +4225,11 @@
       "shellFound": true,
       "bottom": 0.34,
       "scale": 0.71038,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        103,
+        235
+      ]
     },
     "float_R_4": {
       "file": "float_R_4.png",
@@ -3349,7 +4241,11 @@
       "shellFound": true,
       "bottom": 0.395,
       "scale": 0.71038,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        113,
+        224
+      ]
     },
     "float_B_1": {
       "file": "float_B_1.png",
@@ -3361,7 +4257,11 @@
       "shellFound": true,
       "bottom": 0.46,
       "scale": 0.71038,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        130,
+        214
+      ]
     },
     "float_B_2": {
       "file": "float_B_2.png",
@@ -3373,7 +4273,11 @@
       "shellFound": true,
       "bottom": 0.465,
       "scale": 0.71038,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        142,
+        213
+      ]
     },
     "float_B_3": {
       "file": "float_B_3.png",
@@ -3385,7 +4289,11 @@
       "shellFound": true,
       "bottom": 0.46,
       "scale": 0.71038,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        147,
+        209
+      ]
     },
     "float_B_4": {
       "file": "float_B_4.png",
@@ -3397,7 +4305,11 @@
       "shellFound": true,
       "bottom": 0.46,
       "scale": 0.71038,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        142,
+        213
+      ]
     },
     "eat_water_F_1": {
       "file": "eat_water_F_1.png",
@@ -3409,7 +4321,11 @@
       "shellFound": true,
       "bottom": 0.415,
       "scale": 0.71621,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        122,
+        218
+      ]
     },
     "eat_water_F_2": {
       "file": "eat_water_F_2.png",
@@ -3421,7 +4337,11 @@
       "shellFound": true,
       "bottom": 0.445,
       "scale": 0.71621,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        134,
+        209
+      ]
     },
     "eat_water_F_3": {
       "file": "eat_water_F_3.png",
@@ -3433,7 +4353,11 @@
       "shellFound": true,
       "bottom": 0.4,
       "scale": 0.71621,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        149,
+        221
+      ]
     },
     "eat_water_F_4": {
       "file": "eat_water_F_4.png",
@@ -3445,7 +4369,11 @@
       "shellFound": true,
       "bottom": 0.42,
       "scale": 0.71621,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        124,
+        219
+      ]
     },
     "eat_water_R_1": {
       "file": "eat_water_R_1.png",
@@ -3457,7 +4385,11 @@
       "shellFound": true,
       "bottom": 0.345,
       "scale": 0.71621,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        109,
+        234
+      ]
     },
     "eat_water_R_2": {
       "file": "eat_water_R_2.png",
@@ -3469,7 +4401,11 @@
       "shellFound": true,
       "bottom": 0.4,
       "scale": 0.71621,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        109,
+        223
+      ]
     },
     "eat_water_R_3": {
       "file": "eat_water_R_3.png",
@@ -3481,7 +4417,11 @@
       "shellFound": true,
       "bottom": 0.37,
       "scale": 0.71621,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        128,
+        226
+      ]
     },
     "eat_water_R_4": {
       "file": "eat_water_R_4.png",
@@ -3493,7 +4433,11 @@
       "shellFound": true,
       "bottom": 0.34,
       "scale": 0.71621,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        122,
+        234
+      ]
     },
     "eat_water_B_1": {
       "file": "eat_water_B_1.png",
@@ -3505,7 +4449,11 @@
       "shellFound": true,
       "bottom": 0.505,
       "scale": 0.71621,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        140,
+        206
+      ]
     },
     "eat_water_B_2": {
       "file": "eat_water_B_2.png",
@@ -3517,7 +4465,11 @@
       "shellFound": true,
       "bottom": 0.5,
       "scale": 0.71621,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        149,
+        205
+      ]
     },
     "eat_water_B_3": {
       "file": "eat_water_B_3.png",
@@ -3529,7 +4481,11 @@
       "shellFound": true,
       "bottom": 0.5,
       "scale": 0.71621,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        151,
+        205
+      ]
     },
     "eat_water_B_4": {
       "file": "eat_water_B_4.png",
@@ -3541,7 +4497,11 @@
       "shellFound": true,
       "bottom": 0.49,
       "scale": 0.71621,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        143,
+        203
+      ]
     },
     "bottom_walk_F_1": {
       "file": "bottom_walk_F_1.png",
@@ -3553,7 +4513,11 @@
       "shellFound": true,
       "bottom": 0.395,
       "scale": 0.72403,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        145,
+        221
+      ]
     },
     "bottom_walk_F_2": {
       "file": "bottom_walk_F_2.png",
@@ -3565,7 +4529,11 @@
       "shellFound": true,
       "bottom": 0.395,
       "scale": 0.72403,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        140,
+        221
+      ]
     },
     "bottom_walk_F_3": {
       "file": "bottom_walk_F_3.png",
@@ -3577,7 +4545,11 @@
       "shellFound": true,
       "bottom": 0.395,
       "scale": 0.72403,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        144,
+        219
+      ]
     },
     "bottom_walk_F_4": {
       "file": "bottom_walk_F_4.png",
@@ -3589,7 +4561,11 @@
       "shellFound": true,
       "bottom": 0.4,
       "scale": 0.72403,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        143,
+        222
+      ]
     },
     "bottom_walk_R_1": {
       "file": "bottom_walk_R_1.png",
@@ -3601,7 +4577,11 @@
       "shellFound": true,
       "bottom": 0.325,
       "scale": 0.72403,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        111,
+        235
+      ]
     },
     "bottom_walk_R_2": {
       "file": "bottom_walk_R_2.png",
@@ -3613,7 +4593,11 @@
       "shellFound": true,
       "bottom": 0.365,
       "scale": 0.72403,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        109,
+        230
+      ]
     },
     "bottom_walk_R_3": {
       "file": "bottom_walk_R_3.png",
@@ -3625,7 +4609,11 @@
       "shellFound": true,
       "bottom": 0.365,
       "scale": 0.72403,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        105,
+        229
+      ]
     },
     "bottom_walk_R_4": {
       "file": "bottom_walk_R_4.png",
@@ -3637,7 +4625,11 @@
       "shellFound": true,
       "bottom": 0.34,
       "scale": 0.72403,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        117,
+        236
+      ]
     },
     "bottom_walk_B_1": {
       "file": "bottom_walk_B_1.png",
@@ -3649,7 +4641,11 @@
       "shellFound": true,
       "bottom": 0.505,
       "scale": 0.72403,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        145,
+        203
+      ]
     },
     "bottom_walk_B_2": {
       "file": "bottom_walk_B_2.png",
@@ -3661,7 +4657,11 @@
       "shellFound": true,
       "bottom": 0.505,
       "scale": 0.72403,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        158,
+        200
+      ]
     },
     "bottom_walk_B_3": {
       "file": "bottom_walk_B_3.png",
@@ -3673,7 +4673,11 @@
       "shellFound": true,
       "bottom": 0.5,
       "scale": 0.72403,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        157,
+        206
+      ]
     },
     "bottom_walk_B_4": {
       "file": "bottom_walk_B_4.png",
@@ -3685,7 +4689,11 @@
       "shellFound": true,
       "bottom": 0.5,
       "scale": 0.72403,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        147,
+        201
+      ]
     },
     "bottom_rest_F_1": {
       "file": "bottom_rest_F_1.png",
@@ -3697,7 +4705,11 @@
       "shellFound": true,
       "bottom": 0.345,
       "scale": 0.73079,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        130,
+        232
+      ]
     },
     "bottom_rest_F_2": {
       "file": "bottom_rest_F_2.png",
@@ -3709,7 +4721,11 @@
       "shellFound": true,
       "bottom": 0.345,
       "scale": 0.73079,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        127,
+        232
+      ]
     },
     "bottom_rest_F_3": {
       "file": "bottom_rest_F_3.png",
@@ -3721,7 +4737,11 @@
       "shellFound": true,
       "bottom": 0.34,
       "scale": 0.73079,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        128,
+        231
+      ]
     },
     "bottom_rest_F_4": {
       "file": "bottom_rest_F_4.png",
@@ -3733,7 +4753,11 @@
       "shellFound": true,
       "bottom": 0.345,
       "scale": 0.73079,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        129,
+        232
+      ]
     },
     "bottom_rest_R_1": {
       "file": "bottom_rest_R_1.png",
@@ -3745,7 +4769,11 @@
       "shellFound": true,
       "bottom": 0.3,
       "scale": 0.73079,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        107,
+        243
+      ]
     },
     "bottom_rest_R_2": {
       "file": "bottom_rest_R_2.png",
@@ -3757,7 +4785,11 @@
       "shellFound": true,
       "bottom": 0.29,
       "scale": 0.73079,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        111,
+        241
+      ]
     },
     "bottom_rest_R_3": {
       "file": "bottom_rest_R_3.png",
@@ -3769,7 +4801,11 @@
       "shellFound": true,
       "bottom": 0.345,
       "scale": 0.73079,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        115,
+        233
+      ]
     },
     "bottom_rest_R_4": {
       "file": "bottom_rest_R_4.png",
@@ -3781,7 +4817,11 @@
       "shellFound": true,
       "bottom": 0.29,
       "scale": 0.73079,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        115,
+        244
+      ]
     },
     "bottom_rest_B_1": {
       "file": "bottom_rest_B_1.png",
@@ -3793,7 +4833,11 @@
       "shellFound": true,
       "bottom": 0.53,
       "scale": 0.73079,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        145,
+        207
+      ]
     },
     "bottom_rest_B_2": {
       "file": "bottom_rest_B_2.png",
@@ -3805,7 +4849,11 @@
       "shellFound": true,
       "bottom": 0.53,
       "scale": 0.73079,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        144,
+        203
+      ]
     },
     "bottom_rest_B_3": {
       "file": "bottom_rest_B_3.png",
@@ -3817,7 +4865,11 @@
       "shellFound": true,
       "bottom": 0.535,
       "scale": 0.73079,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        146,
+        204
+      ]
     },
     "bottom_rest_B_4": {
       "file": "bottom_rest_B_4.png",
@@ -3829,7 +4881,11 @@
       "shellFound": true,
       "bottom": 0.515,
       "scale": 0.73079,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        143,
+        204
+      ]
     },
     "climb_out_F_1": {
       "file": "climb_out_F_1.png",
@@ -3841,7 +4897,11 @@
       "shellFound": true,
       "bottom": 0.41,
       "scale": 0.74329,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        129,
+        219
+      ]
     },
     "climb_out_F_2": {
       "file": "climb_out_F_2.png",
@@ -3853,7 +4913,11 @@
       "shellFound": true,
       "bottom": 0.475,
       "scale": 0.74329,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        141,
+        208
+      ]
     },
     "climb_out_F_3": {
       "file": "climb_out_F_3.png",
@@ -3865,7 +4929,11 @@
       "shellFound": true,
       "bottom": 0.47,
       "scale": 0.74329,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        151,
+        206
+      ]
     },
     "climb_out_F_4": {
       "file": "climb_out_F_4.png",
@@ -3877,7 +4945,11 @@
       "shellFound": true,
       "bottom": 0.405,
       "scale": 0.74329,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        147,
+        218
+      ]
     },
     "climb_out_R_1": {
       "file": "climb_out_R_1.png",
@@ -3889,7 +4961,11 @@
       "shellFound": true,
       "bottom": 0.49,
       "scale": 0.74329,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        114,
+        202
+      ]
     },
     "climb_out_R_2": {
       "file": "climb_out_R_2.png",
@@ -3901,7 +4977,11 @@
       "shellFound": true,
       "bottom": 0.48,
       "scale": 0.74329,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        137,
+        202
+      ]
     },
     "climb_out_R_3": {
       "file": "climb_out_R_3.png",
@@ -3913,7 +4993,11 @@
       "shellFound": true,
       "bottom": 0.475,
       "scale": 0.74329,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        142,
+        204
+      ]
     },
     "climb_out_R_4": {
       "file": "climb_out_R_4.png",
@@ -3925,7 +5009,11 @@
       "shellFound": true,
       "bottom": 0.355,
       "scale": 0.74329,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        116,
+        229
+      ]
     },
     "climb_out_B_1": {
       "file": "climb_out_B_1.png",
@@ -3937,7 +5025,11 @@
       "shellFound": true,
       "bottom": 0.545,
       "scale": 0.74329,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        145,
+        190
+      ]
     },
     "climb_out_B_2": {
       "file": "climb_out_B_2.png",
@@ -3949,7 +5041,11 @@
       "shellFound": true,
       "bottom": 0.565,
       "scale": 0.74329,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        159,
+        204
+      ]
     },
     "climb_out_B_3": {
       "file": "climb_out_B_3.png",
@@ -3961,7 +5057,11 @@
       "shellFound": true,
       "bottom": 0.53,
       "scale": 0.74329,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        165,
+        197
+      ]
     },
     "climb_out_B_4": {
       "file": "climb_out_B_4.png",
@@ -3973,7 +5073,11 @@
       "shellFound": true,
       "bottom": 0.55,
       "scale": 0.74329,
-      "clipped": false
+      "clipped": false,
+      "offset": [
+        139,
+        197
+      ]
     },
     "bask_L_1": {
       "file": "bask_L_1.png",
@@ -3986,7 +5090,11 @@
       "bottom": 0.365,
       "scale": 0.70481,
       "clipped": false,
-      "mirroredFrom": "bask_R_1"
+      "mirroredFrom": "bask_R_1",
+      "offset": [
+        125,
+        227
+      ]
     },
     "bask_L_2": {
       "file": "bask_L_2.png",
@@ -3999,7 +5107,11 @@
       "bottom": 0.36,
       "scale": 0.70481,
       "clipped": false,
-      "mirroredFrom": "bask_R_2"
+      "mirroredFrom": "bask_R_2",
+      "offset": [
+        128,
+        225
+      ]
     },
     "bask_L_3": {
       "file": "bask_L_3.png",
@@ -4012,7 +5124,11 @@
       "bottom": 0.36,
       "scale": 0.70481,
       "clipped": false,
-      "mirroredFrom": "bask_R_3"
+      "mirroredFrom": "bask_R_3",
+      "offset": [
+        129,
+        224
+      ]
     },
     "bask_L_4": {
       "file": "bask_L_4.png",
@@ -4025,7 +5141,11 @@
       "bottom": 0.36,
       "scale": 0.70481,
       "clipped": false,
-      "mirroredFrom": "bask_R_4"
+      "mirroredFrom": "bask_R_4",
+      "offset": [
+        132,
+        225
+      ]
     },
     "bottom_rest_L_1": {
       "file": "bottom_rest_L_1.png",
@@ -4038,7 +5158,11 @@
       "bottom": 0.3,
       "scale": 0.73079,
       "clipped": false,
-      "mirroredFrom": "bottom_rest_R_1"
+      "mirroredFrom": "bottom_rest_R_1",
+      "offset": [
+        119,
+        243
+      ]
     },
     "bottom_rest_L_2": {
       "file": "bottom_rest_L_2.png",
@@ -4051,7 +5175,11 @@
       "bottom": 0.29,
       "scale": 0.73079,
       "clipped": false,
-      "mirroredFrom": "bottom_rest_R_2"
+      "mirroredFrom": "bottom_rest_R_2",
+      "offset": [
+        126,
+        241
+      ]
     },
     "bottom_rest_L_3": {
       "file": "bottom_rest_L_3.png",
@@ -4064,7 +5192,11 @@
       "bottom": 0.345,
       "scale": 0.73079,
       "clipped": false,
-      "mirroredFrom": "bottom_rest_R_3"
+      "mirroredFrom": "bottom_rest_R_3",
+      "offset": [
+        131,
+        233
+      ]
     },
     "bottom_rest_L_4": {
       "file": "bottom_rest_L_4.png",
@@ -4077,7 +5209,11 @@
       "bottom": 0.29,
       "scale": 0.73079,
       "clipped": false,
-      "mirroredFrom": "bottom_rest_R_4"
+      "mirroredFrom": "bottom_rest_R_4",
+      "offset": [
+        117,
+        244
+      ]
     },
     "bottom_walk_L_1": {
       "file": "bottom_walk_L_1.png",
@@ -4090,7 +5226,11 @@
       "bottom": 0.325,
       "scale": 0.72403,
       "clipped": false,
-      "mirroredFrom": "bottom_walk_R_1"
+      "mirroredFrom": "bottom_walk_R_1",
+      "offset": [
+        126,
+        235
+      ]
     },
     "bottom_walk_L_2": {
       "file": "bottom_walk_L_2.png",
@@ -4103,7 +5243,11 @@
       "bottom": 0.365,
       "scale": 0.72403,
       "clipped": false,
-      "mirroredFrom": "bottom_walk_R_2"
+      "mirroredFrom": "bottom_walk_R_2",
+      "offset": [
+        125,
+        230
+      ]
     },
     "bottom_walk_L_3": {
       "file": "bottom_walk_L_3.png",
@@ -4116,7 +5260,11 @@
       "bottom": 0.365,
       "scale": 0.72403,
       "clipped": false,
-      "mirroredFrom": "bottom_walk_R_3"
+      "mirroredFrom": "bottom_walk_R_3",
+      "offset": [
+        124,
+        229
+      ]
     },
     "bottom_walk_L_4": {
       "file": "bottom_walk_L_4.png",
@@ -4129,7 +5277,11 @@
       "bottom": 0.34,
       "scale": 0.72403,
       "clipped": false,
-      "mirroredFrom": "bottom_walk_R_4"
+      "mirroredFrom": "bottom_walk_R_4",
+      "offset": [
+        118,
+        236
+      ]
     },
     "climb_out_L_1": {
       "file": "climb_out_L_1.png",
@@ -4142,7 +5294,11 @@
       "bottom": 0.49,
       "scale": 0.74329,
       "clipped": false,
-      "mirroredFrom": "climb_out_R_1"
+      "mirroredFrom": "climb_out_R_1",
+      "offset": [
+        130,
+        202
+      ]
     },
     "climb_out_L_2": {
       "file": "climb_out_L_2.png",
@@ -4155,7 +5311,11 @@
       "bottom": 0.48,
       "scale": 0.74329,
       "clipped": false,
-      "mirroredFrom": "climb_out_R_2"
+      "mirroredFrom": "climb_out_R_2",
+      "offset": [
+        144,
+        202
+      ]
     },
     "climb_out_L_3": {
       "file": "climb_out_L_3.png",
@@ -4168,7 +5328,11 @@
       "bottom": 0.475,
       "scale": 0.74329,
       "clipped": false,
-      "mirroredFrom": "climb_out_R_3"
+      "mirroredFrom": "climb_out_R_3",
+      "offset": [
+        145,
+        204
+      ]
     },
     "climb_out_L_4": {
       "file": "climb_out_L_4.png",
@@ -4181,7 +5345,11 @@
       "bottom": 0.355,
       "scale": 0.74329,
       "clipped": false,
-      "mirroredFrom": "climb_out_R_4"
+      "mirroredFrom": "climb_out_R_4",
+      "offset": [
+        121,
+        229
+      ]
     },
     "dive_L_1": {
       "file": "dive_L_1.png",
@@ -4194,7 +5362,11 @@
       "bottom": 0.375,
       "scale": 0.71818,
       "clipped": false,
-      "mirroredFrom": "dive_R_1"
+      "mirroredFrom": "dive_R_1",
+      "offset": [
+        136,
+        228
+      ]
     },
     "dive_L_2": {
       "file": "dive_L_2.png",
@@ -4207,7 +5379,11 @@
       "bottom": 0.3,
       "scale": 0.71818,
       "clipped": false,
-      "mirroredFrom": "dive_R_2"
+      "mirroredFrom": "dive_R_2",
+      "offset": [
+        132,
+        242
+      ]
     },
     "dive_L_3": {
       "file": "dive_L_3.png",
@@ -4220,7 +5396,11 @@
       "bottom": 0.455,
       "scale": 0.71818,
       "clipped": false,
-      "mirroredFrom": "dive_R_3"
+      "mirroredFrom": "dive_R_3",
+      "offset": [
+        152,
+        200
+      ]
     },
     "dive_L_4": {
       "file": "dive_L_4.png",
@@ -4233,7 +5413,11 @@
       "bottom": 0.5,
       "scale": 0.71818,
       "clipped": false,
-      "mirroredFrom": "dive_R_4"
+      "mirroredFrom": "dive_R_4",
+      "offset": [
+        154,
+        195
+      ]
     },
     "eat_L_1": {
       "file": "eat_L_1.png",
@@ -4246,7 +5430,11 @@
       "bottom": 0.26,
       "scale": 0.66287,
       "clipped": false,
-      "mirroredFrom": "eat_R_1"
+      "mirroredFrom": "eat_R_1",
+      "offset": [
+        138,
+        247
+      ]
     },
     "eat_L_2": {
       "file": "eat_L_2.png",
@@ -4259,7 +5447,11 @@
       "bottom": 0.265,
       "scale": 0.66287,
       "clipped": false,
-      "mirroredFrom": "eat_R_2"
+      "mirroredFrom": "eat_R_2",
+      "offset": [
+        138,
+        247
+      ]
     },
     "eat_L_3": {
       "file": "eat_L_3.png",
@@ -4272,7 +5464,11 @@
       "bottom": 0.26,
       "scale": 0.66287,
       "clipped": false,
-      "mirroredFrom": "eat_R_3"
+      "mirroredFrom": "eat_R_3",
+      "offset": [
+        142,
+        248
+      ]
     },
     "eat_L_4": {
       "file": "eat_L_4.png",
@@ -4285,7 +5481,11 @@
       "bottom": 0.285,
       "scale": 0.66287,
       "clipped": false,
-      "mirroredFrom": "eat_R_4"
+      "mirroredFrom": "eat_R_4",
+      "offset": [
+        141,
+        242
+      ]
     },
     "eat_water_L_1": {
       "file": "eat_water_L_1.png",
@@ -4298,7 +5498,11 @@
       "bottom": 0.345,
       "scale": 0.71621,
       "clipped": false,
-      "mirroredFrom": "eat_water_R_1"
+      "mirroredFrom": "eat_water_R_1",
+      "offset": [
+        123,
+        234
+      ]
     },
     "eat_water_L_2": {
       "file": "eat_water_L_2.png",
@@ -4311,7 +5515,11 @@
       "bottom": 0.4,
       "scale": 0.71621,
       "clipped": false,
-      "mirroredFrom": "eat_water_R_2"
+      "mirroredFrom": "eat_water_R_2",
+      "offset": [
+        127,
+        223
+      ]
     },
     "eat_water_L_3": {
       "file": "eat_water_L_3.png",
@@ -4324,7 +5532,11 @@
       "bottom": 0.37,
       "scale": 0.71621,
       "clipped": false,
-      "mirroredFrom": "eat_water_R_3"
+      "mirroredFrom": "eat_water_R_3",
+      "offset": [
+        134,
+        226
+      ]
     },
     "eat_water_L_4": {
       "file": "eat_water_L_4.png",
@@ -4337,7 +5549,11 @@
       "bottom": 0.34,
       "scale": 0.71621,
       "clipped": false,
-      "mirroredFrom": "eat_water_R_4"
+      "mirroredFrom": "eat_water_R_4",
+      "offset": [
+        123,
+        234
+      ]
     },
     "enter_water_L_1": {
       "file": "enter_water_L_1.png",
@@ -4350,7 +5566,11 @@
       "bottom": 0.3,
       "scale": 0.74557,
       "clipped": false,
-      "mirroredFrom": "enter_water_R_1"
+      "mirroredFrom": "enter_water_R_1",
+      "offset": [
+        129,
+        240
+      ]
     },
     "enter_water_L_2": {
       "file": "enter_water_L_2.png",
@@ -4363,7 +5583,11 @@
       "bottom": 0.305,
       "scale": 0.74557,
       "clipped": false,
-      "mirroredFrom": "enter_water_R_2"
+      "mirroredFrom": "enter_water_R_2",
+      "offset": [
+        129,
+        239
+      ]
     },
     "enter_water_L_3": {
       "file": "enter_water_L_3.png",
@@ -4376,7 +5600,11 @@
       "bottom": 0.325,
       "scale": 0.74557,
       "clipped": false,
-      "mirroredFrom": "enter_water_R_3"
+      "mirroredFrom": "enter_water_R_3",
+      "offset": [
+        111,
+        234
+      ]
     },
     "enter_water_L_4": {
       "file": "enter_water_L_4.png",
@@ -4389,7 +5617,11 @@
       "bottom": 0.345,
       "scale": 0.74557,
       "clipped": false,
-      "mirroredFrom": "enter_water_R_4"
+      "mirroredFrom": "enter_water_R_4",
+      "offset": [
+        121,
+        233
+      ]
     },
     "flip_L_1": {
       "file": "flip_L_1.png",
@@ -4402,7 +5634,11 @@
       "bottom": 0.305,
       "scale": 0.69427,
       "clipped": false,
-      "mirroredFrom": "flip_R_1"
+      "mirroredFrom": "flip_R_1",
+      "offset": [
+        137,
+        230
+      ]
     },
     "flip_L_2": {
       "file": "flip_L_2.png",
@@ -4415,7 +5651,11 @@
       "bottom": 0.34,
       "scale": 0.69427,
       "clipped": false,
-      "mirroredFrom": "flip_R_2"
+      "mirroredFrom": "flip_R_2",
+      "offset": [
+        118,
+        221
+      ]
     },
     "flip_L_3": {
       "file": "flip_L_3.png",
@@ -4428,7 +5668,11 @@
       "bottom": 0.315,
       "scale": 0.69427,
       "clipped": false,
-      "mirroredFrom": "flip_R_3"
+      "mirroredFrom": "flip_R_3",
+      "offset": [
+        136,
+        232
+      ]
     },
     "flip_L_4": {
       "file": "flip_L_4.png",
@@ -4441,7 +5685,11 @@
       "bottom": 0.315,
       "scale": 0.69427,
       "clipped": false,
-      "mirroredFrom": "flip_R_4"
+      "mirroredFrom": "flip_R_4",
+      "offset": [
+        132,
+        228
+      ]
     },
     "float_L_1": {
       "file": "float_L_1.png",
@@ -4454,7 +5702,11 @@
       "bottom": 0.385,
       "scale": 0.71038,
       "clipped": false,
-      "mirroredFrom": "float_R_1"
+      "mirroredFrom": "float_R_1",
+      "offset": [
+        130,
+        228
+      ]
     },
     "float_L_2": {
       "file": "float_L_2.png",
@@ -4467,7 +5719,11 @@
       "bottom": 0.39,
       "scale": 0.71038,
       "clipped": false,
-      "mirroredFrom": "float_R_2"
+      "mirroredFrom": "float_R_2",
+      "offset": [
+        134,
+        224
+      ]
     },
     "float_L_3": {
       "file": "float_L_3.png",
@@ -4480,7 +5736,11 @@
       "bottom": 0.34,
       "scale": 0.71038,
       "clipped": false,
-      "mirroredFrom": "float_R_3"
+      "mirroredFrom": "float_R_3",
+      "offset": [
+        122,
+        235
+      ]
     },
     "float_L_4": {
       "file": "float_L_4.png",
@@ -4493,7 +5753,11 @@
       "bottom": 0.395,
       "scale": 0.71038,
       "clipped": false,
-      "mirroredFrom": "float_R_4"
+      "mirroredFrom": "float_R_4",
+      "offset": [
+        128,
+        224
+      ]
     },
     "happy_L_1": {
       "file": "happy_L_1.png",
@@ -4506,7 +5770,11 @@
       "bottom": 0.335,
       "scale": 0.72308,
       "clipped": false,
-      "mirroredFrom": "happy_R_1"
+      "mirroredFrom": "happy_R_1",
+      "offset": [
+        130,
+        230
+      ]
     },
     "happy_L_2": {
       "file": "happy_L_2.png",
@@ -4519,7 +5787,11 @@
       "bottom": 0.365,
       "scale": 0.72308,
       "clipped": false,
-      "mirroredFrom": "happy_R_2"
+      "mirroredFrom": "happy_R_2",
+      "offset": [
+        134,
+        225
+      ]
     },
     "happy_L_3": {
       "file": "happy_L_3.png",
@@ -4532,7 +5804,11 @@
       "bottom": 0.365,
       "scale": 0.72308,
       "clipped": false,
-      "mirroredFrom": "happy_R_3"
+      "mirroredFrom": "happy_R_3",
+      "offset": [
+        138,
+        225
+      ]
     },
     "happy_L_4": {
       "file": "happy_L_4.png",
@@ -4545,7 +5821,11 @@
       "bottom": 0.34,
       "scale": 0.72308,
       "clipped": false,
-      "mirroredFrom": "happy_R_4"
+      "mirroredFrom": "happy_R_4",
+      "offset": [
+        128,
+        231
+      ]
     },
     "hide_L_1": {
       "file": "hide_L_1.png",
@@ -4558,7 +5838,11 @@
       "bottom": 0.295,
       "scale": 0.69993,
       "clipped": false,
-      "mirroredFrom": "hide_R_1"
+      "mirroredFrom": "hide_R_1",
+      "offset": [
+        136,
+        240
+      ]
     },
     "hide_L_2": {
       "file": "hide_L_2.png",
@@ -4571,7 +5855,11 @@
       "bottom": 0.28,
       "scale": 0.69993,
       "clipped": false,
-      "mirroredFrom": "hide_R_2"
+      "mirroredFrom": "hide_R_2",
+      "offset": [
+        134,
+        244
+      ]
     },
     "hide_L_3": {
       "file": "hide_L_3.png",
@@ -4584,7 +5872,11 @@
       "bottom": 0.25,
       "scale": 0.69993,
       "clipped": false,
-      "mirroredFrom": "hide_R_3"
+      "mirroredFrom": "hide_R_3",
+      "offset": [
+        148,
+        251
+      ]
     },
     "hide_L_4": {
       "file": "hide_L_4.png",
@@ -4597,7 +5889,11 @@
       "bottom": 0.245,
       "scale": 0.69993,
       "clipped": false,
-      "mirroredFrom": "hide_R_4"
+      "mirroredFrom": "hide_R_4",
+      "offset": [
+        146,
+        249
+      ]
     },
     "hover_L_1": {
       "file": "hover_L_1.png",
@@ -4610,7 +5906,11 @@
       "bottom": 0.365,
       "scale": 0.7399,
       "clipped": false,
-      "mirroredFrom": "hover_R_1"
+      "mirroredFrom": "hover_R_1",
+      "offset": [
+        130,
+        226
+      ]
     },
     "hover_L_2": {
       "file": "hover_L_2.png",
@@ -4623,7 +5923,11 @@
       "bottom": 0.36,
       "scale": 0.7399,
       "clipped": false,
-      "mirroredFrom": "hover_R_2"
+      "mirroredFrom": "hover_R_2",
+      "offset": [
+        127,
+        228
+      ]
     },
     "hover_L_3": {
       "file": "hover_L_3.png",
@@ -4636,7 +5940,11 @@
       "bottom": 0.35,
       "scale": 0.7399,
       "clipped": false,
-      "mirroredFrom": "hover_R_3"
+      "mirroredFrom": "hover_R_3",
+      "offset": [
+        129,
+        232
+      ]
     },
     "hover_L_4": {
       "file": "hover_L_4.png",
@@ -4649,7 +5957,11 @@
       "bottom": 0.35,
       "scale": 0.7399,
       "clipped": false,
-      "mirroredFrom": "hover_R_4"
+      "mirroredFrom": "hover_R_4",
+      "offset": [
+        125,
+        232
+      ]
     },
     "look_L_1": {
       "file": "look_L_1.png",
@@ -4662,7 +5974,11 @@
       "bottom": 0.31,
       "scale": 0.77675,
       "clipped": false,
-      "mirroredFrom": "look_R_1"
+      "mirroredFrom": "look_R_1",
+      "offset": [
+        121,
+        236
+      ]
     },
     "look_L_2": {
       "file": "look_L_2.png",
@@ -4675,7 +5991,11 @@
       "bottom": 0.39,
       "scale": 0.77675,
       "clipped": false,
-      "mirroredFrom": "look_R_2"
+      "mirroredFrom": "look_R_2",
+      "offset": [
+        124,
+        220
+      ]
     },
     "look_L_3": {
       "file": "look_L_3.png",
@@ -4688,7 +6008,11 @@
       "bottom": 0.32,
       "scale": 0.77675,
       "clipped": false,
-      "mirroredFrom": "look_R_3"
+      "mirroredFrom": "look_R_3",
+      "offset": [
+        114,
+        237
+      ]
     },
     "look_L_4": {
       "file": "look_L_4.png",
@@ -4701,7 +6025,11 @@
       "bottom": 0.38,
       "scale": 0.77675,
       "clipped": false,
-      "mirroredFrom": "look_R_4"
+      "mirroredFrom": "look_R_4",
+      "offset": [
+        124,
+        223
+      ]
     },
     "sleep_L_1": {
       "file": "sleep_L_1.png",
@@ -4714,7 +6042,11 @@
       "bottom": 0.245,
       "scale": 0.70203,
       "clipped": false,
-      "mirroredFrom": "sleep_R_1"
+      "mirroredFrom": "sleep_R_1",
+      "offset": [
+        133,
+        249
+      ]
     },
     "sleep_L_2": {
       "file": "sleep_L_2.png",
@@ -4727,7 +6059,11 @@
       "bottom": 0.25,
       "scale": 0.70203,
       "clipped": false,
-      "mirroredFrom": "sleep_R_2"
+      "mirroredFrom": "sleep_R_2",
+      "offset": [
+        125,
+        249
+      ]
     },
     "sleep_L_3": {
       "file": "sleep_L_3.png",
@@ -4740,7 +6076,11 @@
       "bottom": 0.25,
       "scale": 0.70203,
       "clipped": false,
-      "mirroredFrom": "sleep_R_3"
+      "mirroredFrom": "sleep_R_3",
+      "offset": [
+        122,
+        249
+      ]
     },
     "sleep_L_4": {
       "file": "sleep_L_4.png",
@@ -4753,7 +6093,11 @@
       "bottom": 0.245,
       "scale": 0.70203,
       "clipped": false,
-      "mirroredFrom": "sleep_R_4"
+      "mirroredFrom": "sleep_R_4",
+      "offset": [
+        138,
+        248
+      ]
     },
     "sniff_L_1": {
       "file": "sniff_L_1.png",
@@ -4766,7 +6110,11 @@
       "bottom": 0.29,
       "scale": 0.67051,
       "clipped": false,
-      "mirroredFrom": "sniff_R_1"
+      "mirroredFrom": "sniff_R_1",
+      "offset": [
+        137,
+        242
+      ]
     },
     "sniff_L_2": {
       "file": "sniff_L_2.png",
@@ -4779,7 +6127,11 @@
       "bottom": 0.265,
       "scale": 0.67051,
       "clipped": false,
-      "mirroredFrom": "sniff_R_2"
+      "mirroredFrom": "sniff_R_2",
+      "offset": [
+        134,
+        246
+      ]
     },
     "sniff_L_3": {
       "file": "sniff_L_3.png",
@@ -4792,7 +6144,11 @@
       "bottom": 0.27,
       "scale": 0.67051,
       "clipped": false,
-      "mirroredFrom": "sniff_R_3"
+      "mirroredFrom": "sniff_R_3",
+      "offset": [
+        140,
+        245
+      ]
     },
     "sniff_L_4": {
       "file": "sniff_L_4.png",
@@ -4805,7 +6161,11 @@
       "bottom": 0.285,
       "scale": 0.67051,
       "clipped": false,
-      "mirroredFrom": "sniff_R_4"
+      "mirroredFrom": "sniff_R_4",
+      "offset": [
+        137,
+        241
+      ]
     },
     "startled_L_1": {
       "file": "startled_L_1.png",
@@ -4818,7 +6178,11 @@
       "bottom": 0.325,
       "scale": 0.76777,
       "clipped": false,
-      "mirroredFrom": "startled_R_1"
+      "mirroredFrom": "startled_R_1",
+      "offset": [
+        117,
+        230
+      ]
     },
     "startled_L_2": {
       "file": "startled_L_2.png",
@@ -4831,7 +6195,11 @@
       "bottom": 0.355,
       "scale": 0.76777,
       "clipped": false,
-      "mirroredFrom": "startled_R_2"
+      "mirroredFrom": "startled_R_2",
+      "offset": [
+        127,
+        227
+      ]
     },
     "startled_L_3": {
       "file": "startled_L_3.png",
@@ -4844,7 +6212,11 @@
       "bottom": 0.29,
       "scale": 0.76777,
       "clipped": false,
-      "mirroredFrom": "startled_R_3"
+      "mirroredFrom": "startled_R_3",
+      "offset": [
+        136,
+        241
+      ]
     },
     "startled_L_4": {
       "file": "startled_L_4.png",
@@ -4857,7 +6229,11 @@
       "bottom": 0.345,
       "scale": 0.76777,
       "clipped": false,
-      "mirroredFrom": "startled_R_4"
+      "mirroredFrom": "startled_R_4",
+      "offset": [
+        118,
+        231
+      ]
     },
     "surface_L_1": {
       "file": "surface_L_1.png",
@@ -4870,7 +6246,11 @@
       "bottom": 0.44,
       "scale": 0.74971,
       "clipped": false,
-      "mirroredFrom": "surface_R_1"
+      "mirroredFrom": "surface_R_1",
+      "offset": [
+        136,
+        207
+      ]
     },
     "surface_L_2": {
       "file": "surface_L_2.png",
@@ -4883,7 +6263,11 @@
       "bottom": 0.5,
       "scale": 0.74971,
       "clipped": false,
-      "mirroredFrom": "surface_R_2"
+      "mirroredFrom": "surface_R_2",
+      "offset": [
+        134,
+        197
+      ]
     },
     "surface_L_3": {
       "file": "surface_L_3.png",
@@ -4896,7 +6280,11 @@
       "bottom": 0.565,
       "scale": 0.74971,
       "clipped": false,
-      "mirroredFrom": "surface_R_3"
+      "mirroredFrom": "surface_R_3",
+      "offset": [
+        150,
+        189
+      ]
     },
     "surface_L_4": {
       "file": "surface_L_4.png",
@@ -4909,7 +6297,11 @@
       "bottom": 0.565,
       "scale": 0.74971,
       "clipped": false,
-      "mirroredFrom": "surface_R_4"
+      "mirroredFrom": "surface_R_4",
+      "offset": [
+        149,
+        187
+      ]
     },
     "swim_L_1": {
       "file": "swim_L_1.png",
@@ -4922,7 +6314,11 @@
       "bottom": 0.365,
       "scale": 0.75214,
       "clipped": false,
-      "mirroredFrom": "swim_R_1"
+      "mirroredFrom": "swim_R_1",
+      "offset": [
+        131,
+        224
+      ]
     },
     "swim_L_2": {
       "file": "swim_L_2.png",
@@ -4935,7 +6331,11 @@
       "bottom": 0.295,
       "scale": 0.75214,
       "clipped": false,
-      "mirroredFrom": "swim_R_2"
+      "mirroredFrom": "swim_R_2",
+      "offset": [
+        117,
+        238
+      ]
     },
     "swim_L_3": {
       "file": "swim_L_3.png",
@@ -4948,7 +6348,11 @@
       "bottom": 0.335,
       "scale": 0.75214,
       "clipped": false,
-      "mirroredFrom": "swim_R_3"
+      "mirroredFrom": "swim_R_3",
+      "offset": [
+        130,
+        234
+      ]
     },
     "swim_L_4": {
       "file": "swim_L_4.png",
@@ -4961,7 +6365,11 @@
       "bottom": 0.305,
       "scale": 0.75214,
       "clipped": false,
-      "mirroredFrom": "swim_R_4"
+      "mirroredFrom": "swim_R_4",
+      "offset": [
+        122,
+        237
+      ]
     },
     "swim_turn_L_1": {
       "file": "swim_turn_L_1.png",
@@ -4974,7 +6382,11 @@
       "bottom": 0.275,
       "scale": 0.7342,
       "clipped": false,
-      "mirroredFrom": "swim_turn_R_1"
+      "mirroredFrom": "swim_turn_R_1",
+      "offset": [
+        132,
+        242
+      ]
     },
     "swim_turn_L_2": {
       "file": "swim_turn_L_2.png",
@@ -4987,7 +6399,11 @@
       "bottom": 0.39,
       "scale": 0.7342,
       "clipped": false,
-      "mirroredFrom": "swim_turn_R_2"
+      "mirroredFrom": "swim_turn_R_2",
+      "offset": [
+        132,
+        221
+      ]
     },
     "swim_turn_L_3": {
       "file": "swim_turn_L_3.png",
@@ -5000,7 +6416,11 @@
       "bottom": 0.4,
       "scale": 0.7342,
       "clipped": false,
-      "mirroredFrom": "swim_turn_R_3"
+      "mirroredFrom": "swim_turn_R_3",
+      "offset": [
+        138,
+        219
+      ]
     },
     "swim_turn_L_4": {
       "file": "swim_turn_L_4.png",
@@ -5013,7 +6433,11 @@
       "bottom": 0.36,
       "scale": 0.7342,
       "clipped": false,
-      "mirroredFrom": "swim_turn_R_4"
+      "mirroredFrom": "swim_turn_R_4",
+      "offset": [
+        136,
+        231
+      ]
     },
     "turn_L_1": {
       "file": "turn_L_1.png",
@@ -5026,7 +6450,11 @@
       "bottom": 0.345,
       "scale": 0.73343,
       "clipped": false,
-      "mirroredFrom": "turn_R_1"
+      "mirroredFrom": "turn_R_1",
+      "offset": [
+        122,
+        231
+      ]
     },
     "turn_L_2": {
       "file": "turn_L_2.png",
@@ -5039,7 +6467,11 @@
       "bottom": 0.36,
       "scale": 0.73343,
       "clipped": false,
-      "mirroredFrom": "turn_R_2"
+      "mirroredFrom": "turn_R_2",
+      "offset": [
+        124,
+        228
+      ]
     },
     "turn_L_3": {
       "file": "turn_L_3.png",
@@ -5052,7 +6484,11 @@
       "bottom": 0.375,
       "scale": 0.73343,
       "clipped": false,
-      "mirroredFrom": "turn_R_3"
+      "mirroredFrom": "turn_R_3",
+      "offset": [
+        141,
+        224
+      ]
     },
     "turn_L_4": {
       "file": "turn_L_4.png",
@@ -5065,7 +6501,11 @@
       "bottom": 0.395,
       "scale": 0.73343,
       "clipped": false,
-      "mirroredFrom": "turn_R_4"
+      "mirroredFrom": "turn_R_4",
+      "offset": [
+        152,
+        222
+      ]
     },
     "walk_L_1": {
       "file": "walk_L_1.png",
@@ -5078,7 +6518,11 @@
       "bottom": 0.295,
       "scale": 0.71207,
       "clipped": false,
-      "mirroredFrom": "walk_R_1"
+      "mirroredFrom": "walk_R_1",
+      "offset": [
+        127,
+        241
+      ]
     },
     "walk_L_2": {
       "file": "walk_L_2.png",
@@ -5091,7 +6535,11 @@
       "bottom": 0.295,
       "scale": 0.71207,
       "clipped": false,
-      "mirroredFrom": "walk_R_2"
+      "mirroredFrom": "walk_R_2",
+      "offset": [
+        125,
+        240
+      ]
     },
     "walk_L_3": {
       "file": "walk_L_3.png",
@@ -5104,7 +6552,11 @@
       "bottom": 0.295,
       "scale": 0.71207,
       "clipped": false,
-      "mirroredFrom": "walk_R_3"
+      "mirroredFrom": "walk_R_3",
+      "offset": [
+        123,
+        241
+      ]
     },
     "walk_L_4": {
       "file": "walk_L_4.png",
@@ -5117,7 +6569,11 @@
       "bottom": 0.3,
       "scale": 0.71207,
       "clipped": false,
-      "mirroredFrom": "walk_R_4"
+      "mirroredFrom": "walk_R_4",
+      "offset": [
+        129,
+        240
+      ]
     },
     "yawn_L_1": {
       "file": "yawn_L_1.png",
@@ -5130,7 +6586,11 @@
       "bottom": 0.275,
       "scale": 0.67448,
       "clipped": false,
-      "mirroredFrom": "yawn_R_1"
+      "mirroredFrom": "yawn_R_1",
+      "offset": [
+        138,
+        244
+      ]
     },
     "yawn_L_2": {
       "file": "yawn_L_2.png",
@@ -5143,7 +6603,11 @@
       "bottom": 0.35,
       "scale": 0.67448,
       "clipped": false,
-      "mirroredFrom": "yawn_R_2"
+      "mirroredFrom": "yawn_R_2",
+      "offset": [
+        139,
+        230
+      ]
     },
     "yawn_L_3": {
       "file": "yawn_L_3.png",
@@ -5156,7 +6620,11 @@
       "bottom": 0.385,
       "scale": 0.67448,
       "clipped": false,
-      "mirroredFrom": "yawn_R_3"
+      "mirroredFrom": "yawn_R_3",
+      "offset": [
+        135,
+        223
+      ]
     },
     "yawn_L_4": {
       "file": "yawn_L_4.png",
@@ -5169,7 +6637,12 @@
       "bottom": 0.275,
       "scale": 0.67448,
       "clipped": false,
-      "mirroredFrom": "yawn_R_4"
+      "mirroredFrom": "yawn_R_4",
+      "offset": [
+        136,
+        245
+      ]
     }
-  }
+  },
+  "cropped": true
 }

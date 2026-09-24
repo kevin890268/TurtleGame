@@ -11,224 +11,353 @@
       "name": "散步",
       "source": "reference/sheets/map/sheet_a.png",
       "shellFound": true,
-      "bottom": 0.455
+      "bottom": 0.455,
+      "offset": [
+        134,
+        221
+      ]
     },
     "walk_b": {
       "file": "walk_b.png",
       "name": "慢慢爬",
       "source": "reference/sheets/map/sheet_a.png",
       "shellFound": true,
-      "bottom": 0.385
+      "bottom": 0.385,
+      "offset": [
+        120,
+        238
+      ]
     },
     "look": {
       "file": "look.png",
       "name": "張望",
       "source": "reference/sheets/map/sheet_a.png",
       "shellFound": true,
-      "bottom": 0.5
+      "bottom": 0.5,
+      "offset": [
+        154,
+        186
+      ]
     },
     "neck_up": {
       "file": "neck_up.png",
       "name": "伸長脖子",
       "source": "reference/sheets/map/sheet_a.png",
       "shellFound": true,
-      "bottom": 0.45
+      "bottom": 0.45,
+      "offset": [
+        155,
+        129
+      ]
     },
     "observe": {
       "file": "observe.png",
       "name": "抬頭觀察",
       "source": "reference/sheets/map/sheet_a.png",
       "shellFound": true,
-      "bottom": 0.52
+      "bottom": 0.52,
+      "offset": [
+        149,
+        206
+      ]
     },
     "sniff": {
       "file": "sniff.png",
       "name": "低頭聞聞",
       "source": "reference/sheets/map/sheet_a.png",
       "shellFound": true,
-      "bottom": 0.535
+      "bottom": 0.535,
+      "offset": [
+        136,
+        235
+      ]
     },
     "bask": {
       "file": "bask.png",
       "name": "曬太陽",
       "source": "reference/sheets/map/sheet_b.png",
       "shellFound": true,
-      "bottom": 0.395
+      "bottom": 0.395,
+      "offset": [
+        112,
+        201
+      ]
     },
     "sleep": {
       "file": "sleep.png",
       "name": "睡覺",
       "source": "reference/sheets/map/sheet_b.png",
       "shellFound": true,
-      "bottom": 0.375
+      "bottom": 0.375,
+      "offset": [
+        141,
+        232
+      ]
     },
     "yawn": {
       "file": "yawn.png",
       "name": "打哈欠",
       "source": "reference/sheets/map/sheet_b.png",
       "shellFound": true,
-      "bottom": 0.43
+      "bottom": 0.43,
+      "offset": [
+        161,
+        175
+      ]
     },
     "stretch": {
       "file": "stretch.png",
       "name": "伸懶腰",
       "source": "reference/sheets/map/sheet_b.png",
       "shellFound": true,
-      "bottom": 0.345
+      "bottom": 0.345,
+      "offset": [
+        95,
+        241
+      ]
     },
     "hide": {
       "file": "hide.png",
       "name": "縮進殼裡",
       "source": "reference/sheets/map/sheet_b.png",
       "shellFound": true,
-      "bottom": 0.325
+      "bottom": 0.325,
+      "offset": [
+        149,
+        232
+      ]
     },
     "rest": {
       "file": "rest.png",
       "name": "趴著休息",
       "source": "reference/sheets/map/sheet_b.png",
       "shellFound": true,
-      "bottom": 0.345
+      "bottom": 0.345,
+      "offset": [
+        132,
+        234
+      ]
     },
     "happy": {
       "file": "happy.png",
       "name": "開心",
       "source": "reference/sheets/map/sheet_c.png",
       "shellFound": true,
-      "bottom": 0.565
+      "bottom": 0.565,
+      "offset": [
+        152,
+        201
+      ]
     },
     "startled": {
       "file": "startled.png",
       "name": "驚嚇",
       "source": "reference/sheets/map/sheet_c.png",
       "shellFound": true,
-      "bottom": 0.45
+      "bottom": 0.45,
+      "offset": [
+        135,
+        208
+      ]
     },
     "angry": {
       "file": "angry.png",
       "name": "生氣",
       "source": "reference/sheets/map/sheet_c.png",
       "shellFound": true,
-      "bottom": 0.485
+      "bottom": 0.485,
+      "offset": [
+        131,
+        208
+      ]
     },
     "purr": {
       "file": "purr.png",
       "name": "滿足",
       "source": "reference/sheets/map/sheet_c.png",
       "shellFound": true,
-      "bottom": 0.555
+      "bottom": 0.555,
+      "offset": [
+        146,
+        226
+      ]
     },
     "think": {
       "file": "think.png",
       "name": "思考",
       "source": "reference/sheets/map/sheet_c.png",
       "shellFound": true,
-      "bottom": 0.565
+      "bottom": 0.565,
+      "offset": [
+        151,
+        189
+      ]
     },
     "relax": {
       "file": "relax.png",
       "name": "放鬆",
       "source": "reference/sheets/map/sheet_c.png",
       "shellFound": true,
-      "bottom": 0.57
+      "bottom": 0.57,
+      "offset": [
+        146,
+        203
+      ]
     },
     "swim": {
       "file": "swim.png",
       "name": "游泳",
       "source": "reference/sheets/map/sheet_d.png",
       "shellFound": true,
-      "bottom": 0.415
+      "bottom": 0.415,
+      "offset": [
+        110,
+        249
+      ]
     },
     "dive": {
       "file": "dive.png",
       "name": "下潛",
       "source": "reference/sheets/map/sheet_d.png",
       "shellFound": true,
-      "bottom": 0.74
+      "bottom": 0.74,
+      "offset": [
+        114,
+        196
+      ]
     },
     "rise": {
       "file": "rise.png",
       "name": "上浮",
       "source": "reference/sheets/map/sheet_d.png",
       "shellFound": true,
-      "bottom": 0.555
+      "bottom": 0.555,
+      "offset": [
+        145,
+        161
+      ]
     },
     "float": {
       "file": "float.png",
       "name": "漂浮",
       "source": "reference/sheets/map/sheet_d.png",
       "shellFound": true,
-      "bottom": 0.535
+      "bottom": 0.535,
+      "offset": [
+        108,
+        241
+      ]
     },
     "drink": {
       "file": "drink.png",
       "name": "淺水換氣",
       "source": "reference/sheets/map/sheet_d.png",
       "shellFound": true,
-      "bottom": 0.515
+      "bottom": 0.515,
+      "offset": [
+        144,
+        150
+      ]
     },
     "nibble": {
       "file": "nibble.png",
       "name": "咬食物",
       "source": "reference/sheets/map/sheet_d.png",
       "shellFound": true,
-      "bottom": 0.405
+      "bottom": 0.405,
+      "offset": [
+        141,
+        228
+      ]
     },
     "swim_1": {
       "file": "swim_1.png",
       "name": "游泳1",
       "source": "reference/sheets/map/loop_swim.png",
       "shellFound": true,
-      "bottom": 0.325
+      "bottom": 0.325,
+      "offset": [
+        146,
+        236
+      ]
     },
     "swim_2": {
       "file": "swim_2.png",
       "name": "游泳2",
       "source": "reference/sheets/map/loop_swim.png",
       "shellFound": true,
-      "bottom": 0.51
+      "bottom": 0.51,
+      "offset": [
+        119,
+        246
+      ]
     },
     "swim_3": {
       "file": "swim_3.png",
       "name": "游泳3",
       "source": "reference/sheets/map/loop_swim.png",
       "shellFound": true,
-      "bottom": 0.32
+      "bottom": 0.32,
+      "offset": [
+        141,
+        245
+      ]
     },
     "swim_4": {
       "file": "swim_4.png",
       "name": "游泳4",
       "source": "reference/sheets/map/loop_swim.png",
       "shellFound": true,
-      "bottom": 0.375
+      "bottom": 0.375,
+      "offset": [
+        131,
+        247
+      ]
     },
     "walk_1": {
       "file": "walk_1.png",
       "name": "爬行1",
       "source": "reference/sheets/map/loop_walk.png",
       "shellFound": true,
-      "bottom": 0.475
+      "bottom": 0.475,
+      "offset": [
+        133,
+        240
+      ]
     },
     "walk_2": {
       "file": "walk_2.png",
       "name": "爬行2",
       "source": "reference/sheets/map/loop_walk.png",
       "shellFound": true,
-      "bottom": 0.525
+      "bottom": 0.525,
+      "offset": [
+        149,
+        240
+      ]
     },
     "walk_3": {
       "file": "walk_3.png",
       "name": "爬行3",
       "source": "reference/sheets/map/loop_walk.png",
       "shellFound": true,
-      "bottom": 0.525
+      "bottom": 0.525,
+      "offset": [
+        128,
+        239
+      ]
     },
     "walk_4": {
       "file": "walk_4.png",
       "name": "爬行4",
       "source": "reference/sheets/map/loop_walk.png",
       "shellFound": true,
-      "bottom": 0.41
+      "bottom": 0.41,
+      "offset": [
+        147,
+        221
+      ]
     }
-  }
+  },
+  "cropped": true
 }
