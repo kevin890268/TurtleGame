@@ -80,6 +80,30 @@
         }));
         location.replace(location.pathname + '?fresh=' + Date.now());
       };
+      // 程式載入失敗時（多半是瀏覽器把新舊版的程式檔混在一起用），顯示提示和按鈕，
+      // 不要只剩一片空白的水缸。遊戲啟動完成後（main.js 設 __gameStarted）就不再攔截。
+      window.showLoadError = function (detail) {
+        if (window.__gameStarted || document.getElementById('loadError')) return;
+        var show = function () {
+          var box = document.createElement('div');
+          box.id = 'loadError';
+          box.className = 'load-error';
+          box.innerHTML = '<p>畫面載入失敗，可能是瀏覽器還留著舊版的程式。</p>'
+            + '<button type="button">更新到最新版（存檔會保留）</button><small></small>';
+          box.querySelector('small').textContent = detail || '';
+          box.querySelector('button').addEventListener('click', function () { window.refreshCode(); });
+          document.body.appendChild(box);
+        };
+        if (document.body) show(); else document.addEventListener('DOMContentLoaded', show);
+      };
+      window.addEventListener('error', function (e) {
+        window.showLoadError(e.message || (e.target && e.target.src) || '程式檔載入失敗');
+      }, true);
+      window.addEventListener('unhandledrejection', function (e) {
+        var r = e.reason;
+        window.showLoadError(String((r && (r.message || r)) || '程式啟動失敗'));
+      });
+
       if (/[?&]reset=1(&|$)/.test(location.search)) {
         document.documentElement.classList.add('resetting');
         window.hardReset();

@@ -447,6 +447,7 @@ async function start() {
     else welcomeBack();
   });
   window.addEventListener('pagehide', () => save(state));
+  window.__gameStarted = true; // index.html 的載入失敗提示看這個
 }
 
 // 第一次玩：兩隻隨機命名的斑龜

@@ -507,3 +507,30 @@ html.resetting body::after, html.refreshing body::after {
 }
 html.resetting body::after { content: '正在清除網頁紀錄…'; }
 
+/* 程式載入失敗時的提示（index.html 的 showLoadError） */
+.load-error {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+  background: var(--bg);
+  color: var(--ink);
+  text-align: center;
+  font-size: 16px;
+}
+.load-error button {
+  font: inherit;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  cursor: pointer;
+}
+.load-error small { color: var(--muted); max-width: 32em; word-break: break-word; }
+
