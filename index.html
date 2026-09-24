@@ -8,6 +8,7 @@
   <script>
     // 清除網頁紀錄：存檔與設定、瀏覽器暫存的舊版程式，全部清掉後重新載入。
     // 設定裡的「重新開始」會呼叫它；手機畫面壞掉、按不到按鈕時，直接開「網址?reset=1」。
+    // 只想換成最新的程式、不清存檔：開「網址?refresh=1」。
     (function () {
       // 遊戲的程式與樣式（新增 js 檔時要加進來）
       var FILES = [
@@ -66,9 +67,25 @@
         }));
         location.replace(location.pathname + '?fresh=' + Date.now());
       };
+      // 只更新程式、保留存檔：網址 ?refresh=1。程式更新後畫面怪怪的（例如還在跑舊版）時用這個。
+      window.refreshCode = async function () {
+        var urls = FILES.slice();
+        try {
+          performance.getEntriesByType('resource').forEach(function (e) {
+            if (e.name.indexOf(location.origin) === 0) urls.push(e.name);
+          });
+        } catch (e) {}
+        await Promise.all(urls.map(function (u) {
+          return fetch(u, { cache: 'reload' }).catch(function () { return null; });
+        }));
+        location.replace(location.pathname + '?fresh=' + Date.now());
+      };
       if (/[?&]reset=1(&|$)/.test(location.search)) {
         document.documentElement.classList.add('resetting');
         window.hardReset();
+      } else if (/[?&]refresh=1(&|$)/.test(location.search)) {
+        document.documentElement.classList.add('refreshing');
+        window.refreshCode();
       }
     })();
   </script>

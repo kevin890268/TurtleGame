@@ -493,10 +493,10 @@ button.scene-item:disabled:active { transform: none; }
 }
 .care-shutter[hidden], .care-save[hidden] { display: none; }
 
-/* 網址 ?reset=1：清除網頁紀錄中 */
-html.resetting body > * { visibility: hidden; }
-html.resetting body::after {
-  content: '正在清除網頁紀錄…';
+/* 網址 ?reset=1：清除網頁紀錄中；?refresh=1：更新程式中 */
+html.resetting body > *, html.refreshing body > * { visibility: hidden; }
+html.refreshing body::after { content: '正在更新到最新版…'; }
+html.resetting body::after, html.refreshing body::after {
   position: fixed;
   inset: 0;
   display: grid;
@@ -505,4 +505,5 @@ html.resetting body::after {
   color: var(--ink);
   background: var(--bg);
 }
+html.resetting body::after { content: '正在清除網頁紀錄…'; }
 
