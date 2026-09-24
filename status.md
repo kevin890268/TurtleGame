@@ -228,7 +228,7 @@ tools/make_actions_v3.py  產生斑龜 v3 動作提示詞
 ## 下一步
 
 **斑龜 v3 素材**：動作改成水上 13 ＋ 水下 10 ＝ 23 個、三視角（正面俯看 45°／側面／背面俯看 45°），每張 3 × 4。
-提示詞在 `gpt/actions/bangui_v3/`，規則 `gpt/rules/rules_bangui_v3.6.md`，進度看根目錄 `bangui_asset_status.md`（目前 0／23）。
+提示詞在 `gpt/actions/bangui_v3/`，規則 `gpt/rules/rules_bangui_v3.6.md`，進度看根目錄 `bangui_asset_status.md`（**23／23 全部完成**，舊的 4 視角圖收在 `reference/sheets/bangui/_old_superseded/`）。
 `reference/sheets/bangui/_incoming/` 有 5 張（05～09）還不知道是哪個動作的新圖，要確認後改名。
 
 **想互動請求**：右下角按鈕＋4 個小遊戲已完成（刷屁屁、擦背甲藻斑、摸下巴、拍照，`js/requests.js`），其餘 6 種規劃在 `docs/interactions.md` A 部分。
