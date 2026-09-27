@@ -98,7 +98,8 @@ export class Tank3D extends Tank {
 
     // 平移的可動範圍（以預設的注視點為中心）：左右大約半個缸、上下小一點
     this.panHome = ctl.target.clone();
-    this.panLimit = this.isOutdoor ? { x: 55, y: 22 } : { x: 32, y: 14 };
+    // 戶外是一整個圓台（小溪、濕地、小樹），平移範圍要大一點才逛得到
+    this.panLimit = this.isOutdoor ? { x: 130, y: 30 } : { x: 32, y: 14 };
 
     this.hemi = new THREE.HemisphereLight(0xfff6e0, 0x6b5a40, 1);
     this.sun = new THREE.DirectionalLight(0xffffff, 1.5);
@@ -118,7 +119,9 @@ export class Tank3D extends Tank {
     if (this.isOutdoor) {
       // 戶外：池子挖在一大片草地裡，正面是土層剖面，四周一圈全景（js/outdoor-world.js）
       this.rim = this.Y(this.terrain.groundY(W - 1)); // 池邊地面的高度
-      this.world = buildOutdoorWorld(this.scene, { TW: this.TW, TD: this.TD, rim: this.rim, renderer: this.renderer });
+      this.world = buildOutdoorWorld(this.scene, {
+        TW: this.TW, TD: this.TD, rim: this.rim, waterY: this.WATER_Y, renderer: this.renderer,
+      });
       return;
     }
     const table = new THREE.Mesh(
@@ -542,6 +545,7 @@ export class Tank3D extends Tank {
     this.controls.update();
     this.clampPan();
     this.keepCameraAboveGround();
+    this.world?.update(this.time);
     this.updateLighting(s);
     this.updateWater(dirt);
     this.updatePlants();
@@ -679,10 +683,10 @@ export class Tank3D extends Tank {
   keepCameraAboveGround() {
     if (!this.world) return;
     const cam = this.camera.position;
-    const { tile, fieldY } = this.world;
-    // 在草地底座上方（剖面後面）：不低於草地
-    const overTile = cam.x > tile.left - 2 && cam.x < tile.right + 2 && cam.z > tile.back - 2 && cam.z < tile.front + 2;
-    const minY = overTile ? tile.top + 4 : fieldY + 4;
+    const { disc, fieldY } = this.world;
+    // 在圓台上方（剖面後面）：不低於草地
+    const overDisc = cam.z < disc.front + 2 && Math.hypot(cam.x - disc.cx, cam.z - disc.cz) < disc.r + 2;
+    const minY = overDisc ? disc.top + 12 : fieldY + 4;
     if (cam.y < minY) cam.y = minY;
   }
 

@@ -1,20 +1,20 @@
-// 戶外池的周遭世界：把池子「挖進地裡」、四周一圈全景、地面與剖面的紋理。
+// 戶外池的周遭世界：圓柱形的小天地、四周一圈全景、地面與剖面的紋理。
 //
-// 做法：一大片草地（高度＝池邊的地面），中間挖一個跟池子一樣大的缺口，
-// 並沿著池子正面整條切齊——從正面看是一整面「土層剖面」，池子是剖面上的一扇窗，
-// 看得到水下的烏龜；從上面或後面看，就是一個挖在草地上的池塘。
+// 做法：一個圓柱形的台子（高度＝池邊的地面），池子放在台子前緣，挖一個跟池子一樣大的缺口，
+// 並沿著池子正面切齊——從正面看是一整面「土層剖面」，池子是剖面上的一扇窗，看得到水下的烏龜；
+// 台子後面是小溪、石頭、濕地、小樹、小花（js/outdoor-garden.js）。
 //
 // 圖片都是可選的：assets/scene/outdoor/ 裡有 panorama、soil、grass（.webp 或 .png）就用，
 // 沒有就用這裡程式畫的替代圖。提示詞在 gpt/scene/outdoor/。
 import * as THREE from 'three';
+import { buildGarden } from './outdoor-garden.js';
 
 const DIR = 'assets/scene/outdoor/';
-// 草地底座：池子是九宮格的中間那格，左右各一格、後面一整排（前面那排拿掉，正面要露出剖面）
-const TILE_CELLS_SIDE = 1;   // 池子左右各幾格
-const TILE_CELLS_BACK = 1;   // 池子後面幾排
-const TILE_CORNER = 10;      // 底座四個角的圓角
+// 圓柱形的台子：池子在前緣，後面是小溪、濕地、小樹
+const DISC_R = 190;          // 台子半徑
+const DISC_BACK = 106;       // 台子圓心在池子正面後方多遠（正面切線到圓心的距離）
 const FIELD_DROP = 26;       // 底座外面的遠方田野，比草地低多少（底座看起來像立體模型的台子）
-const FIELD_R = 880;         // 遠方田野的半徑（接到全景）
+const FIELD_R = 910;         // 遠方田野的半徑：比全景（900）大一點，藏在全景後面，接縫才不會露出一條白線
 const PANO_R = 900;        // 全景圓筒半徑，比草地大一點
 const PANO_H = 520;        // 全景圓筒高度
 // 全景圖繞一圈重複幾次：ChatGPT 最寬只能出 1536×1024，一張拉滿一整圈會變形得很嚴重；
@@ -34,9 +34,10 @@ const FIELD_COLOR = '#7ba452';
  * @param {number} o.TW  池子寬（x）
  * @param {number} o.TD  池子深（z）
  * @param {number} o.rim 池邊地面的高度（y）
+ * @param {number} o.waterY 池子水面的高度（y）
  * @param {THREE.WebGLRenderer} o.renderer
  */
-export function buildOutdoorWorld(scene, { TW, TD, rim, renderer }) {
+export function buildOutdoorWorld(scene, { TW, TD, rim, waterY, renderer }) {
   const aniso = Math.min(4, renderer.capabilities.getMaxAnisotropy());
 
   // ---------- 紋理：先用程式畫的，有圖檔就換掉 ----------
@@ -59,43 +60,66 @@ export function buildOutdoorWorld(scene, { TW, TD, rim, renderer }) {
 
   grass.repeat.set(1 / GRASS_TILE, 1 / GRASS_TILE);
 
+  const soilTextures = [soilCap, soilSide];   // 土層貼圖（之後建立的也會加進來）
   loadOptional(DIR + 'soil', aniso, img => {
-    for (const t of [soilCap, soilSide]) { t.image = img; t.needsUpdate = true; }
+    for (const t of soilTextures) { t.image = img; t.needsUpdate = true; }
   });
   loadOptional(DIR + 'grass', aniso, img => { grass.image = img; grass.needsUpdate = true; });
   loadOptional(DIR + 'panorama', aniso, img => { pano.image = img; pano.needsUpdate = true; });
 
-  // ---------- 草地底座：池子是九宮格的中間那格 ----------
-  // 左右各一格、後面一整排；前面那排拿掉，池子正面切齊成剖面。四周露出土層側面，像立體模型的台子。
+  // ---------- 圓柱形的台子 ----------
+  // 圓心在池子正面後方 DISC_BACK；正面沿池子切齊（一條弦），中間挖掉池子
   const hx = TW / 2, hz = TD / 2;
-  const left = -hx - TW * TILE_CELLS_SIDE, right = hx + TW * TILE_CELLS_SIDE;
-  const back = -hz - TD * TILE_CELLS_BACK, front = hz;
-  const rc = TILE_CORNER;
+  const front = hz;
+  const disc = { cx: 0, cz: front - DISC_BACK, r: DISC_R, front, top: rim };
+  const half = Math.sqrt(DISC_R * DISC_R - DISC_BACK * DISC_BACK); // 正面那條弦的一半長
   const shape = new THREE.Shape();
   // Shape 的 (x, y) 對應世界的 (x, -z)
   const P = (x, z) => [x, -z];
-  // 前緣（剖面）是直的：左前角 → 池子 → 右前角；後面兩個角做圓角
-  shape.moveTo(...P(left, front));
+  shape.moveTo(...P(-half, front));
   shape.lineTo(...P(-hx, front));
   shape.lineTo(...P(-hx, -hz));
   shape.lineTo(...P(hx, -hz));
   shape.lineTo(...P(hx, front));
-  shape.lineTo(...P(right, front));
-  shape.lineTo(...P(right, back + rc));
-  shape.quadraticCurveTo(...P(right, back), ...P(right - rc, back));
-  shape.lineTo(...P(left + rc, back));
-  shape.quadraticCurveTo(...P(left, back), ...P(left, back + rc));
+  shape.lineTo(...P(half, front));
+  // 從右前方沿圓周往後繞到左前方
+  const a0 = Math.atan2(front - disc.cz, half), a1 = Math.PI - a0 - Math.PI * 2;
+  for (let i = 1; i < 120; i++) {
+    const a = a0 + (a1 - a0) * (i / 120);
+    shape.lineTo(...P(disc.cx + Math.cos(a) * DISC_R, disc.cz + Math.sin(a) * DISC_R));
+  }
   shape.closePath();
 
-  const height = rim - base;
-  const geo = new THREE.ExtrudeGeometry(shape, { depth: height, bevelEnabled: false, steps: 1, curveSegments: 6 });
-  geo.rotateX(-Math.PI / 2);   // 擠出方向變成往上
-  geo.translate(0, base, 0);
-  const ground = new THREE.Mesh(geo, [
-    new THREE.MeshStandardMaterial({ map: grass, roughness: 1 }),     // 上下兩面
-    new THREE.MeshStandardMaterial({ map: soilSide, roughness: 1 }),  // 側面（含正面剖面）
-  ]);
-  scene.add(ground);
+  // 上半段（池底到地面）挖掉池子；下半段（池底以下）是實心的，不然池子正下方會是一個空洞。
+  // 土層紋理的位移要依各段的起點算，上下兩段的土層才會對齊。
+  const soilFrom = y0 => {
+    const t = soil.clone();
+    t.repeat.set(k, -k);
+    t.offset.set(0, k * (1 + y0));
+    return t;
+  };
+  const extrude = (shp, y0, y1, topMap) => {
+    const geo = new THREE.ExtrudeGeometry(shp, { depth: y1 - y0, bevelEnabled: false, steps: 1, curveSegments: 6 });
+    geo.rotateX(-Math.PI / 2);   // 擠出方向變成往上
+    geo.translate(0, y0, 0);
+    const side = soilFrom(y0);
+    soilTextures.push(side);
+    const mesh = new THREE.Mesh(geo, [
+      new THREE.MeshStandardMaterial({ map: topMap, roughness: 1 }),  // 上下兩面
+      new THREE.MeshStandardMaterial({ map: side, roughness: 1 }),    // 側面（含正面剖面）
+    ]);
+    scene.add(mesh);
+  };
+  const solid = new THREE.Shape();
+  solid.moveTo(...P(-half, front));
+  solid.lineTo(...P(half, front));
+  for (let i = 1; i < 120; i++) {
+    const a = a0 + (a1 - a0) * (i / 120);
+    solid.lineTo(...P(disc.cx + Math.cos(a) * DISC_R, disc.cz + Math.sin(a) * DISC_R));
+  }
+  solid.closePath();
+  extrude(shape, 0, rim, grass);     // 池底以上：挖掉池子
+  extrude(solid, base, 0, grass);    // 池底以下：實心
 
   // ---------- 底座外面：低一截的遠方田野，一路接到全景 ----------
   // 也是一塊沿池子正面切齊、挖掉池子的厚板（不然平面會在剖面前面擋住水下），
@@ -155,6 +179,9 @@ export function buildOutdoorWorld(scene, { TW, TD, rim, renderer }) {
     scene.add(wall);
   }
 
+  // ---------- 台子上的小溪、石頭、濕地、小樹、小花 ----------
+  const garden = buildGarden(scene, { disc, TW, TD, rim, waterY, aniso });
+
   // 池子自己的地形表面（沙、石頭、草地是用頂點顏色分的）疊一層細小的顆粒感
   const speckle = canvasTexture(drawSpeckle(128), aniso);
   speckle.repeat.set(1 / 12, 1 / 12);
@@ -163,13 +190,17 @@ export function buildOutdoorWorld(scene, { TW, TD, rim, renderer }) {
     soilCap,
     speckle,
     grassColor: GRASS_COLOR,
-    // 鏡頭不能鑽進去的範圍：底座（高到 rim）、遠方田野（高到 fieldY）
-    tile: { left, right, back, front, top: rim },
+    // 鏡頭不能鑽進去的範圍：圓台（高到 rim）、遠方田野（高到 fieldY）
+    disc,
     fieldY,
     // 日夜：全景不受燈光影響，自己調色
     setDaylight(f) {
       panoMat.color.copy(night).lerp(day, f);
       fieldMat.color.set(FIELD_COLOR).multiply(panoMat.color);
+      garden.setDaylight(panoMat.color);
+    },
+    update(time) {
+      garden.update(time);
     },
   };
 }

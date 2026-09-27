@@ -54,7 +54,7 @@ export function newState() {
     tank: { water: 90, temp: 26 },
     lamp: { on: false, timer: true },
     equip: { filter: 'small', lamp: 'uvb', heater: false },
-    scene: 'indoor60',
+    scene: 'outdoor',   // 新遊戲預設在戶外池
     turtles: [a, b],
     relations: {},
     alerts: {},
