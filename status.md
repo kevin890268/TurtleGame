@@ -232,7 +232,7 @@ tools/make_actions_v3.py  產生斑龜 v3 動作提示詞
 
 **想互動請求**：右下角按鈕＋4 個小遊戲已完成（刷屁屁、擦背甲藻斑、摸下巴、拍照，`js/requests.js`），其餘 6 種規劃在 `docs/interactions.md` A 部分。
 
-**戶外池場景**：漂在天空裡的圓台（`js/outdoor-world.js`）。碗狀池子靠在正面剖面上、圓弧沙灘（漂流木、平石、小石子）、小溪、濕地、矮灌木、小花、菇類（`js/outdoor-garden.js`）。圓台外只有天空，太陽和月亮照遊戲時間低低地從後方天空劃過。土層、草地目前用程式畫的替代圖；提示詞在 `gpt/scene/outdoor/`，生好後跑 `python tools/pack_scene.py outdoor`。
+**戶外池場景**：漂在天空裡的圓台（`js/outdoor-world.js`）。碗狀池子靠在正面剖面上、圓弧沙灘（漂流木、平石、小石子）、小溪、溪流石頭區（上游隆起的碎石坡，溪水在大石頭之間流）、濕地、矮灌木、小花、菇類（`js/outdoor-garden.js`）。圓台外只有天空，太陽和月亮照遊戲時間低低地從後方天空劃過。土層、草地目前用程式畫的替代圖；提示詞在 `gpt/scene/outdoor/`，生好後跑 `python tools/pack_scene.py outdoor`。
 
 **戶外池重做（2026-09-27）**：只保留元素、版面重來——碗狀池子（中間深、四周淺，深度只到圓台厚度）、圓弧的沙灘和草地、小樹換成貼地的矮灌木；圓台外只剩天空。新遊戲預設在戶外池。想再升級可以用 ChatGPT 畫小植物貼圖（`gpt/scene/outdoor/plants.md`）。
 

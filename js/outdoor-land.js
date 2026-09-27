@@ -20,6 +20,10 @@ const POND = { x: -40, rx: 95, rz: 100 };
 // 沙灘：池子右岸、烏龜曬背那一段
 const BEACH = { x: 32, z: 4, rx: 46, rz: 32 };
 
+// 溪流石頭區：小溪上游、泉水周圍一片微微隆起的碎石坡，溪水在石頭之間往下流，不長草
+export const ROCKY = { x: 92, z: -162, rx: 58, rz: 44 };
+const ROCKY_RISE = 5;              // 石頭區中間比草地高多少
+
 // 小溪：從圓台後方的泉水彎彎曲曲流進池子後緣
 export const STREAM = [
   [84, -186], [70, -166], [48, -150], [18, -134], [-12, -112], [-32, -88], [-42, -64], [-42, -36],
@@ -50,6 +54,7 @@ export function makeLand({ rim, waterY, deepY, profileY }) {
   const pondQ = (x, z) => ellipseQ(x, z, POND.x, FRONT, POND.rx, POND.rz, 1);
   const beachQ = (x, z) => ellipseQ(x, z, BEACH.x, BEACH.z, BEACH.rx, BEACH.rz, 4);
   const poolQ = (p, i, x, z) => ellipseQ(x, z, p.x, p.z, p.r, p.r * 0.85, i * 2.1 + 0.5);
+  const rockyQ = (x, z) => ellipseQ(x, z, ROCKY.x, ROCKY.z, ROCKY.rx, ROCKY.rz, 2.6);
 
   const smooth = (e0, e1, v) => {
     const t = Math.min(1, Math.max(0, (v - e0) / (e1 - e0)));
@@ -78,6 +83,9 @@ export function makeLand({ rim, waterY, deepY, profileY }) {
     const r = Math.hypot(x - disc.cx, z - disc.cz);
     const land = smooth(waterY + 3, rim, h) * (1 - smooth(DISC_R - 16, DISC_R - 4, r)) * (1 - smooth(FRONT - 10, FRONT, z));
     h += land * 0.9 * (Math.sin(x * 0.045 + 0.7) * Math.cos(z * 0.05 - 0.4) + 0.4 * Math.sin(x * 0.11 + z * 0.09));
+    // 溪流石頭區：中間隆起、凹凸不平，小溪順著坡往下流
+    const rq = rockyQ(x, z);
+    if (rq < 1.2) h += (1 - smooth(0.15, 1.1, rq)) * (ROCKY_RISE + 0.8 * Math.sin(x * 0.19) * Math.cos(z * 0.23));
     return h;
   }
 
@@ -103,10 +111,11 @@ export function makeLand({ rim, waterY, deepY, profileY }) {
     const springBank = 1 - smooth(1.05, 1.6, sq);
     // 沙灘、池邊的濕沙
     const beach = 1 - smooth(0.85, 1.05 + n * 0.06, beachQ(x, z));
+    const rocky = 1 - smooth(0.8, 1.02 + n * 0.08, rockyQ(x, z));
     const bank = 1 - smooth(waterY + 1.2, waterY + 4 + n * 1.5, h0);
     const h = h0 - Math.max(streamCut, poolCut);
-    const grass = Math.max(0, 1 - Math.max(beach, bank, streamBank, springBank, mud * 0.9));
-    return { h, h0, beach, bank, stream: streamBank, spring: springBank, mud, grass, underwater: h < waterY };
+    const grass = Math.max(0, 1 - Math.max(beach, bank, streamBank, springBank, mud * 0.9, rocky));
+    return { h, h0, beach, bank, stream: streamBank, spring: springBank, mud, rocky, grass, underwater: h < waterY };
   }
 
   const height = (x, z) => info(x, z).h;
@@ -119,7 +128,7 @@ export function makeLand({ rim, waterY, deepY, profileY }) {
   return {
     disc, rim, waterY, base,
     height, info, baseHeight, streamSurface, inDisc,
-    pondQ, poolQ, distToStream, streamWidth, wobble,
+    pondQ, poolQ, rockyQ, distToStream, streamWidth, wobble,
     // 池子水面的範圍（水面平面只要蓋住這一塊；超出的地方會被地面擋住）
     pondBox: { x0: POND.x - POND.rx * 1.25, x1: POND.x + POND.rx * 1.25, z0: FRONT - POND.rz * 1.25, z1: FRONT },
     beach: BEACH,

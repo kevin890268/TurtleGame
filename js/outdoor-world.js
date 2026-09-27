@@ -25,6 +25,7 @@ const GROUND = {
   wet: '#b5a178',      // 水邊的濕沙
   beach: '#dccb9f',    // 沙灘
   gravel: '#a39884',   // 溪床的碎石
+  stone: '#9a9486',    // 溪流石頭區的碎石地
   mud: '#6f6c45',      // 濕地的泥
 };
 
@@ -77,6 +78,7 @@ export function buildOutdoorWorld(scene, { rim, waterY, deepY, profileY, rendere
       } else {
         c.copy(col.beach).lerp(col.wet, f.bank);
       }
+      c.lerp(col.stone, f.rocky * (0.85 + 0.15 * Math.sin(x * 0.37 + z * 0.29)));
       c.lerp(col.gravel, Math.max(f.stream, f.spring)).lerp(col.mud, f.mud);
       c.multiplyScalar(0.95 + 0.05 * Math.sin(x * 0.21 + z * 0.17));
       ground.set([c.r, c.g, c.b, f.underwater ? 0 : f.grass], k * 4);

@@ -5,12 +5,12 @@
 // 亂數固定種子，每次開遊戲擺設都一樣。地面高度、哪裡是草地／沙灘都問 land（js/outdoor-land.js）。
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-import { STREAM, SPRING, POOLS } from './outdoor-land.js';
+import { STREAM, SPRING, POOLS, ROCKY } from './outdoor-land.js';
 
 // 矮灌木（x, z, 大小）：一叢一叢貼著地面，不要有樹幹
 const BUSHES = [
   [130, -84, 9], [150, -134, 8], [40, -216, 10], [-160, -48, 8], [-56, -206, 9],
-  [166, -36, 7], [116, -170, 8], [-174, -96, 7], [-150, 14, 7], [104, -40, 6],
+  [166, -36, 7], [-174, -96, 7], [-150, 14, 7], [104, -40, 6],
   [-18, -188, 7], [-120, -206, 6], [160, 6, 6], [70, -92, 6],
 ];
 // 菇類的小群落
@@ -114,6 +114,51 @@ export function buildGarden(scene, { land, rim, waterY, aniso }) {
     const a = R(0, Math.PI * 2), d = SPRING.r + R(0.5, 5);
     stones.push([SPRING.x + Math.cos(a) * d, SPRING.z + Math.sin(a) * d, R(2, 4.6), R(0.45, 0.7), 0]);
   }
+  // 溪流石頭區：滿滿的大小石頭（不擋住溪水），溪裡也有被水沖圓的小石頭
+  {
+    const inRocky = (x, z, q) => land.rockyQ(x, z) < q && land.inDisc(x, z, 3);
+    const clearOfWater = (x, z, m) => {
+      const [d, at] = land.distToStream(x, z);
+      return d > land.streamWidth(at) / 2 + m && Math.hypot(x - SPRING.x, z - SPRING.z) > SPRING.r + m;
+    };
+    const rx = () => ROCKY.x + R(-1, 1) * ROCKY.rx, rz = () => ROCKY.z + R(-1, 1) * ROCKY.rz;
+    for (let i = 2; i < last - 2; i += 3) {                  // 溪的兩岸夾著大石頭
+      const p = pts[i], q = pts[i + 1];
+      if (land.rockyQ(p.x, p.z) > 0.9) continue;
+      const tl = Math.hypot(q.x - p.x, q.z - p.z) || 1;
+      const nx = -(q.z - p.z) / tl, nz = (q.x - p.x) / tl;
+      const w = land.streamWidth(i / samples) / 2;
+      for (const side of [-1, 1]) {
+        if (rand() < 0.35) continue;
+        const s = R(2.4, 5), off = w + s * 0.75 + R(0, 1.5);
+        stones.push([p.x + nx * off * side, p.z + nz * off * side, s, R(0.55, 0.85), 0]);
+      }
+    }
+    for (let n = 0, g = 0; n < 22 && g < 3000; g++) {        // 大石頭
+      const x = rx(), z = rz(), s = R(2.8, 6.5);
+      if (!inRocky(x, z, 0.85) || !clearOfWater(x, z, s * 0.8)) continue;
+      stones.push([x, z, s, R(0.5, 0.8), 0]);
+      n++;
+    }
+    for (let n = 0, g = 0; n < 90 && g < 4000; g++) {        // 中小石頭
+      const x = rx(), z = rz();
+      if (!inRocky(x, z, 1) || !clearOfWater(x, z, 1.2)) continue;
+      stones.push([x, z, R(0.9, 2.4), R(0.45, 0.75), 0]);
+      n++;
+    }
+    for (let n = 0, g = 0; n < 160 && g < 5000; g++) {       // 碎石
+      const x = rx(), z = rz();
+      if (!inRocky(x, z, 1.05) || !clearOfWater(x, z, 0.3)) continue;
+      stones.push([x, z, R(0.3, 0.75), R(0.5, 0.8), 1]);
+      n++;
+    }
+    for (let i = 3; i < last - 3; i++) {                     // 溪裡被水沖圓的小石頭
+      const p = pts[i];
+      if (land.rockyQ(p.x, p.z) > 0.95 || rand() < 0.45) continue;
+      const w = land.streamWidth(i / samples) / 2;
+      stones.push([p.x + R(-w, w) * 0.7, p.z + R(-w, w) * 0.7, R(0.6, 1.5), 0.7, 2]);
+    }
+  }
   // 草地上三三兩兩的小石堆
   for (let n = 0; n < 9;) {
     const [x, z] = randomOnDisc();
@@ -136,6 +181,7 @@ export function buildGarden(scene, { land, rim, waterY, aniso }) {
   const stoneColors = [
     [0xa89f8c, 0x938b7a, 0xb8ae98, 0x857d6e, 0x9ea08e, 0xc2b8a2],
     [0xe3dccb, 0xcfc4ad, 0xb9ad96, 0xeae4d6, 0xa99d86],     // 沙灘上的小石子：淺一點
+    [0x6f7466, 0x7d7a6c, 0x65695e, 0x857f70],               // 溪裡濕濕的石頭：深一點
   ].map(g => g.map(c => new THREE.Color(c)));
   stones.forEach(([x, z, s, flat, set], i) => {
     const sy = s * flat;
