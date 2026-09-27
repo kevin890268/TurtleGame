@@ -40,8 +40,8 @@ export const HEATER_SET = 26;
 const ROOM_TEMP = [17, 18, 20, 23, 26, 28, 30, 29, 28, 25, 22, 19];
 
 export function roomTemp(s) {
-  const d = new Date(s.gameTime);
-  const hour = d.getHours() + d.getMinutes() / 60;
+  const d = new Date(s.gameTime);   // 季節照現實月份
+  const hour = hourOf(s);           // 一天裡的冷熱照畫面時鐘
   // 下午三點最暖、清晨最冷
   return ROOM_TEMP[d.getMonth()] + 1.5 * Math.sin(((hour - 9) / 24) * Math.PI * 2);
 }
@@ -51,7 +51,7 @@ const OUTDOOR_TEMP = [15, 16, 19, 23, 27, 29, 31, 31, 28, 24, 20, 16];
 
 export function outdoorTemp(s) {
   const d = new Date(s.gameTime);
-  const hour = d.getHours() + d.getMinutes() / 60;
+  const hour = hourOf(s);
   return OUTDOOR_TEMP[d.getMonth()] + 4 * Math.sin(((hour - 9) / 24) * Math.PI * 2);
 }
 
@@ -63,9 +63,17 @@ export function ambientTemp(s) {
 const H = 3.6e6;
 export const clamp = (v, lo = 0, hi = 100) => Math.max(lo, Math.min(hi, v));
 
+// 畫面上的「現在幾點」：每 CONFIG.dayMinutes 分鐘（現實）轉一圈，從當地午夜開始算。
+// 數值照現實時間變化，這個時鐘只決定日夜、燈光和烏龜作息。
+export function dayHourAt(t) {
+  const d = new Date(t);
+  const sinceMidnight = t - new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+  const dayMs = CONFIG.dayMinutes * 60000;
+  return ((sinceMidnight % dayMs) / dayMs) * 24;
+}
+
 export function hourOf(s) {
-  const d = new Date(s.gameTime);
-  return d.getHours() + d.getMinutes() / 60;
+  return dayHourAt(s.gameTime);
 }
 
 export function isNight(s) {
@@ -368,16 +376,6 @@ export function fastForward(s, hours) {
   return events;
 }
 
-// 調時鐘：只改時刻，不模擬中間的時間（給作息跟遊戲對不上的人用）
-export function setClock(s, hh, mm) {
-  const d = new Date(s.gameTime);
-  d.setHours(hh, mm, 0, 0);
-  s.gameTime = d.getTime();
-  if (s.lamp.timer) s.lamp.on = hh + mm / 60 >= CONFIG.lampTimer.on && hh + mm / 60 < CONFIG.lampTimer.off;
-  const text = `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
-  addLog(s, `把時鐘調到 ${text}。`);
-  return `時鐘調到 ${text} 了。`;
-}
 
 // ---- 關係 ----
 

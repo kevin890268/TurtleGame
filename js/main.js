@@ -245,21 +245,6 @@ function bindActions() {
       act(events.length ? events[events.length - 1] : `時間過了 ${hours} 小時。`);
     });
   }
-  // 調時鐘：只改時刻
-  const clock = $('clockInput');
-  clock.addEventListener('focus', () => {
-    const d = new Date(state.gameTime);
-    clock.value = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
-  });
-  $('clockForm').addEventListener('submit', e => {
-    e.preventDefault();
-    const [hh, mm] = clock.value.split(':').map(Number);
-    if (Number.isNaN(hh)) return;
-    catchUp(document.hidden ? 1 : speed);
-    const msg = sim.setClock(state, hh, mm);
-    tank.onTimeJump();
-    act(msg);
-  });
 
   // 烏龜清單：點一列選取，點名字看詳細資料，✏️ 改名，🏠 送養
   $('turtleList').addEventListener('click', e => {

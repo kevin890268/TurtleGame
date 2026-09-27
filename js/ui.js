@@ -46,8 +46,9 @@ let lastLogTop = null;
 let lastListHtml = '';
 
 export function render(s, tank, selectedId) {
-  const d = new Date(s.gameTime);
-  $('clock').textContent = `${isNight(s) ? '🌙' : '☀️'} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  // 畫面時鐘（90 分鐘一天），不是現實時間
+  const hr = hourOf(s);
+  $('clock').textContent = `${isNight(s) ? '🌙' : '☀️'} ${pad(Math.floor(hr))}:${pad(Math.floor((hr % 1) * 60))}`;
 
   // 烏龜清單
   const html = s.turtles.map(t => {
