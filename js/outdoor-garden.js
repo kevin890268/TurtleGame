@@ -5,14 +5,8 @@
 // 亂數固定種子，每次開遊戲擺設都一樣。地面高度、哪裡是草地／沙灘都問 land（js/outdoor-land.js）。
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-import { STREAM, SPRING, POOLS, ROCKY } from './outdoor-land.js';
+import { STREAM, SPRING, POOLS, ROCKY, BUSHES } from './outdoor-land.js';
 
-// 矮灌木（x, z, 大小）：一叢一叢貼著地面，不要有樹幹
-const BUSHES = [
-  [130, -84, 9], [150, -134, 8], [40, -216, 10], [-160, -48, 8], [-56, -206, 9],
-  [166, -36, 7], [-174, -96, 7], [-150, 14, 7], [104, -40, 6],
-  [-18, -188, 7], [-120, -206, 6], [160, 6, 6], [70, -92, 6],
-];
 // 菇類的小群落
 const MUSHROOMS = [[122, -96], [-150, -60], [-40, -196]];
 
@@ -108,7 +102,12 @@ export function buildGarden(scene, { land, rim, waterY, aniso }) {
     const p = pts[i], q = pts[i + 1];
     const tl = Math.hypot(q.x - p.x, q.z - p.z) || 1;
     const nx = -(q.z - p.z) / tl, nz = (q.x - p.x) / tl;
-    for (const k of [-1.6, -0.55, 0.55, 1.6]) stones.push([p.x + nx * k * 3.2, p.z + nz * k * 3.2, R(1.9, 2.3), 0.4, 0]);
+    const w = land.streamWidth(i / samples) / 2;
+    const n = Math.round((w * 2) / 5);
+    for (let k = 0; k < n; k++) {
+      const o = -w + (k + 0.5) * (w * 2 / n);
+      stones.push([p.x + nx * o, p.z + nz * o, R(1.9, 2.3), 0.4, 0]);
+    }
   }
   for (let i = 0; i < 12; i++) {
     const a = R(0, Math.PI * 2), d = SPRING.r + R(0.5, 5);
@@ -258,7 +257,7 @@ export function buildGarden(scene, { land, rim, waterY, aniso }) {
     if (turtleZone(x, z) && z > -24) continue;
     const h = land.height(x, z);
     if (h < waterY - 1.5 || h > waterY + 1.2) continue;
-    if (Math.hypot(x - mouth.x, z - mouth.z) < 12) continue;
+    if (Math.hypot(x - mouth.x, z - mouth.z) < 22) continue;
     for (let i = 0; i < 6 + rand() * 6; i++) addReed(x + R(-3, 3), z + R(-3, 3));
     n++;
   }

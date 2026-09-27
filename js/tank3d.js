@@ -723,7 +723,8 @@ export class Tank3D extends Tank {
     const cam = this.camera.position;
     const dx = cam.x - meshPos.x;
     const dz = cam.z - meshPos.z;
-    const heading = t.face > 0 ? 0 : Math.PI;
+    // 出門走走時會往前後走，用實際的行進方向；平常只有左右
+    const heading = t.heading ?? (t.face > 0 ? 0 : Math.PI);
     let rel = Math.atan2(dz, dx) - heading;
     rel = ((rel % TAU) + TAU) % TAU;
 

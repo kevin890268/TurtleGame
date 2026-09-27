@@ -1,7 +1,8 @@
 // 缸裡的一隻烏龜：行為（游泳、在淺灘走路、上岸曬背、追食物、睡覺）與要畫的姿勢。
 // 數值在存檔的 turtles[] 裡（由 sim.js 管），這裡只管牠在缸裡怎麼動。座標是 1000×600 的邏輯座標。
 import { CONFIG } from './config.js';
-import { W, WATER_TOP, terrainOf } from './terrain.js';
+import { W, H, WATER_TOP, terrainOf } from './terrain.js';
+import { planTrip } from './explore.js';
 import { choosePose, poseMotion, renderTurtle, trackPoseChange } from './poses.js';
 import { getSpecies } from './species.js';
 import { relation, FRIEND_AT, BEST_FRIEND_AT, RIVAL_AT } from './sim.js';
@@ -36,6 +37,11 @@ const REACTIONS = {
   startled: { key: 'startled', dur: 1.3 / PACE },
   eat: { key: 'eat', dur: 0.6 / PACE },           // 水裡會自動換成 eat_water（poses.js）
 };
+
+// 出門走走：每次白天閒晃決定下一件事時有多少機率想出門；走路比平常快一點；回來後隔多久才會再出門（秒）
+const EXPLORE_CHANCE = 0.08;
+const EXPLORE_SPEED = 1.5;
+const EXPLORE_REST = [180, 420];
 
 export class TurtleAgent {
   constructor(tank, id) {
@@ -142,6 +148,20 @@ export class TurtleAgent {
     if (t.mode === 'flipped') {
       t.mode = 'bask';
       t.timer = 0;
+    }
+
+    // 出門走走中：先照平常的方式走上沙灘，再沿著路線在圓台上走
+    if (t.mode === 'explore' && t.trip) {
+      if (t.trip.stage === 'toShore') {
+        if (t.path.length) {
+          this.move(dt, h, foot);
+          this.updateDepth(dt);
+          return;
+        }
+        t.trip.stage = 'go';
+      }
+      this.explore(dt, night, foot);
+      return;
     }
 
     // 疊在朋友背上：朋友一離開就下來
@@ -266,6 +286,10 @@ export class TurtleAgent {
       t.timer = rand(60, 120);
       return;
     }
+    // 戶外：偶爾想出門，到圓台上的小溪邊、石頭區、濕地、灌木叢下走走（生病時不想出門）
+    if (this.tank.world && this.turtle.stats.health >= 50 && this.tank.time > (t.exploreAfter ?? 60)
+        && Math.random() < EXPLORE_CHANCE && this.startExplore(foot)) return;
+
     // 好朋友：一半的機率跟著朋友做同一件事，待在牠旁邊
     const friend = this.bestFriend();
     const fm = friend?.t.mode;
@@ -307,11 +331,76 @@ export class TurtleAgent {
     }
   }
 
+  // ---------- 出門走走（只有戶外池） ----------
+
+  startExplore(foot) {
+    const t = this.t;
+    const homeX = rand(640, 900);
+    const trip = planTrip(this.tank.world.land, this.tank.X(homeX));
+    if (!trip) return false;
+    t.mode = 'explore';
+    t.trip = { ...trip, pts: [...trip.route, trip.dest], i: 0, stage: 'toShore', back: false, stay: rand(25, 60) };
+    t.stackOn = null;
+    this.planPath({ x: rand(640, 760), ground: true }, foot);
+    this.zTarget = rand(-6, 6);
+    this.tank.hooks.onEvent?.(`「${this.turtle.name}」想出去走走，往${trip.label}去了。`);
+    return true;
+  }
+
+  // 沿著路線走（3D 座標），到了目的地待一下，再照原路走回沙灘
+  explore(dt, night, foot) {
+    const t = this.t, tank = this.tank, trip = t.trip;
+    let x = tank.X(t.x), z = this.z;
+    if (night && !trip.back) this.headHome();
+    const wp = trip.pts[trip.i];
+    if (wp) {
+      const dx = wp[0] - x, dz = wp[1] - z, d = Math.hypot(dx, dz);
+      const step = MOVE.walkLand * EXPLORE_SPEED * PACE * t.boost * tank.S * dt;
+      if (d <= step) { x = wp[0]; z = wp[1]; trip.i++; } else { x += (dx / d) * step; z += (dz / d) * step; }
+      if (Math.abs(dx) > 0.2) t.face = dx > 0 ? 1 : -1;
+      t.heading = Math.atan2(dz, dx);    // 往前後走的時候，畫面要選對應方向的圖
+      t.path = [{ x: t.x, walk: true }]; // 只是讓姿勢播走路，實際移動在這裡
+    } else if (trip.back) {
+      this.endExplore(foot);
+      return;
+    } else {
+      t.path = [];
+      trip.stay -= dt;
+      if (trip.stay <= 0) this.headHome();
+    }
+    t.x = x / tank.S + W / 2;
+    this.z = this.zTarget = z;
+    t.y = H - tank.world.land.height(x, z) / tank.S - foot;
+    t.grounded = true;
+    t.tilt *= 0.9;
+  }
+
+  headHome() {
+    const trip = this.t.trip;
+    trip.pts = [...trip.route].reverse().concat([trip.home]);
+    trip.i = 0;
+    trip.back = true;
+  }
+
+  endExplore(foot) {
+    const t = this.t;
+    t.mode = 'bask';
+    t.trip = null;
+    t.heading = null;
+    t.path = [];
+    t.grounded = true;
+    t.y = this.terrain.groundY(t.x) - foot;
+    t.timer = rand(4, 8);
+    t.exploreAfter = this.tank.time + rand(...EXPLORE_REST);
+  }
+
   // 被玩家用手手抓起來、放到 (x, z)：放在水裡就浮在水中，放在岸上就趴在地上，過一下再自己決定要做什麼
   place(x, z) {
     const t = this.t;
     const { h, foot } = this.size();
     t.held = false;
+    t.trip = null;
+    t.heading = null;
     t.x = Math.max(20, Math.min(W - 15, x));
     this.z = this.zTarget = z;
     t.path = [];
@@ -334,7 +423,7 @@ export class TurtleAgent {
   // 被別隻烏龜擠開：在地上就沿著地面移動，在水裡可以上下左右移動
   nudge(dx, dy) {
     const t = this.t;
-    if (t.held) return;
+    if (t.held || t.mode === 'explore') return;
     const { h, foot } = this.size();
     t.x = Math.max(20, Math.min(W - 15, t.x + dx));
     if (t.grounded) {

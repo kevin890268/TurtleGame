@@ -217,7 +217,7 @@ export class Tank {
     this.eventClock -= dt;
     if (this.eventClock > 0 || night) return;
     this.eventClock = rand(60, 150);
-    const onLand = [...this.agents.values()].filter(a => a.t.grounded && a.t.y < WATER_TOP && !a.t.path.length && !a.t.stackOn && !a.turtle.flipped);
+    const onLand = [...this.agents.values()].filter(a => a.t.grounded && a.t.y < WATER_TOP && !a.t.path.length && !a.t.stackOn && !a.turtle.flipped && a.t.mode !== 'explore');
     if (onLand.length && Math.random() < 0.3) {
       this.hooks.onFlip(onLand[Math.floor(Math.random() * onLand.length)].id);
     } else {
@@ -254,6 +254,7 @@ export class Tank {
       for (let j = i + 1; j < list.length; j++) {
         const a = list[i], b = list[j];
         if (a.t.stackOn === b.id || b.t.stackOn === a.id || a.t.stackOn || b.t.stackOn) continue; // 疊在背上的不推開
+        if (a.t.mode === 'explore' || b.t.mode === 'explore') continue; // 出門走走的在圓台上別的地方
         const sa = a.size(), sb = b.size();
         const minX = (sa.shell + sb.shell) * 0.45;
         const minY = (sa.h + sb.h) * 0.5;

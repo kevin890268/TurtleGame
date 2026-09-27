@@ -28,15 +28,22 @@ const ROCKY_RISE = 5;              // 石頭區中間比草地高多少
 export const STREAM = [
   [84, -186], [70, -166], [48, -150], [18, -134], [-12, -112], [-32, -88], [-42, -64], [-42, -36],
 ];
-export const STREAM_W0 = 7, STREAM_W1 = 11;   // 源頭寬、出口寬
-export const SPRING = { x: 86, z: -194, r: 9 };
+export const STREAM_W0 = 21, STREAM_W1 = 33;  // 源頭寬、出口寬
+export const SPRING = { x: 86, z: -194, r: 15 };
 // 濕地：幾個形狀不規則的淺水窪
 export const POOLS = [
   { x: -100, z: -140, r: 20 }, { x: -128, z: -106, r: 12 },
   { x: -70, z: -172, r: 13 }, { x: -130, z: -164, r: 9 },
 ];
 
-const STREAM_DEPTH = 1.7;
+// 矮灌木（x, z, 大小）：一叢一叢貼著地面，不要有樹幹
+export const BUSHES = [
+  [130, -84, 9], [150, -134, 8], [40, -216, 10], [-160, -48, 8], [-56, -206, 9],
+  [166, -36, 7], [-174, -96, 7], [-150, 14, 7], [104, -40, 6],
+  [-18, -188, 7], [-120, -206, 6], [160, 6, 6], [70, -92, 6],
+];
+
+const STREAM_DEPTH = 2;
 const POOL_DEPTH = 1.9;
 
 export function makeLand({ rim, waterY, deepY, profileY }) {
