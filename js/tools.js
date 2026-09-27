@@ -8,7 +8,7 @@
 
 export const TOOLS = [
   { id: 'view', icon: '👁️', label: '看看', hint: '拖曳轉鏡頭，點一下東西戳戳看' },
-  { id: 'hand', icon: '✋', grab: '✊', label: '手手', hint: '按住龜龜或地面（撿小石頭）拖曳，甩出去就是丟' },
+  { id: 'hand', icon: '✋', label: '手手', hint: '按住龜龜或地面（撿小石頭）拖曳，甩出去就是丟' },
   { id: 'touch', icon: '👆', label: '撥一撥', hint: '在水面或水草上劃過去' },
 ];
 

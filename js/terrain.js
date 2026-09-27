@@ -1,4 +1,4 @@
-// 地形。2D 和 2.5D 共用這份資料，座標是 1000×600 的邏輯座標（y 往下為正）。
+// 地形。烏龜的行為和 3D 畫面共用這份資料，座標是 1000×600 的邏輯座標（y 往下為正）。
 // 室內缸跟戶外池是兩份不同的地形剖面，但共用同一套演算法（groundY 等），
 // 呼叫時用 terrainOf(scene) 拿對應那份，用法一樣不用另外學。
 //
@@ -93,10 +93,6 @@ function makeSwimLimitX(groundYFn, k) {
 
 export const swimLimitX = makeSwimLimitX(groundY, 1.15);
 export const outdoorSwimLimitX = makeSwimLimitX(outdoorGroundY, 0.8);
-
-export function isUnderwater(y) {
-  return y > WATER_TOP;
-}
 
 function makeSampleGround(groundYFn) {
   // 取樣出一串點，給畫地形用

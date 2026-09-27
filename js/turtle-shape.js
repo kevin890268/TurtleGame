@@ -142,7 +142,7 @@ export function drawHeart(ctx, x, y, r) {
   ctx.fill();
 }
 
-export function roundRect(ctx, x, y, w, h, r) {
+function roundRect(ctx, x, y, w, h, r) {
   ctx.beginPath();
   ctx.roundRect(x, y, w, h, r);
 }

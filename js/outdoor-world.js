@@ -16,7 +16,7 @@ const STEP = 2.5;          // 地面高度圖的格子大小
 const SOIL_TILE = 34;      // 土層紋理每隔多少單位重複一次
 const GRASS_TILE = 36;     // 草地紋理每隔多少單位重複一次
 const SKY_R = 1800;        // 天空球的半徑
-export const GRASS_COLOR = '#6b9a45';
+const GRASS_COLOR = '#6b9a45';   // 草地的底色（程式畫的草地貼圖）
 
 // 地面的顏色（草地以外的地方）
 const GROUND = {
@@ -146,7 +146,6 @@ export function buildOutdoorWorld(scene, { rim, waterY, deepY, profileY, rendere
     land,
     landMesh,   // 手手放烏龜時，用來找點到地面的哪裡
     disc,
-    grassColor: GRASS_COLOR,
     sunDir: sky.sunDir,
     moonDir: sky.moonDir,
     // 日夜：小溪、水窪的顏色跟著變暗

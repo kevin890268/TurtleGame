@@ -62,6 +62,13 @@ const PLACES = [
   },
 ];
 
+// 從圓台上某個地方走回沙灘要經過哪些點（在池子左邊、後面的話要繞過池子後面）
+export function routeHome(x, z) {
+  if (x >= 0) return z > -40 ? [] : [EXIT];
+  if (z <= -70) return [BACK, EXIT];
+  return [WEST, BACK, EXIT];
+}
+
 // 規劃一趟出門：{ label, route（出口→目的地前的中繼點）, dest, home（回到沙灘的位置） }
 export function planTrip(land, homeX) {
   const ok = ([x, z]) =>

@@ -1,5 +1,5 @@
 // 烏龜姿勢：載入切好的姿勢圖、依狀態挑姿勢、加上程式做的小動作（呼吸、擺動、跳一下）。
-// 2D 和 2.5D 都用這裡的 renderTurtle 畫烏龜，所以兩邊長得一樣。
+// 3D 畫面和想互動請求的圓形按鈕都用這裡的 renderTurtle 畫烏龜，所以兩邊長得一樣。
 import { CONFIG } from './config.js';
 import { drawTurtleShape } from './turtle-shape.js';
 

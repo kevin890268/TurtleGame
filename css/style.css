@@ -246,7 +246,6 @@ button { touch-action: manipulation; }
 .turtle-row .name { font-weight: 700; font-size: 16px; }
 .turtle-row .meta, .turtle-row .status { grid-column: 1 / -1; font-size: 12px; color: var(--muted); }
 .turtle-row .status { color: var(--ink); font-size: 13px; }
-.rename-btn { padding: 2px 8px; font-size: 13px; }
 .add-btn { width: 100%; margin-top: 8px; border-style: dashed; }
 .badge { display: inline-block; font-size: 11px; padding: 1px 6px; border-radius: 99px; background: #efe8d8; color: var(--muted); margin-left: 4px; font-weight: 400; }
 
@@ -322,7 +321,6 @@ select:disabled { opacity: .5; cursor: not-allowed; }
 .modal-box button.ghost { background: none; color: var(--muted); border: 1px solid var(--line); }
 .modal-box.wide { width: min(640px, 100%); max-height: 90vh; overflow-y: auto; }
 .modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
-.stat .wide-label { grid-column: 1 / -1; font-size: 12px; color: var(--muted); margin-top: 4px; }
 
 .species-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
 .modal-box .species-card {
@@ -347,7 +345,6 @@ select:disabled { opacity: .5; cursor: not-allowed; }
 
 /* 造景目錄 */
 .decor-list { display: flex; flex-direction: column; gap: 10px; }
-.decor-group { font-size: 12px; color: var(--muted); margin-top: 4px; }
 .decor-item { display: grid; grid-template-columns: 40px 1fr; gap: 2px 10px; align-items: center; }
 .decor-item .icon {
   grid-row: span 2;

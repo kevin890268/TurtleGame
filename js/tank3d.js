@@ -1,5 +1,5 @@
 // 2.5D 版：場景用 Three.js 做成 3D，澤龜是永遠轉向鏡頭的 2D 圖片。
-// 烏龜的行為、食物、泡泡都沿用 2D 版 Tank 的邏輯（1000×600 的邏輯座標），這裡只負責換成 3D 來畫。
+// 烏龜的行為、食物、泡泡都在基底類別 Tank（js/tank.js，1000×600 的邏輯座標），這裡負責 3D 畫面、點擊和游標工具。
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
@@ -552,7 +552,7 @@ export class Tank3D extends Tank {
     this.rottenMat = new THREE.MeshStandardMaterial({ color: 0x6d6440 });
   }
 
-  // ---------- 覆寫 2D 版的部分行為 ----------
+  // ---------- 覆寫基底類別 Tank 的部分行為 ----------
 
   resize() {
     if (!this.renderer) return; // 父類別建構時會先呼叫一次，那時場景還沒建好
@@ -581,15 +581,20 @@ export class Tank3D extends Tank {
     this.refreshCursor();
   }
 
-  refreshCursor(grabbing = false) {
-    const tool = TOOLS.find(t => t.id === this.mode);
-    const icon = this.tool ? FOODS[this.tool].icon : grabbing ? tool.grab ?? tool.icon : tool.icon;
+  refreshCursor() {
+    const icon = this.tool ? FOODS[this.tool].icon : TOOLS.find(t => t.id === this.mode).icon;
     this.c.style.cursor = cursorFor(icon);
   }
 
-  // 點到的是什麼：龜龜 > 水草 > 水面 > 地面
-  pick(ray) {
-    const agent = this.agentHit(ray);
+  // 拖著東西時：滑鼠游標藏起來，只留跟著手指走的拳頭（手機沒有游標，也看得到拳頭）
+  showFist(e) {
+    this.c.style.cursor = 'none';
+    this.hooks.onHandMove?.({ x: e.clientX, y: e.clientY }, '✊');
+  }
+
+  // 點到的是什麼：龜龜 > 水草 > 水面 > 地面。拖著東西移動時不看龜龜（不然會點到手上抓著的那隻）
+  pick(ray, withTurtles = true) {
+    const agent = withTurtles && this.agentHit(ray);
     if (agent) return { kind: 'turtle', agent };
     const blade = ray.intersectObjects(this.blades.map(b => b.mesh))[0];
     const ground = ray.intersectObject(this.world ? this.world.landMesh : this.groundMesh)[0];
@@ -616,14 +621,14 @@ export class Tank3D extends Tank {
 
   onPointerMove(e) {
     const drag = this.gesture?.drag;
-    if (drag) this['act_' + drag]('move', this.pick(this.rayAt(e)), e);
+    if (drag) this['act_' + drag]('move', this.pick(this.rayAt(e), false), e);
   }
 
   onPointerUp(e) {
     const g = this.gesture;
     this.gesture = null;
     if (g?.drag) {
-      this['act_' + g.drag]('up', this.pick(this.rayAt(e)), e);
+      this['act_' + g.drag]('up', this.pick(this.rayAt(e), false), e);
       this.controls.enabled = true;
       this.refreshCursor();
       this.hooks.onHandMove?.(null);
@@ -708,29 +713,47 @@ export class Tank3D extends Tank {
       this.held = agent;
       agent.t.held = true;
       agent.t.stackOn = null;
-      this.dragAt = { x: agent.t.x, z: agent.z };
-      this.refreshCursor(true);
+      this.dragAt = { x: this.X(agent.t.x), z: agent.z };
     }
     const agent = this.held;
     if (!agent) return;
+    this.showFist(e);
     if (phase === 'up') {
       this.held = null;
-      agent.place(this.dragAt.x, this.dragAt.z);
+      this.dropTurtle(agent, this.dragAt.x, this.dragAt.z);
       agent.react('startled');
       agent.emote('startle');
       return;
     }
     const p = hit.point;
     if (!p) return;
-    // 前後只能放在烏龜平常活動的範圍（戶外池再往後是池岸的斜坡）
-    const x = Math.max(20, Math.min(W - 15, p.x / this.S + W / 2));
-    const z = Math.max(this.zRange[0], Math.min(this.zRange[1], p.z));
-    const top = Math.max(this.Y(this.terrain.groundY(x)), this.WATER_Y);
-    agent.t.x = x;
+    let x = p.x, z = p.z;
+    if (this.world) {
+      // 戶外：整個圓台都能去（不要超出圓台邊緣）
+      const d = this.world.disc, dx = x - d.cx, dz = z - d.cz, r = Math.hypot(dx, dz), R = d.r - 8;
+      if (r > R) { x = d.cx + (dx / r) * R; z = d.cz + (dz / r) * R; }
+      z = Math.min(d.front - 4, z);
+    } else {
+      // 室內缸：只能在缸子裡
+      x = this.X(Math.max(20, Math.min(W - 15, x / this.S + W / 2)));
+      z = Math.max(this.zRange[0], Math.min(this.zRange[1], z));
+    }
+    const top = Math.max(this.groundAt(x, z), this.WATER_Y);
+    agent.t.x = x / this.S + W / 2;
     agent.t.y = H - (top + 9) / this.S;
     agent.z = agent.zTarget = z;
     this.dragAt = { x, z };
-    this.hooks.onHandMove?.({ x: e.clientX, y: e.clientY }, '✊');
+  }
+
+  // 放下龜龜：放進池子（或池子正面烏龜平常活動的那一條）就照平常生活；
+  // 放在圓台上別的地方，牠就在那裡待一下，再自己走回沙灘
+  dropTurtle(agent, x, z) {
+    const lx = x / this.S + W / 2;
+    const [z0, z1] = this.zRange;
+    const inWater = this.groundAt(x, z) < this.WATER_Y;
+    const inStrip = lx >= 20 && lx <= W - 15 && z >= z0 && z <= z1;
+    if (!this.world || inWater || inStrip) agent.place(lx, Math.max(z0, Math.min(z1, z)));
+    else agent.placeOnMap(x, z);
   }
 
   // 手手按在地上：撿起一顆小石頭；放開時手還在甩就是丟出去，不然就是放下
@@ -742,16 +765,15 @@ export class Tank3D extends Tank {
       mesh.scale.set(1, 0.7, 0.85);
       this.scene.add(mesh);
       this.carry = { mesh, trail: [] };
-      this.refreshCursor(true);
     }
     const c = this.carry;
     if (!c) return;
+    this.showFist(e);
     const p = hit.point;
     if (p) {
       c.mesh.position.set(p.x, p.y + 5, p.z);
       c.trail.push({ x: p.x, z: p.z, t: now });
       c.trail = c.trail.filter(q => now - q.t < 140);
-      this.hooks.onHandMove?.({ x: e.clientX, y: e.clientY }, '✊');
     }
     if (phase !== 'up') return;
     this.carry = null;

@@ -135,10 +135,9 @@ export function makeLand({ rim, waterY, deepY, profileY }) {
   return {
     disc, rim, waterY, base,
     height, info, baseHeight, streamSurface, inDisc,
-    pondQ, poolQ, rockyQ, distToStream, streamWidth, wobble,
+    pondQ, rockyQ, distToStream, streamWidth, wobble,
     // 池子水面的範圍（水面平面只要蓋住這一塊；超出的地方會被地面擋住）
     pondBox: { x0: POND.x - POND.rx * 1.25, x1: POND.x + POND.rx * 1.25, z0: FRONT - POND.rz * 1.25, z1: FRONT },
-    beach: BEACH,
   };
 }
 

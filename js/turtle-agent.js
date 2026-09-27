@@ -2,7 +2,7 @@
 // 數值在存檔的 turtles[] 裡（由 sim.js 管），這裡只管牠在缸裡怎麼動。座標是 1000×600 的邏輯座標。
 import { CONFIG } from './config.js';
 import { W, H, WATER_TOP, terrainOf } from './terrain.js';
-import { planTrip } from './explore.js';
+import { planTrip, routeHome } from './explore.js';
 import { TURTLE_REACT, EMOTES } from './signals.js';
 import { choosePose, poseMotion, renderTurtle, trackPoseChange } from './poses.js';
 import { getSpecies } from './species.js';
@@ -545,6 +545,19 @@ export class TurtleAgent {
     t.timer = rand(2, 4);
   }
 
+  // 被玩家放在圓台上池子以外的地方（3D 座標）：在那裡東張西望一下，再自己走回沙灘
+  placeOnMap(x, z) {
+    const t = this.t, tank = this.tank;
+    const home = routeHome(x, z);
+    Object.assign(t, { held: false, chase: null, stackOn: null, heading: null, path: [], vy: 0, tilt: 0, grounded: true });
+    t.mode = 'explore';
+    // route 是「出門」的方向，回家時會倒過來走
+    t.trip = { route: [...home].reverse(), pts: [], i: 0, stage: 'go', back: false, stay: rand(8, 16), home: [tank.X(rand(640, 900)), rand(-8, 8)] };
+    t.x = x / tank.S + W / 2;
+    this.z = this.zTarget = z;
+    t.y = H - tank.world.land.height(x, z) / tank.S - this.size().foot;
+  }
+
   // 被別隻烏龜擠開：在地上就沿著地面移動，在水裡可以上下左右移動
   nudge(dx, dy) {
     const t = this.t;
@@ -657,7 +670,7 @@ export class TurtleAgent {
     this.z += Math.sign(d) * Math.min(Math.abs(d), speed * dt);
   }
 
-  // ---------- 要畫的樣子（2D 和 2.5D 共用） ----------
+  // ---------- 要畫的樣子（3D 畫面、想互動請求的圓形按鈕共用） ----------
 
   frame() {
     const t = this.t;
