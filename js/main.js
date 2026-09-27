@@ -7,6 +7,7 @@ import { SPECIES_LIST, getSpecies } from './species.js';
 import * as ui from './ui.js';
 import { initMenu } from './menu.js';
 import { Requests, REQUEST_TYPES } from './requests.js';
+import { TOOLS } from './tools.js';
 
 const $ = id => document.getElementById(id);
 const HOUR = 3.6e6;
@@ -123,30 +124,47 @@ function addTurtle(speciesId) {
 // 投餵模式：選了食物之後，點水缸哪裡就在那裡丟一顆；再按一次同一個按鈕或按 Esc 取消
 function selectFood(type) {
   const next = tank.tool === type ? null : type;
-  if (next) setHand(false);
   tank.setTool(next);
   for (const b of document.querySelectorAll('button[data-act="feed"]')) {
     b.classList.toggle('on', b.dataset.food === next);
   }
+  syncToolBar();
   if (next) ui.toast(`點水缸就會丟一顆${sim.FOODS[next].name}（再按一次按鈕取消）`);
 }
 
-// ---------- 手手：抓烏龜 ----------
+// ---------- 游標工具列（js/tools.js）：看看、手手、撥一撥 ----------
 
-// 打開手手之後，按住烏龜就能拖到別的地方放下；再按一次按鈕或按 Esc 關掉
-function setHand(on) {
-  if (!tank.setHand) return;
-  if (on && tank.tool) selectFood(tank.tool);
-  tank.setHand(on);
-  $('btnHand').setAttribute('aria-pressed', String(on));
-  if (on) ui.toast('按住烏龜，拖到想放的地方再放開');
+function buildToolBar() {
+  $('toolBar').innerHTML = TOOLS.map(t =>
+    `<button type="button" class="tool-btn" data-tool="${t.id}" aria-pressed="false" aria-label="${t.label}" title="${t.label}：${t.hint}">${t.icon}</button>`,
+  ).join('');
+  $('toolBar').addEventListener('click', e => {
+    const b = e.target.closest('[data-tool]');
+    if (b) setMode(b.dataset.tool);
+  });
+  syncToolBar();
 }
 
-// 抓著烏龜時，拳頭跟著手指走（null：放下了）
-function onHandMove(p) {
+// 換工具（選了食物的話先取消）
+function setMode(id) {
+  if (tank.tool) selectFood(tank.tool);
+  tank.setMode(id);
+  syncToolBar();
+  const t = TOOLS.find(x => x.id === id);
+  ui.toast(`${t.icon} ${t.label}：${t.hint}`);
+}
+
+function syncToolBar() {
+  for (const b of document.querySelectorAll('.tool-btn')) {
+    b.setAttribute('aria-pressed', String(!tank.tool && b.dataset.tool === tank.mode));
+  }
+}
+
+// 拖著東西時，拳頭跟著手指走（null：放下了）
+function onHandMove(p, icon = '✊') {
   const el = $('handDrag');
   el.hidden = !p;
-  if (p) { el.style.left = `${p.x}px`; el.style.top = `${p.y}px`; }
+  if (p) { el.textContent = icon; el.style.left = `${p.x}px`; el.style.top = `${p.y}px`; }
 }
 
 let lastFeedLog = 0;
@@ -290,7 +308,7 @@ function bindActions() {
     if (e.key !== 'Escape') return;
     if ([...document.querySelectorAll('.modal')].some(m => !m.hidden)) closeModals();
     else if (tank.tool) selectFood(tank.tool);
-    else if (tank.hand) setHand(false);
+    else if (tank.mode !== 'view') setMode('view');
   });
 
   const slider = $('speed');
@@ -363,8 +381,6 @@ async function start() {
     btnFullscreen.setAttribute('aria-pressed', String(on));
     btnFullscreen.textContent = on ? '⤡' : '⛶';
   };
-  $('btnHand').addEventListener('click', () => setHand(!tank.hand));
-
   btnFullscreen.addEventListener('click', () => {
     if (document.fullscreenElement) document.exitFullscreen();
     else appFrame.requestFullscreen?.().catch(() => {});
@@ -405,6 +421,7 @@ async function start() {
     onEvent,
   });
   tank.setSelected(selectedId);
+  buildToolBar();
 
   // 想互動請求（右下角的按鈕）
   const requests = new Requests({

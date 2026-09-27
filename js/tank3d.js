@@ -9,7 +9,11 @@ import { isDirectional, withView } from './poses.js';
 import { W, H, WATER_TOP, LAMP_X, AIR_STONE_X, terrainOf } from './terrain.js';
 import { drawHeart } from './turtle-shape.js';
 import { CONFIG } from './config.js';
-import { isNight, hourOf } from './sim.js';
+import { isNight, hourOf, FOODS } from './sim.js';
+import { SignalBus } from './signals.js';
+import { TOOLS, affordance, cursorFor } from './tools.js';
+import { Critters } from './critters.js';
+import { drawEmote } from './doodles.js';
 
 // 1 個 3D 單位 = 邏輯座標 10px；室內缸寬 100、高 60、深 44。
 // 戶外池只有寬（連帶高）放大兩倍，深度不變——S 依場景決定，其他都是實例方法，
@@ -47,7 +51,13 @@ export class Tank3D extends Tank {
         { x: 480, h: 120, emergent: true }, { x: 520, h: 140, emergent: true },
       ].map(p => ({ ...p, p: rand(0, 6.28) }));
     }
+    this.signals = new SignalBus();   // 世界裡的動靜（js/signals.js）
+    this.mode = 'view';               // 目前的游標工具（js/tools.js）
+    this.zRange = this.isOutdoor ? [-16, 34] : [-16, 16]; // 烏龜在前後方向能去的範圍
+    this.pebbles = [];
     this.initScene();
+    this.critters = new Critters(this);
+    this.refreshCursor();
     // 父類別建構時已經建好烏龜，那時場景還沒好，現在補建牠們的 3D 物件
     for (const agent of this.agents.values()) this.onAgentAdded(agent);
     this.resize();
@@ -371,15 +381,21 @@ export class Tank3D extends Tank {
     for (const p of this.plants) {
       const z = p.emergent ? rand(-12, 4) : rand(-18, -9);
       const baseY = this.world ? this.world.land.height(this.X(p.x), z) : this.Y(this.terrain.groundY(p.x));
+      // 這叢水草在哪裡、被晃得多厲害、裡面躲了幾條小魚
+      Object.assign(p, { X: this.X(p.x), Z: z, baseY, topY: baseY + p.h * this.S, shake: 0, bumpAt: 0 });
+      p.maxFish = p.emergent ? 1 : 2;
+      p.fish = p.maxFish;
+      p.refillAt = 0;
       for (let i = 0; i < 4; i++) {
         const h = (p.h - i * 18) * this.S;
         const geo = new THREE.PlaneGeometry(p.emergent ? 0.9 : 1.3, h, 1, 10);
         geo.translate(0, h / 2, 0);
         const mesh = new THREE.Mesh(geo, mats[p.emergent ? 'emergent' : 'submerged'][i % 2]);
+        mesh.userData.plant = p;
         mesh.position.set(this.X(p.x) + i * 0.7 - 1, baseY, z + rand(-2, 2));
         mesh.rotation.set(0, rand(-0.6, 0.6), p.emergent ? (i - 1.5) * 0.08 : 0);
         this.scene.add(mesh);
-        this.blades.push({ mesh, h, base: geo.attributes.position.array.slice(), phase: p.p + i, amp: p.emergent ? 0.4 : 1.8 });
+        this.blades.push({ mesh, h, plant: p, base: geo.attributes.position.array.slice(), phase: p.p + i, amp: p.emergent ? 0.4 : 1.8 });
       }
     }
   }
@@ -432,14 +448,19 @@ export class Tank3D extends Tank {
       return sp;
     });
 
-    this.scene.add(mesh, name, ...zzz);
-    this.turtleViews.set(agent.id, { mesh, canvas, ctx: canvas.getContext('2d'), tex, name, nameCanvas, nameTex, nameKey: '', zzz });
+    // 頭上的小泡泡（符號、顏文字）
+    const emote = new THREE.Sprite(new THREE.SpriteMaterial({ transparent: true, depthWrite: false, depthTest: false }));
+    emote.renderOrder = 11;
+    emote.visible = false;
+
+    this.scene.add(mesh, name, emote, ...zzz);
+    this.turtleViews.set(agent.id, { mesh, canvas, ctx: canvas.getContext('2d'), tex, name, nameCanvas, nameTex, nameKey: '', zzz, emote, emoteText: '' });
   }
 
   onAgentRemoved(agent) {
     const v = this.turtleViews?.get(agent.id);
     if (!v) return;
-    this.scene.remove(v.mesh, v.name, ...v.zzz);
+    this.scene.remove(v.mesh, v.name, v.emote, ...v.zzz);
     v.tex.dispose();
     v.nameTex.dispose();
     this.turtleViews.delete(agent.id);
@@ -521,7 +542,7 @@ export class Tank3D extends Tank {
 
     // 落水漣漪
     const rippleMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, depthWrite: false, side: THREE.DoubleSide });
-    this.rippleMeshes = Array.from({ length: 16 }, () => {
+    this.rippleMeshes = Array.from({ length: 32 }, () => {
       const ring = new THREE.Mesh(new THREE.RingGeometry(0.85, 1, 40).rotateX(-Math.PI / 2), rippleMat.clone());
       ring.renderOrder = 3;
       ring.visible = false;
@@ -541,46 +562,77 @@ export class Tank3D extends Tank {
     this.camera.updateProjectionMatrix();
   }
 
-  // 拖曳是轉鏡頭，只有「點一下」才算摸烏龜；手手模式下按住烏龜可以把牠抓起來
+  // ---------- 游標工具（js/tools.js）：工具 × 點到的東西 → 動作 act_○○ ----------
+
+  // 目前的工具：選了食物就是食物，不然是工具列上選的那個
+  get toolId() {
+    return this.tool ? 'food' : this.mode;
+  }
+
+  setMode(id) {
+    this.mode = id;
+    this.tool = null;
+    this.refreshCursor();
+  }
+
+  // 選擇食物進入投餵模式；null 取消（回到工具列上的工具）
+  setTool(type) {
+    this.tool = type;
+    this.refreshCursor();
+  }
+
+  refreshCursor(grabbing = false) {
+    const tool = TOOLS.find(t => t.id === this.mode);
+    const icon = this.tool ? FOODS[this.tool].icon : grabbing ? tool.grab ?? tool.icon : tool.icon;
+    this.c.style.cursor = cursorFor(icon);
+  }
+
+  // 點到的是什麼：龜龜 > 水草 > 水面 > 地面
+  pick(ray) {
+    const agent = this.agentHit(ray);
+    if (agent) return { kind: 'turtle', agent };
+    const blade = ray.intersectObjects(this.blades.map(b => b.mesh))[0];
+    const ground = ray.intersectObject(this.world ? this.world.landMesh : this.groundMesh)[0];
+    if (blade && (!ground || blade.distance < ground.distance)) return { kind: 'plant', plant: blade.object.userData.plant, point: blade.point };
+    if (!ground) return { kind: 'none' };
+    if (ground.point.y < this.WATER_Y) {
+      const q = new THREE.Vector3();
+      if (ray.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0, 1, 0), -this.WATER_Y), q)) return { kind: 'water', point: q };
+    }
+    return { kind: 'ground', point: ground.point };
+  }
+
   onPointer(e) {
     this.downAt = { x: e.clientX, y: e.clientY };
-    if (!this.hand) return;
-    const agent = this.agentHit(this.rayAt(e));
-    if (!agent || agent.turtle.flipped) return;
-    this.held = agent;
-    agent.t.held = true;
-    agent.t.stackOn = null;
-    this.controls.enabled = false;   // 抓著的時候不要轉鏡頭（OrbitControls 的 pointerdown 在這之後才跑）
-    try { this.c.setPointerCapture(e.pointerId); } catch {} // 手指移出畫布也繼續跟著
-    this.c.style.cursor = 'grabbing';
-    this.dragTo(e);
+    const hit = this.pick(this.rayAt(e));
+    const aff = affordance(this.toolId, hit.kind);
+    this.gesture = { hit, aff };
+    if (aff?.drag && this['act_' + aff.drag]('down', hit, e) !== false) {
+      this.gesture.drag = aff.drag;
+      this.controls.enabled = false;   // 拖著東西的時候不要轉鏡頭（OrbitControls 的 pointerdown 在這之後才跑）
+      try { this.c.setPointerCapture(e.pointerId); } catch {} // 手指移出畫布也繼續跟著
+    }
   }
 
   onPointerMove(e) {
-    if (this.held) this.dragTo(e);
+    const drag = this.gesture?.drag;
+    if (drag) this['act_' + drag]('move', this.pick(this.rayAt(e)), e);
   }
 
   onPointerUp(e) {
-    if (this.held) {
-      const agent = this.held;
-      this.held = null;
-      agent.place(this.dragAt.x, this.dragAt.z);
-      agent.react('startled');
+    const g = this.gesture;
+    this.gesture = null;
+    if (g?.drag) {
+      this['act_' + g.drag]('up', this.pick(this.rayAt(e)), e);
       this.controls.enabled = true;
-      this.c.style.cursor = this.hand ? 'grab' : '';
+      this.refreshCursor();
       this.hooks.onHandMove?.(null);
       this.downAt = null;
       return;
     }
-    if (e.type !== 'pointerup') return;
+    if (e.type !== 'pointerup' || !g?.aff?.tap) return;
     if (!this.downAt || Math.hypot(e.clientX - this.downAt.x, e.clientY - this.downAt.y) > 6) return;
-    const ray = this.rayAt(e);
-    if (this.tool) {
-      const p = this.dropPoint(ray.ray);
-      if (this.dropFoodAt(this.tool, p.x / this.S + W / 2, p.z)) this.hooks.onDrop(this.tool);
-      return;
-    }
-    this.clickAgent(this.agentHit(ray));
+    this['act_' + g.aff.tap](g.hit, e);
   }
 
   rayAt(e) {
@@ -597,34 +649,215 @@ export class Tank3D extends Tank {
     return hit ? this.agents.get(hit.object.userData.agentId) : null;
   }
 
-  // ---------- 手手：把烏龜抓起來放到別的地方 ----------
-
-  setHand(on) {
-    this.hand = on;
-    if (on) this.setTool(null);
-    this.c.style.cursor = on ? 'grab' : '';
+  // 地面高度（3D）：戶外用圓台的高度圖，室內用地形剖面
+  groundAt(x, z) {
+    return this.world ? this.world.land.height(x, z) : this.Y(this.terrain.groundY(Math.max(0, Math.min(W, x / this.S + W / 2))));
   }
 
-  // 抓著烏龜移動：找手指指到的地面（在池子裡就是水面），烏龜提在那上方一點
-  dragTo(e) {
-    const agent = this.held;
-    const ray = this.rayAt(e);
-    const ground = this.world ? this.world.landMesh : this.groundMesh;
-    let p = ray.intersectObject(ground)[0]?.point;
-    if (!p) return;
-    if (p.y < this.WATER_Y) {
-      const q = new THREE.Vector3();
-      if (ray.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0, 1, 0), -this.WATER_Y), q)) p = q;
+  // ---------- 動作 ----------
+
+  // 點龜龜：選取／摸摸／幫翻身
+  act_pet(hit) {
+    this.clickAgent(hit.agent);
+  }
+
+  // 戳一下：水面起個小波紋，水草晃一下
+  act_poke(hit) {
+    if (hit.kind === 'plant') this.shakePlant(hit.plant, 0.55, null);
+    else if (hit.point) this.makeRipple(hit.point.x, hit.point.z, 0.6);
+  }
+
+  // 丟食物
+  act_drop(hit, e) {
+    const p = this.dropPoint(this.rayAt(e).ray);
+    if (this.dropFoodAt(this.tool, p.x / this.S + W / 2, p.z)) this.hooks.onDrop(this.tool);
+  }
+
+  // 撥一撥：手指劃過水面留下一串波紋，劃過水草就把水草撥得晃來晃去
+  act_stir(phase, hit, e) {
+    const now = this.time;
+    const g = this.gesture;
+    if (phase === 'down') g.stir = { x: null, z: null, at: 0, px: e.clientX, py: e.clientY, pt: performance.now() };
+    const st = g?.stir;
+    if (!st || phase === 'up') return;
+    // 劃得越快，動靜越大
+    const pt = performance.now();
+    const v = Math.hypot(e.clientX - st.px, e.clientY - st.py) / Math.max(16, pt - st.pt) * 1000;
+    st.px = e.clientX; st.py = e.clientY; st.pt = pt;
+    const strength = Math.min(1.3, 0.5 + v / 900);
+    if (hit.kind === 'plant') {
+      if ((hit.plant.stirAt ?? 0) < now) { hit.plant.stirAt = now + 0.4; this.shakePlant(hit.plant, Math.max(0.8, strength), null); }
+      return;
     }
-    const x = Math.max(20, Math.min(W - 15, p.x / this.S + W / 2));
+    if (hit.kind !== 'water') return;
+    const { x, z } = hit.point;
+    if (st.x !== null && Math.hypot(x - st.x, z - st.z) < 3 && now - st.at < 0.2) return;
+    st.x = x; st.z = z; st.at = now;
+    this.makeRipple(x, z, strength);
+    // 劃過水草旁邊也會碰到水草
+    for (const p of this.plants) {
+      if (Math.abs(p.X - x) < 3 && Math.abs(p.Z - z) < 4 && (p.stirAt ?? 0) < now) { p.stirAt = now + 0.4; this.shakePlant(p, 0.75, null); }
+    }
+  }
+
+  // 手手抓龜龜：拖到別的地方放下
+  act_grab(phase, hit, e) {
+    if (phase === 'down') {
+      const agent = hit.agent;
+      if (agent.turtle.flipped) return false;
+      this.held = agent;
+      agent.t.held = true;
+      agent.t.stackOn = null;
+      this.dragAt = { x: agent.t.x, z: agent.z };
+      this.refreshCursor(true);
+    }
+    const agent = this.held;
+    if (!agent) return;
+    if (phase === 'up') {
+      this.held = null;
+      agent.place(this.dragAt.x, this.dragAt.z);
+      agent.react('startled');
+      agent.emote('startle');
+      return;
+    }
+    const p = hit.point;
+    if (!p) return;
     // 前後只能放在烏龜平常活動的範圍（戶外池再往後是池岸的斜坡）
-    const z = this.world ? Math.max(-16, Math.min(34, p.z)) : Math.max(-16, Math.min(16, p.z));
+    const x = Math.max(20, Math.min(W - 15, p.x / this.S + W / 2));
+    const z = Math.max(this.zRange[0], Math.min(this.zRange[1], p.z));
     const top = Math.max(this.Y(this.terrain.groundY(x)), this.WATER_Y);
     agent.t.x = x;
     agent.t.y = H - (top + 9) / this.S;
     agent.z = agent.zTarget = z;
     this.dragAt = { x, z };
-    this.hooks.onHandMove?.({ x: e.clientX, y: e.clientY });
+    this.hooks.onHandMove?.({ x: e.clientX, y: e.clientY }, '✊');
+  }
+
+  // 手手按在地上：撿起一顆小石頭；放開時手還在甩就是丟出去，不然就是放下
+  act_pebble(phase, hit, e) {
+    const now = performance.now();
+    if (phase === 'down') {
+      const mesh = new THREE.Mesh(this.pebbleGeo ??= new THREE.IcosahedronGeometry(0.9, 0),
+        new THREE.MeshStandardMaterial({ color: new THREE.Color().setHSL(0.1, 0.08, rand(0.5, 0.68)), roughness: 0.95, flatShading: true }));
+      mesh.scale.set(1, 0.7, 0.85);
+      this.scene.add(mesh);
+      this.carry = { mesh, trail: [] };
+      this.refreshCursor(true);
+    }
+    const c = this.carry;
+    if (!c) return;
+    const p = hit.point;
+    if (p) {
+      c.mesh.position.set(p.x, p.y + 5, p.z);
+      c.trail.push({ x: p.x, z: p.z, t: now });
+      c.trail = c.trail.filter(q => now - q.t < 140);
+      this.hooks.onHandMove?.({ x: e.clientX, y: e.clientY }, '✊');
+    }
+    if (phase !== 'up') return;
+    this.carry = null;
+    const from = c.mesh.position.clone();
+    const first = c.trail[0], last = c.trail[c.trail.length - 1];
+    let to = new THREE.Vector3(from.x, 0, from.z), dur = 0.35, arc = 0;
+    if (first && last && last.t - first.t > 20) {
+      const dt = (last.t - first.t) / 1000;
+      const vx = (last.x - first.x) / dt, vz = (last.z - first.z) / dt;
+      const sp = Math.hypot(vx, vz);
+      if (sp > 30) {                    // 甩出去了：沿著甩的方向飛一段
+        const dist = Math.min(50, sp * 0.18);   // 甩得越快丟越遠，最遠 50
+        to.set(from.x + (vx / sp) * dist, 0, from.z + (vz / sp) * dist);
+        dur = 0.55;
+        arc = Math.min(14, 4 + sp * 0.05);
+      }
+    }
+    if (this.world) {                   // 不要丟出圓台
+      const d = this.world.disc, dx = to.x - d.cx, dz = to.z - d.cz, r = Math.hypot(dx, dz), R = d.r - 4;
+      if (r > R) { to.x = d.cx + (dx / r) * R; to.z = d.cz + (dz / r) * R; }
+      to.z = Math.min(d.front - 3, to.z);
+    }
+    this.pebbles.push({ mesh: c.mesh, from, to, arc, dur, t: 0, state: 'fly' });
+  }
+
+  // 石頭飛行、落水、沉底；一分鐘後消失
+  updatePebbles(dt) {
+    for (const pb of [...this.pebbles]) {
+      pb.t += dt;
+      const m = pb.mesh;
+      if (pb.state === 'fly') {
+        const k = Math.min(1, pb.t / pb.dur);
+        const gy = this.groundAt(pb.to.x, pb.to.z);
+        const endY = Math.max(gy, this.WATER_Y);
+        m.position.set(
+          pb.from.x + (pb.to.x - pb.from.x) * k,
+          pb.from.y + (endY - pb.from.y) * k + pb.arc * 4 * k * (1 - k),
+          pb.from.z + (pb.to.z - pb.from.z) * k,
+        );
+        m.rotation.x += dt * 8;
+        if (k < 1) continue;
+        pb.floor = gy + 0.4;
+        if (gy < this.WATER_Y) {
+          // 噗通：水花、大波紋，魚跑掉，龜龜轉頭
+          pb.state = 'sink';
+          this.makeRipple(pb.to.x, pb.to.z, 1.2, 'splash');
+          this.makeRipple(pb.to.x + 0.6, pb.to.z - 0.4, 0.8);
+        } else {
+          pb.state = 'rest';
+          m.position.y = pb.floor;
+          this.signals.emit('thud', pb.to.x, pb.to.z, 0.7);
+        }
+        pb.t = 0;
+      } else if (pb.state === 'sink') {
+        m.position.y = Math.max(pb.floor, m.position.y - 5 * dt);
+        if (m.position.y <= pb.floor) { pb.state = 'rest'; pb.t = 0; }
+      } else if (pb.t > 60) {
+        this.scene.remove(m);
+        m.material.dispose();
+        this.pebbles.splice(this.pebbles.indexOf(pb), 1);
+      }
+    }
+  }
+
+  // 水面的波紋（畫面＋訊號）
+  makeRipple(x, z, strength, type = 'ripple') {
+    this.ripples.push({ x: x / this.S + W / 2, z, age: 0, s: 0.5 + strength * 0.7 });
+    this.signals.emit(type, x, z, strength);
+  }
+
+  // 水草被晃到：發出沙沙聲，躲在裡面的小魚可能被嚇出來
+  shakePlant(p, strength, source, from = null) {
+    p.shake = Math.max(p.shake, strength);
+    this.signals.emit('rustle', p.X, p.Z, strength * 0.8, source);
+    if (strength >= 0.6 && p.fish > 0 && Math.random() < 0.8) {
+      p.fish--;
+      p.refillAt = this.time + rand(40, 80);
+      this.critters.spawnFish(p, from?.x, from?.z);
+    }
+  }
+
+  // 水草慢慢停下來；小魚慢慢回來；游過水草的龜龜會把水草撞得晃來晃去
+  updatePlantLife(dt) {
+    for (const p of this.plants) {
+      p.shake *= Math.exp(-dt * 1.6);
+      if (p.fish < p.maxFish && this.time > p.refillAt) { p.fish++; p.refillAt = this.time + rand(40, 80); }
+    }
+    for (const agent of this.agents.values()) {
+      const t = agent.t;
+      if (t.held || t.mode === 'explore' || !t.path.length) continue;
+      const x = this.X(t.x), y = this.Y(t.y);
+      for (const p of this.plants) {
+        if (Math.abs(x - p.X) < 3 && Math.abs(agent.z - p.Z) < 5 && y < p.topY && p.bumpAt < this.time) {
+          p.bumpAt = this.time + 2.5;
+          this.shakePlant(p, 0.8, agent.id, { x, z: agent.z });
+        }
+      }
+    }
+  }
+
+  update(dt) {
+    super.update(dt);
+    this.signals.update(dt);
+    this.updatePlantLife(dt);
+    this.critters.update(dt);
+    this.updatePebbles(dt);
   }
 
   // 點擊的位置換算成要在哪裡丟食物：
@@ -707,7 +940,7 @@ export class Tank3D extends Tank {
       for (let i = 0; i < pos.count; i++) {
         const y = b.base[i * 3 + 1];
         const k = (y / b.h) ** 2;
-        pos.array[i * 3] = b.base[i * 3] + Math.sin(this.time * 0.8 + b.phase) * b.amp * k;
+        pos.array[i * 3] = b.base[i * 3] + (Math.sin(this.time * 0.8 + b.phase) * b.amp + Math.sin(this.time * 11 + b.phase * 2) * b.plant.shake * 1.8) * k;
         pos.array[i * 3 + 2] = b.base[i * 3 + 2] + Math.cos(this.time * 0.6 + b.phase) * b.amp * 0.45 * k;
       }
       pos.needsUpdate = true;
@@ -788,6 +1021,39 @@ export class Tank3D extends Tank {
     while (this.placedNames.some(p => Math.abs(p.x - nx) < 9 && Math.abs(p.y - ny) < 2.6)) ny += 2.6;
     this.placedNames.push({ x: nx, y: ny });
     v.name.position.set(nx, ny, agent.z);
+    this.updateEmote(agent, v, nx, ny);
+  }
+
+  // 頭上的小泡泡：冒出來時先彈一下，快消失時淡掉
+  updateEmote(agent, v, nx, ny) {
+    const e = agent.t.emote;
+    const left = e ? e.until - this.time : 0;
+    v.emote.visible = left > 0;
+    if (left <= 0) return;
+    if (v.emoteText !== e.text) {
+      v.emoteText = e.text;
+      v.emote.material.map = this.emoteTexture(e.text);
+      v.emote.material.needsUpdate = true;
+    }
+    const tex = v.emote.material.map;
+    const age = this.time - e.at;
+    const pop = age < 0.18 ? 0.6 + (age / 0.18) * 0.5 : age < 0.3 ? 1.1 - ((age - 0.18) / 0.12) * 0.1 : 1;
+    const hgt = 4.6 * pop;
+    v.emote.scale.set(hgt * tex.userData.aspect, hgt, 1);
+    v.emote.position.set(nx, ny + 4.2, agent.z);
+    v.emote.material.opacity = Math.min(1, left / 0.4);
+  }
+
+  emoteTexture(text) {
+    this.emoteCache ??= new Map();
+    if (!this.emoteCache.has(text)) {
+      const c = drawEmote(text);
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.userData.aspect = c.width / c.height;
+      this.emoteCache.set(text, tex);
+    }
+    return this.emoteCache.get(text);
   }
 
   // 戶外：鏡頭繞到池子剖面的後方時，不要低於地面（不然會看到地底）
@@ -881,7 +1147,7 @@ export class Tank3D extends Tank {
       if (!r) return;
       const k = r.age / 1.5;
       ring.position.set(this.X(r.x), this.WATER_Y + 0.05, r.z ?? 0);
-      ring.scale.setScalar(0.6 + k * 4);
+      ring.scale.setScalar((0.6 + k * 4) * (r.s ?? 1));
       ring.material.opacity = 0.7 * (1 - k);
     });
   }

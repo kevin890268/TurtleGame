@@ -416,12 +416,17 @@ button.scene-item:disabled:active { transform: none; }
 }
 .req-btn:active { transform: scale(.94); }
 
-/* 手手：畫面右邊中間的圓形按鈕；打開時整顆變成強調色 */
-.hand-btn {
+/* 游標工具列：畫面右邊直排的圓形按鈕；目前的工具整顆變成強調色 */
+.tool-bar {
   position: absolute;
   right: 10px;
-  top: 38%;
+  top: 26%;
   z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.tool-btn {
   width: 52px;
   height: 52px;
   padding: 0;
@@ -433,8 +438,8 @@ button.scene-item:disabled:active { transform: none; }
   line-height: 1;
   cursor: pointer;
 }
-.hand-btn:active { transform: scale(.94); }
-.hand-btn[aria-pressed="true"] { background: var(--accent); }
+.tool-btn:active { transform: scale(.94); }
+.tool-btn[aria-pressed="true"] { background: var(--accent); }
 /* 抓著烏龜時跟著手指走的拳頭 */
 .hand-drag {
   position: fixed;
