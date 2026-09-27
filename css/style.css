@@ -415,6 +415,36 @@ button.scene-item:disabled:active { transform: none; }
   animation: req-in .35s ease-out, req-bob 2.4s ease-in-out .35s infinite;
 }
 .req-btn:active { transform: scale(.94); }
+
+/* 手手：畫面右邊中間的圓形按鈕；打開時整顆變成強調色 */
+.hand-btn {
+  position: absolute;
+  right: 10px;
+  top: 38%;
+  z-index: 4;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  background: var(--card);
+  box-shadow: 0 3px 10px rgba(40, 36, 20, .25);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+.hand-btn:active { transform: scale(.94); }
+.hand-btn[aria-pressed="true"] { background: var(--accent); }
+/* 抓著烏龜時跟著手指走的拳頭 */
+.hand-drag {
+  position: fixed;
+  z-index: 6;
+  font-size: 34px;
+  line-height: 1;
+  pointer-events: none;
+  transform: translate(-50%, -115%);
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .3));
+}
 .req-face { width: 54px; height: 54px; border-radius: 50%; display: block; }
 .req-badge {
   position: absolute;

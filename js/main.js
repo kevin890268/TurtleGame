@@ -123,11 +123,30 @@ function addTurtle(speciesId) {
 // 投餵模式：選了食物之後，點水缸哪裡就在那裡丟一顆；再按一次同一個按鈕或按 Esc 取消
 function selectFood(type) {
   const next = tank.tool === type ? null : type;
+  if (next) setHand(false);
   tank.setTool(next);
   for (const b of document.querySelectorAll('button[data-act="feed"]')) {
     b.classList.toggle('on', b.dataset.food === next);
   }
   if (next) ui.toast(`點水缸就會丟一顆${sim.FOODS[next].name}（再按一次按鈕取消）`);
+}
+
+// ---------- 手手：抓烏龜 ----------
+
+// 打開手手之後，按住烏龜就能拖到別的地方放下；再按一次按鈕或按 Esc 關掉
+function setHand(on) {
+  if (!tank.setHand) return;
+  if (on && tank.tool) selectFood(tank.tool);
+  tank.setHand(on);
+  $('btnHand').setAttribute('aria-pressed', String(on));
+  if (on) ui.toast('按住烏龜，拖到想放的地方再放開');
+}
+
+// 抓著烏龜時，拳頭跟著手指走（null：放下了）
+function onHandMove(p) {
+  const el = $('handDrag');
+  el.hidden = !p;
+  if (p) { el.style.left = `${p.x}px`; el.style.top = `${p.y}px`; }
 }
 
 let lastFeedLog = 0;
@@ -271,6 +290,7 @@ function bindActions() {
     if (e.key !== 'Escape') return;
     if ([...document.querySelectorAll('.modal')].some(m => !m.hidden)) closeModals();
     else if (tank.tool) selectFood(tank.tool);
+    else if (tank.hand) setHand(false);
   });
 
   const slider = $('speed');
@@ -343,6 +363,8 @@ async function start() {
     btnFullscreen.setAttribute('aria-pressed', String(on));
     btnFullscreen.textContent = on ? '⤡' : '⛶';
   };
+  $('btnHand').addEventListener('click', () => setHand(!tank.hand));
+
   btnFullscreen.addEventListener('click', () => {
     if (document.fullscreenElement) document.exitFullscreen();
     else appFrame.requestFullscreen?.().catch(() => {});
@@ -379,6 +401,7 @@ async function start() {
     onRelation,
     onFlip,
     onRescue,
+    onHandMove,
     onEvent,
   });
   tank.setSelected(selectedId);

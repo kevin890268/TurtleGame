@@ -52,6 +52,8 @@ export class Tank3D extends Tank {
     for (const agent of this.agents.values()) this.onAgentAdded(agent);
     this.resize();
     canvas.addEventListener('pointerup', e => this.onPointerUp(e));
+    canvas.addEventListener('pointermove', e => this.onPointerMove(e));
+    canvas.addEventListener('pointercancel', e => this.onPointerUp(e));
   }
 
   // ---------- 場景建立 ----------
@@ -176,6 +178,7 @@ export class Tank3D extends Tank {
       new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 1 }),
     ]);
     this.scene.add(terrain);
+    this.groundMesh = terrain;
 
     // 水底的小石子
     const pebbleColors = [0x9c8a66, 0xcbb995, 0x877556, 0xd8c9a8].map(v => new THREE.Color(v));
@@ -538,25 +541,90 @@ export class Tank3D extends Tank {
     this.camera.updateProjectionMatrix();
   }
 
-  // 拖曳是轉鏡頭，只有「點一下」才算摸烏龜
+  // 拖曳是轉鏡頭，只有「點一下」才算摸烏龜；手手模式下按住烏龜可以把牠抓起來
   onPointer(e) {
     this.downAt = { x: e.clientX, y: e.clientY };
+    if (!this.hand) return;
+    const agent = this.agentHit(this.rayAt(e));
+    if (!agent || agent.turtle.flipped) return;
+    this.held = agent;
+    agent.t.held = true;
+    agent.t.stackOn = null;
+    this.controls.enabled = false;   // 抓著的時候不要轉鏡頭（OrbitControls 的 pointerdown 在這之後才跑）
+    try { this.c.setPointerCapture(e.pointerId); } catch {} // 手指移出畫布也繼續跟著
+    this.c.style.cursor = 'grabbing';
+    this.dragTo(e);
+  }
+
+  onPointerMove(e) {
+    if (this.held) this.dragTo(e);
   }
 
   onPointerUp(e) {
+    if (this.held) {
+      const agent = this.held;
+      this.held = null;
+      agent.place(this.dragAt.x, this.dragAt.z);
+      agent.react('startled');
+      this.controls.enabled = true;
+      this.c.style.cursor = this.hand ? 'grab' : '';
+      this.hooks.onHandMove?.(null);
+      this.downAt = null;
+      return;
+    }
+    if (e.type !== 'pointerup') return;
     if (!this.downAt || Math.hypot(e.clientX - this.downAt.x, e.clientY - this.downAt.y) > 6) return;
-    const r = this.c.getBoundingClientRect();
-    const ndc = new THREE.Vector2((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
-    const ray = new THREE.Raycaster();
-    ray.setFromCamera(ndc, this.camera);
+    const ray = this.rayAt(e);
     if (this.tool) {
       const p = this.dropPoint(ray.ray);
       if (this.dropFoodAt(this.tool, p.x / this.S + W / 2, p.z)) this.hooks.onDrop(this.tool);
       return;
     }
+    this.clickAgent(this.agentHit(ray));
+  }
+
+  rayAt(e) {
+    const r = this.c.getBoundingClientRect();
+    const ndc = new THREE.Vector2((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    const ray = new THREE.Raycaster();
+    ray.setFromCamera(ndc, this.camera);
+    return ray;
+  }
+
+  agentHit(ray) {
     const meshes = [...this.turtleViews.values()].map(v => v.mesh);
     const hit = ray.intersectObjects(meshes)[0];
-    this.clickAgent(hit ? this.agents.get(hit.object.userData.agentId) : null);
+    return hit ? this.agents.get(hit.object.userData.agentId) : null;
+  }
+
+  // ---------- 手手：把烏龜抓起來放到別的地方 ----------
+
+  setHand(on) {
+    this.hand = on;
+    if (on) this.setTool(null);
+    this.c.style.cursor = on ? 'grab' : '';
+  }
+
+  // 抓著烏龜移動：找手指指到的地面（在池子裡就是水面），烏龜提在那上方一點
+  dragTo(e) {
+    const agent = this.held;
+    const ray = this.rayAt(e);
+    const ground = this.world ? this.world.landMesh : this.groundMesh;
+    let p = ray.intersectObject(ground)[0]?.point;
+    if (!p) return;
+    if (p.y < this.WATER_Y) {
+      const q = new THREE.Vector3();
+      if (ray.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0, 1, 0), -this.WATER_Y), q)) p = q;
+    }
+    const x = Math.max(20, Math.min(W - 15, p.x / this.S + W / 2));
+    // 前後只能放在烏龜平常活動的範圍（戶外池再往後是池岸的斜坡）
+    const z = this.world ? Math.max(-16, Math.min(34, p.z)) : Math.max(-16, Math.min(16, p.z));
+    const top = Math.max(this.Y(this.terrain.groundY(x)), this.WATER_Y);
+    agent.t.x = x;
+    agent.t.y = H - (top + 9) / this.S;
+    agent.z = agent.zTarget = z;
+    this.dragAt = { x, z };
+    this.hooks.onHandMove?.({ x: e.clientX, y: e.clientY });
   }
 
   // 點擊的位置換算成要在哪裡丟食物：

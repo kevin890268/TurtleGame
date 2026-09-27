@@ -98,7 +98,8 @@ export function buildOutdoorWorld(scene, { rim, waterY, deepY, profileY, rendere
   landGeo.setAttribute('ground', new THREE.BufferAttribute(ground, 4));
   landGeo.setIndex(idx);
   landGeo.computeVertexNormals();
-  scene.add(new THREE.Mesh(landGeo, groundMaterial(grass, speckle)));
+  const landMesh = new THREE.Mesh(landGeo, groundMaterial(grass, speckle));
+  scene.add(landMesh);
 
   // ---------- 圓台側面與正面：土層 ----------
   const soilMat = new THREE.MeshStandardMaterial({ map: soil, roughness: 1 });
@@ -143,6 +144,7 @@ export function buildOutdoorWorld(scene, { rim, waterY, deepY, profileY, rendere
   const light = new THREE.Color();
   return {
     land,
+    landMesh,   // 手手放烏龜時，用來找點到地面的哪裡
     disc,
     grassColor: GRASS_COLOR,
     sunDir: sky.sunDir,

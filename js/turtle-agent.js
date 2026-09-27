@@ -117,6 +117,14 @@ export class TurtleAgent {
     const { w, h, foot } = this.size();
     this.swimLimit = this.terrain.swimLimitX(h);
     t.anim += dt * ANIM_RATE;
+
+    // 被玩家的手手抓著：位置由 tank 決定，縮在殼裡等著被放下
+    if (t.held) {
+      t.flash = { key: 'hide', until: this.tank.time + 0.5, dur: 100 };
+      t.path = [];
+      t.grounded = false;
+      return;
+    }
     t.timer -= dt;
     t.boost ??= 1;
     t.boost += ((t.mode === 'food' ? FOOD_BOOST : 1) - t.boost) * Math.min(1, dt * BOOST_EASE);
@@ -299,9 +307,34 @@ export class TurtleAgent {
     }
   }
 
+  // 被玩家用手手抓起來、放到 (x, z)：放在水裡就浮在水中，放在岸上就趴在地上，過一下再自己決定要做什麼
+  place(x, z) {
+    const t = this.t;
+    const { h, foot } = this.size();
+    t.held = false;
+    t.x = Math.max(20, Math.min(W - 15, x));
+    this.z = this.zTarget = z;
+    t.path = [];
+    t.stackOn = null;
+    t.vy = 0;
+    t.tilt = 0;
+    const floor = this.terrain.groundY(t.x) - foot;
+    if (t.x < this.swimLimit - 10) {
+      t.grounded = false;
+      t.mode = 'swim';
+      t.y = Math.min(floor, WATER_TOP + h * 0.6);
+    } else {
+      t.grounded = true;
+      t.mode = 'bask';
+      t.y = floor;
+    }
+    t.timer = rand(2, 4);
+  }
+
   // 被別隻烏龜擠開：在地上就沿著地面移動，在水裡可以上下左右移動
   nudge(dx, dy) {
     const t = this.t;
+    if (t.held) return;
     const { h, foot } = this.size();
     t.x = Math.max(20, Math.min(W - 15, t.x + dx));
     if (t.grounded) {
