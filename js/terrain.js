@@ -11,10 +11,12 @@
 //   │▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁／                      │
 //   └──────────────────────────────────────────────┘
 //
-// 戶外池：一路四等分，深水／淺水／石頭陸地／草地各 1/4 寬
-//   ┌───────────┬───────────┬───────────┬───────────┐
-//   │  深水區    │  淺水區    │ 石頭陸地區  │  草地區    │
-//   └───────────┴───────────┴───────────┴───────────┘
+// 戶外池：像真的池塘，左邊淺、中間深、右邊慢慢變淺上岸；深度跟圓台一樣淺（只有 2.5D）
+//   ┌───────────────────────────────────────────────┐
+//   │~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   ▁▁▁▁▁▁▁▁▁│ ← 沙灘、草地
+//   │ ＼＿        深水區        ＿／ 淺水            │
+//   │     ＼＿＿＿＿＿＿＿＿＿／                     │
+//   └───────────────────────────────────────────────┘
 
 export const W = 1000, H = 600;
 export const WATER_TOP = 175;
@@ -34,23 +36,19 @@ export const ZONES = {
 export const LAMP_X = 930;
 export const AIR_STONE_X = 70;
 
-// 戶外池地面剖面：四段依序是深水（0-250）／淺水（250-500）／石頭陸地（500-750）／草地（750-1000），
-// 每段內部再用幾個控制點做出自然的坡度，跟室內缸共用同一套平滑插值。
+// 戶外池地面剖面：最深約 116（圓台厚度以內），左右兩邊都是緩坡，右邊上岸是沙灘接草地。
+// 3D 的碗狀池子（前後方向也是淺→深）由 js/outdoor-land.js 依這條剖面做出來。
 export const OUTDOOR_PROFILE = [
-  [0, 520], [150, 522], [250, 500],
-  [330, 420], [410, 310], [470, 225], [500, 195],
-  [520, 165], [580, 150], [650, 145], [750, 143],
-  [850, 140], [1000, 138],
+  [0, 238], [60, 262], [140, 286], [240, 292], [330, 286],
+  [400, 264], [460, 230], [510, 198], [545, 180], [580, 166],
+  [650, 152], [750, 145], [850, 140], [1000, 138],
 ];
 
 export const OUTDOOR_ZONES = {
-  deep: [30, 220],
-  shallow: [300, 480],
-  bask: [520, 980], // 石頭陸地＋草地都算「陸地」，烏龜行為不分；畫面上才分兩種材質
+  deep: [90, 400],
+  shallow: [430, 540],
+  bask: [590, 980], // 沙灘＋草地
 };
-
-// 石頭陸地／草地的分界（3D 畫地形顏色時用）
-export const OUTDOOR_GRASS_X = 750;
 
 function makeGroundY(profile) {
   return function groundY(x) {
@@ -78,20 +76,23 @@ function makeGroundSlope(groundYFn) {
 export const groundSlope = makeGroundSlope(groundY);
 export const outdoorGroundSlope = makeGroundSlope(outdoorGroundY);
 
-function makeSwimLimitX(groundYFn) {
-  // 從左邊開始，水深還夠這麼高（h）的烏龜游泳的最右邊 x
+function makeSwimLimitX(groundYFn, k) {
+  // 從最深的地方往右，水深還夠這麼高（h）的烏龜游泳的最右邊 x。
+  // k：水深至少要烏龜身高的幾倍（戶外池很淺，烏龜半浮在水面也算在游）
+  let deepest = 0;
+  for (let x = 0; x <= W; x += 5) if (groundYFn(x) > groundYFn(deepest)) deepest = x;
   return function swimLimitX(h) {
-    let last = 0;
-    for (let x = 0; x <= W; x += 5) {
-      if (groundYFn(x) - WATER_TOP < h * 1.15) break;
+    let last = deepest;
+    for (let x = deepest; x <= W; x += 5) {
+      if (groundYFn(x) - WATER_TOP < h * k) break;
       last = x;
     }
     return last;
   };
 }
 
-export const swimLimitX = makeSwimLimitX(groundY);
-export const outdoorSwimLimitX = makeSwimLimitX(outdoorGroundY);
+export const swimLimitX = makeSwimLimitX(groundY, 1.15);
+export const outdoorSwimLimitX = makeSwimLimitX(outdoorGroundY, 0.8);
 
 export function isUnderwater(y) {
   return y > WATER_TOP;

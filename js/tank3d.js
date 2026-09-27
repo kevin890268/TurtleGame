@@ -6,10 +6,10 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { Tank } from './tank.js';
 import { buildOutdoorWorld } from './outdoor-world.js';
 import { isDirectional, withView } from './poses.js';
-import { W, H, WATER_TOP, LAMP_X, AIR_STONE_X, OUTDOOR_GRASS_X, terrainOf } from './terrain.js';
+import { W, H, WATER_TOP, LAMP_X, AIR_STONE_X, terrainOf } from './terrain.js';
 import { drawHeart } from './turtle-shape.js';
 import { CONFIG } from './config.js';
-import { isNight } from './sim.js';
+import { isNight, hourOf } from './sim.js';
 
 // 1 個 3D 單位 = 邏輯座標 10px；室內缸寬 100、高 60、深 44。
 // 戶外池只有寬（連帶高）放大兩倍，深度不變——S 依場景決定，其他都是實例方法，
@@ -40,12 +40,11 @@ export class Tank3D extends Tank {
     this.Y = y => (H - y) * this.S;
     this.WATER_Y = this.Y(WATER_TOP);
     if (this.isOutdoor) {
-      // 戶外的水草位置跟室內缸的岸線不一樣，配合新的地形剖面重新排過
-      // （沉水植物在深/淺水區、挺水植物長在淺水靠岸邊緣）
+      // 戶外池很淺：沉水植物矮一點（不要冒出水面），挺水植物長在右邊淺水靠岸
       this.plants = [
-        { x: 60, h: 200 }, { x: 140, h: 260 }, { x: 220, h: 180 },
-        { x: 340, h: 220 }, { x: 400, h: 160 },
-        { x: 460, h: 190, emergent: true }, { x: 500, h: 230, emergent: true },
+        { x: 120, h: 80 }, { x: 200, h: 95 }, { x: 280, h: 88 },
+        { x: 350, h: 78 }, { x: 410, h: 62 },
+        { x: 480, h: 120, emergent: true }, { x: 520, h: 140, emergent: true },
       ].map(p => ({ ...p, p: rand(0, 6.28) }));
     }
     this.initScene();
@@ -66,13 +65,13 @@ export class Tank3D extends Tank {
     this.nightBg = new THREE.Color('#1a2140');
     scene.background = this.dayBg.clone();
 
-    // far 要夠遠，戶外的全景圓筒在 900 單位外
-    const cam = this.camera = new THREE.PerspectiveCamera(40, W / H, 1, 2500);
+    // far 要夠遠：戶外的天空球半徑 1800，鏡頭拉到最遠時也要整顆看得到
+    const cam = this.camera = new THREE.PerspectiveCamera(40, W / H, 1, 4000);
     // 戶外池比室內缸大，鏡頭要退遠一點才能整個看到
-    if (this.isOutdoor) cam.position.set(0, 75, 170);
+    if (this.isOutdoor) cam.position.set(0, 122, 270);
     else cam.position.set(0, 46, 110);
     const ctl = this.controls = new OrbitControls(cam, this.c);
-    ctl.target.set(0, this.isOutdoor ? 38 : 28, 0);
+    ctl.target.set(0, this.isOutdoor ? 76 : 28, this.isOutdoor ? -20 : 0);
     ctl.enableDamping = true;
     // 可以小幅度平移看角落的烏龜：滑鼠右鍵拖曳、觸控兩指拖曳；
     // 平移範圍在 draw() 裡夾住，免得整個缸子被推出畫面外
@@ -81,12 +80,12 @@ export class Tank3D extends Tank {
     ctl.panSpeed = 0.6;
     ctl.touches = { ONE: THREE.TOUCH.ROTATE, TWO: THREE.TOUCH.DOLLY_PAN };
     ctl.minDistance = this.isOutdoor ? 85 : 60;
-    // 往後拉遠一點，整缸看得到（原本 180/260 拉不太開）
-    ctl.maxDistance = this.isOutdoor ? 420 : 300;
+    // 往後拉遠一點，整缸看得到；戶外可以拉到看見整個圓台漂在天空裡
+    ctl.maxDistance = this.isOutdoor ? 800 : 300;
     ctl.minPolarAngle = 0.75;
     ctl.maxPolarAngle = 1.62;
     // 室內缸只有正面做了背景（桌子＋牆），轉太過去會看到沒佈置的地方，所以限制在正面 126°；
-    // 戶外池四面都是開放的草地，沒有圍牆擋視線，可以整圈繞著池子看
+    // 戶外是整個圓台，可以整圈繞著看
     if (this.isOutdoor) {
       ctl.minAzimuthAngle = -Infinity;
       ctl.maxAzimuthAngle = Infinity;
@@ -117,10 +116,14 @@ export class Tank3D extends Tank {
 
   buildRoom() {
     if (this.isOutdoor) {
-      // 戶外：池子挖在一大片草地裡，正面是土層剖面，四周一圈全景（js/outdoor-world.js）
-      this.rim = this.Y(this.terrain.groundY(W - 1)); // 池邊地面的高度
+      // 戶外：漂在天空裡的圓台，池子靠在正面切開的剖面上（js/outdoor-world.js）
+      const gy = this.terrain.groundY;
+      let deepest = 0;
+      for (let x = 0; x <= W; x += 5) deepest = Math.max(deepest, gy(x));
+      this.rim = this.Y(gy(W - 1)); // 池邊地面的高度
       this.world = buildOutdoorWorld(this.scene, {
-        TW: this.TW, TD: this.TD, rim: this.rim, waterY: this.WATER_Y, renderer: this.renderer,
+        rim: this.rim, waterY: this.WATER_Y, deepY: this.Y(deepest), renderer: this.renderer,
+        profileY: x => this.Y(gy(Math.min(W, Math.max(0, x / this.S + W / 2)))),
       });
       return;
     }
@@ -139,6 +142,7 @@ export class Tank3D extends Tank {
 
   // 地形：把 terrain.js 的剖面往深度方向擠出來。水面下是砂，水面上是土和青苔。
   buildTerrain() {
+    if (this.world) { this.buildPondFloor(); return; }
     const shape = new THREE.Shape();
     shape.moveTo(this.X(0), 0);
     for (const [x, y] of this.terrain.sampleGround(10)) shape.lineTo(this.X(x), this.Y(y));
@@ -152,21 +156,7 @@ export class Tank3D extends Tank {
     const pos = geo.attributes.position;
     const colors = new Float32Array(pos.count * 3);
     const c = new THREE.Color();
-    if (this.isOutdoor) {
-      // 戶外照 x 的四等分上色：深水沙／淺水沙／石頭陸地／草地，跟室內缸靠高度分不一樣
-      const deepSand = new THREE.Color('#b7a074');
-      const shallowSand = new THREE.Color('#cdbb8c');
-      const rock = new THREE.Color('#9b988c');
-      const grass = new THREE.Color(this.world ? this.world.grassColor : '#5f8a3c');
-      for (let i = 0; i < pos.count; i++) {
-        const lx = pos.getX(i) / this.S + W / 2; // 頂點的 3D x 換回邏輯 x，才知道落在哪一區
-        const y = pos.getY(i);
-        if (lx > OUTDOOR_GRASS_X) c.copy(grass).multiplyScalar(0.92 + 0.08 * Math.sin(lx * 0.08));
-        else if (y < this.WATER_Y) c.copy(rock).multiplyScalar(0.9 + 0.1 * Math.sin(lx * 0.06));
-        else c.copy(lx > 375 ? shallowSand : deepSand).multiplyScalar(0.85 + 0.15 * (y / this.WATER_Y));
-        colors.set([c.r, c.g, c.b], i * 3);
-      }
-    } else {
+    {
       const sand = new THREE.Color('#c9b48c');
       const soil = new THREE.Color('#8f7a5c');
       const moss = new THREE.Color('#7d9a4f');
@@ -182,10 +172,8 @@ export class Tank3D extends Tank {
 
     // 群組 0 是前後兩片剖面，群組 1 是表面
     const terrain = new THREE.Mesh(geo, [
-      this.world
-        ? new THREE.MeshStandardMaterial({ map: this.world.soilCap, roughness: 1 })
-        : new THREE.MeshStandardMaterial({ color: 0x9c8565, roughness: 1 }),
-      new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 1, map: this.world ? this.world.speckle : null }),
+      new THREE.MeshStandardMaterial({ color: 0x9c8565, roughness: 1 }),
+      new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 1 }),
     ]);
     this.scene.add(terrain);
 
@@ -210,11 +198,9 @@ export class Tank3D extends Tank {
     }
     this.scene.add(pebbles);
 
-    // 曬台/石頭陸地上的大石頭：室內缸曬台在 x 880-985，戶外池的石頭區在 x 520-750
+    // 曬台上的大石頭
     const rockMat = new THREE.MeshStandardMaterial({ color: 0xa28c6a, roughness: 0.95, flatShading: true });
-    const rockSpots = this.isOutdoor
-      ? [[560, -14, 6, 2.6, 6], [610, 12, 5, 2.2, 5], [670, -16, 4.5, 2, 4.5], [720, 14, 4, 1.8, 4]]
-      : [[960, -12, 5, 2.2, 5], [985, 10, 4, 1.8, 4], [905, -17, 3.5, 1.6, 3], [940, 16, 3, 1.4, 3]];
+    const rockSpots = [[960, -12, 5, 2.2, 5], [985, 10, 4, 1.8, 4], [905, -17, 3.5, 1.6, 3], [940, 16, 3, 1.4, 3]];
     for (const [x, z, sx, sy, sz] of rockSpots) {
       const rock = new THREE.Mesh(new THREE.DodecahedronGeometry(1, 1), rockMat);
       rock.scale.set(sx, sy, sz);
@@ -223,30 +209,52 @@ export class Tank3D extends Tank {
       this.scene.add(rock);
     }
 
-    // 打氣石：室內缸的過濾設備，戶外自然池沒有這個
-    if (!this.isOutdoor) {
-      const stone = new THREE.Mesh(
-        new THREE.CylinderGeometry(1.6, 1.8, 1.2, 16),
-        new THREE.MeshStandardMaterial({ color: 0x7d7d82 }),
+    // 打氣石
+    const stone = new THREE.Mesh(
+      new THREE.CylinderGeometry(1.6, 1.8, 1.2, 16),
+      new THREE.MeshStandardMaterial({ color: 0x7d7d82 }),
+    );
+    stone.position.set(this.X(AIR_STONE_X), this.Y(this.terrain.groundY(AIR_STONE_X)) + 0.6, -14);
+    this.scene.add(stone);
+  }
+
+  // 戶外池底：地形在 outdoor-world 做好了，這裡只撒小石子
+  buildPondFloor() {
+    const { land } = this.world;
+    const pebbleColors = [0x9c8a66, 0xcbb995, 0x877556, 0xd8c9a8].map(v => new THREE.Color(v));
+    const pebbles = new THREE.InstancedMesh(
+      new THREE.DodecahedronGeometry(1, 0),
+      new THREE.MeshStandardMaterial({ roughness: 1 }),
+      260,
+    );
+    const m = new THREE.Matrix4();
+    for (let i = 0; i < pebbles.count; i++) {
+      const x = this.X(rand(5, this.terrain.SHORE_X - 10));
+      const z = rand(-40, land.disc.front - 1);
+      const r = rand(0.35, 0.9);
+      m.compose(
+        new THREE.Vector3(x, land.height(x, z), z),
+        new THREE.Quaternion().setFromEuler(new THREE.Euler(rand(0, 3), rand(0, 3), 0)),
+        new THREE.Vector3(r, r * 0.7, r),
       );
-      stone.position.set(this.X(AIR_STONE_X), this.Y(this.terrain.groundY(AIR_STONE_X)) + 0.6, -14);
-      this.scene.add(stone);
+      pebbles.setMatrixAt(i, m);
+      pebbles.setColorAt(i, pebbleColors[i % 4]);
     }
+    this.scene.add(pebbles);
   }
 
   buildWaterAndGlass() {
     const scene = this.scene;
+    this.cleanWater = new THREE.Color('#6cc0cc');
+    this.dirtyWater = new THREE.Color('#6d7436');
+    if (this.world) { this.buildPondWater(); return; }
     const waterW = this.terrain.SHORE_X * this.S;
     const waterX = this.X(0) + waterW / 2;
 
-    this.cleanWater = new THREE.Color('#6cc0cc');
-    this.dirtyWater = new THREE.Color('#6d7436');
     this.waterMat = new THREE.MeshStandardMaterial({
       color: this.cleanWater.clone(), transparent: true, opacity: 0.3, depthWrite: false, roughness: 0.2,
     });
-    // 戶外：水的正面要在地形剖面後面一點，不然沙坡底下的土層也會被水染色
-    const waterD = this.isOutdoor ? this.TD - 0.8 : this.TD - 0.4;
-    const water = new THREE.Mesh(new THREE.BoxGeometry(waterW, this.WATER_Y, waterD), this.waterMat);
+    const water = new THREE.Mesh(new THREE.BoxGeometry(waterW, this.WATER_Y, this.TD - 0.4), this.waterMat);
     water.position.set(waterX, this.WATER_Y / 2, 0);
     water.renderOrder = 1;
     scene.add(water);
@@ -262,8 +270,45 @@ export class Tank3D extends Tank {
     this.surface.renderOrder = 2;
     scene.add(this.surface);
 
-    if (this.isOutdoor) this.buildPondEdge();
-    else this.buildGlassTank();
+    this.buildGlassTank();
+  }
+
+  // 戶外池的水：一片會起伏的水面（蓋住整個池子，岸上的部分會被地面擋住）＋正面剖面上的一片水
+  buildPondWater() {
+    const { land } = this.world;
+    const b = land.pondBox, front = land.disc.front;
+    this.waterMat = new THREE.MeshStandardMaterial({
+      color: this.cleanWater.clone(), transparent: true, opacity: 0.3, depthWrite: false, roughness: 0.2,
+    });
+    // 正面：池底剖面到水面之間
+    const p = [], ix = [];
+    let prev = null;
+    for (let x = Math.ceil(b.x0); x <= b.x1; x += 1) {
+      const h = land.height(x, front);
+      if (h >= this.WATER_Y) { prev = null; continue; }
+      const n = p.length / 6;
+      p.push(x, h, front - 0.25, x, this.WATER_Y, front - 0.25);
+      if (prev !== null) ix.push(prev * 2, n * 2, prev * 2 + 1, n * 2, n * 2 + 1, prev * 2 + 1);
+      prev = n;
+    }
+    const pane = new THREE.BufferGeometry();
+    pane.setAttribute('position', new THREE.Float32BufferAttribute(p, 3));
+    pane.setIndex(ix);
+    pane.computeVertexNormals();
+    const water = new THREE.Mesh(pane, this.waterMat);
+    water.renderOrder = 1;
+    this.scene.add(water);
+
+    const w = b.x1 - b.x0, d = b.z1 - b.z0 - 0.4;
+    const surfGeo = new THREE.PlaneGeometry(w, d, 60, 34);
+    surfGeo.rotateX(-Math.PI / 2);
+    this.surfBase = surfGeo.attributes.position.array.slice();
+    this.surface = new THREE.Mesh(surfGeo, new THREE.MeshStandardMaterial({
+      color: 0xbfe8ee, transparent: true, opacity: 0.35, depthWrite: false, roughness: 0.1, metalness: 0.1, side: THREE.DoubleSide,
+    }));
+    this.surface.position.set((b.x0 + b.x1) / 2, this.WATER_Y, b.z0 + d / 2);
+    this.surface.renderOrder = 2;
+    this.scene.add(this.surface);
   }
 
   // 室內缸：玻璃缸壁與邊框
@@ -280,17 +325,6 @@ export class Tank3D extends Tank {
     const base = new THREE.Mesh(new THREE.BoxGeometry(this.TW + 1.5, 1.5, this.TD + 1.5), new THREE.MeshStandardMaterial({ color: 0x2c2c2c }));
     base.position.y = -0.4;
     scene.add(glass, edges, base);
-  }
-
-  // 戶外池：沒有任何圍欄或玻璃牆，池邊只留一圈低矮的石頭邊界，視野完全開放
-  buildPondEdge() {
-    if (this.world) return; // 池子挖在地裡了，不用邊框
-    const curb = new THREE.Mesh(
-      new THREE.BoxGeometry(this.TW + 2, 1.6, this.TD + 2),
-      new THREE.MeshStandardMaterial({ color: 0xb9ac8a, roughness: 0.9 }),
-    );
-    curb.position.y = -0.6;
-    this.scene.add(curb);
   }
 
   buildLamp() {
@@ -333,7 +367,7 @@ export class Tank3D extends Tank {
     };
     for (const p of this.plants) {
       const z = p.emergent ? rand(-12, 4) : rand(-18, -9);
-      const baseY = this.Y(this.terrain.groundY(p.x));
+      const baseY = this.world ? this.world.land.height(this.X(p.x), z) : this.Y(this.terrain.groundY(p.x));
       for (let i = 0; i < 4; i++) {
         const h = (p.h - i * 18) * this.S;
         const geo = new THREE.PlaneGeometry(p.emergent ? 0.9 : 1.3, h, 1, 10);
@@ -425,7 +459,7 @@ export class Tank3D extends Tank {
       const x = rand(5, this.terrain.SHORE_X - 5);
       pos[i * 3] = this.X(x);
       pos[i * 3 + 1] = rand(this.Y(this.terrain.groundY(x)) + 0.5, this.WATER_Y - 0.5);
-      pos[i * 3 + 2] = rand(-this.TD / 2 + 1, this.TD / 2 - 1);
+      pos[i * 3 + 2] = this.world ? rand(-24, this.TD / 2 - 1) : rand(-this.TD / 2 + 1, this.TD / 2 - 1);
     }
     const geo = new THREE.BufferGeometry();
     geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
@@ -529,7 +563,9 @@ export class Tank3D extends Tank {
   // 點在水面附近 → 用視線和水面的交點；點在水中（視線先穿過前面的玻璃）→ 用缸子中間那個深度
   dropPoint(ray) {
     const p = new THREE.Vector3();
-    const inside = v => Math.abs(v.z) < this.TD / 2 - 3 && v.x > this.X(0) && v.x < this.X(W);
+    const inside = this.world
+      ? v => v.z > -28 && v.z < this.TD / 2 - 3 && v.x > this.X(20) && v.x < this.X(this.terrain.SHORE_X - 15)
+      : v => Math.abs(v.z) < this.TD / 2 - 3 && v.x > this.X(0) && v.x < this.X(W);
     if (ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0, 1, 0), -this.WATER_Y), p) && inside(p)) return p;
     ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0, 0, 1), 0), p);
     p.z = rand(-6, 6);
@@ -565,7 +601,13 @@ export class Tank3D extends Tank {
     this.sun.intensity = 0.1 + 1.5 * f;
     this.hemi.intensity = 0.25 + 0.85 * f;
     this.scene.background.copy(this.nightBg).lerp(this.dayBg, f);
-    this.world?.setDaylight(f);
+    if (this.world) {
+      this.world.setDaylight(f);
+      this.world.setHour(hourOf(s));
+      // 光線跟著天上的太陽（晚上是月亮）左右移動；天上的太陽畫得很低，光線的高度另外抬高
+      const dir = isNight(s) ? this.world.moonDir : this.world.sunDir;
+      this.sun.position.set(dir.x, 1.1, dir.z).normalize().multiplyScalar(150);
+    }
 
     if (!this.hasLamp) return;
     const on = s.lamp.on;
@@ -683,10 +725,10 @@ export class Tank3D extends Tank {
   keepCameraAboveGround() {
     if (!this.world) return;
     const cam = this.camera.position;
-    const { disc, fieldY } = this.world;
-    // 在圓台上方（剖面後面）：不低於草地
+    const { disc } = this.world;
+    // 在圓台上方：不低於草地；在圓台外面：最低到比地面低一點（看得到正面剖面，但看不到圓台底下）
     const overDisc = cam.z < disc.front + 2 && Math.hypot(cam.x - disc.cx, cam.z - disc.cz) < disc.r + 2;
-    const minY = overDisc ? disc.top + 12 : fieldY + 4;
+    const minY = overDisc ? disc.top + 12 : disc.top - 8;
     if (cam.y < minY) cam.y = minY;
   }
 

@@ -23,7 +23,7 @@
         'js/main.js',
         'js/menu.js',
         'js/outdoor-world.js',
-        'js/outdoor-garden.js',
+        'js/outdoor-garden.js', 'js/outdoor-land.js',
         'js/poses.js',
         'js/requests.js',
         'js/sim.js',
@@ -84,7 +84,7 @@
       };
       // 程式載入失敗時（多半是瀏覽器把新舊版的程式檔混在一起用），顯示提示和按鈕，
       // 不要只剩一片空白的水缸。遊戲啟動完成後（main.js 設 __gameStarted）就不再攔截。
-      // 有錯誤時先等 5 秒：很多錯誤不影響遊玩（例如 2.5D 載不到、自動退回 2D），
+      // 有錯誤時先等 5 秒：很多錯誤不影響遊玩（例如選配的圖檔載不到），
       // 遊戲有起來（__gameStarted）就不顯示；真的沒起來才擋住畫面給按鈕。
       var pendingError = null;
       window.showLoadError = function (detail) {
@@ -137,7 +137,6 @@
     <header class="topbar">
       <div class="logo" id="logo" aria-hidden="true">🐢</div>
       <div class="top-right">
-        <button id="btnView" class="icon-btn" type="button"></button>
         <button id="btnFullscreen" class="icon-btn" type="button" aria-label="全螢幕" aria-pressed="false">⛶</button>
         <div class="clock" id="clock"></div>
       </div>

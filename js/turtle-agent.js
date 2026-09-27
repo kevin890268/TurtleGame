@@ -291,7 +291,7 @@ export class TurtleAgent {
       this.zTarget = rand(-14, 14);
     } else {
       t.mode = 'swim';
-      const x = rand(30, Math.max(60, this.swimLimit - 20));
+      const x = rand(this.terrain.ZONES.deep[0], Math.max(this.terrain.ZONES.deep[0] + 30, this.swimLimit - 20));
       const y = rand(WATER_TOP + h * 0.4, Math.max(WATER_TOP + h * 0.5, this.terrain.groundY(x) - foot - 5));
       this.planPath({ x, y, ground: false }, foot);
       t.timer = rand(2, 6);

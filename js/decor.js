@@ -7,7 +7,7 @@ export const SCENES = [
   { id: 'indoor60', icon: '🫙', name: '60 公分小缸', desc: '目前的缸子。養 1～2 隻小烏龜剛好。', size: { w: 100, d: 44, h: 60 } },
   { id: 'indoor90', icon: '🐠', name: '90 公分中缸', desc: '更寬的深水區和曬台，可以養 3～4 隻亞成龜。', size: { w: 140, d: 55, h: 70 }, locked: true },
   { id: 'indoor120', icon: '🏞️', name: '120 公分大缸', desc: '成龜也住得舒服，水量大、水質比較穩定。', size: { w: 180, d: 65, h: 80 }, locked: true },
-  { id: 'outdoor', icon: '🌳', name: '戶外池', desc: '圓形的小天地：池塘、流進池子的小溪、溪邊的石頭、濕地、小樹和小花。有真的陽光可以曬（不用 UVB 燈），但要注意天氣和溫差。', size: { w: 176, d: 88, h: 106 } },
+  { id: 'outdoor', icon: '🌳', name: '戶外池', desc: '漂在天空裡的圓形小天地：池塘、沙灘、流進池子的小溪、溪邊的石頭、濕地、矮灌木和小花。有真的陽光可以曬（不用 UVB 燈），但要注意天氣和溫差。', size: { w: 176, d: 88, h: 106 } },
 ];
 
 export const PROPS = [

@@ -22,12 +22,12 @@ python tools/serve.py
 
 測試用的加速模式：http://localhost:8123/?speed=600（1 秒 = 10 分鐘，使用獨立存檔）
 
-## 2D / 2.5D
+## 畫面
 
 右上角的按鈕可以切換畫面，存檔是共用的。
 
-- **2.5D**（預設）：場景用 Three.js 做成 3D，可以拖曳旋轉、用滾輪縮放；澤龜是一張會轉向鏡頭的 2D 圖片。Three.js 從 CDN 載入，所以需要網路，載入失敗時會自動退回 2D。
-- **2D**：純 Canvas，不需要網路。
+- **2.5D**：場景用 Three.js 做成 3D，可以拖曳旋轉、用滾輪縮放；澤龜是一張會轉向鏡頭的 2D 圖片。Three.js 從 CDN 載入，所以需要網路。
+- 2D 玩法先取消了（程式還在 `js/tank.js`，當作 2.5D 的基底類別）。
 
 兩種畫面共用同一套烏龜行為（`tank.js`），`tank3d.js` 只負責把畫面換成 3D。
 
@@ -89,7 +89,8 @@ js/
   terrain.js     地形剖面（深水區、淺水區、曬台）
   tank.js        烏龜缸：食物物理、多隻烏龜、2D 畫面
   tank3d.js      2.5D 畫面（繼承 tank.js，只換掉繪圖）
-  outdoor-world.js  戶外池的周遭：挖在草地裡的池子、土層剖面、全景
+  outdoor-world.js  戶外池：漂在天空裡的圓台、土層剖面、天空（太陽、月亮）
+  outdoor-land.js   戶外池圓台的地形：碗狀池子、沙灘、小溪、濕地（高度圖）
   turtle-agent.js  每隻烏龜的行為
   poses.js       姿勢圖載入、依狀態挑動作
   requests.js    想互動請求（右下角按鈕）與刷屁屁小遊戲
@@ -109,7 +110,7 @@ gpt/                           ★ 所有給 ChatGPT 的 md（見 gpt/README.md�
   rules/                       生圖規則（rules_bangui_v3.6.md 是目前版本）
   actions/bangui_v3/           斑龜 v3 動作（23 個）
   character/                   定裝照／角色設計提示詞
-  scene/outdoor/               戶外池場景圖（全景、土層、草地）
+  scene/outdoor/               戶外池場景圖（土層、草地）
   back_fill/                   補背面用
   archive/                     舊版動作、舊規格
 

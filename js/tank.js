@@ -3,7 +3,7 @@
 // 2.5D 版（tank3d.js）繼承這個類別，只換掉繪圖。
 import { CONFIG } from './config.js';
 import { isNight } from './sim.js';
-import { W, H, WATER_TOP, LAMP_X, AIR_STONE_X, SHORE_X, groundY, sampleGround } from './terrain.js';
+import { W, H, WATER_TOP, LAMP_X, AIR_STONE_X, SHORE_X, groundY, sampleGround, terrainOf } from './terrain.js';
 import { TurtleAgent, MAX_SHOVE } from './turtle-agent.js';
 import { isDirectional } from './poses.js';
 import { drawHeart } from './turtle-shape.js';
@@ -156,11 +156,16 @@ export class Tank {
     }
   }
 
+  // 現在這個場景的地形（室內缸／戶外池不一樣）
+  get land() {
+    return terrainOf(this.getState().scene);
+  }
+
   // 在 x（和 2.5D 的深度 z）的正上方掉一顆食物
   dropFoodAt(type, x, z = rand(-12, 12)) {
     if (this.food.length >= MAX_FOOD) return false;
     this.food.push({
-      type, x: Math.max(20, Math.min(SHORE_X - 15, x)), z, y: WATER_TOP - rand(50, 70),
+      type, x: Math.max(20, Math.min(this.land.SHORE_X - 15, x)), z, y: WATER_TOP - rand(50, 70),
       vy: 0, age: 0, wet: 0, inWater: false, floating: false, seed: rand(0, 6.28), spin: rand(-1.5, 1.5),
     });
     return true;
@@ -216,7 +221,7 @@ export class Tank {
     if (onLand.length && Math.random() < 0.3) {
       this.hooks.onFlip(onLand[Math.floor(Math.random() * onLand.length)].id);
     } else {
-      this.dropFoodAt('bug', rand(80, SHORE_X - 60));
+      this.dropFoodAt('bug', rand(80, this.land.SHORE_X - 60));
       this.hooks.onEvent('一隻小蟲掉進水裡了，看誰先抓到！');
     }
   }
@@ -303,7 +308,7 @@ export class Tank {
       const P = FOOD_PHYSICS[f.type];
       f.wet += dt;
       const density = P.d0 + (P.d1 - P.d0) * Math.min(1, f.wet / P.soak);
-      const floor = groundY(f.x) - 3;
+      const floor = this.land.groundY(f.x) - 3;
 
       if (density < 1 && f.y <= WATER_TOP + 2) {
         // 浮在水面，隨水流慢慢漂
@@ -325,7 +330,7 @@ export class Tank {
         }
       }
       if (f.type === 'bug' && f.floating) f.x += Math.sin(this.time * 9 + f.seed) * 20 * dt; // 掙扎
-      f.x = Math.max(5, Math.min(SHORE_X - 5, f.x));
+      f.x = Math.max(5, Math.min(this.land.SHORE_X - 5, f.x));
     }
 
     this.ripples = this.ripples.filter(r => (r.age += dt) < 1.5);
@@ -349,15 +354,17 @@ export class Tank {
     }
     f.x += f.vx * dt;
     f.y += f.vy * dt;
-    const floor = groundY(f.x) - 8;
-    if (f.x < 15 || f.x > SHORE_X - 15) { f.vx *= -1; f.x = Math.max(15, Math.min(SHORE_X - 15, f.x)); }
+    const { groundY: gy, SHORE_X: shore } = this.land;
+    const floor = gy(f.x) - 8;
+    if (f.x < 15 || f.x > shore - 15) { f.vx *= -1; f.x = Math.max(15, Math.min(shore - 15, f.x)); }
     if (f.y < WATER_TOP + 8 || f.y > floor) { f.vy *= -1; f.y = Math.max(WATER_TOP + 8, Math.min(floor, f.y)); }
     f.floating = false;
   }
 
   updateBubbles(dt) {
     this.bubbleClock -= dt;
-    if (this.bubbleClock <= 0) {
+    // 泡泡是室內缸的打氣石冒的，戶外池沒有打氣石
+    if (this.bubbleClock <= 0 && this.getState().scene !== 'outdoor') {
       this.bubbleClock = rand(0.08, 0.3);
       this.bubbles.push({ x: AIR_STONE_X + rand(-4, 4), y: groundY(AIR_STONE_X) - 10, r: rand(2, 5), p: rand(0, 6.28) });
     }

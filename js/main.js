@@ -10,28 +10,15 @@ import { Requests, REQUEST_TYPES } from './requests.js';
 
 const $ = id => document.getElementById(id);
 const HOUR = 3.6e6;
-const VIEW_KEY = 'banGui.view';
 const SPEED_KEY = 'banGui.speed';
 
 // 玩家調的時間速度（1～10 倍），只在網頁開著、看得到的時候有效
 let speed = 1;
 try { speed = Math.min(10, Math.max(1, Number(localStorage.getItem(SPEED_KEY)) || 1)); } catch {}
 
-function getView() {
-  try { return localStorage.getItem(VIEW_KEY) || '3d'; } catch { return '3d'; }
-}
-
-// 2.5D 需要從網路載入 Three.js，載入失敗就退回 2D
-async function loadTankClass(view) {
-  if (view === '3d') {
-    try {
-      return (await import('./tank3d.js')).Tank3D;
-    } catch (e) {
-      console.error(e);
-      ui.toast('2.5D 畫面載入失敗（需要網路），先用 2D 顯示。');
-    }
-  }
-  return (await import('./tank.js')).Tank;
+// 2D 玩法先取消，只有 2.5D（需要從網路載入 Three.js，載入失敗會顯示載入失敗的畫面）
+async function loadTankClass() {
+  return (await import('./tank3d.js')).Tank3D;
 }
 
 let state = load();
@@ -218,7 +205,7 @@ function bindActions() {
   });
   $('chkTimer').addEventListener('change', e => act(sim.setTimer(state, e.target.checked)));
 
-  // 選場景：換場景要重整才會重建 3D 場景，跟切換 2D/2.5D 一樣
+  // 選場景：換場景要重整才會重建 3D 場景
   $('sceneList').addEventListener('click', e => {
     const btn = e.target.closest('[data-scene]');
     if (!btn || btn.disabled) return;
@@ -348,15 +335,6 @@ async function start() {
   ui.buildScenes(state);
   ui.buildDecor();
   initMenu();
-  const view = getView();
-  const btnView = $('btnView');
-  btnView.textContent = view === '3d' ? '2D' : '2.5D';
-  btnView.title = view === '3d' ? '切換成 2D' : '切換成 2.5D';
-  btnView.addEventListener('click', () => {
-    save(state);
-    try { localStorage.setItem(VIEW_KEY, view === '3d' ? '2d' : '3d'); } catch {}
-    location.reload();
-  });
 
   const btnFullscreen = $('btnFullscreen');
   const appFrame = document.getElementById('frame');
@@ -380,7 +358,7 @@ async function start() {
   const [base, poseList, Tank] = await Promise.all([
     loadAssets(),
     Promise.all(SPECIES_LIST.map(sp => (posesReady.includes(sp.id) && inTank.has(sp.id) ? loadPoses(sp.id) : null))),
-    loadTankClass(view),
+    loadTankClass(),
   ]);
   assets = base;
   assets.poses = Object.fromEntries(SPECIES_LIST.map((sp, i) => [sp.id, poseList[i]]));
@@ -445,7 +423,7 @@ async function start() {
   });
   window.addEventListener('pagehide', () => save(state));
   window.__gameStarted = true; // index.html 的載入失敗提示看這個
-  document.getElementById('loadError')?.remove(); // 有錯誤但遊戲還是起來了（例如 2.5D 退回 2D），就不要擋畫面
+  document.getElementById('loadError')?.remove(); // 有錯誤但遊戲還是起來了，就不要擋畫面
 }
 
 // 第一次玩：兩隻隨機命名的斑龜
